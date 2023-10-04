@@ -1,0 +1,58 @@
+
+.header-container {
+  margin-left: 400px;
+  margin-right:400px;
+  /* change colour to white */
+    color: #000; 
+    text-decoration: none;
+    margin-bottom:10px;
+  }
+  
+  .navbar {
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top:15px;
+  }
+ 
+  /* Initial styling for the underline */
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #333; /* Change to your desired text color */
+}
+
+/* Add an ::after pseudo-element for the underline */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px; /* Adjust the thickness of the underline */
+  background-color: yellow; /* Change to your desired underline color */
+  transform: scaleX(0); /* Initially, set the width to 0 */
+  transform-origin: right;
+  transition: transform 0.2s ease-in-out; /* Add a transition for the swipe effect */
+}
+
+/* Hover effect to reveal the underline */
+.nav-link:hover::after {
+  transform: scaleX(1); /* Expand the underline to full width on hover */
+}
+
+        
+  .footer{
+    text-align: center;
+  }
+
+  .footer-container {
+    margin: 0;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      
+      width: 100%;
+      
+    }
