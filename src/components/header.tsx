@@ -10,19 +10,19 @@ export function Header() {
       {/* <Link className="nav-link" to="/home">
               <strong>Foodie</strong>
             </Link> */}
-            <Link className="nav-link" to="/home">
+            <Link style={{ textDecoration: 'none' }} className="nav-link" to="/home">
               Home
             </Link>
         
-            <Link className="nav-link" to="/about">
+            <Link style={{ textDecoration: 'none' }} className="nav-link" to="/menu">
               Our Menu
             </Link>
          
-            <Link className="nav-link" to="/contact">
+            <Link style={{ textDecoration: 'none' }} className="nav-link" to="/contact">
               Discount Voucher
             </Link>
 
-            <Link className="nav-link" to="/contact">
+            <Link style={{ textDecoration: 'none' }} className="nav-link" to="/contact">
               Contact Us
             </Link>
             {/* <Link className="nav-link" to="/login">

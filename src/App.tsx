@@ -8,6 +8,7 @@ import { NoPage } from './pages/nopage';
 import { City } from './pages/city';
 import { RestaurantList } from './components/restaurantList';
 import { Menu } from './pages/menu';
+import React from 'react';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/about' element={<About/>} />
         <Route path='/contact' element={<Contact/>} />
         <Route path='/login' element={<Login/>} />
+        <Route path='/menu' element={<Menu/>} />
         <Route path='/city/:searchQuery' element={<City/>} />
         <Route path='/menu/:rest_id' element={<Menu/>} />
         <Route path='/restaurantList/:cuisineStr' element={<RestaurantList />} />

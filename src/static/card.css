@@ -79,3 +79,11 @@
   padding-left: 30px;
   
 }
+
+
+
+.yes{
+  background: linear-gradient(to right, #FF5733, #FFC300);
+
+  position: relative;
+}

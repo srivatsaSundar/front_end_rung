@@ -1,8 +1,5 @@
 // imports
 import  { useState } from "react";
-import '../static/login.css';
-import login from '../images/login.svg';
-import signup from '../images/signup.svg';
 import { useNavigate } from "react-router";
 // importing icons
 import { SocialLogin } from "../components/socialmedia";

@@ -1,0 +1,29 @@
+.social-media {
+    display: flex;
+    justify-content: space-around;
+  }
+  .contact-us {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .contact-us li {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 20px; /* Add spacing between items */
+    
+  }
+
+  .icons-loc{
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+.margin-hour{
+    margin-left: 27px;
+}
+  
+ 
