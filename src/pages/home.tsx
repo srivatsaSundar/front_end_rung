@@ -10,7 +10,7 @@ export function Home() {
 
 // home page
   return (
-    <div className="yes">
+    <div className="yes-1">
       <Header />
      
       <CitySearch/>

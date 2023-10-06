@@ -1,6 +1,6 @@
 // imports
 
-import "../static/menu.css";
+
 import { Header } from "../components/header";
 import React from 'react';
 // types

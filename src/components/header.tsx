@@ -18,7 +18,7 @@ export function Header() {
               Our Menu
             </Link>
          
-            <Link style={{ textDecoration: 'none' }} className="nav-link" to="/contact">
+            <Link style={{ textDecoration: 'none' }} className="nav-link" to="/discount">
               Discount Voucher
             </Link>
 
