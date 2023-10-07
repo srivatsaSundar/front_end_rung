@@ -2,13 +2,13 @@
 import { Link } from "react-router-dom";
 import "../static/header.css";
 import React from 'react';
-import Logo from '../images/rung_logo.png';
+import logo from '../images/rung_logo.png';
 export function Header() {
   return (
     // created a fixed header which routes to multiple pages
     <div className="header-container">
      
-    <img src={Logo} alt="logo"/>
+    <img src={logo} alt="logo"/>
       <nav className="navbar">
       {/* <Link className="nav-link" to="/home">
               <strong>Foodie</strong>
