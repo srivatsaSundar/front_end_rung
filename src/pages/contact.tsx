@@ -4,6 +4,7 @@ import { Header } from "../components/header";
 import { SocialLogin } from "../components/socialmedia";
 import React from 'react';
 import "../static/menu.css";
+import Icofont from 'react-icofont';
 
 export function Contact() {
     return (
@@ -11,20 +12,29 @@ export function Contact() {
       <div >
         <div className="yes">
          <Header />
+         <div className="up">
+         <h3>Contact Us</h3>
+         <p>Home &rsaquo; Contact Us</p>
+         </div>
         </div>
         <div className="reservation">
           <h1>Contact Us</h1>
           <div className="contact-form">
             <form>
+              <div className="name-email">
               <input type="text" placeholder="Name" />
               <input type="text" placeholder="Email" />
-              <input type="number" placeholder="Mobile Number" />
+              </div>
+              <div className="contact-mobile">
+              <input type="text" placeholder="Mobile Number" />
               <br></br>
+              <div className="contact-mess">
               <input type="textarea" placeholder="Write your message here" />
-              <br></br>
+              </div>
               <input type="text" placeholder="enter Captcha" />
               <br></br>
-              <input type="submit" value="Send a Message" />
+              </div>
+              <button className='search-b'> Send a Message</button>
             </form>
           </div>
         </div>

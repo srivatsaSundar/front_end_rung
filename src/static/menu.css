@@ -1,6 +1,14 @@
 .yes{
   background: linear-gradient(to right, #FF5733, #FFC300);
-  height: 30vh;
+  height: 40vh;
+}
+
+.up{
+   margin-top: 100px;
+   text-align: center;
+   background: rgba(0, 0, 0, 0.35);
+   width: 350px;
+   margin-left: 450px;
 }
 .title-Discount{
   padding-left: 300px;
@@ -16,8 +24,8 @@
   padding-top: 35px;
 }
 .contact-form{
-  width: 40%;
-  margin-left:370px;
+  width:650px;
+  margin-left:330px;
 }
 
 .menu-container {
@@ -47,4 +55,43 @@
     margin-left: 5px; /* Add a 5px margin to the left of Column 3 */
     padding: 10px; /* Add some spacing */
     border: 1px solid #ccc; /* Add a border for clarity */
+}
+
+.contact-form input{
+  background:rgba(0, 0, 0, 0.35) ;
+  border: #fff 1px solid;
+  border-radius: 3px;
+  padding: 10px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.contact-mobile input{
+  width: 521px;
+}
+
+.contact-mess input{
+  height: 150px;
+}
+
+.search-b{
+  margin-left: 15px;
+  margin-top: 20px;
+  background: red;
+  border: red 1px solid;
+  border-radius: 3px;
+  padding: 10px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 150px;
+}
+
+.name-email input{
+  width:252px;
+}
+
+input:focus{
+  color: red;
 }

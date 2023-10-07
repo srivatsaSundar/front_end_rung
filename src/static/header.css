@@ -15,11 +15,12 @@
     top:15px;
   }
  
-  /* Initial styling for the underline */
+ /* Initial styling for the underline and text color */
 .nav-link {
   position: relative;
   text-decoration: none;
-  color: #333; /* Change to your desired text color */
+  color: #333; /* Initial text color */
+  transition: color 0.2s ease-in-out; /* Add a transition for text color change */
 }
 
 /* Add an ::after pseudo-element for the underline */
@@ -30,15 +31,20 @@
   right: 0;
   bottom: 0;
   height: 3px; /* Adjust the thickness of the underline */
-  background-color: yellow; /* Change to your desired underline color */
+  background-color: transparent; /* Initially transparent underline */
   transform: scaleX(0); /* Initially, set the width to 0 */
   transform-origin: right;
-  transition: transform 0.2s ease-in-out; /* Add a transition for the swipe effect */
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Add transitions for both underline and text color */
 }
 
-/* Hover effect to reveal the underline */
+/* Hover effect to reveal the underline and change text color */
+.nav-link:hover {
+  color: yellow !important; /* Text color change on hover */
+}
+
 .nav-link:hover::after {
   transform: scaleX(1); /* Expand the underline to full width on hover */
+  background-color: yellow; /* Underline color change on hover */
 }
 
         

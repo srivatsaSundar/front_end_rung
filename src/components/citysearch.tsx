@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import Icofont from 'react-icofont';
 import '../static//citysearch.css';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 interface MyComponentState {
   showDiv: string | null;
+  selectedDate: Date | null;
 }
 
 class CitySearch extends Component<{}, MyComponentState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      showDiv: 'first'
+      showDiv: 'first',
+      selectedDate: null,
     };
   }
-
+ 
   render() {
     return (
       <div className='citysearch'>
@@ -28,10 +33,12 @@ class CitySearch extends Component<{}, MyComponentState> {
         {this.state.showDiv === 'first' ?
          <div className="home-delivery" id="homeDeliverySection">
          <form>
-           <label className='label-food'>Time to order food</label>
-           <div >
-           <input className='search' placeholder='Enter your pincode here' type='text'/>
-           <button >Search</button>
+          <div className='label-food'>
+           <label>Time to order food</label>
+           </div>
+           <div className='search-pin'>
+           <input placeholder='Enter your pincode here' type='text'/>
+           <button > <Icofont className="icon-pin" icon="icofont-search"  /> Search</button>
            </div>
          </form>
        </div>
@@ -41,11 +48,32 @@ class CitySearch extends Component<{}, MyComponentState> {
               
         <div className="take-away" id="takeAwaySection">
         <form>
-          <label  className='label-food'>Select date and time</label>
-          <div >
-          <input className='search' type='date'/>
-          <input className='search' type='time'/>
-          <button>Search</button>
+          <div  className='label-food'>
+          <label >Select date and time</label>
+          </div>
+          <div className='search-td'>
+          <DatePicker
+          selected={this.state.selectedDate}
+          onChange={(date) => this.setState({ selectedDate: date })}
+          dateFormat="MM/dd/yyyy"
+          placeholderText="MM/DD/YYYY"
+        />
+       
+       <select className='search-time' defaultValue="18:00">
+    
+      {Array.from({ length: 13 }, (_, i) => {
+        const hour = 18 + Math.floor(i / 4);
+        const minute = (i % 4) * 15;
+        const time = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+         const pm ='PM';
+        return (
+          <option key={time} value={time}>
+            {time} {pm}
+          </option>
+        );
+      })}
+    </select>
+          <button className='search-button'> <Icofont className="icon-pin" icon="icofont-search"  />Search</button>
           </div>
         </form>
       </div>
