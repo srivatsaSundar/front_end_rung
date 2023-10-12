@@ -35,27 +35,49 @@
     margin-top: 10px;
 }
 
-/* Define the styles for Column 1 */
+/* Add the following styles to your CSS */
 .column1 {
-    flex: 0 0 30%; /* Set the width of Column 1 to 35% */
-    padding: 10px; /* Add some spacing */
-    border: 1px solid #ccc; /* Add a border for clarity */
-    margin-right: 5px;
+  flex: 0 0 30%; /* Set the width of Column 1 to 30% */
+  padding: 10px; /* Add some spacing */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  margin-right: 5px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-/* Define the styles for Column 2 */
 .column2 {
-    flex: 0 0 45%; /* Set the width of Column 2 to 45% */
-    padding: 10px; /* Add some spacing */
-    border: 1px solid #ccc; /* Add a border for clarity */
+  flex: 0 0 45%; /* Set the width of Column 2 to 45% */
+  padding: 10px; /* Add some spacing */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  overflow-y: auto; /* Allow Column 2 to scroll if content exceeds its height */
+  max-height: 100vh; /* Set a maximum height for Column 2 */
+  text-align: left;
+}
+.menu-name h2{
+  text-align: left;
+  color: red;
 }
 
-/* Define the styles for Column 3 */
+
 .column3 {
-    flex: 0 0 calc(25% - 5px); /* Set the width of Column 3 to 20% with 5px margin */
-    margin-left: 5px; /* Add a 5px margin to the left of Column 3 */
-    padding: 10px; /* Add some spacing */
-    border: 1px solid #ccc; /* Add a border for clarity */
+  flex: 0 0 25%; /* Set the width of Column 3 to 25% */
+  margin-left: 1px; /* Add a 5px margin to the left of Column 3 */
+  padding: 5px; /* Add some spacing */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  overflow-y: auto; /* Allow Column 3 to scroll if content exceeds its height */
+  max-height: 100vh; /* Set a maximum height for Column 3 */
+  
+}
+.title-cart{
+  text-align: center;
+}
+
+.column3 ul li{
+  list-style: none;
+  margin-left: -3rem;
+  font-size: smaller;
 }
 
 .contact-form input{
@@ -102,14 +124,144 @@ input:focus{
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding:10px;
+  padding-bottom: 45px;
 }
 
 .card-titleMenu {
   font-size: 1.25rem;
   margin-bottom: 0.5rem;
+  color: red;
 }
+
+.card-nameMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  margin-left: auto;
+  /* Add any additional styles you want for the price */
+}
+
 
 .card-textMenu {
   font-size: 1rem;
   color: #333;
+
+}
+
+/* Style for the menu items */
+.menu-item {
+  background-color: white; /* Set the default background color */
+  transition: background-color 0.3s;
+  color: grey;
+}
+
+/* Style for the first menu item */
+.menu-item.first {
+  background-color: red; /* Set the background color for the first item */
+  color: white; /* Set the text color for the first item */
+}
+
+/* Hover effect for menu items */
+.menu-item:hover {
+  background-color: red; /* Hover effect for all menu items */
+  color: white;
+}
+
+
+/* Style for the "Add On" button */
+.add-on-button {
+  background:red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  float: left;
+}
+
+/* Style for the "Add" button */
+.add-button {
+  background: none;
+  color: red;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: right;
+}
+
+.basket{
+  display: flex;
+  justify-content: center;
+}
+
+.cart-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cart-item-name {
+  flex: 1;
+  width: 3%;
+  word-wrap: break-word;
+  margin-right: 10px; /* Add some margin for separation */
+
+}
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+}
+
+/* Add styles for the buttons and price as needed */
+
+
+.plus-button{
+  background: red;
+  color: white;
+  border: red;
+  padding: 5px;
+ 
+}
+
+.quantity{
+  padding: 5px;
+  border-bottom: red solid 1px;
+  border-top: red solid 1px;
+
+}
+
+.drink-food{
+  display: flex;
+  gap: 5px;
+}
+.drink-dropdown, .food-dropdown {
+  width: 100%; /* Make each dropdown take the full width of the container */
+}
+
+/* Style for the dropdown options */
+.drink-dropdown select, .food-dropdown select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style for the options within the dropdowns */
+.drink-dropdown select option, .food-dropdown select option {
+  padding: 10px;
+}
+
+.price-cart{
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.icon-del{
+  border: none;
 }
