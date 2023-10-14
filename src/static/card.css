@@ -83,7 +83,7 @@
 
 
 .yes-1{
-  background: linear-gradient(to right, #FF5733, #FFC300);
+  background: url("../images/main_bg.jpg") no-repeat center center fixed;
 
   position: relative;
 }

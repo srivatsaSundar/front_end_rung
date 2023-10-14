@@ -26,6 +26,7 @@ export function Header() {
           Contact Us
         </Link>
       </div>
+      
       </div>
   );
 }

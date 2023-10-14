@@ -41,10 +41,7 @@ const cuisineCollection = [
 //function
 const RestaurantSearch: React.FC<RestaurantSearchProps> = ({ coordinates }) => {
  //defining the API link with fetching the latitude and longitude for each cities
-  const targetURL = `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${coordinates.latitude}&lng=${coordinates.longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`;
-  const proxyURL = 'https://api.allorigins.win/raw?url=';
-  const finalURL = proxyURL + encodeURIComponent(targetURL);
-  // console.log(targetURL)
+ 
   const [currentIndex, setCurrentIndex] = useState<number>();
   // defined state
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);

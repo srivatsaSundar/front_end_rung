@@ -10,6 +10,7 @@ import { City } from './pages/city';
 import { RestaurantList } from './components/restaurantList';
 import { Menu } from './pages/menu';
 import React from 'react';
+import { Order } from './pages/order';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/menu/:rest_id' element={<Menu/>} />
         <Route path='/restaurantList/:cuisineStr' element={<RestaurantList />} />
         <Route path='*' element={<NoPage/>} />
+        <Route path='/order' element={<Order/>} />
       </Routes>
       </BrowserRouter>
       

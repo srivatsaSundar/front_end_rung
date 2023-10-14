@@ -11,6 +11,10 @@ export function Discount() {
       <div >
         <div className="yes">
          <Header />
+         <div className="up">
+         <h3>Discount Voucher</h3>
+         <p>Home &rsaquo; Discount Voucher</p>
+         </div>
         </div>
         <div className="title-Discount">
           <h1>Discount Voucher</h1>

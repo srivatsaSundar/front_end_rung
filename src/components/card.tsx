@@ -20,10 +20,7 @@ interface bestCity {
 
 export function CardHome() {
   //defining the API link
-  const targetURL = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.54049434254868&lng=73.94665578842162&page_type=DESKTOP_WEB_LISTING';
-  const proxyURL = 'https://api.allorigins.win/raw?url=';
-  const finalURL = proxyURL + encodeURIComponent(targetURL);
-
+  
 // define state
   const [bestcities, setBestCities] = useState<bestCity[]>([]);
 
