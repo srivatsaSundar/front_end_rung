@@ -25,7 +25,6 @@ function App() {
         <Route path='/login' element={<Login/>} />
         <Route path='/menu' element={<Menu/>} />
         <Route path='/city/:searchQuery' element={<City/>} />
-        <Route path='/menu/:rest_id' element={<Menu/>} />
         <Route path='/restaurantList/:cuisineStr' element={<RestaurantList />} />
         <Route path='*' element={<NoPage/>} />
         <Route path='/order' element={<Order/>} />

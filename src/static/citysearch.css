@@ -6,8 +6,8 @@
   display: flex;
   flex-direction: row;
   align-items:top; /* Center items horizontally */
-  margin-bottom: 20px;
-  margin-left: 400px;
+  margin-bottom: 50px;
+  margin-left: 210px;
   margin-top: 30px;
    /* Add some spacing between items */
 }
@@ -39,7 +39,7 @@
   list-style: none;
   margin-left: 20px;
     margin-right: 20px;
-    width:80px;
+    width:200px;
 }
 
 .button{
@@ -131,4 +131,8 @@
 .search-time{
   margin-right: 10px;
   margin-left: 10px;
+}
+
+.logo-main{
+  margin-left: 500px;
 }

@@ -25,8 +25,10 @@ export function Header() {
         <Link style={{ textDecoration: 'none' }} className="nav-link" to="/contact">
           Contact Us
         </Link>
+       
       </div>
       
       </div>
+     
   );
 }

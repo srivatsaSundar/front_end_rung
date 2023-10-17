@@ -281,6 +281,7 @@ input:focus{
   background: linear-gradient(to left, #c91618, #b59161);
   margin: 20px;
   padding: 20px;
+  color: #fff;
   border-radius: 5px;
 }
 
@@ -294,4 +295,98 @@ input:focus{
   color: #fff;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.order-columns {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.yes-order {
+  width: 75%; /* 70% of the available space */
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.order-cart {
+  width: 25%; /* 30% of the available space */
+}
+
+.address{
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.address input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.address-1  input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.code button{
+ margin-left: 30px;
+}
+.code  input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 400px;
+}
+
+.rem input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width:850px;
+  height:150px;
+}
+
+.input-date {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.search-time-yes{
+  padding-right: 140px;
+  margin-left: -5px;
+}
+
+.add input{
+  width:400px;
+}
+
+.name input{
+  width: 400px;
+}
+
+.address-1{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 300px;
+}
+
+.address-2{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 200px;
+}
+
+h5{
+  padding-top: 50px;
+
+}
+
+h4{
+  padding-top: 50px;
 }
