@@ -41,14 +41,14 @@ function CitySearch() {
       // Invalid pincode, display an error message
       setError('Sorry, this Pin Code is not eligible for delivery.');
     }
-  };
+  }
 
   return (
     <div className="citysearch">
       <div className='logo-main'>
-        <img src={Logo}  style={{
-          height: '150px', // Set the height
-          width: '250px',  // Set the width
+        <img src={Logo} style={{
+          height: '150px',
+          width: '250px',
         }} alt="logo" />
       </div>
       <div className="box">
@@ -70,12 +70,24 @@ function CitySearch() {
                   <label>Time to order food</label>
                 </div>
                 <div className="search-pin">
-                  <input
-                    placeholder="Enter your pincode here"
-                    type="text"
+                  <select
                     value={pincode}
                     onChange={handlePincodeChange}
-                  />
+                  >
+                    <option value="">Select Pincode</option>
+                    <option value="6003">6003</option>
+                    <option value="6004">6004</option>
+                    <option value="6005">6005</option>
+                    <option value="6014">6014</option>
+                    <option value="6020">6020</option>
+                    <option value="6032">6032</option>
+                    <option value="6010">6010</option>
+                    <option value="6012">6012</option>
+                    <option value="6013">6013</option>
+                    <option value="6047">6047</option>
+                    <option value="6048">6048</option>
+                    <option value="6052">6052</option>
+                  </select>
                   <button onClick={handleSearch}>
                     <Icofont className="icon-pin" icon="icofont-search" /> Search
                   </button>
@@ -140,7 +152,7 @@ function CitySearch() {
             </li>
           </div>
         </ul>
-</div>
+      </div>
     </div>
   );
 }

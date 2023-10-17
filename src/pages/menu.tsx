@@ -357,6 +357,8 @@ console.log(uniqueTitles)
 
         </div>
       </div>
+      <SocialLogin />
+      <Footer />
     </div>
   );
             }

@@ -137,7 +137,7 @@ export function Order() {
           </div>
 </div>
 
-          <h5>Coupon code</h5>
+          <h5 className="h5-header">Coupon code</h5>
           <hr></hr>
           <form>
 

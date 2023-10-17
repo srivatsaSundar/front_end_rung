@@ -11,10 +11,12 @@
    margin-left: 450px;
    font-family:italic;
 }
+
 .title-Discount{
   padding-left: 300px;
   padding-right: 200px;
 }
+
 .reservation {
   background: url(../images/reservation_bg.jpg) center center no-repeat;
   background-size: cover;
@@ -24,6 +26,7 @@
   text-align: center;
   padding-top: 35px;
 }
+
 .contact-form{
   width:650px;
   margin-left:330px;
@@ -382,11 +385,36 @@ input:focus{
   margin-right: 200px;
 }
 
-h5{
+.h5-header{
   padding-top: 50px;
 
 }
-
 h4{
   padding-top: 50px;
+}
+
+
+/* Media Query for Mobile Devices (up to 768px) */
+@media only screen and (max-width: 768px) {
+  /* Add mobile-specific styles here */
+}
+
+/* Media Query for Tablets (768px - 1024px) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Add tablet-specific styles here */
+}
+
+/* Media Query for Smaller Desktop Screens (1024px - 1280px) */
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
+  /* Add smaller desktop-specific styles here */
+}
+
+/* Media Query for Standard Desktop Screens (1280px - 1440px) */
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+  /* Add standard desktop-specific styles here */
+}
+
+/* Media Query for Larger Desktop Screens (1440px and above) */
+@media only screen and (min-width: 1441px) {
+  /* Add larger desktop-specific styles here */
 }
