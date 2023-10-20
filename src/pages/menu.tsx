@@ -37,7 +37,7 @@ export function Menu() {
 
   
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/menu/')
+    fetch('http://13.233.96.33:8000/menu/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -70,7 +70,7 @@ console.log(uniqueTitles)
     }
   }
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/add_on_drink/')
+    fetch('http://13.233.96.33:8000/add_on_drink/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -82,7 +82,7 @@ console.log(uniqueTitles)
   }, []);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/add_on_food/')
+    fetch('http://13.233.96.33:8000/add_on_food/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -249,7 +249,7 @@ console.log(uniqueTitles)
                 <h5 className="card-titleMenu">{item.name}</h5>
                 <p className="card-titleMenu price">{item.price}/- CHF</p>
               </div>
-              <p className="card-textMenu">{item.description}</p>
+              <p className="card-textMenu">{item.description_1}</p>
               {add_on_drink.some(drink => drink.menu.name === item.name) || add_on_food.some(food => food.menu.name === item.name) ? (
                 <button onClick={() => handleAddOnClick(item.name)} className="add-on-button">
                   + Add On
