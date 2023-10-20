@@ -34,10 +34,11 @@ export function Menu() {
   const [selectedFood, setSelectedFood] = useState<string | null>(null);
   const [cart, setCart] = useState<MenuItem[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
-
-  
+  const targetURL ="http://13.233.96.33:8000/menu/"
+  const proxyURL = "https://api.allorigins.win/raw?url=";
+  const finalURL = proxyURL +targetURL;
   useEffect(() => {
-    fetch('http://13.233.96.33:8000/menu/')
+    fetch(finalURL)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
