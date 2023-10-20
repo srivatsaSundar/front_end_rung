@@ -70,8 +70,10 @@ console.log(uniqueTitles)
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
+  const targetURL2 ="http://13.233.96.33:8000/add_on_drink/";
+  const finalURL2 = proxyURL +targetURL2;
   useEffect(() => {
-    fetch('http://13.233.96.33:8000/add_on_drink/')
+    fetch(finalURL2 )
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -81,9 +83,10 @@ console.log(uniqueTitles)
       .then(data => setAdd_on_drink(data))
       .catch(err => console.log("error in fetching add_on_drink", err));
   }, []);
-
+  const targetURL3 ="http://13.233.96.33:8000/add_on_food/";
+  const finalURL3 = proxyURL +targetURL3;
   useEffect(() => {
-    fetch('http://13.233.96.33:8000/add_on_food/')
+    fetch(finalURL3)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
