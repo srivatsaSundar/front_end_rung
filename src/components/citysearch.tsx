@@ -3,7 +3,10 @@ import Icofont from 'react-icofont';
 import '../static/citysearch.css';
 import DatePicker from 'react-datepicker';
 import { useNavigate } from 'react-router-dom';
-import Logo from "../images/rung_logo.png";
+import Logo from '../images/rung_logo.png';
+import { useLanguage } from './LanguageProvider'; // Import the useLanguage hook
+import translations_en from '../translations/translation_en.json'; // Import English translations
+import translations_de from '../translations/translation_de.json'; // Import German translations
 
 function CitySearch() {
   const navigate = useNavigate();
@@ -11,6 +14,11 @@ function CitySearch() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [pincode, setPincode] = useState('');
   const [error, setError] = useState(null);
+  const { selectedLanguage } = useLanguage(); // Access the selected language
+
+  // Define translations based on the selected language
+  const translations = selectedLanguage === 'en' ? translations_en : translations_de;
+
 
   const handlePincodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPincode(e.target.value);
@@ -48,18 +56,19 @@ function CitySearch() {
     <div className="citysearch">
       <div className='logo-main'>
         <img src={Logo} style={{
-          height: '150px',
-          width: '250px',
+          height: '120px',
+          width: '230px',
         }} alt="logo" />
       </div>
       <div className="box">
         <nav>
           <div className="button">
             <button className="button-1" onClick={() => setShowDiv('first')}>
-              Home Delivery
+            {translations.homeDelivery}
+
             </button>
             <button className="button-2" onClick={() => setShowDiv('second')}>
-              Take away
+            {translations.takeAway}
             </button>
           </div>
         </nav>
@@ -68,14 +77,14 @@ function CitySearch() {
             <div className="home-delivery" id="homeDeliverySection">
               <form>
                 <div className="label-food">
-                  <label>Time to order food</label>
+                  <label>{translations.timeToOrderFood}</label>
                 </div>
                 <div className="search-pin">
                   <select
                     value={pincode}
                     onChange={handlePincodeChange}
                   >
-                    <option value="">Select Pincode</option>
+                    <option value="">{translations.selectPincode}</option>
                     <option value="6003">6003</option>
                     <option value="6004">6004</option>
                     <option value="6005">6005</option>
@@ -90,7 +99,7 @@ function CitySearch() {
                     <option value="6052">6052</option>
                   </select>
                   <button onClick={handleSearch}>
-                    <Icofont className="icon-pin" icon="icofont-search" /> Search
+                    <Icofont className="icon-pin" icon="icofont-search" />{translations.search}
                   </button>
                   {error && <p className="error-message">{error}</p>}
                 </div>
@@ -101,7 +110,7 @@ function CitySearch() {
             <div className="take-away" id="takeAwaySection">
               <form>
                 <div className="label-food">
-                  <label>Select date and time</label>
+                  <label>{translations.selectDateTime}</label>
                 </div>
                 <div className="search-td">
                   <DatePicker
@@ -111,6 +120,7 @@ function CitySearch() {
                     placeholderText="MM/DD/YYYY"
                   />
                   <select className="search-time" defaultValue="18:00">
+                  <option value="">{translations.selecttime}</option>
                     {Array.from({ length: 13 }, (_, i) => {
                       const hour = 18 + Math.floor(i / 4);
                       const minute = (i % 4) * 15;
@@ -124,7 +134,7 @@ function CitySearch() {
                     })}
                   </select>
                   <button className="search-button">
-                    <Icofont className="icon-pin" icon="icofont-search" /> Search
+                    <Icofont className="icon-pin" icon="icofont-search" /> {translations.search}
                   </button>
                 </div>
               </form>
@@ -137,19 +147,19 @@ function CitySearch() {
           <div className="list-item">
             <li>
               <Icofont className="icons" icon="icofont-fast-food" size="3" />
-              <p>Select Food</p>
+              <p>{translations.selectFood}</p>
             </li>
           </div>
           <div className="list-item">
             <li>
               <Icofont className="icons" icon="icofont-food-basket" size="3" />
-              <p>Order Food</p>
+              <p>{translations.orderFood}</p>
             </li>
           </div>
           <div className="list-item">
             <li>
               <Icofont className="icons" icon="icofont-fast-delivery" size="3" />
-              <p>Delivery At Your Door Step</p>
+              <p>{translations.deliveryAtYourDoorStep}</p>
             </li>
           </div>
         </ul>

@@ -8,11 +8,13 @@ import { NoPage } from './pages/nopage';
 import { Menu } from './pages/menu';
 import React from 'react';
 import { Order } from './pages/order';
+import { LanguageProvider } from './components/LanguageProvider';
 
 
 function App() {
   return (
     <div >
+      <LanguageProvider>
       <BrowserRouter>
       <Routes>
         <Route index element={<Home/>} />
@@ -24,7 +26,7 @@ function App() {
         <Route path='/order' element={<Order/>} />
       </Routes>
       </BrowserRouter>
-      
+      </LanguageProvider>
 
     </div>
   );

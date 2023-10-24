@@ -111,7 +111,7 @@
 @media only screen and (min-width: 768px) {
   .yes-1{
     background:  linear-gradient(to right, #c91618, #b59161);
-    width: min-content;
+    width: max-content;
     height: auto;
     
   }

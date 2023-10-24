@@ -1,10 +1,10 @@
 import { Footer } from "../components/footer";
-import { Header } from "../components/header";
 import { SocialLogin } from "../components/socialmedia";
 import React, { useState } from 'react';
 import "../static/menu.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import AppNavbar from "../components/navbar";
 
 export function Order() {
   // Define state variables using the useState hook
@@ -14,7 +14,7 @@ export function Order() {
   return (
     <div>
       <div className="yes">
-        <Header />
+        <AppNavbar/>
       </div>
       <div>
         <div className="order-columns">

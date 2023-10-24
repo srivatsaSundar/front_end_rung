@@ -14,6 +14,11 @@ import soup from "../images/soup.jpg";
 import thai_wok from "../images/thai_wok.jpg";
 import fry from "../images/fry.jpg";
 import combodia from "../images/combodia.jpg";
+import { useLanguage } from '../components/LanguageProvider';
+import translations_en from '../translations/translation_en.json'; // Import English translations
+import translations_de from '../translations/translation_de.json'; // Import German translations
+import { Navbar } from "react-bootstrap";
+import AppNavbar from "../components/navbar";
 
 interface MenuItem {
   id: number;
@@ -25,6 +30,11 @@ interface MenuItem {
 
 
 export function Menu() {
+  const { selectedLanguage } = useLanguage(); // Access the selected language
+
+  // Define translations based on the selected language
+  const translations = selectedLanguage === 'en' ? translations_en : translations_de;
+
   const [menu, setMenu] = useState([]) as any[];
   const uniqueTitlesRef = useRef<HTMLElement[]>([]);
   const [add_on_drink, setAdd_on_drink] = useState([]) as any[];
@@ -219,7 +229,7 @@ console.log(uniqueTitles)
   return (
     <div>
       <div className="yes">
-        <Header />
+        <AppNavbar />
       </div>
       <div className="menu-container">
         <div className="column1">
@@ -255,7 +265,7 @@ console.log(uniqueTitles)
               <p className="card-textMenu">{item.description_1}</p>
               {add_on_drink.some(drink => drink.menu.name === item.name) || add_on_food.some(food => food.menu.name === item.name) ? (
                 <button onClick={() => handleAddOnClick(item.name)} className="add-on-button">
-                  + Add On
+                  + {translations.addon}
                 </button>
               ) : null}
               {selectedItemName === item.name && (
@@ -263,7 +273,7 @@ console.log(uniqueTitles)
                   <br></br>
                   <div className="drink-dropdown">
                   <select onChange={handleDrinkChange} value={selectedDrink || ''}>
-                    <option value="">Select Drink</option>
+                    <option value="">{translations.selectaddon}</option>
                     {add_on_drink
                       .filter(drink => drink.menu.name === item.name)
                       .map((drink, drinkIndex) => (
@@ -278,7 +288,7 @@ console.log(uniqueTitles)
                   </div>
                   <div className="food-dropdown">
                   <select onChange={handleFoodChange} value={selectedFood || ''}>
-                    <option value="">Select Food</option>
+                    <option value="">{translations.selectaddon}</option>
                     {add_on_food
                       .filter(food => food.menu.name === item.name)
                       .map((food, foodIndex) => (
@@ -297,7 +307,7 @@ console.log(uniqueTitles)
                 </div>
               )}
               <button className="add-button" onClick={() => addToCart(item)}>
-                <Icofont icon="icofont-bag" /> Add
+                <Icofont icon="icofont-bag" /> {translations.add}
               </button>
            
           </div>
@@ -311,11 +321,11 @@ console.log(uniqueTitles)
 
         <div className="column3">
           <div className="title-cart">
-          <p>Shopping Cart</p>
+          <p>{translations.shoppingCartTitle}</p>
           {cart.length === 0 && (
   <>
     <Icofont icon="icofont-basket" className="basket" size="4" />
-    <p>Choose delicious dishes from the menu and order your menu.</p>
+    <p>{translations.chooseDishesFromMenu}</p>
   </>
 )}
 </div>
@@ -344,16 +354,16 @@ console.log(uniqueTitles)
           </ul>
           {calculateTotalPrice() > 0 && (
             <div>
-  <p>Total: {calculateTotalPrice()}/- CHF</p>
+  <p>{translations.totalLabel} {calculateTotalPrice()}/- CHF</p>
   {calculateTotalPrice() < 40 && (
-  <p>Minimum order must be of 40/- CHF </p>
+  <p>{translations.minimumOrderMessage} </p>
   )}
   </div>
 )} 
 
 {calculateTotalPrice() > 40 && (
   <Link style={{ textDecoration: 'none' }} to="/order">
- <button className="order-button">Order</button></Link>
+ <button className="order-button">{translations.orderButton}</button></Link>
  
 )}
 

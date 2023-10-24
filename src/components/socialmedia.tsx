@@ -2,12 +2,21 @@
 import '../static/socialmedia.css';
 import React from 'react';
 import Icofont from 'react-icofont';
+import { useLanguage } from './LanguageProvider'; // Import the useLanguage hook
+import translations_en from '../translations/translation_en.json'; // Import English translations
+import translations_de from '../translations/translation_de.json'; // Import German translations
+
 // social media login component
 export function SocialLogin(){
+    const { selectedLanguage } = useLanguage(); // Access the selected language
+
+  // Define translations based on the selected language
+  const translations = selectedLanguage === 'en' ? translations_en : translations_de;
+
     return(
         <div className="social-media">
             <div className="contact">
-            <h5>Contact Us</h5>
+            <h5>{translations.contactUs}</h5>
             <ul className='contact-us'>
             <li>
             <Icofont className="icons-loc" icon=" icofont-location-pin" size="1" />
@@ -22,20 +31,20 @@ export function SocialLogin(){
             </ul>
             </div>
             <div className="opening">
-            <h5>Restaurant Opening Hours</h5>
+            <h5>{translations.openingHours}</h5>
             <ul className='contact-us'>
             <li>
            
-            <p className='margin-hour'>Monday to Sunday (5:30 p.m. to 9:00 p.m.) </p>
+            <p className='margin-hour'>{translations.regularHours} </p>
             </li>
             <li>
           
-            <p className='margin-hour'>Delivery time (6.00 p.m. to 9.00 p.m.)</p>
+            <p className='margin-hour'>{translations.deliveryHours}</p>
             </li>
             </ul>
             </div>
             <div className="media">
-            <h5 >Follow Us On</h5>
+            <h5 >{translations.followUsOn}</h5>
             <Icofont className="icons-loc" icon="icofont-facebook" size="1" />
             <Icofont className="icons-loc" icon="icofont-twitter" size="1" />
             <Icofont className="icons-loc" icon="icofont-pinterest" size="1" />
