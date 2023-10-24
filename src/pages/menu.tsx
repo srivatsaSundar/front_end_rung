@@ -34,11 +34,9 @@ export function Menu() {
   const [selectedFood, setSelectedFood] = useState<string | null>(null);
   const [cart, setCart] = useState<MenuItem[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
-  const targetURL ="http://13.233.96.33:8000/menu/"
-  const proxyURL = "https://api.allorigins.win/raw?url=";
-  const finalURL = proxyURL +targetURL;
+  const targetURL ="https://backend-rung.onrender.com/menu/";
   useEffect(() => {
-    fetch(finalURL)
+    fetch(targetURL)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -70,10 +68,10 @@ console.log(uniqueTitles)
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
-  const targetURL2 ="http://13.233.96.33:8000/add_on_drink/";
-  const finalURL2 = proxyURL +targetURL2;
+  const targetURL2 ="https://backend-rung.onrender.com/add_on_drink";
+
   useEffect(() => {
-    fetch(finalURL2 )
+    fetch(targetURL2)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -85,11 +83,9 @@ console.log(uniqueTitles)
   }, [setMenu]);
   
   console.log(add_on_drink)
-  const proxyURL2 = "https://proxy.cors.sh/";
-  const targetURL3 ="http://13.233.96.33:8000/add_on_food/";
-  const finalURL3 = proxyURL2 +targetURL3;
+  const targetURL3 ="https://backend-rung.onrender.com/add_on_food";
   useEffect(() => {
-    fetch(finalURL3)
+    fetch(targetURL3)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
