@@ -3,21 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import restaurantReducer from './redux-store/restaurantReducer';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-const store = createStore(restaurantReducer);
 root.render(
   <React.StrictMode>
-     <Provider store={store}>
     <App />
-    </Provider>
   </React.StrictMode>
 );
 

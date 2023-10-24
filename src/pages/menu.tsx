@@ -82,9 +82,12 @@ console.log(uniqueTitles)
       })
       .then(data => setAdd_on_drink(data))
       .catch(err => console.log("error in fetching add_on_drink", err));
-  }, []);
+  }, [setMenu]);
+  
+  console.log(add_on_drink)
+  const proxyURL2 = "https://proxy.cors.sh/";
   const targetURL3 ="http://13.233.96.33:8000/add_on_food/";
-  const finalURL3 = proxyURL +targetURL3;
+  const finalURL3 = proxyURL2 +targetURL3;
   useEffect(() => {
     fetch(finalURL3)
       .then((response) => {
@@ -95,7 +98,7 @@ console.log(uniqueTitles)
       })
       .then(data => setAdd_on_food(data))
       .catch(err => console.log("error in fetching add_on_food", err));
-  }, []);
+  }, [setMenu]);
   function handleAddOnClick(itemName: string) {
     if (selectedItemName === itemName) {
       // If the button is clicked again for the same item, close it

@@ -12,10 +12,11 @@ function CitySearch() {
   const [pincode, setPincode] = useState('');
   const [error, setError] = useState(null);
 
-  const handlePincodeChange = (e) => {
+  const handlePincodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPincode(e.target.value);
     setError(null);
   };
+  
 
   const handleSearch = () => {
     const validPincodes = [

@@ -1,37 +1,32 @@
 
 .header-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   color: #fff; 
   text-decoration: none;
   margin-bottom:10px;
+  width: 100%;
  }
   
   .navbar {
     display:flex;
     justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top:15px;
-    margin-left: 5px;
-    margin-right: 10px;
-    width: 30%;
-    margin-top: -30px;
+    align-items: top;
+
   }
  
  /* Initial styling for the underline and text color */
 .nav-link {
-  position: relative;
   text-decoration: none;
   color: #333; /* Initial text color */
   transition: color 0.2s ease-in-out; /* Add a transition for text color change */
+  margin-left: 20px;
 }
 
 /* Add an ::after pseudo-element for the underline */
 .nav-link::after {
   content: "";
-  position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
@@ -48,100 +43,67 @@
 }
 
 .nav-link:hover::after {
-  transform: scaleX(1); /* Expand the underline to full width on hover */
+  transform: scaleX(1); /* Expand the underline to flinkl width on hover */
   background-color: yellow; /* Underline color change on hover */
 }
 
-        
 
 
-  .footer-container {
-    margin: 0;
-      background-color: #333;
-      color: #fff;
-      width: 100%;
-      text-align: center;
-      margin-bottom: -15px;
-      overflow: hidden;
-    }
-    .logo {
-      width: 150px;
-      height: auto;
-      margin-left: -450px;
-      margin-top: 20px;
-      margin-right: -300px;
-    }
-  
-    @media (min-width: 992px) {
-      .navbar {
-        width: 30%;
-        justify-content: space-between;
-      }
-    
-      .nav-link {
-        font-size: 20px;
-      }
-    }
 
-    /* 14-inch laptop */
+.footer-container {
+  margin: 0;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  margin-bottom: -15px;
+  overflow: hidden;
+}
+
+.logo {
+  height: auto;
+  margin-top: 20px;
+  float: left;
+  margin-left: 20px;
+}
+
+
+.lang{
+  padding-right: 20px;
+}
+
+.hamburger-icon {
+  cursor: pointer;
+}
+
+.hamburger-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.hamburger-menu.open {
+  display: block;
+}
+@media (min-width: 768px) {
+  .hamburger-icon {
+    display: none;
+  }
+}
 @media (min-width: 992px) {
-  .navbar {
-    display: flex;
-    justify-content: space-between;
+  .hamburger-icon {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .hamburger-icon {
+    display: none;
   }
 }
 
-/* Tab and mobile */
-@media (max-width: 991px) {
-  .navbar {
-    display: none;
-  }
-
-  .navbar-button {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .navbar-button:hover {
-    background-color: #444;
-  }
-
-  .navbar-button.active {
-    background-color: #555;
-  }
-
-  .navbar-dropdown {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    z-index: 100;
-    display: none;
-  }
-
-  .navbar-dropdown.active {
-    display: block;
-  }
-
-  .navbar-dropdown a {
-    display: block;
-    padding: 10px;
-    color: #fff;
-    text-decoration: none;
-  }
-
-  .navbar-dropdown a:hover {
-    background-color: #444;
-  }
-}
-
-    

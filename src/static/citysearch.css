@@ -20,6 +20,7 @@
     align-items: center;
     margin-top: 50px;
 }
+
 .line{
   background: linear-gradient(to left, #c91618, #b59161);
   padding-top: 5px;

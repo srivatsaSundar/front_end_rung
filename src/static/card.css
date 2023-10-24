@@ -26,7 +26,9 @@
     width: 100%;
     text-align: center;
     margin-top: 20px;
+    height: 100%;
   }
+  
 .home-container > .card{
     display: inline-block;
 }
@@ -84,7 +86,55 @@
 
 .yes-1{
   background:  linear-gradient(to right, #c91618, #b59161);
-  
-  position: relative;
+  width: min-content;
+  height: auto;
 }
+
+@media only screen and (max-width: 600px )  {
+  .yes-1{
+    background:  linear-gradient(to right, #c91618, #b59161);
+    width: min-content;
+    height: auto;
+    
+  }
+}
+
+@media only screen and (min-width: 600px ) {
+  .yes-1{
+    background:  linear-gradient(to right, #c91618, #b59161);
+    width: min-content;
+    height: auto;
+    
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .yes-1{
+    background:  linear-gradient(to right, #c91618, #b59161);
+    width: min-content;
+    height: auto;
+    
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .yes-1{
+    background:  linear-gradient(to right, #c91618, #b59161);
+    width: auto;
+    height: auto;
+    
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px)  {
+  .yes-1{
+    background:  linear-gradient(to right, #c91618, #b59161);
+    width: auto;
+    height: auto;
+    
+  }
+}
+
 
