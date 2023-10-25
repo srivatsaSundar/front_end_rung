@@ -19,6 +19,12 @@ import translations_en from '../translations/translation_en.json'; // Import Eng
 import translations_de from '../translations/translation_de.json'; // Import German translations
 import { Navbar } from "react-bootstrap";
 import AppNavbar from "../components/navbar";
+import drink from "../images/drink.jpg";
+import soft from "../images/soft.jpg";
+import duck from "../images/duck.jpg";
+import noodle from "../images/noodle.jpg";
+import rice from "../images/rice.jpg";
+import veg from "../images/veg.jpg";
 
 interface MenuItem {
   id: number;
@@ -44,7 +50,8 @@ export function Menu() {
   const [selectedFood, setSelectedFood] = useState<string | null>(null);
   const [cart, setCart] = useState<MenuItem[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
-  const targetURL ="https://backend-rung.onrender.com/menu/";
+  const targetURL =translations.url;
+  console.log(targetURL)
   useEffect(() => {
     fetch(targetURL)
       .then((response) => {
@@ -55,7 +62,7 @@ export function Menu() {
       })
       .then(data => setMenu(data))
       .catch(err => console.log("error in fetching the menu", err));
-  }, []);
+  }, [targetURL]);
 
   const uniqueTitles: string[] = Array.from(new Set(menu.map((item) => item.title_name)));
   uniqueTitlesRef.current = uniqueTitles.map((_, index) => uniqueTitlesRef.current[index] as HTMLDivElement);
@@ -69,7 +76,17 @@ console.log(uniqueTitles)
     "Soups": soup,
     "Delicious Thai Wok": thai_wok,
     "Delicious Fry & Grill": fry,
-    "Delicious Combodia Wok": combodia,
+    "Delicious Cambodia Work": combodia,
+    "Alcholic Drinks": drink,
+    "Soft Drinks": soft,
+    "Delicious Duck": duck,
+    "Delicious Noodle": noodle,
+    "Delicious Rice": rice,
+    "Delicious Vegetable": veg,
+    "Beliebte Gerichte": Popular,
+    "Suppen": soup,
+    "Alkoholische Getränke": drink,
+    "Alkoholfreie Getränke": soft,
   };
 
   function scrollToTitle(index) {

@@ -36,8 +36,9 @@
   "formMobilePlaceholder": "Handynummer",
   "formMessagePlaceholder": "schreibe deine Nachricht hier",
   "formCaptchaPlaceholder": "Captcha eingeben",
-  "formSubmitButton": "einenachricht schicken"
-
+  "formSubmitButton": "einenachricht schicken",
+  "select":"sprache",
+  "url":"https://backend-rung.onrender.com/menu_germen/"
   
   }
   

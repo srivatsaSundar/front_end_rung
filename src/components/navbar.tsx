@@ -15,6 +15,13 @@ const navLinkStyle = {
     textDecoration: 'none' // Remove underline from links
     
   };
+  const customSelectStyle = {
+    background: 'transparent',
+    color: 'white',
+    border: 'none',
+    cursor: 'pointer',
+  };
+  
 
   const navLinkHoverStyle = {
     color: 'yellow', // Set hover text color
@@ -52,10 +59,15 @@ const navLinkStyle = {
         
       </Container>
       <div className="lang" style={{ display: 'flex', alignItems: 'center' }}>
-        <select onChange={handleLanguageChange} value={selectedLanguage} style={{background:'transparent',color:'white',border:"none"}}>
-          <option value="en" style={{color:'gray'}}>English</option>
-          <option value="de"  style={{color:'gray'}}>German</option>
+        <select onChange={handleLanguageChange} value={selectedLanguage} style={customSelectStyle}>
+        <option value="en" disabled hidden>{selectedLanguage === 'en' ? 'Language' : ''}</option>
+  <option value="de" disabled hidden>{selectedLanguage === 'de' ? 'Sprache' : ''}</option>
+  <option value="en" style={{ color: 'gray' }}>English</option>
+  <option value="de" style={{ color: 'gray' }}>Deutsch</option>
+ 
         </select>
+       
+        
         <Icofont icon="icofont-bag"  style={{ color:'white'}}size="1" />
         
       </div>
