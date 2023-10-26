@@ -2,7 +2,7 @@
   "name": "food_delivery_app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://backend-rung.onrender.com",
+  "proxy": "https://backend-rung.onrender.com/",
   "dependencies": {
     "-": "^0.0.1",
     "@bigdatacloudapi/client": "^1.1.3",
