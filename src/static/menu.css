@@ -1,0 +1,441 @@
+.yes{
+  background: linear-gradient(to left, #c91618, #b59161);
+
+}
+
+.up{
+   /* margin-top: 100px; */
+   text-align: center;
+   background: rgba(0, 0, 0, 0.35);
+   width: 350px;
+   margin-left: 450px;
+   font-family:italic;
+}
+
+.title-Discount{
+  padding-left: 300px;
+  padding-right: 200px;
+}
+
+.reservation {
+  background: url(../images/reservation_bg.jpg) center center no-repeat;
+  background-size: cover;
+  width: 100%;
+  padding-bottom: 50px;
+  color: #fff;
+  text-align: center;
+  padding-top: 35px;
+}
+
+.contact-form{
+  width:650px;
+  margin-left:330px;
+}
+
+.menu-container {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+/* Add the following styles to your CSS */
+.column1 {
+  flex: 0 0 25%; /* Set the width of Column 1 to 30% */
+  padding: 5px; /* Add some spacing */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  margin-right: 5px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: none;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+
+.column2 {
+  flex: 0 0 50%; /* Set the width of Column 2 to 45% */
+  padding: 10px; /* Add some spacing */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  overflow-y: auto; /* Allow Column 2 to scroll if content exceeds its height */
+  max-height: 100vh; /* Set a maximum height for Column 2 */
+  text-align: left;
+  margin-bottom:10px;
+  font-size:15px;
+}
+.column2::-webkit-scrollbar {
+  display: none;
+}
+.menu-name h2{
+  text-align: left;
+  color: rgb(196, 80, 7);
+}
+
+
+.column3 {
+  flex: 0 0 25%; /* Set the width of Column 3 to 25% */
+  margin-left: 1px; /* Add a 5px margin to the left of Column 3 */
+  padding: 5px; /* Add some spacing */
+  border: 1px solid #ccc; /* Add a border for clarity */
+  overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
+  max-height: 100vh; /* Set a maximum height for Column 3 */
+  height:fit-content;
+}
+.title-cart{
+  text-align: center;
+  font: size 15px;
+}
+
+.column3 ul li{
+  list-style: none;
+  margin-left: -1rem;
+  font-size: smaller;
+}
+
+.contact-form input{
+  background:rgba(0, 0, 0, 0.35) ;
+  border: #fff 1px solid;
+  border-radius: 3px;
+  padding: 10px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.contact-mobile input{
+  width: 521px;
+}
+
+.contact-mess input{
+  height: 150px;
+}
+
+.search-b{
+  margin-left: 15px;
+  margin-top: 20px;
+  background: red;
+  border: red 1px solid;
+  border-radius: 3px;
+  padding: 10px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 150px;
+}
+
+.name-email input{
+  width:252px;
+}
+
+input:focus{
+  color: rgb(196, 80, 7);
+}
+/* Menu.css */
+.cardMenu {
+ margin-bottom:10px;
+  border: 1px solid #ccc;
+  
+  border-radius: 5px;
+  padding:10px;
+  padding-bottom: 45px;
+}
+
+
+.card-titleMenu {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: rgb(196, 80, 7);
+}
+
+.card-nameMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  margin-left: auto;
+  /* Add any additional styles you want for the price */
+}
+
+
+.card-textMenu {
+  font-size: 1rem;
+  color: #333;
+
+}
+
+/* Style for the menu items */
+.menu-item {
+  background-color: white; /* Set the default background color */
+  transition: background-color 0.3s;
+  color: grey;
+}
+
+/* Style for the first menu item */
+.menu-item.first {
+  border-radius:3%;
+  padding:2px;
+  margin-bottom:5px;
+  background-color: rgb(196, 61, 7); /* Set the background color for the first item */
+  color: white; /* Set the text color for the first item */
+}
+
+/* Hover effect for menu items */
+.menu-item:hover {
+  background-color: rgb(196, 61, 7);
+  margin-bottom:5px; /* Hover effect for all menu items */
+  color: white;
+  border-radius:3%;
+  padding:2px;
+}
+
+/* Style for the "Add On" button */
+.add-on-button {
+  background:rgb(196, 80, 7);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  float: left;
+  
+}
+
+
+/* Style for the "Add" button */
+.add-button {
+  background: none;
+  color: rgb(196, 80, 7);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  float: right;
+}
+
+
+
+.basket{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.cart-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cart-item-name {
+  flex: 1;
+  width: 3%;
+  word-wrap: break-word;
+  margin-right: 10px; /* Add some margin for separation */
+  
+}
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+}
+
+/* Add styles for the buttons and price as needed */
+
+
+.plus-button{
+  background:rgb(196, 80, 7);
+  color: white;
+  border: rgb(196, 80, 7);
+  padding: 5px;
+ 
+}
+
+.quantity{
+  padding: 5px;
+  border-bottom: rgb(196, 80, 7) solid 1px;
+  border-top: rgb(196, 80, 7) solid 1px;
+
+}
+
+.drink-food{
+  display: flex;
+  gap: 5px;
+}
+.drink-dropdown, .food-dropdown {
+  width: 100%; /* Make each dropdown take the full width of the container */
+}
+
+/* Style for the dropdown options */
+.drink-dropdown select, .food-dropdown select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style for the options within the dropdowns */
+.drink-dropdown select option, .food-dropdown select option {
+  padding: 10px;
+}
+
+.price-cart{
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.icon-del{
+  border: none;
+}
+
+.order-button {
+  background:rgb(196, 80, 7);
+  color: white;
+  border: none;
+  padding: 5px 120px;
+  margin-right: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  float: left;
+}
+
+.yes-order{
+  background: linear-gradient(to left, #c91618, #b59161);
+  margin: 20px;
+  padding: 20px;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.search-button-pay{
+  width: 250px;
+  display: inline-block;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.order-columns {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.yes-order {
+  width: 75%; /* 70% of the available space */
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.order-cart {
+  width: 25%; /* 30% of the available space */
+}
+
+.address{
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.address input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.address-1  input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.code button{
+ margin-left: 30px;
+}
+.code  input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 400px;
+}
+
+.rem input{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width:850px;
+  height:150px;
+}
+
+.input-date {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.search-time-yes{
+  padding-right: 140px;
+  margin-left: -5px;
+}
+
+.add input{
+  width:400px;
+}
+
+.name input{
+  width: 400px;
+}
+
+.address-1{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 300px;
+}
+
+.address-2{
+  display: flex;
+  justify-content: space-between;
+  margin-right: 200px;
+}
+
+.h5-header{
+  padding-top: 50px;
+
+}
+h4{
+  padding-top: 50px;
+}
+
+
+/* Media Query for Mobile Devices (up to 768px) */
+@media only screen and (max-width: 768px) {
+  /* Add mobile-specific styles here */
+}
+
+/* Media Query for Tablets (768px - 1024px) */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Add tablet-specific styles here */
+}
+
+/* Media Query for Smaller Desktop Screens (1024px - 1280px) */
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
+  /* Add smaller desktop-specific styles here */
+}
+
+/* Media Query for Standard Desktop Screens (1280px - 1440px) */
+@media only screen and (min-width: 1281px) and (max-width: 1440px) {
+  /* Add standard desktop-specific styles here */
+}
+
+/* Media Query for Larger Desktop Screens (1440px and above) */
+@media only screen and (min-width: 1441px) {
+  /* Add larger desktop-specific styles here */
+}

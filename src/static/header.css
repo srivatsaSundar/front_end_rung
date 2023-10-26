@@ -1,0 +1,73 @@
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff; 
+  text-decoration: none;
+  margin-bottom:10px;
+  width: 100%;
+ }
+  
+  .navbar {
+    display:flex;
+    justify-content: space-between;
+    align-items: top;
+
+  }
+ 
+ /* Initial styling for the underline and text color */
+.nav-link {
+  text-decoration: none;
+  color: #333; /* Initial text color */
+  transition: color 0.2s ease-in-out; /* Add a transition for text color change */
+  margin-left: 20px;
+}
+
+/* Add an ::after pseudo-element for the underline */
+.nav-link::after {
+  content: "";
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px; /* Adjust the thickness of the underline */
+  background-color: transparent; /* Initially transparent underline */
+  transform: scaleX(0); /* Initially, set the width to 0 */
+  transform-origin: right;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Add transitions for both underline and text color */
+}
+
+/* Hover effect to reveal the underline and change text color */
+.nav-link:hover {
+  color: yellow !important; /* Text color change on hover */
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1); /* Expand the underline to flinkl width on hover */
+  background-color: yellow; /* Underline color change on hover */
+}
+
+
+
+
+.footer-container {
+  margin: 0;
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  margin-bottom: -15px;
+  overflow: hidden;
+}
+
+.logo {
+  height: auto;
+  margin-top: 20px;
+  float: left;
+  margin-left: 20px;
+}
+
+
+.lang{
+  padding-right: 20px;
+}
