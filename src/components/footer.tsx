@@ -13,8 +13,9 @@ export function Footer() {
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
 
     return (
-      <div className="footer-container">
-        <p className="footer">{translations.copyrightNotice}</p>
+      <div style={{backgroundColor: "#EC5800",}} className="footer-container">
+        <p className="footer" style={{marginLeft:60}}>{translations.copyrightNotice} <span >Powered by Team Trio</span></p>
+       
       </div>
     );
   }

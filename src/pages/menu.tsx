@@ -267,8 +267,9 @@ console.log(uniqueTitles)
         <div className="column2">
   {uniqueTitles.map((title, index) => (
     <div key={index} className="menu-name" ref={(el) => (uniqueTitlesRef.current[index] = el as HTMLDivElement)}>
-        <img src={titleImageUrls[title]} alt={`Image for ${title}`} />
+        
       <h2>{title}</h2>
+      <img src={titleImageUrls[title]} alt={`Image for ${title}`} />
       <hr />
       {menu
         .filter(item => item.title_name === title)

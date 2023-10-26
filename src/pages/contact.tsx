@@ -20,11 +20,11 @@ export function Contact() {
     return (
       // basic contact information
       <div >
-        <div className="yes">
+        <div style={{fontSize:16,marginBottom:10}} className="yes">
          <AppNavbar />
-         <div className="up">
-         <h3>{translations.contact}</h3>
-         <p>{translations.home} &rsaquo; {translations.contact}</p>
+         <div style={{paddingTop:20 , paddingBottom:20, marginTop:30, }} className="up">
+         <h3 style={{fontFamily:"Great Vibes", fontStyle:"italic",color:"white"}}>{translations.contact}</h3>
+         <p style={{fontFamily:"Great Vibes", color:"white"}}>{translations.home} &rsaquo; {translations.contact}</p>
          </div>
         </div>
         <div className="reservation">

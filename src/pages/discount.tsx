@@ -21,13 +21,13 @@ export function Discount() {
       <div >
         <div className="yes">
          <AppNavbar />
-         <div className="up">
-         <h3>{translations.discount}</h3>
-         <p>{translations.home}&rsaquo; {translations.discount}</p>
+         <div style={{paddingTop:20 , paddingBottom:20, marginTop:30, }} className="up">
+         <h3 style={{fontFamily:"Great Vibes", fontStyle:"italic",color:"white"}}>{translations.discount}</h3>
+         <p style={{fontFamily:"Great Vibes", color:"white"}}>{translations.home}&rsaquo; {translations.discount}</p>
          </div>
         </div>
         <div className="title-Discount">
-          <h1>{translations.discount}</h1>
+          <h1 style={{padding:30,marginLeft:10}}>{translations.discount}</h1>
           <hr></hr>
         </div>
       <div className="home-container yes">
