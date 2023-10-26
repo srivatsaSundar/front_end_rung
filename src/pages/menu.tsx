@@ -51,7 +51,7 @@ export function Menu() {
   const [cart, setCart] = useState<MenuItem[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL =translations.url;
-  console.log(targetURL)
+  console.log(targetURL,{ mode: 'cors' })
   useEffect(() => {
     fetch(targetURL)
       .then((response) => {
@@ -98,7 +98,7 @@ console.log(uniqueTitles)
   const targetURL2 ="https://backend-rung.onrender.com/add_on_drink";
 
   useEffect(() => {
-    fetch(targetURL2)
+    fetch(targetURL2,{ mode: 'cors' })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -112,7 +112,7 @@ console.log(uniqueTitles)
   console.log(add_on_drink)
   const targetURL3 ="https://backend-rung.onrender.com/add_on_food";
   useEffect(() => {
-    fetch(targetURL3)
+    fetch(targetURL3,{ mode: 'cors' })
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
