@@ -1,0 +1,22 @@
+{
+    "project": {
+      "name": "my-project",
+      "version": "1.0.0",
+      "runtime": "nodejs16"
+    },
+    "routes": [
+      {
+        "src": "/",
+        "dest": "public/index.html"
+      },
+      {
+        "src": "/api/*",
+        "dest": "api/index.js",
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        }
+      }
+    ]
+  }
