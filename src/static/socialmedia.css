@@ -1,11 +1,12 @@
 .social-media {
-    display: flex;
-    justify-content: space-around;
-    margin-top: -20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  text-align: left;
     padding-top: 20px;
     height: fit-content;
     color: #fff;
-    background: linear-gradient(to right, #c91618, #b59161)
+    background: linear-gradient(to right, #c22527, #b47727);
   }
   .contact-us {
     list-style: none;
@@ -17,17 +18,54 @@
   
   .contact-us li {
     display: flex;
-    align-items: flex-start; /* Align items to the top */
-    margin-bottom: 20px; /* Add spacing between items */
+    align-items: flex-start; 
+    margin-bottom: 5px; 
   }
 
   .icons-loc{
-    margin-right: 20px;
+    padding-top: 5px;
     margin-left: 20px;
+    padding-right: 20px;
   }
 
 .margin-hour{
     margin-left: 27px;
+}
+.social-media h5 {
+  margin-left: 25px;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 600px )  {/*mobile*/
+  .social-media {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    font-size: 13px;
+    padding-left: 25px;
+  }
+  .social-media h5 {
+    margin-left: 20px;
+    font-size: 15px;
+  }
+  .contact-us {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  .contact-us li {
+    display: flex;
+    align-items: flex-start; 
+    margin-bottom: 5px; 
+  }
+  .margin-hour{
+    margin-left: 27px;
+}
+.media{
+  margin-bottom: 30px;
+}
 }
   
  

@@ -7,6 +7,7 @@ import Logo from '../images/rung_logo.png';
 import { useLanguage } from './LanguageProvider'; // Import the useLanguage hook
 import translations_en from '../translations/translation_en.json'; // Import English translations
 import translations_de from '../translations/translation_de.json'; // Import German translations
+import lines from "../images/lines.png"
 
 function CitySearch() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function CitySearch() {
     setPincode(e.target.value);
     setError(null);
   };
-  
+
 
   const handleSearch = () => {
     const validPincodes = [
@@ -64,11 +65,11 @@ function CitySearch() {
         <nav>
           <div className="button">
             <button className="button-1" onClick={() => setShowDiv('first')}>
-            {translations.homeDelivery}
+              {translations.homeDelivery}
 
             </button>
             <button className="button-2" onClick={() => setShowDiv('second')}>
-            {translations.takeAway}
+              {translations.takeAway}
             </button>
           </div>
         </nav>
@@ -120,7 +121,7 @@ function CitySearch() {
                     placeholderText="MM/DD/YYYY"
                   />
                   <select className="search-time" defaultValue="18:00">
-                  <option value="">{translations.selecttime}</option>
+                    <option value="">{translations.selecttime}</option>
                     {Array.from({ length: 13 }, (_, i) => {
                       const hour = 18 + Math.floor(i / 4);
                       const minute = (i % 4) * 15;
@@ -163,6 +164,7 @@ function CitySearch() {
             </li>
           </div>
         </ul>
+        <img src={lines} alt="line" title="line" className='lines'/>
       </div>
     </div>
   );

@@ -20,24 +20,22 @@
 .nav-link {
   text-decoration: none;
   color: #333; /* Initial text color */
-  transition: color 0.2s ease-in-out; /* Add a transition for text color change */
+  transition: color 0.2s ease-in-out; 
   margin-left: 20px;
 }
 
-/* Add an ::after pseudo-element for the underline */
 .nav-link::after {
   content: "";
   left: 0;
   right: 0;
   bottom: 0;
-  height: 3px; /* Adjust the thickness of the underline */
+  height: 3px; 
   background-color: transparent; /* Initially transparent underline */
   transform: scaleX(0); /* Initially, set the width to 0 */
   transform-origin: right;
   transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Add transitions for both underline and text color */
 }
 
-/* Hover effect to reveal the underline and change text color */
 .nav-link:hover {
   color: yellow !important; /* Text color change on hover */
 }
@@ -47,12 +45,9 @@
   background-color: yellow; /* Underline color change on hover */
 }
 
-
-
-
 .footer-container {
   margin: 0;
-  background-color: #333;
+  background-color: #EC5800;
   color: #fff;
   width: 100%;
   text-align: center;
@@ -70,4 +65,10 @@
 
 .lang{
   padding-right: 20px;
+}
+
+.footer{
+  align-items:"center";
+  margin-top:"10px";
+  font-size: 13px;
 }

@@ -82,36 +82,24 @@
   
 }
 
-
-
 .yes-1{
-  background:  linear-gradient(to right, #c91618, #b59161);
-  width: min-content;
-  height: auto;
+  background:  linear-gradient(to right, #1a0606, #b59161);
 }
 
-@media only screen and (max-width: 600px )  {
+@media only screen and (max-width: 600px )  {/*mobile*/
   .yes-1{
     background:  linear-gradient(to right, #c91618, #b59161);
-    width: min-content;
+    width:inherit;
     height: auto;
-    
+    overflow-x: hidden;
   }
+  
 }
 
-@media only screen and (min-width: 600px ) {
+@media only screen and (min-width: 600px ) {/*tab*/
   .yes-1{
     background:  linear-gradient(to right, #c91618, #b59161);
-    width: min-content;
-    height: auto;
-    
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .yes-1{
-    background:  linear-gradient(to right, #c91618, #b59161);
-    width: max-content;
+    width: inherit;
     height: auto;
     
   }
