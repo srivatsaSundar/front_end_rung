@@ -141,25 +141,31 @@ console.log(uniqueTitles)
 
  
   const addToCart = (item) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+    const existingItemIndex = cart.findIndex(
+      (cartItem) =>
+        cartItem.id === item.id &&
+        cartItem.drink === selectedDrink &&
+        cartItem.food === selectedFood
+    );
   
-    if (existingItem) {
-      // If item already exists in the cart, increment its quantity and update the drink or food
-      setCart(
-        cart.map((cartItem) =>
-          cartItem.id === item.id
-            ? {
-                ...cartItem,
-                quantity: cartItem.quantity + 1,
-                drink: selectedDrink || cartItem.drink,
-                food: selectedFood || cartItem.food,
-              }
-            : cartItem,
-        ),
-      );
+    if (existingItemIndex !== -1) {
+      // If an identical item with the same add-ons exists in the cart, update its quantity and price
+      const updatedCart = [...cart];
+      updatedCart[existingItemIndex].quantity += 1;
+      updatedCart[existingItemIndex].price = calculateItemPrice(updatedCart[existingItemIndex]);
+      setCart(updatedCart);
     } else {
-      // If item doesn't exist in the cart, add it with quantity 1 and update the drink or food
-      setCart([...cart, { ...item, quantity: 1, drink: selectedDrink, food: selectedFood }]);
+      // If the item doesn't exist in the cart, add it with the selected options
+      setCart([
+        ...cart,
+        {
+          ...item,
+          quantity: 1,
+          drink: selectedDrink,
+          food: selectedFood,
+          price: calculateItemPrice(item), // Calculate the price with selected options
+        },
+      ]);
     }
   };
   
