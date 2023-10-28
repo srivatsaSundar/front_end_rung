@@ -22,6 +22,7 @@ const AppNavbar = () => {
     color: 'white',
     border: 'none',
     cursor: 'pointer',
+    height:"50px"
   };
 
 
@@ -66,8 +67,6 @@ const AppNavbar = () => {
           <option value="de" style={{ color: 'gray' }}>Deutsch</option>
 
         </select>
-
-
         <Icofont icon="icofont-bag" style={{ color: 'white' }} size="1" />
 
       </div>

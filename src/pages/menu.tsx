@@ -1,4 +1,3 @@
-import { Header } from "../components/header";
 import React, { useEffect, useRef, useState } from 'react';
 import "../static/menu.css";
 import Icofont from 'react-icofont';
@@ -15,9 +14,8 @@ import thai_wok from "../images/thai_wok.jpg";
 import fry from "../images/fry.jpg";
 import combodia from "../images/combodia.jpg";
 import { useLanguage } from '../components/LanguageProvider';
-import translations_en from '../translations/translation_en.json'; // Import English translations
-import translations_de from '../translations/translation_de.json'; // Import German translations
-import { Navbar } from "react-bootstrap";
+import translations_en from '../translations/translation_en.json'; 
+import translations_de from '../translations/translation_de.json';
 import AppNavbar from "../components/navbar";
 import drink from "../images/drink.jpg";
 import soft from "../images/soft.jpg";
@@ -34,12 +32,9 @@ interface MenuItem {
   amount: number;
 }
 
-
-
 export function Menu() {
-  const { selectedLanguage } = useLanguage(); // Access the selected language
+  const { selectedLanguage } = useLanguage(); /
 
-  // Define translations based on the selected language
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
 
   const [menu, setMenu] = useState([]) as any[];
@@ -67,7 +62,7 @@ export function Menu() {
 
   const uniqueTitles: string[] = Array.from(new Set(menu.map((item) => item.title_name)));
   uniqueTitlesRef.current = uniqueTitles.map((_, index) => uniqueTitlesRef.current[index] as HTMLDivElement);
-console.log(uniqueTitles)
+  console.log(uniqueTitles)
   const titleImageUrls = {
     "Popular Dishes": Popular,
     "Delicious Asia Wok": asiawok,
@@ -140,10 +135,6 @@ console.log(uniqueTitles)
     setSelectedFood(event.target.value);
   }
 
- 
- // Remove the selectedDrink and selectedFood states, as they are now being managed within the cart items.
-// Remove the code that updates prices based on selected drink and food from calculateItemPrice.
-
 const addToCart = (item) => {
   const existingItemIndex = cart.findIndex(
     (cartItem) =>
@@ -202,11 +193,7 @@ const deleteFromCart = (item) => {
     setCart(updatedCart);
   }
 };
-
-  
-
-  
-  
+ 
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
       return cart.reduce((total, item) => {
@@ -227,20 +214,17 @@ const deleteFromCart = (item) => {
           }
         }
 
-        // Return the total price of the item, including the price of the add-ons
         return total + price * item.quantity;
       }, 0);
     } else {
       return 0;
     }
   };
-  
 
   function calculateItemPrice(item) {
     const basePrice = item.price;
     let price = basePrice;
 
-    // Calculate the total price based on selected drink and food
     if (selectedDrink) {
       const drink = add_on_drink.find(drink => drink.drink.name === selectedDrink);
       if (drink) {
@@ -256,7 +240,6 @@ const deleteFromCart = (item) => {
 
     return price;
   }
-
  
   return (
     <div>

@@ -14,8 +14,7 @@ export function Footer() {
 
     return (
       <div className="footer-container">
-        <p className="footer" style={{alignItems:"center",marginTop:"10px"}}>{translations.copyrightNotice} <span >Powered by Team Trio</span></p>
-       
+        <p className="footer" style={{alignItems:"center",marginTop:"10px"}}>{translations.copyrightNotice} <span >Powered by Team Trio</span></p>  
       </div>
     );
   }
