@@ -33,7 +33,7 @@ interface MenuItem {
 }
 
 export function Menu() {
-  const { selectedLanguage } = useLanguage(); /
+  const { selectedLanguage } = useLanguage(); 
 
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
   const [selectedAddons, setSelectedAddons] = useState({});
