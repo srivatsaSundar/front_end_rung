@@ -41,6 +41,7 @@ export function Menu() {
 
   // Define translations based on the selected language
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
+  const [selectedAddons, setSelectedAddons] = useState({});
 
   const [menu, setMenu] = useState([]) as any[];
   const uniqueTitlesRef = useRef<HTMLElement[]>([]);
@@ -123,28 +124,54 @@ console.log(uniqueTitles)
       .then(data => setAdd_on_food(data))
       .catch(err => console.log("error in fetching add_on_food", err));
   }, [setMenu]);
-  function handleAddOnClick(itemName: string) {
-    if (selectedItemName === itemName) {
-      // If the button is clicked again for the same item, close it
-      setSelectedItemName(null);
-    } else {
-      setSelectedItemName(itemName);
+  function handleAddOnClick(itemName) {
+    setSelectedItemName(itemName);
+  
+    // Initialize selected add-ons if not already set
+    if (!selectedAddons[itemName]) {
+      setSelectedAddons({
+        ...selectedAddons,
+        [itemName]: {
+          selectedDrink: null,
+          selectedFood: null,
+        },
+      });
     }
   }
-  function handleDrinkChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  function handleDrinkChange(event) {
     const selectedValue = event.target.value;
-    setSelectedDrink(selectedValue);
+    const updatedAddons = {
+      ...selectedAddons,
+      [selectedItemName]: {
+        ...selectedAddons[selectedItemName],
+        selectedDrink: selectedValue,
+      },
+    };
+    setSelectedAddons(updatedAddons);
   }
-
-  function handleFoodChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    setSelectedFood(event.target.value);
+  
+  function handleFoodChange(event) {
+    const selectedValue = event.target.value;
+    const updatedAddons = {
+      ...selectedAddons,
+      [selectedItemName]: {
+        ...selectedAddons[selectedItemName],
+        selectedFood: selectedValue,
+      },
+    };
+    setSelectedAddons(updatedAddons);
   }
-
+  
  
  // Remove the selectedDrink and selectedFood states, as they are now being managed within the cart items.
 // Remove the code that updates prices based on selected drink and food from calculateItemPrice.
 
+
+
 const addToCart = (item) => {
+  const selectedDrink = selectedAddons[item.name]?.selectedDrink || null;
+  const selectedFood = selectedAddons[item.name]?.selectedFood || null;
+
   const existingItemIndex = cart.findIndex(
     (cartItem) =>
       cartItem.id === item.id &&
@@ -168,6 +195,7 @@ const addToCart = (item) => {
     ]);
   }
 };
+
 
 const removeFromCart = (item) => {
   const existingItemIndex = cart.findIndex(
@@ -205,58 +233,60 @@ const deleteFromCart = (item) => {
 
   
 
-  
-  
-  const calculateTotalPrice = () => {
-    if (cart && cart.length > 0) {
-      return cart.reduce((total, item) => {
-        const basePrice = item.price;
-        let price = basePrice;
+function calculateUpdateItemPrice(item, selectedDrink, selectedFood) {
+  const drink = add_on_drink.find(drink => drink.drink.name === selectedDrink);
+  const food = add_on_food.find(food => food.food.name === selectedFood);
+  return item.price + (drink ? drink.drink.price : 0) + (food ? food.food.price : 0);
+}
 
-        // Calculate the total price based on selected drink and food
-        if (selectedDrink) {
-          const drink = add_on_drink.find(drink => drink.drink.name === selectedDrink);
-          if (drink) {
-            price += drink.drink.price;
-          }
-        }
-        if (selectedFood) {
-          const food = add_on_food.find(food => food.food.name === selectedFood);
-          if (food) {
-            price += food.food.price;
-          }
-        }
+const calculateTotalPrice = () => {
+  if (cart && cart.length > 0) {
+    return cart.reduce((total, item) => {
+      const basePrice = item.price;
+      let price = basePrice;
 
-        // Return the total price of the item, including the price of the add-ons
-        return total + price * item.quantity;
-      }, 0);
-    } else {
-      return 0;
-    }
-  };
-  
+      // Calculate the total price based on selected drink and food for each item
+      if (item.drink) {
+        const drink = add_on_drink.find(drink => drink.drink.name === item.drink);
+        if (drink) {
+          price += drink.drink.price;
+        }
+      }
+      if (item.food) {
+        const food = add_on_food.find(food => food.food.name === item.food);
+        if (food) {
+          price += food.food.price;
+        }
+      }
+
+      // Return the total price of the item, including the price of the add-ons
+      return total + price * item.quantity;
+    }, 0);
+  } else {
+    return 0;
+  }
+};
 
   function calculateItemPrice(item) {
-    const basePrice = item.price;
-    let price = basePrice;
-
-    // Calculate the total price based on selected drink and food
-    if (selectedDrink) {
-      const drink = add_on_drink.find(drink => drink.drink.name === selectedDrink);
-      if (drink) {
-        price += drink.drink.price;
+    let price = item.price; // Initialize the price with the base item price
+  
+    // Calculate the total price based on the selected drink and food
+    if (item.drink) {
+      const selectedDrink = add_on_drink.find((drink) => drink.drink.name === item.drink);
+      if (selectedDrink) {
+        price += selectedDrink.drink.price;
       }
     }
-    if (selectedFood) {
-      const food = add_on_food.find(food => food.food.name === selectedFood);
-      if (food) {
-        price += food.food.price;
+    if (item.food) {
+      const selectedFood = add_on_food.find((food) => food.food.name === item.food);
+      if (selectedFood) {
+        price += selectedFood.food.price;
       }
     }
-
+  
     return price;
   }
-
+  
  
   return (
     <div>
@@ -297,15 +327,16 @@ const deleteFromCart = (item) => {
               </div>
               <p className="card-textMenu">{item.description_1}</p>
               {add_on_drink.some(drink => drink.menu.name === item.name) || add_on_food.some(food => food.menu.name === item.name) ? (
-                <button onClick={() => handleAddOnClick(item.name)} className="add-on-button">
-                  + {translations.addon}
-                </button>
+               <button onClick={() => handleAddOnClick(item.name)} className="add-on-button">
+               + {translations.addon}
+             </button>
+             
               ) : null}
               {selectedItemName === item.name && (
                 <div className="drink-food">
                   <br></br>
                   <div className="drink-dropdown">
-                  <select onChange={handleDrinkChange} value={selectedDrink || ''}>
+                  <select onChange={handleDrinkChange} value={selectedAddons[item.name].selectedDrink || ''}>
                     <option value="">{translations.selectaddon}</option>
                     {add_on_drink
                       .filter(drink => drink.menu.name === item.name)
@@ -320,7 +351,7 @@ const deleteFromCart = (item) => {
                   </select>
                   </div>
                   <div className="food-dropdown">
-                  <select onChange={handleFoodChange} value={selectedFood || ''}>
+                  <select onChange={handleFoodChange} value={selectedAddons[item.name].selectedFood || ''}>
                     <option value="">{translations.selectaddon}</option>
                     {add_on_food
                       .filter(food => food.menu.name === item.name)
@@ -334,9 +365,12 @@ const deleteFromCart = (item) => {
                       ))}
                   </select>
                   </div>
-                  {selectedDrink || selectedFood ? (
-  <p>{calculateItemPrice(item)}/- CHF</p>
+                  {selectedAddons[item.name].selectedDrink || selectedAddons[item.name].selectedFood ? (
+  <div className="add-on-cost">
+    <p>{calculateUpdateItemPrice(item, selectedAddons[item.name].selectedDrink || null, selectedAddons[item.name].selectedFood || null)}/- CHF</p>
+  </div>
 ) : null}
+
                 </div>
               )}
               <button className="add-button" onClick={() => addToCart(item)}>
