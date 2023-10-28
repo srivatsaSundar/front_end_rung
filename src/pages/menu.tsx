@@ -23,6 +23,7 @@ import duck from "../images/duck.jpg";
 import noodle from "../images/noodle.jpg";
 import rice from "../images/rice.jpg";
 import veg from "../images/veg.jpg";
+import axios from "axios"
 
 interface MenuItem {
   id: number;
@@ -39,7 +40,7 @@ export function Menu() {
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
   const [selectedAddons, setSelectedAddons] = useState({});
 
-  const [menu, setMenu] = useState([]) as any[];
+  const [menu, setMenu] = useState([]);
   const uniqueTitlesRef = useRef<HTMLElement[]>([]);
   const [add_on_drink, setAdd_on_drink] = useState([]) as any[];
   const [add_on_food, setAdd_on_food] = useState([]) as any[];
@@ -47,22 +48,31 @@ export function Menu() {
   const [cart, setCart] = useState<MenuItem[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL = translations.url;
+
+
+  const targetURL2 = "https://backend-rung.onrender.com/add_on_drink";
   console.log(targetURL, { mode: 'cors' })
+
+
   useEffect(() => {
-    fetch(targetURL)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => setMenu(data))
-      .catch(err => console.log("error in fetching the menu", err));
-  }, [targetURL]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(targetURL); // Replace 'YOUR_API_ENDPOINT' with the actual API URL
+        setMenu(response.data); 
+        console.log("ressponse",response)// Assuming the menu items are nested under 'menus' key in the response data
+      } catch (error) {
+        console.error('Error fetching menu:', error);
+      }
+    };
+
+    fetchData();
+  }, [targetURL]); 
 
   const uniqueTitles: string[] = Array.from(new Set(menu.map((item) => item.title_name)));
   uniqueTitlesRef.current = uniqueTitles.map((_, index) => uniqueTitlesRef.current[index] as HTMLDivElement);
   console.log(uniqueTitles)
+  console.log("menu",menu);
+
   const titleImageUrls = {
     "Popular Dishes": Popular,
     "Delicious Asia Wok": asiawok,
@@ -91,7 +101,6 @@ export function Menu() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   }
-  const targetURL2 = "https://backend-rung.onrender.com/add_on_drink";
 
   useEffect(() => {
     fetch(targetURL2, { mode: 'cors' })
@@ -447,6 +456,17 @@ export function Menu() {
 
 
         </div>
+        {cart.length > 0 && (
+          <div className="column4">
+            {cart.length > 0 && (
+              <div className="cart-div">
+                <button className="cart-button" >
+                  {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF
+                </button>
+              </div>
+            )}
+          </div>
+        )}
       </div>
       <SocialLogin />
       <Footer />

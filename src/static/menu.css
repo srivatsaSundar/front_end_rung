@@ -1,18 +1,18 @@
-.yes{
+.yes {
   background: linear-gradient(to left, #c91618, #b59161);
 }
 
-.up{
-   text-align: center;
-   background: rgba(0, 0, 0, 0.35);
-   width: 350px;
-   display: flex;
-   flex-direction: column;
-   font-family:italic;
-   margin-left: 38%;
+.up {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.35);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  font-family: italic;
+  margin-left: 38%;
 }
 
-.title-Discount{
+.title-Discount {
   text-align: center;
 }
 
@@ -26,16 +26,16 @@
   padding-top: 35px;
 }
 
-.contact-form{
-  width:650px;
-  margin-left:330px;
+.contact-form {
+  width: 650px;
+  margin-left: 330px;
 }
 
 .menu-container {
-    display: flex;
-    width: 100%;
-    max-width: 100%;
-    margin-top: 10px;
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
 }
 
 /* Add the following styles to your CSS */
@@ -48,11 +48,10 @@
   top: 0;
   height: 100vh;
   overflow-y: none;
-  font-size:13px;
-  margin-bottom:15px;
-  display:block
+  font-size: 13px;
+  margin-bottom: 15px;
+  display: block;
 }
-
 
 .column2 {
   flex: 0 0 50%; /* Set the width of Column 2 to 45% */
@@ -61,17 +60,16 @@
   overflow-y: auto; /* Allow Column 2 to scroll if content exceeds its height */
   max-height: 100vh; /* Set a maximum height for Column 2 */
   text-align: left;
-  margin-bottom:10px;
-  font-size:15px;
+  margin-bottom: 10px;
+  font-size: 15px;
 }
 .column2::-webkit-scrollbar {
   display: none;
 }
-.menu-name h2{
+.menu-name h2 {
   text-align: left;
   color: rgb(196, 80, 7);
 }
-
 
 .column3 {
   flex: 0 0 25%; /* Set the width of Column 3 to 25% */
@@ -80,21 +78,22 @@
   border: 1px solid #ccc; /* Add a border for clarity */
   overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
   max-height: 100vh; /* Set a maximum height for Column 3 */
-  height:fit-content;
+  height: fit-content;
+  display: block;
 }
-.title-cart{
+.title-cart {
   text-align: center;
   font: size 15px;
 }
 
-.column3 ul li{
+.column3 ul li {
   list-style: none;
   margin-left: -1rem;
   font-size: smaller;
 }
 
-.contact-form input{
-  background:rgba(0, 0, 0, 0.35) ;
+.contact-form input {
+  background: rgba(0, 0, 0, 0.35);
   border: #fff 1px solid;
   border-radius: 3px;
   padding: 10px;
@@ -102,15 +101,15 @@
   margin-top: 10px;
 }
 
-.contact-mobile input{
+.contact-mobile input {
   width: 521px;
 }
 
-.contact-mess input{
+.contact-mess input {
   height: 150px;
 }
 
-.search-b{
+.search-b {
   margin-left: 15px;
   margin-top: 20px;
   background: red;
@@ -124,23 +123,22 @@
   width: 150px;
 }
 
-.name-email input{
-  width:252px;
+.name-email input {
+  width: 252px;
 }
 
-input:focus{
+input:focus {
   color: rgb(196, 80, 7);
 }
 /* Menu.css */
 .cardMenu {
- margin-bottom:10px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
-  
+
   border-radius: 5px;
-  padding:10px;
+  padding: 10px;
   padding-bottom: 45px;
 }
-
 
 .card-titleMenu {
   font-size: 1.25rem;
@@ -159,11 +157,9 @@ input:focus{
   /* Add any additional styles you want for the price */
 }
 
-
 .card-textMenu {
   font-size: 1rem;
   color: #333;
-
 }
 
 /* Style for the menu items */
@@ -175,34 +171,36 @@ input:focus{
 
 /* Style for the first menu item */
 .menu-item.first {
-  border-radius:3%;
-  padding:2px;
-  margin-bottom:5px;
-  background-color: rgb(196, 61, 7); /* Set the background color for the first item */
+  border-radius: 3%;
+  padding: 2px;
+  margin-bottom: 5px;
+  background-color: rgb(
+    196,
+    61,
+    7
+  ); /* Set the background color for the first item */
   color: white; /* Set the text color for the first item */
 }
 
 /* Hover effect for menu items */
 .menu-item:hover {
   background-color: rgb(196, 61, 7);
-  margin-bottom:5px; /* Hover effect for all menu items */
+  margin-bottom: 5px; /* Hover effect for all menu items */
   color: white;
-  border-radius:3%;
-  padding:2px;
+  border-radius: 3%;
+  padding: 2px;
 }
 
 /* Style for the "Add On" button */
 .add-on-button {
-  background:rgb(196, 80, 7);
+  background: rgb(196, 80, 7);
   color: white;
   border: none;
   padding: 5px 10px;
   margin-right: 5px;
   cursor: pointer;
   float: left;
-  
 }
-
 
 /* Style for the "Add" button */
 .add-button {
@@ -215,10 +213,9 @@ input:focus{
   float: right;
 }
 
-.basket{
+.basket {
   display: flex;
   justify-content: center;
-  
 }
 
 .cart-item {
@@ -232,7 +229,6 @@ input:focus{
   width: 3%;
   word-wrap: break-word;
   margin-right: 10px; /* Add some margin for separation */
-  
 }
 
 .cart-controls {
@@ -242,32 +238,31 @@ input:focus{
 
 /* Add styles for the buttons and price as needed */
 
-
-.plus-button{
-  background:rgb(196, 80, 7);
+.plus-button {
+  background: rgb(196, 80, 7);
   color: white;
   border: rgb(196, 80, 7);
   padding: 5px;
- 
 }
 
-.quantity{
+.quantity {
   padding: 5px;
   border-bottom: rgb(196, 80, 7) solid 1px;
   border-top: rgb(196, 80, 7) solid 1px;
-
 }
 
-.drink-food{
+.drink-food {
   display: flex;
   gap: 5px;
 }
-.drink-dropdown, .food-dropdown {
+.drink-dropdown,
+.food-dropdown {
   width: 100%; /* Make each dropdown take the full width of the container */
 }
 
 /* Style for the dropdown options */
-.drink-dropdown select, .food-dropdown select {
+.drink-dropdown select,
+.food-dropdown select {
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
@@ -275,21 +270,22 @@ input:focus{
 }
 
 /* Style for the options within the dropdowns */
-.drink-dropdown select option, .food-dropdown select option {
+.drink-dropdown select option,
+.food-dropdown select option {
   padding: 10px;
 }
 
-.price-cart{
+.price-cart {
   margin-left: 2px;
   margin-right: 2px;
 }
 
-.icon-del{
+.icon-del {
   border: none;
 }
 
 .order-button {
-  background:rgb(196, 80, 7);
+  background: rgb(196, 80, 7);
   color: white;
   border: none;
   padding: 5px 120px;
@@ -299,7 +295,7 @@ input:focus{
   float: left;
 }
 
-.yes-order{
+.yes-order {
   background: linear-gradient(to left, #c91618, #b59161);
   margin: 20px;
   padding: 20px;
@@ -307,7 +303,7 @@ input:focus{
   border-radius: 5px;
 }
 
-.search-button-pay{
+.search-button-pay {
   width: 250px;
   display: inline-block;
   padding: 10px;
@@ -335,40 +331,39 @@ input:focus{
   width: 25%; /* 30% of the available space */
 }
 
-.address{
+.address {
   display: flex;
   justify-content: space-between;
-  
 }
 
-.address input{
+.address input {
   border-radius: 5px;
   border: 1px solid #ccc;
   padding: 5px;
 }
 
-.address-1  input{
+.address-1 input {
   border-radius: 5px;
   border: 1px solid #ccc;
   padding: 5px;
 }
 
-.code button{
- margin-left: 30px;
+.code button {
+  margin-left: 30px;
 }
-.code  input{
+.code input {
   border-radius: 5px;
   border: 1px solid #ccc;
   padding: 5px;
   width: 400px;
 }
 
-.rem input{
+.rem input {
   border-radius: 5px;
   border: 1px solid #ccc;
   padding: 5px;
-  width:850px;
-  height:150px;
+  width: 850px;
+  height: 150px;
 }
 
 .input-date {
@@ -379,125 +374,154 @@ input:focus{
   padding-right: 20px;
 }
 
-.search-time-yes{
+.search-time-yes {
   padding-right: 140px;
   margin-left: -5px;
 }
 
-.add input{
-  width:400px;
-}
-
-.name input{
+.add input {
   width: 400px;
 }
 
-.address-1{
+.name input {
+  width: 400px;
+}
+
+.address-1 {
   display: flex;
   justify-content: space-between;
   margin-right: 300px;
 }
 
-.address-2{
+.address-2 {
   display: flex;
   justify-content: space-between;
   margin-right: 200px;
 }
 
-.h5-header{
+.h5-header {
   padding-top: 50px;
-
 }
-h4{
+h4 {
   padding-top: 50px;
 }
 
 .mobile-dropdown {
-  display: none; 
+  display: none;
 }
 
+.cart-div {
+  display: none;
+}
 
 /* Media Query for Mobile Devices (up to 768px) */
 @media only screen and (max-width: 768px) {
-  .up{
+  .up {
     text-align: center;
     background: rgba(0, 0, 0, 0.35);
     width: 350px;
     margin-left: 12px;
-    font-family:italic;
- }
- .title-Discount{
-  text-align: center;
-  width:inherit;
-  overflow-x: hidden;
-}
-.contact-form input{
-  background:rgba(0, 0, 0, 0.35) ;
-  border: #fff 1px solid;
-  border-radius: 3px;
-  padding: 10px;
-  margin-left: 15px;
-  margin-top: 10px;
-}
-.contact-form{
-  width:inherit;
-  overflow-x: hidden;
-  margin-left: 0px
-}
+    font-family: italic;
+  }
+  .title-Discount {
+    text-align: center;
+    width: inherit;
+    overflow-x: hidden;
+  }
+  .menu-container {
+    display: block;
+    width: inherit;
+    margin-top: 10px;
+    overflow-x: hidden;
+    margin: 20px;
+  }
+  .contact-form input {
+    background: rgba(0, 0, 0, 0.35);
+    border: #fff 1px solid;
+    border-radius: 3px;
+    padding: 10px;
+    margin-left: 15px;
+    margin-top: 10px;
+  }
+  .contact-form {
+    width: inherit;
+    overflow-x: hidden;
+    margin-left: 0px;
+  }
 
-.column1 {
-  display: none;
-}
+  .column1 {
+    display: none;
+  }
+  .column3 {
+    flex-direction: column;
+  }
+  .name-email input {
+    width: 330px;
+  }
 
-.name-email input{
-  width:330px;
-}
+  .contact-mobile input {
+    width: 330px;
+  }
 
-.contact-mobile input{
-  width: 330px;
-}
+  .contact-mess input {
+    height: 150px;
+  }
 
-.contact-mess input{
-  height: 150px;
-}
+  .reservation {
+    background: url(../images/reservation_bg.jpg) center center no-repeat;
+    background-size: cover;
+    width: inherit;
+    padding-bottom: 50px;
+    color: #fff;
+    text-align: center;
+    padding-top: 35px;
+  }
 
-.reservation {
-  background: url(../images/reservation_bg.jpg) center center no-repeat;
-  background-size: cover;
-  width: inherit;
-  padding-bottom: 50px;
-  color: #fff;
-  text-align: center;
-  padding-top: 35px;
-}
+  .mobile-dropdown {
+    display: block;
+    margin-bottom: 10px;
+  }
 
-.mobile-dropdown {
-  display: block; 
-  margin-bottom: 10px;
-}
+  .column1 {
+    display: none;
+  }
 
-.column1 {
-  display: none; 
-}
-
-.menu-select{
-  background-color: #000;
-  color:white;
-  width: 120px;
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-}
-.menu-select option{
-  background-color: white;
-  color:black;
-  max-width: 200px; /* Set the maximum width of the dropdown options */
-  white-space: nowrap; /* Prevent options from wrapping to the next line */
-  overflow: hidden; /* Hide any content that overflows the specified width */
-  text-overflow: ellipsis;
-  width: inherit;
-}
-
+  .menu-select {
+    background-color: #000;
+    color: white;
+    width: 120px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+  }
+  .menu-select option {
+    background-color: white;
+    color: black;
+    max-width: 200px; /* Set the maximum width of the dropdown options */
+    white-space: nowrap; /* Prevent options from wrapping to the next line */
+    overflow: hidden; /* Hide any content that overflows the specified width */
+    text-overflow: ellipsis;
+    width: inherit;
+  }
+  .column2 {
+    flex: 0 0 50%; /* Set the width of Column 2 to 45% */
+    padding: 10px; /* Add some spacing */
+    border: 1px solid #ccc; /* Add a border for clarity */
+    overflow-y: auto; /* Allow Column 2 to scroll if content exceeds its height */
+    max-height: 100vh; /* Set a maximum height for Column 2 */
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 15px;
+    width: 330px;
+  }
+  .column2 img {
+    width: 320px;
+    height: 130px;
+  }
+  .cart-div{
+    position: fixed;
+    bottom:0
+  }
 }
 
 /* Media Query for Tablets (768px - 1024px) */
