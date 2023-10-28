@@ -279,6 +279,22 @@ export function Menu() {
     setSelectValue("DEFAULT");
   }, [selectedItemIndex]);
 
+  function increaseQuantity(item) {
+    const existingItemIndex = cart.findIndex(
+      (cartItem) =>
+        cartItem.id === item.id &&
+        cartItem.drink === item.drink &&
+        cartItem.food === item.food
+    );
+  
+    if (existingItemIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[existingItemIndex].quantity += 1;
+      setCart(updatedCart);
+    }
+  }
+  
+
   return (
     <div>
       <div className="yes">
@@ -419,7 +435,7 @@ export function Menu() {
                 <div className="cart-controls">
                   <button className="plus-button" onClick={() => removeFromCart(item)}>-</button>
                   <span className="quantity">{item.quantity}</span>
-                  <button className="plus-button" onClick={() => addToCart(item)}>+</button>
+                  <button className="plus-button" onClick={() => increaseQuantity(item)}>+</button>
                   <span className="price-cart">{calculateItemPrice(item) * item.quantity}/- CHF</span>
                   <button className="icon-del" onClick={() => deleteFromCart(item)}>
                     <Icofont icon="icofont-bin" size="1" />
