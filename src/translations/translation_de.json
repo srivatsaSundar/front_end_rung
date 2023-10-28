@@ -38,7 +38,29 @@
   "formCaptchaPlaceholder": "Captcha eingeben",
   "formSubmitButton": "einenachricht schicken",
   "select":"sprache",
-  "url":"https://backend-rung.onrender.com/menu_germen/"
+  "url":"https://backend-rung.onrender.com/menu_germen/",
+  "readyToEat": "Auf geht's!  ",
+  "deliveryLocation": "Wohin soll Deine Bestellung geliefert werden?  ",
+  "address": "Adresse",
+  "postcode": "Postleitzahl",
+  "city": "Stadt",
+  "contactInformation": "Wie können wir Sie erreichen?",
+  "name": "Name",
+  "email": "E-Mail",
+  "phoneNumber": "Telefonnummer",
+  "companyName": "Firmenname",
+  "foodDeliveryTime": "Wann möchten Sie Ihr Essen erhalten?",
+  "delivery": "Lieferung",
+  "takeAway": "Zum Mitnehmen",
+  "selectDate": "Datum auswählen",
+  "dateFormat": "MM/TT/JJJJ",
+  "selectTime": "Uhrzeit auswählen",
+  "remarks": "Anmerkungen für das Restaurant  ",
+  "couponCode": "Gutscheincode",
+  "enterCouponCode": "Geben Sie hier Ihren Gutscheincode ein",
+  "applyCode": "Code anwenden",
+  "orderAndPay": "zahlungspflichtig Bestellen ",
+  "orderConfirmation": "“ Nachdem Du eine Bestellung aufgegeben hast, empfängst Du eine Bestellbestätigung, per E-Mail, oder auf anderem Wege (z.B. Push-Nachrichten)”  "
   
   }
   

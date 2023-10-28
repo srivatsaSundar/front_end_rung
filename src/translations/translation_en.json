@@ -38,7 +38,30 @@
   "formCaptchaPlaceholder": "Enter Captcha",
   "formSubmitButton": "Send a Message",
   "select":"Language",
-  "url":"https://backend-rung.onrender.com/menu/"
+  "url":"https://backend-rung.onrender.com/menu/",
+  "readyToEat": "Ready to eat?",
+  "deliveryLocation": "Where do you want your order to be delivered?",
+  "address": "Address",
+  "postcode": "Postcode",
+  "city": "City",
+  "contactInformation": "How can we reach you?",
+  "name": "Name",
+  "email": "Email",
+  "phoneNumber": "Phone Number",
+    "companyName": "Company name",
+    "foodDeliveryTime": "When would you like your food?",
+    "delivery": "Delivery",
+    "takeAway": "Take Away",
+    "selectDate": "Select Date",
+    "dateFormat": "MM/DD/YYYY",
+    "selectTime": "Select Time",
+    "remarks": "Remarks",
+    "couponCode": "Coupon code",
+    "enterCouponCode": "Enter coupon code here",
+    "applyCode": "Apply Code",
+    "orderAndPay": "Order and Pay",
+    "orderConfirmation": "When placing an order, you will receive a confirmation, Food Tracker status messages and a request to review the restaurant via email or otherwise (such as push messages)."
+
 
   }
   

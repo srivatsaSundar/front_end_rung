@@ -31,6 +31,7 @@ interface MenuItem {
   name: string;
   price: number;
   quantity: number;
+  amount: number;
 }
 
 
@@ -140,64 +141,72 @@ console.log(uniqueTitles)
   }
 
  
-  const addToCart = (item) => {
-    const existingItemIndex = cart.findIndex(
-      (cartItem) =>
-        cartItem.id === item.id &&
-        cartItem.drink === selectedDrink &&
-        cartItem.food === selectedFood
-    );
-  
-    if (existingItemIndex !== -1) {
-      // If an identical item with the same add-ons exists in the cart, update its quantity and price
-      const updatedCart = [...cart];
-      updatedCart[existingItemIndex].quantity += 1;
-      updatedCart[existingItemIndex].price = calculateItemPrice(updatedCart[existingItemIndex]);
-      setCart(updatedCart);
-    } else {
-      // If the item doesn't exist in the cart, add it with the selected options
-      setCart([
-        ...cart,
-        {
-          ...item,
-          quantity: 1,
-          drink: selectedDrink,
-          food: selectedFood,
-          price: calculateItemPrice(item), // Calculate the price with selected options
-        },
-      ]);
-    }
-  };
-  
+ // Remove the selectedDrink and selectedFood states, as they are now being managed within the cart items.
+// Remove the code that updates prices based on selected drink and food from calculateItemPrice.
 
-  const removeFromCart = (item: MenuItem) => {
-    const existingItem = cart.find((cartItem) => cartItem.id === item.id);
+const addToCart = (item) => {
+  const existingItemIndex = cart.findIndex(
+    (cartItem) =>
+      cartItem.id === item.id &&
+      cartItem.drink === selectedDrink &&
+      cartItem.food === selectedFood
+  );
 
-    if (existingItem && existingItem.quantity > 1) {
-      // If item exists in the cart with quantity > 1, decrement its quantity and update the total price
-      setCart(
-        cart.map((cartItem) =>
-          cartItem.id === item.id
-            ? {
-                ...cartItem,
-                quantity: cartItem.quantity - 1,
-                price: (cartItem.quantity - 1) * cartItem.price,
-              }
-            : cartItem
-        )
-      );
-    } else {
-      // If item exists in the cart with quantity 1 or doesn't exist, remove it
-      setCart(cart.filter((cartItem) => cartItem.id !== item.id));
-    }
-  };
-
-  const deleteFromCart = (item: MenuItem) => {
-    const updatedCart = cart.filter((cartItem) => cartItem.id !== item.id);
+  if (existingItemIndex !== -1) {
+    const updatedCart = [...cart];
+    updatedCart[existingItemIndex].quantity += 1;
     setCart(updatedCart);
-  };
-  // Calculate the total price of all items in the cart
+  } else {
+    setCart([
+      ...cart,
+      {
+        ...item,
+        quantity: 1,
+        drink: selectedDrink,
+        food: selectedFood,
+      },
+    ]);
+  }
+};
 
+const removeFromCart = (item) => {
+  const existingItemIndex = cart.findIndex(
+    (cartItem) =>
+      cartItem.id === item.id &&
+      cartItem.drink === item.drink &&
+      cartItem.food === item.food
+  );
+
+  if (existingItemIndex !== -1) {
+    const updatedCart = [...cart];
+    if (updatedCart[existingItemIndex].quantity > 1) {
+      updatedCart[existingItemIndex].quantity -= 1;
+    } else {
+      updatedCart.splice(existingItemIndex, 1);
+    }
+    setCart(updatedCart);
+  }
+};
+
+const deleteFromCart = (item) => {
+  const existingItemIndex = cart.findIndex(
+    (cartItem) =>
+      cartItem.id === item.id &&
+      cartItem.drink === item.drink &&
+      cartItem.food === item.food
+  );
+
+  if (existingItemIndex !== -1) {
+    const updatedCart = [...cart];
+    updatedCart.splice(existingItemIndex, 1);
+    setCart(updatedCart);
+  }
+};
+
+  
+
+  
+  
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
       return cart.reduce((total, item) => {
@@ -366,7 +375,7 @@ console.log(uniqueTitles)
     <button className="plus-button" onClick={() => removeFromCart(item)}>-</button>
     <span className="quantity">{item.quantity}</span>
     <button className="plus-button" onClick={() => addToCart(item)}>+</button>
-    <span className="price-cart">{calculateItemPrice(item)}/- CHF</span>
+    <span className="price-cart">{calculateItemPrice(item) * item.quantity}/- CHF</span>
     <button className="icon-del" onClick={() => deleteFromCart(item)}>
       <Icofont icon="icofont-bin" size="1" />
     </button>
