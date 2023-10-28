@@ -61,6 +61,7 @@
   "applyCode": "Code anwenden",
   "orderAndPay": "zahlungspflichtig Bestellen ",
   "orderConfirmation": "“ Nachdem Du eine Bestellung aufgegeben hast, empfängst Du eine Bestellbestätigung, per E-Mail, oder auf anderem Wege (z.B. Push-Nachrichten)”  ",
-  "pay":"Ihre Bestellung wurde aufgegeben und Sie können die Lieferung per Nachnahme vornehmen"
+  "pay":"Ihre Bestellung wurde aufgegeben und Sie können die Lieferung per Nachnahme vornehmen",
+  "placed":"Sind Sie sicher, dass Sie die Bestellung aufgeben und per Nachnahme bezahlen möchten?"
   }
   

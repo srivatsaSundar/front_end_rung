@@ -61,7 +61,8 @@
     "applyCode": "Apply Code",
     "orderAndPay": "Order and Pay",
     "orderConfirmation": "When placing an order, you will receive a confirmation, Food Tracker status messages and a request to review the restaurant via email or otherwise (such as push messages).",
-    "pay":"Your order has been placed and you can do cash on delivery"
+    "pay":"Your order has been placed and you can do cash on delivery",
+    "placed":"Are you sure you want to place the order and make cash on delivery?"
 
   }
   
