@@ -5,11 +5,10 @@ import "../static/menu.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import AppNavbar from "../components/navbar";
-
 import { useLanguage } from '../components/LanguageProvider'; // Import the useLanguage hook
 import translations_en from '../translations/translation_en.json'; // Import English translations
 import translations_de from '../translations/translation_de.json'; // Import German translations
-
+import { Link } from "react-router-dom";
 
 export function Order() {
   // Define state variables using the useState hook
@@ -35,15 +34,15 @@ export function Order() {
               <div className="address">
                 <div className="add">
                   <label>{translations.address}</label><br />
-                  <input type="text" />
+                  <input type="text" required/>
                 </div>
                 <div>
                   <label>{translations.postcode}</label><br />
-                  <input type="text" />
+                  <input type="text" required/>
                 </div>
                 <div>
                   <label>{translations.city}</label><br />
-                  <input type="text" />
+                  <input type="text" required/>
                 </div>
               </div>
               <h4>{translations.contactInformation}</h4>
@@ -51,21 +50,21 @@ export function Order() {
               <div className="address">
                 <div className="name">
                   <label>{translations.name}</label><br />
-                  <input type="text" />
+                  <input type="text" required/>
                 </div>
                 <div className="name">
                   <label>{translations.email}</label><br />
-                  <input type="text" />
+                  <input type="text" required/>
                 </div>
               </div>
               <div className="address">
                 <div className="name">
                   <label>{translations.phoneNumber}</label><br />
-                  <input type="text" />
+                  <input type="text" required/>
                 </div>
                 <div className="name">
                   <label>{translations.companyName}</label><br />
-                  <input type="text" />
+                  <input type="text" required/>
                 </div>
               </div>
               <h4>{translations.foodDeliveryTime}</h4>
@@ -103,12 +102,13 @@ export function Order() {
                     dateFormat={translations.dateFormat}
                     placeholderText={translations.dateFormat}
                     className="input-date"
+                    required
                   />
                 </div>
                 <div>
                   <label>{translations.selectTime}</label><br />
                   {orderType === 'deliver' ? (
-                    <select className="search-time-yes" defaultValue="11:00">
+                    <select className="search-time-yes" defaultValue="11:00" required>
                       {Array.from({ length: 33 }, (_, i) => {
                         const hour = 11 + Math.floor(i / 4);
                         const minute = (i % 4) * 15;
@@ -122,7 +122,7 @@ export function Order() {
                       })}
                     </select>
                   ) : (
-                    <select className="search-time" defaultValue="18:00">
+                    <select className="search-time" defaultValue="18:00" required>
                       {Array.from({ length: 12 }, (_, i) => {
                         const hour = 18 + i;
                         const time = `${hour.toString().padStart(2, '0')}:00`;
@@ -154,7 +154,9 @@ export function Order() {
                 </div>
               </form>
               <p>{translations.orderConfirmation}</p>
+              <Link to="/placed">
               <button className="search-button-pay">{translations.orderAndPay}</button>
+              </Link>
             </form>
           </div>
 

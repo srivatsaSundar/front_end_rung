@@ -9,6 +9,7 @@ import { Menu } from './pages/menu';
 import React from 'react';
 import { Order } from './pages/order';
 import { LanguageProvider } from './components/LanguageProvider';
+import { Final } from './pages/final';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path='/menu' element={<Menu/>} />
         <Route path='*' element={<NoPage/>} />
         <Route path='/order' element={<Order/>} />
+        <Route path="/placed" element={<Final/>} />
       </Routes>
       </BrowserRouter>
       </LanguageProvider>
