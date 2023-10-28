@@ -155,7 +155,7 @@ export function Order() {
               </form>
               <p>{translations.orderConfirmation}</p>
               <Link to="/placed">
-              <button className="search-button-pay">{translations.orderAndPay}</button>
+              <button className="search-button-pay" type="submit">{translations.orderAndPay}</button>
               </Link>
             </form>
           </div>

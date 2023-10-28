@@ -406,16 +406,83 @@ h4 {
   padding-top: 50px;
 }
 
-.mobile-dropdown {
-  display: none;
-}
-
-.cart-div {
+.mobile-dropdown  , .column4{
   display: none;
 }
 
 /* Media Query for Mobile Devices (up to 768px) */
 @media only screen and (max-width: 768px) {
+  .order-columns {
+    display: flex;
+    width: inherit;
+    overflow-x: hidden;
+    justify-content: space-between;
+  }
+  .yes-order {
+    background: linear-gradient(to left, #c91618, #b59161);
+    margin: 20px;
+    padding: 20px;
+    color: #fff;
+    border-radius: 5px;
+    width:340px
+  }
+  .search-time-yes {
+    padding-right: 140px;
+    margin-left: 0px;
+  }
+  .address {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .code button {
+    margin-left: 0px;
+    width:150px;
+    margin-bottom: 5px;
+  }
+  .code input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    width: 300px;
+  }
+  
+  .address input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    width:300px
+  }
+  .rem input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    width: 300px;
+    height: 150px;
+  }
+  
+  .address-1 input {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 5px;
+  }
+  .address-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 0px;
+    margin-bottom: 30px;
+  }
+  
+.address-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 200px;
+}
+.address-2 input , .address-2 select{
+  width:300px;
+}
   .up {
     text-align: center;
     background: rgba(0, 0, 0, 0.35);
@@ -453,7 +520,7 @@ h4 {
     display: none;
   }
   .column3 {
-    flex-direction: column;
+    /* flex-direction: column; */
   }
   .name-email input {
     width: 330px;
@@ -477,7 +544,7 @@ h4 {
     padding-top: 35px;
   }
 
-  .mobile-dropdown {
+  .mobile-dropdown  , .column4{
     display: block;
     margin-bottom: 10px;
   }
@@ -493,6 +560,16 @@ h4 {
     position: fixed;
     bottom: 10px;
     right: 10px;
+  }
+  .cart-button {
+    background-color: #000;
+    color: white;
+    width: 120px;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 10px;
+    border: none;
   }
   .menu-select option {
     background-color: white;
@@ -518,9 +595,9 @@ h4 {
     width: 320px;
     height: 130px;
   }
-  .cart-div{
-    position: fixed;
-    bottom:0
+  .contact-mess input {
+    height: 150px;
+    width:200px
   }
 }
 

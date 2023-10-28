@@ -23,7 +23,6 @@ import duck from "../images/duck.jpg";
 import noodle from "../images/noodle.jpg";
 import rice from "../images/rice.jpg";
 import veg from "../images/veg.jpg";
-import axios from "axios"
 
 interface MenuItem {
   id: number;
@@ -35,6 +34,7 @@ interface MenuItem {
 
 export function Menu() {
   const { selectedLanguage } = useLanguage();
+  const column3Ref = useRef(null);
   const [selectValue, setSelectValue] = useState("DEFAULT");
 
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
@@ -55,23 +55,21 @@ export function Menu() {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(targetURL); // Replace 'YOUR_API_ENDPOINT' with the actual API URL
-        setMenu(response.data); 
-        console.log("ressponse",response)// Assuming the menu items are nested under 'menus' key in the response data
-      } catch (error) {
-        console.error('Error fetching menu:', error);
-      }
-    };
-
-    fetchData();
-  }, [targetURL]); 
+    fetch(targetURL)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => setMenu(data))
+      .catch(err => console.log("error in fetching the menu", err));
+  }, [targetURL]);
 
   const uniqueTitles: string[] = Array.from(new Set(menu.map((item) => item.title_name)));
   uniqueTitlesRef.current = uniqueTitles.map((_, index) => uniqueTitlesRef.current[index] as HTMLDivElement);
   console.log(uniqueTitles)
-  console.log("menu",menu);
+  console.log("menu", menu);
 
   const titleImageUrls = {
     "Popular Dishes": Popular,
@@ -228,8 +226,6 @@ export function Menu() {
     }
   };
 
-
-
   function calculateUpdateItemPrice(item, selectedDrink, selectedFood) {
     const drink = add_on_drink.find(drink => drink.drink.name === selectedDrink);
     const food = add_on_food.find(food => food.food.name === selectedFood);
@@ -295,14 +291,19 @@ export function Menu() {
         cartItem.drink === item.drink &&
         cartItem.food === item.food
     );
-  
+
     if (existingItemIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart[existingItemIndex].quantity += 1;
       setCart(updatedCart);
     }
   }
-  
+
+  const scrollToColumn3 = () => {
+    // Scroll to the top of the column3 div
+    column3Ref.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
 
   return (
     <div>
@@ -420,9 +421,7 @@ export function Menu() {
             </div>
           ))}
         </div>
-
-
-        <div className="column3">
+        <div className="column3" ref={column3Ref}>
           <div className="title-cart">
             <p>{translations.shoppingCartTitle}</p>
             {cart.length === 0 && (
@@ -464,7 +463,7 @@ export function Menu() {
             </div>
           )}
 
-          {calculateTotalPrice() > 40 && (
+          {calculateTotalPrice() >= 40 && (
             <Link style={{ textDecoration: 'none' }} to="/order">
               <button className="order-button">{translations.orderButton}</button></Link>
 
@@ -472,17 +471,12 @@ export function Menu() {
 
 
         </div>
-        {cart.length > 0 && (
-          <div className="column4">
-            {cart.length > 0 && (
-              <div className="cart-div">
-                <button className="cart-button" >
-                  {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF
-                </button>
-              </div>
-            )}
-          </div>
-        )}
+
+        <div className="column4">
+          <button className="cart-button" onClick={scrollToColumn3}>
+            {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF
+          </button>
+        </div>
       </div>
       <SocialLogin />
       <Footer />
