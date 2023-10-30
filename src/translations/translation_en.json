@@ -28,6 +28,7 @@
   "totalLabel": "Total:",
   "minimumOrderMessage": "Minimum order must be of 40/- CHF",
   "orderButton": "Order",
+  "backToMenuButton": "Back to Menu",
   "addon": "Add On",
   "selectaddon": "Select Add On",
   "add": "Add",

@@ -77,10 +77,10 @@
   padding: 5px; /* Add some spacing */
   border: 1px solid #ccc; /* Add a border for clarity */
   overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
-  max-height: 100vh; /* Set a maximum height for Column 3 */
-  height: fit-content;
+  height: 50vh;
   display: block;
 }
+
 .title-cart {
   text-align: center;
   font: size 15px;
@@ -284,11 +284,12 @@ input:focus {
   background: rgb(196, 80, 7);
   color: white;
   border: none;
-  padding: 5px 120px;
-  margin-right: 5px;
-  margin-left: 10px;
+  padding: 10px 20px;
   cursor: pointer;
   float: left;
+  height: 50px;
+  align-items: center;
+  width: 280px;
 }
 
 .yes-order {
@@ -314,6 +315,7 @@ input:focus {
 .order-columns {
   display: flex;
   width: 100%;
+  flex-direction: row;
   justify-content: space-between;
 }
 
@@ -346,6 +348,9 @@ input:focus {
 
 .code button {
   margin-left: 30px;
+  height: 42px;
+  width: 170px;
+  align-items: center;
 }
 .code input {
   border-radius: 5px;
@@ -422,6 +427,18 @@ h4 {
     color: #fff;
     border-radius: 5px;
     width: 340px;
+  }
+  .order-button {
+    background: rgb(196, 80, 7);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    float: left;
+    height: 50px;
+    align-items: center;
+    width: 280px;
+    margin-left: 30px;
   }
   .search-time-yes {
     padding-right: 140px;
@@ -538,6 +555,16 @@ h4 {
     text-align: center;
     padding-top: 35px;
   }
+  .column3 {
+    flex: 0 0 25%; /* Set the width of Column 3 to 25% */
+    margin-left: 1px; /* Add a 5px margin to the left of Column 3 */
+    padding: 5px; /* Add some spacing */
+    border: 1px solid #ccc; /* Add a border for clarity */
+    overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
+    height: 32vh;
+    display: block;
+    width: 340px;
+  }
 
   .mobile-dropdown,
   .column4 {
@@ -594,6 +621,12 @@ h4 {
   .contact-mess input {
     height: 150px;
     width: 200px;
+  }
+  .order-columns {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
   }
 }
 

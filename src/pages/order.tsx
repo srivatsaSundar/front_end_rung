@@ -10,17 +10,40 @@ import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Cart from "./cart";
 
-export function Order() {
+interface IOrder {
+  ref;
+  removeFromCart;
+  cart;
+  increaseQuantity;
+  calculateItemPrice;
+  calculateTotalPrice;
+  deleteFromCart;
+  translations;
+  setCart;
+}
+
+export function Order(props: IOrder) {
+  const {
+    ref,
+    removeFromCart,
+    cart,
+    increaseQuantity,
+    calculateItemPrice,
+    calculateTotalPrice,
+    deleteFromCart,
+    translations,
+  } = props;
   const [selectedDate, setSelectedDate] = useState(null);
   const [orderType, setOrderType] = useState("deliver");
   const { selectedLanguage } = useLanguage();
 
   const [confirmation, setConfirmation] = useState(false);
   // Define translations based on the selected language
-  const translations =
-    selectedLanguage === "en" ? translations_en : translations_de;
-  let data = {};
+  // const translations =
+  //   selectedLanguage === "en" ? translations_en : translations_de;
+  // let data = {};
 
   const handleOrderAndPay = () => {
     const currentDate = new Date();
@@ -101,6 +124,8 @@ export function Order() {
         alert("Failed to place the order. Please try again.");
       });
   };
+
+  console.log(cart.length, "order");
 
   return (
     <div>
@@ -313,8 +338,20 @@ export function Order() {
               </div>
             )}
           </div>
+          {/* //// */}
           <div className="order-cart">
-            {/* Your order cart contents can go here */}
+            <Cart
+              ref={ref}
+              cart={cart}
+              removeFromCart={removeFromCart}
+              increaseQuantity={increaseQuantity}
+              deleteFromCart={deleteFromCart}
+              calculateItemPrice={calculateItemPrice}
+              calculateTotalPrice={calculateTotalPrice}
+              translations={translations}
+              isMenu={true}
+              style={{ margin: "20px" }}
+            />
           </div>
         </div>
         <div className="home-container yes">

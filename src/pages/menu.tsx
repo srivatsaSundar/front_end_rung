@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../static/menu.css";
 import Icofont from "react-icofont";
-import { Link } from "react-router-dom";
 import { Footer } from "../components/footer";
 import { SocialLogin } from "../components/socialmedia";
 import Popular from "../images/Popular_dishes.jpg";
@@ -14,8 +13,6 @@ import thai_wok from "../images/thai_wok.jpg";
 import fry from "../images/fry.jpg";
 import combodia from "../images/combodia.jpg";
 import { useLanguage } from "../components/LanguageProvider";
-import translations_en from "../translations/translation_en.json";
-import translations_de from "../translations/translation_de.json";
 import AppNavbar from "../components/navbar";
 import drink from "../images/drink.jpg";
 import soft from "../images/soft.jpg";
@@ -23,8 +20,9 @@ import duck from "../images/duck.jpg";
 import noodle from "../images/noodle.jpg";
 import rice from "../images/rice.jpg";
 import veg from "../images/veg.jpg";
+import Cart from "./cart";
 
-interface MenuItem {
+export interface MenuItem {
   id: number;
   name: string;
   price: number;
@@ -32,13 +30,32 @@ interface MenuItem {
   amount: number;
 }
 
-export function Menu() {
-  const { selectedLanguage } = useLanguage();
-  const column3Ref = useRef(null);
-  const [selectValue, setSelectValue] = useState("DEFAULT");
+interface IMenu {
+  ref;
+  removeFromCart;
+  cart;
+  increaseQuantity;
+  calculateItemPrice;
+  calculateTotalPrice;
+  deleteFromCart;
+  translations;
+  setCart;
+}
 
-  const translations =
-    selectedLanguage === "en" ? translations_en : translations_de;
+export function Menu(props: IMenu) {
+  const {
+    ref,
+    removeFromCart,
+    cart,
+    increaseQuantity,
+    calculateItemPrice,
+    calculateTotalPrice,
+    deleteFromCart,
+    translations,
+    setCart,
+  } = props;
+  const column3Ref = useRef(null || undefined);
+  const [selectValue, setSelectValue] = useState("DEFAULT");
 
   const [selectedAddons, setSelectedAddons] = useState({});
   const [menu, setMenu] = useState([]);
@@ -46,7 +63,6 @@ export function Menu() {
   const [add_on_drink, setAdd_on_drink] = useState([]) as any[];
   const [add_on_food, setAdd_on_food] = useState([]) as any[];
   const [selectedItemName, setSelectedItemName] = useState<string | null>(null);
-  const [cart, setCart] = useState<MenuItem[]>([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL = translations.url;
 
@@ -197,40 +213,6 @@ export function Menu() {
     }
   };
 
-  const removeFromCart = (item) => {
-    const existingItemIndex = cart.findIndex(
-      (cartItem) =>
-        cartItem.id === item.id &&
-        cartItem.drink === item.drink &&
-        cartItem.food === item.food,
-    );
-
-    if (existingItemIndex !== -1) {
-      const updatedCart = [...cart];
-      if (updatedCart[existingItemIndex].quantity > 1) {
-        updatedCart[existingItemIndex].quantity -= 1;
-      } else {
-        updatedCart.splice(existingItemIndex, 1);
-      }
-      setCart(updatedCart);
-    }
-  };
-
-  const deleteFromCart = (item) => {
-    const existingItemIndex = cart.findIndex(
-      (cartItem) =>
-        cartItem.id === item.id &&
-        cartItem.drink === item.drink &&
-        cartItem.food === item.food,
-    );
-
-    if (existingItemIndex !== -1) {
-      const updatedCart = [...cart];
-      updatedCart.splice(existingItemIndex, 1);
-      setCart(updatedCart);
-    }
-  };
-
   function calculateUpdateItemPrice(item, selectedDrink, selectedFood) {
     const drink = add_on_drink.find(
       (drink) => drink.drink.name === selectedDrink,
@@ -243,78 +225,14 @@ export function Menu() {
     );
   }
 
-  const calculateTotalPrice = () => {
-    if (cart && cart.length > 0) {
-      return cart.reduce((total, item) => {
-        const basePrice = item.price;
-        let price = basePrice;
-
-        if (item.drink) {
-          const drink = add_on_drink.find(
-            (drink) => drink.drink.name === item.drink,
-          );
-          if (drink) {
-            price += drink.drink.price;
-          }
-        }
-        if (item.food) {
-          const food = add_on_food.find((food) => food.food.name === item.food);
-          if (food) {
-            price += food.food.price;
-          }
-        }
-
-        return total + price * item.quantity;
-      }, 0);
-    } else {
-      return 0;
-    }
-  };
-
-  function calculateItemPrice(item) {
-    let price = item.price;
-
-    if (item.drink) {
-      const selectedDrink = add_on_drink.find(
-        (drink) => drink.drink.name === item.drink,
-      );
-      if (selectedDrink) {
-        price += selectedDrink.drink.price;
-      }
-    }
-    if (item.food) {
-      const selectedFood = add_on_food.find(
-        (food) => food.food.name === item.food,
-      );
-      if (selectedFood) {
-        price += selectedFood.food.price;
-      }
-    }
-
-    return price;
-  }
-
   useEffect(() => {
     setSelectValue("DEFAULT");
   }, [selectedItemIndex]);
 
-  function increaseQuantity(item) {
-    const existingItemIndex = cart.findIndex(
-      (cartItem) =>
-        cartItem.id === item.id &&
-        cartItem.drink === item.drink &&
-        cartItem.food === item.food,
-    );
-
-    if (existingItemIndex !== -1) {
-      const updatedCart = [...cart];
-      updatedCart[existingItemIndex].quantity += 1;
-      setCart(updatedCart);
-    }
-  }
-
   const scrollToColumn3 = () => {
-    column3Ref.current.scrollIntoView({ behavior: "smooth" });
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -492,70 +410,17 @@ export function Menu() {
             </div>
           ))}
         </div>
-        <div className="column3" ref={column3Ref}>
-          <div className="title-cart">
-            <p>{translations.shoppingCartTitle}</p>
-            {cart.length === 0 && (
-              <>
-                <Icofont icon="icofont-basket" className="basket" size="4" />
-                <p>{translations.chooseDishesFromMenu}</p>
-              </>
-            )}
-          </div>
-          <ul>
-            {cart.map((item) => (
-              <li key={item.id} className="cart-item">
-                <span className="cart-item-name">
-                  {item.name}
-                  {item.drink && `\n+ ${item.drink}`}
-                  {item.food && `\n+ ${item.food}`}
-                </span>
-                <div className="cart-controls">
-                  <button
-                    className="plus-button"
-                    onClick={() => removeFromCart(item)}
-                  >
-                    -
-                  </button>
-                  <span className="quantity">{item.quantity}</span>
-                  <button
-                    className="plus-button"
-                    onClick={() => increaseQuantity(item)}
-                  >
-                    +
-                  </button>
-                  <span className="price-cart">
-                    {calculateItemPrice(item) * item.quantity}/- CHF
-                  </span>
-                  <button
-                    className="icon-del"
-                    onClick={() => deleteFromCart(item)}
-                  >
-                    <Icofont icon="icofont-bin" size="1" />
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-          {calculateTotalPrice() > 0 && (
-            <div>
-              <p>
-                {translations.totalLabel} {calculateTotalPrice()}/- CHF
-              </p>
-              {calculateTotalPrice() < 40 && (
-                <p>{translations.minimumOrderMessage} </p>
-              )}
-            </div>
-          )}
-
-          {calculateTotalPrice() >= 40 && (
-            <Link style={{ textDecoration: "none" }} to="/order">
-              <button className="order-button">
-                {translations.orderButton}
-              </button>
-            </Link>
-          )}
-        </div>
+        <Cart
+          ref={column3Ref}
+          cart={cart}
+          removeFromCart={removeFromCart}
+          increaseQuantity={increaseQuantity}
+          deleteFromCart={deleteFromCart}
+          calculateItemPrice={calculateItemPrice}
+          calculateTotalPrice={calculateTotalPrice}
+          translations={translations}
+          isMenu={false}
+        />
         <div className="column4">
           <button className="cart-button" onClick={scrollToColumn3}>
             {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF

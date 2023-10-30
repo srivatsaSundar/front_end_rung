@@ -28,6 +28,7 @@
   "totalLabel": "Gesamt  :",
   "minimumOrderMessage": "Mindestbestellmenge muss sein 40/- CHF",
   "orderButton": "Bestellen",
+  "backToMenuButton": "Back to Menu",
   "addon": "Beilage",
   "selectaddon": "Selecteer Beilage ",
   "add": "Hinzufügen",
