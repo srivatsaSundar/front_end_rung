@@ -6,35 +6,34 @@ import { useLanguage } from './LanguageProvider'; // Import the useLanguage hook
 import translations_en from '../translations/translation_en.json';
 import translations_de from '../translations/translation_de.json';
 import Icofont from 'react-icofont';
-import style from "../static/nabvar.css"
+import "../static/navbar.css"
 
 const AppNavbar = () => {
   const { selectedLanguage, changeLanguage } = useLanguage();
 
   const navLinkStyle = {
-    color: 'white', // Set text color to white
+    color: 'white',
     textDecoration: 'none',
     alignItems: 'center',
-    
+
   };
   const customSelectStyle = {
     background: 'transparent',
     color: 'white',
     border: 'none',
     cursor: 'pointer',
-    height:"50px"
+    height: "50px"
   };
-
-
   const navLinkHoverStyle = {
-    color: 'yellow', // Set hover text color
-    textDecoration: 'underline', // Add underline when hovered
+    color: 'yellow',
+    textDecoration: 'underline',
   };
   const disp = {
     display: 'flex',
     justifyContent: 'center',
     width: '100%',
   }
+
   const handleLanguageChange = (event) => {
     const newLanguage = event.target.value;
     changeLanguage(newLanguage);

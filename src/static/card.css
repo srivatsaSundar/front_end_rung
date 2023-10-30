@@ -1,42 +1,17 @@
-/* .card{
-    border: 1px solid black;
-    box-shadow: 0 0 5px black;
-    width:250px;
-    margin: 20px;
-    cursor: pointer;
-}
-
-.card-image img{
-    width: 250px;
-}
-
-.card-title {
-    text-align: center;
-    margin: 0;
-    padding: 10px;
-    font-weight: bold;
-}
-
-.description{
-    margin: 0;
-    padding: 10px;
-} */
-
 .home-container {
-    width: 100%;
-    text-align: center;
-    height: 100%;
-  }
-  
-.home-container > .card{
-    display: inline-block;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+}
+
+.home-container > .card {
+  display: inline-block;
 }
 
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  
 }
 
 .card {
@@ -67,8 +42,8 @@
 .card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-  
-.restp{
+
+.restp {
   background-color: #4d84e2;
   margin: 0;
   color: #fff;
@@ -78,50 +53,45 @@
   font-weight: bold;
   font-size: 30px;
   padding-left: 30px;
-  
 }
 
-.yes-1{
-  background:  linear-gradient(to right, #1a0606, #b59161);
+.yes-1 {
+  background: linear-gradient(to right, #1a0606, #b59161);
 }
 
-@media only screen and (max-width: 600px )  {/*mobile*/
-  .yes-1{
-    background:  linear-gradient(to right, #c91618, #b59161);
-    width:inherit;
+@media only screen and (max-width: 600px) {
+  /*mobile*/
+  .yes-1 {
+    background: linear-gradient(to right, #c91618, #b59161);
+    width: inherit;
     height: auto;
     overflow-x: hidden;
   }
-  
 }
 
-@media only screen and (min-width: 600px ) {/*tab*/
-  .yes-1{
-    background:  linear-gradient(to right, #c91618, #b59161);
+@media only screen and (min-width: 600px) {
+  /*tab*/
+  .yes-1 {
+    background: linear-gradient(to right, #c91618, #b59161);
     width: inherit;
     height: auto;
-    
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  .yes-1{
-    background:  linear-gradient(to right, #c91618, #b59161);
+  .yes-1 {
+    background: linear-gradient(to right, #c91618, #b59161);
     width: auto;
     height: auto;
-    
   }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px)  {
-  .yes-1{
-    background:  linear-gradient(to right, #c91618, #b59161);
+@media only screen and (min-width: 1200px) {
+  .yes-1 {
+    background: linear-gradient(to right, #c91618, #b59161);
     width: auto;
     height: auto;
-    
   }
 }
-
-

@@ -228,15 +228,13 @@ input:focus {
   flex: 1;
   width: 3%;
   word-wrap: break-word;
-  margin-right: 10px; /* Add some margin for separation */
+  margin-right: 10px;
 }
 
 .cart-controls {
   display: flex;
   align-items: center;
 }
-
-/* Add styles for the buttons and price as needed */
 
 .plus-button {
   background: rgb(196, 80, 7);
@@ -257,10 +255,9 @@ input:focus {
 }
 .drink-dropdown,
 .food-dropdown {
-  width: 100%; /* Make each dropdown take the full width of the container */
+  width: 100%;
 }
 
-/* Style for the dropdown options */
 .drink-dropdown select,
 .food-dropdown select {
   width: 100%;
@@ -269,7 +266,6 @@ input:focus {
   border-radius: 5px;
 }
 
-/* Style for the options within the dropdowns */
 .drink-dropdown select option,
 .food-dropdown select option {
   padding: 10px;
@@ -322,13 +318,13 @@ input:focus {
 }
 
 .yes-order {
-  width: 75%; /* 70% of the available space */
+  width: 75%;
   padding-left: 40px;
   padding-right: 40px;
 }
 
 .order-cart {
-  width: 25%; /* 30% of the available space */
+  width: 25%; 
 }
 
 .address {
@@ -402,15 +398,16 @@ input:focus {
 .h5-header {
   padding-top: 50px;
 }
+
 h4 {
   padding-top: 50px;
 }
 
-.mobile-dropdown  , .column4{
+.mobile-dropdown,
+.column4 {
   display: none;
 }
 
-/* Media Query for Mobile Devices (up to 768px) */
 @media only screen and (max-width: 768px) {
   .order-columns {
     display: flex;
@@ -424,7 +421,7 @@ h4 {
     padding: 20px;
     color: #fff;
     border-radius: 5px;
-    width:340px
+    width: 340px;
   }
   .search-time-yes {
     padding-right: 140px;
@@ -437,7 +434,7 @@ h4 {
   }
   .code button {
     margin-left: 0px;
-    width:150px;
+    width: 150px;
     margin-bottom: 5px;
   }
   .code input {
@@ -446,12 +443,12 @@ h4 {
     padding: 5px;
     width: 300px;
   }
-  
+
   .address input {
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 5px;
-    width:300px
+    width: 300px;
   }
   .rem input {
     border-radius: 5px;
@@ -460,7 +457,7 @@ h4 {
     width: 300px;
     height: 150px;
   }
-  
+
   .address-1 input {
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -473,16 +470,17 @@ h4 {
     margin-right: 0px;
     margin-bottom: 30px;
   }
-  
-.address-2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin-right: 200px;
-}
-.address-2 input , .address-2 select{
-  width:300px;
-}
+
+  .address-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 200px;
+  }
+  .address-2 input,
+  .address-2 select {
+    width: 300px;
+  }
   .up {
     text-align: center;
     background: rgba(0, 0, 0, 0.35);
@@ -519,9 +517,6 @@ h4 {
   .column1 {
     display: none;
   }
-  .column3 {
-    /* flex-direction: column; */
-  }
   .name-email input {
     width: 330px;
   }
@@ -544,7 +539,8 @@ h4 {
     padding-top: 35px;
   }
 
-  .mobile-dropdown  , .column4{
+  .mobile-dropdown,
+  .column4 {
     display: block;
     margin-bottom: 10px;
   }
@@ -574,18 +570,18 @@ h4 {
   .menu-select option {
     background-color: white;
     color: black;
-    max-width: 200px; /* Set the maximum width of the dropdown options */
-    white-space: nowrap; /* Prevent options from wrapping to the next line */
-    overflow: hidden; /* Hide any content that overflows the specified width */
+    max-width: 200px; 
+    white-space: nowrap;
+    overflow: hidden; 
     text-overflow: ellipsis;
     width: inherit;
   }
   .column2 {
-    flex: 0 0 50%; /* Set the width of Column 2 to 45% */
-    padding: 10px; /* Add some spacing */
-    border: 1px solid #ccc; /* Add a border for clarity */
-    overflow-y: auto; /* Allow Column 2 to scroll if content exceeds its height */
-    max-height: 100vh; /* Set a maximum height for Column 2 */
+    flex: 0 0 50%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    overflow-y: auto;
+    max-height: 100vh; 
     text-align: left;
     margin-bottom: 10px;
     font-size: 15px;
@@ -597,7 +593,7 @@ h4 {
   }
   .contact-mess input {
     height: 150px;
-    width:200px
+    width: 200px;
   }
 }
 

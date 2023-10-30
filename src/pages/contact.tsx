@@ -1,14 +1,11 @@
 // imports
 import { Footer } from "../components/footer";
-import { Header } from "../components/header";
 import { SocialLogin } from "../components/socialmedia";
 import React from 'react';
 import "../static/menu.css";
-import Icofont from 'react-icofont';
-import { useLanguage } from '../components/LanguageProvider'; // Import the useLanguage hook
-import translations_en from '../translations/translation_en.json'; // Import English translations
-import translations_de from '../translations/translation_de.json'; // Import German translations
-import { Navbar } from "react-bootstrap";
+import { useLanguage } from '../components/LanguageProvider';
+import translations_en from '../translations/translation_en.json';
+import translations_de from '../translations/translation_de.json';
 import AppNavbar from "../components/navbar";
 
 export function Contact() {
@@ -17,45 +14,42 @@ export function Contact() {
   // Define translations based on the selected language
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
 
-    return (
-      // basic contact information
-      <div >
-        <div style={{fontSize:16,marginBottom:10}} className="yes">
-         <AppNavbar />
-         <div style={{paddingTop:20 , paddingBottom:20, marginTop:30, }} className="up">
-         <h3 style={{fontFamily:"Great Vibes", fontStyle:"italic",color:"white"}}>{translations.contact}</h3>
-         <p style={{fontFamily:"Great Vibes", color:"white"}}>{translations.home} &rsaquo; {translations.contact}</p>
-         </div>
+  return (
+    <div >
+      <div style={{ fontSize: 16, marginBottom: 10 }} className="yes">
+        <AppNavbar />
+        <div style={{ paddingTop: 20, paddingBottom: 20, marginTop: 30, }} className="up">
+          <h3 style={{ fontFamily: "Great Vibes", fontStyle: "italic", color: "white" }}>{translations.contact}</h3>
+          <p style={{ fontFamily: "Great Vibes", color: "white" }}>{translations.home} &rsaquo; {translations.contact}</p>
         </div>
-        <div className="reservation">
-          <h1>{translations.contact}</h1>
-          <div className="contact-form">
-            <form>
-              <div className="name-email">
+      </div>
+      <div className="reservation">
+        <h1>{translations.contact}</h1>
+        <div className="contact-form">
+          <form>
+            <div className="name-email">
               <input type="text" placeholder={translations.formNamePlaceholder} />
               <input type="text" placeholder={translations.formEmailPlaceholder} />
-              </div>
-              <div className="contact-mobile">
-              <input type="text" placeholder={translations.formMobilePlaceholder}/>
+            </div>
+            <div className="contact-mobile">
+              <input type="text" placeholder={translations.formMobilePlaceholder} />
               <br></br>
               <div className="contact-mess">
-              <input type="textarea" placeholder={translations.formMessagePlaceholder}/>
+                <input type="textarea" placeholder={translations.formMessagePlaceholder} />
               </div>
               <input type="text" placeholder={translations.formCaptchaPlaceholder} />
               <br></br>
-              </div>
-              <button className='search-b'> {translations.formSubmitButton}</button>
-            </form>
-          </div>
+            </div>
+            <button className='search-b'> {translations.formSubmitButton}</button>
+          </form>
         </div>
-
+      </div>
       <div className="home-container yes">
         <SocialLogin />
       </div>
-        <div>
-          <Footer />
-        </div>
-      </div>      
-    );
-  }
-  
+      <div>
+        <Footer />
+      </div>
+    </div>
+  );
+}

@@ -20,12 +20,10 @@ function CitySearch() {
   // Define translations based on the selected language
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
 
-
   const handlePincodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPincode(e.target.value);
     setError(null);
   };
-
 
   const handleSearch = () => {
     const validPincodes = [
@@ -44,11 +42,9 @@ function CitySearch() {
     ];
 
     if (validPincodes.includes(pincode)) {
-      // Valid pincode, navigate to the next menu page
       setError(null);
       navigate('/menu');
     } else {
-      // Invalid pincode, display an error message
       setError('Sorry, this Pin Code is not eligible for delivery.');
     }
   }
@@ -164,7 +160,7 @@ function CitySearch() {
             </li>
           </div>
         </ul>
-        <img src={lines} alt="line" title="line" className='lines'/>
+        <img src={lines} alt="line" title="line" className='lines' />
       </div>
     </div>
   );

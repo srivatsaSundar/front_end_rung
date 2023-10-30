@@ -38,8 +38,8 @@ export function Menu() {
   const [selectValue, setSelectValue] = useState("DEFAULT");
 
   const translations = selectedLanguage === 'en' ? translations_en : translations_de;
-  const [selectedAddons, setSelectedAddons] = useState({});
 
+  const [selectedAddons, setSelectedAddons] = useState({});
   const [menu, setMenu] = useState([]);
   const uniqueTitlesRef = useRef<HTMLElement[]>([]);
   const [add_on_drink, setAdd_on_drink] = useState([]) as any[];
@@ -51,7 +51,7 @@ export function Menu() {
 
 
   const targetURL2 = "https://backend-rung.onrender.com/add_on_drink";
-  console.log(targetURL, { mode: 'cors' })
+  console.log(targetURL, { mode: 'cors' })//console
 
 
   useEffect(() => {
@@ -68,7 +68,8 @@ export function Menu() {
 
   const uniqueTitles: string[] = Array.from(new Set(menu.map((item) => item.title_name)));
   uniqueTitlesRef.current = uniqueTitles.map((_, index) => uniqueTitlesRef.current[index] as HTMLDivElement);
-  console.log(uniqueTitles)
+
+  console.log(uniqueTitles)//console
   console.log("menu", menu);
 
   const titleImageUrls = {
@@ -112,8 +113,10 @@ export function Menu() {
       .catch(err => console.log("error in fetching add_on_drink", err));
   }, [setMenu]);
 
-  console.log(add_on_drink)
+  console.log(add_on_drink)//console
+
   const targetURL3 = "https://backend-rung.onrender.com/add_on_food";
+
   useEffect(() => {
     fetch(targetURL3, { mode: 'cors' })
       .then((response) => {
@@ -125,10 +128,9 @@ export function Menu() {
       .then(data => setAdd_on_food(data))
       .catch(err => console.log("error in fetching add_on_food", err));
   }, [setMenu]);
+
   function handleAddOnClick(itemName) {
     setSelectedItemName(itemName);
-
-    // Initialize selected add-ons if not already set
     if (!selectedAddons[itemName]) {
       setSelectedAddons({
         ...selectedAddons,
@@ -139,6 +141,7 @@ export function Menu() {
       });
     }
   }
+
   function handleDrinkChange(event) {
     const selectedValue = event.target.value;
     const updatedAddons = {
@@ -191,7 +194,6 @@ export function Menu() {
     }
   };
 
-
   const removeFromCart = (item) => {
     const existingItemIndex = cart.findIndex(
       (cartItem) =>
@@ -238,7 +240,6 @@ export function Menu() {
         const basePrice = item.price;
         let price = basePrice;
 
-        // Calculate the total price based on selected drink and food for each item
         if (item.drink) {
           const drink = add_on_drink.find(drink => drink.drink.name === item.drink);
           if (drink) {
@@ -252,7 +253,6 @@ export function Menu() {
           }
         }
 
-        // Return the total price of the item, including the price of the add-ons
         return total + price * item.quantity;
       }, 0);
     } else {
@@ -261,9 +261,8 @@ export function Menu() {
   };
 
   function calculateItemPrice(item) {
-    let price = item.price; // Initialize the price with the base item price
+    let price = item.price;
 
-    // Calculate the total price based on the selected drink and food
     if (item.drink) {
       const selectedDrink = add_on_drink.find((drink) => drink.drink.name === item.drink);
       if (selectedDrink) {
@@ -300,7 +299,6 @@ export function Menu() {
   }
 
   const scrollToColumn3 = () => {
-    // Scroll to the top of the column3 div
     column3Ref.current.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -321,7 +319,6 @@ export function Menu() {
                 scrollToTitle(index);
               }}
             >
-
               <p>{title}</p>
             </div>
           ))}
@@ -413,9 +410,7 @@ export function Menu() {
                       <button className="add-button" onClick={() => addToCart(item)}>
                         <Icofont icon="icofont-bag" /> {translations.add}
                       </button>
-
                     </div>
-
                   </div>
                 ))}
             </div>
@@ -433,7 +428,6 @@ export function Menu() {
           </div>
           <ul>
             {cart.map((item) => (
-
               <li key={item.id} className="cart-item">
                 <span className="cart-item-name">
                   {item.name}
@@ -466,12 +460,8 @@ export function Menu() {
           {calculateTotalPrice() >= 40 && (
             <Link style={{ textDecoration: 'none' }} to="/order">
               <button className="order-button">{translations.orderButton}</button></Link>
-
           )}
-
-
         </div>
-
         <div className="column4">
           <button className="cart-button" onClick={scrollToColumn3}>
             {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF

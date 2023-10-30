@@ -12,9 +12,7 @@ export function Home() {
   return (
     <div className="yes-1">
       <AppNavbar />
-
       <CitySearch />
-
       <div className="home-container">
         <SocialLogin />
       </div>

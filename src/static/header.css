@@ -1,26 +1,23 @@
-
 .header-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #fff; 
+  color: #fff;
   text-decoration: none;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   width: 100%;
- }
-  
-  .navbar {
-    display:flex;
-    justify-content: space-between;
-    align-items: top;
+}
 
-  }
- 
- /* Initial styling for the underline and text color */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+}
+
 .nav-link {
   text-decoration: none;
-  color: #333; /* Initial text color */
-  transition: color 0.2s ease-in-out; 
+  color: #333;
+  transition: color 0.2s ease-in-out;
   margin-left: 20px;
 }
 
@@ -29,33 +26,29 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 3px; 
-  background-color: transparent; /* Initially transparent underline */
-  transform: scaleX(0); /* Initially, set the width to 0 */
+  height: 3px;
+  background-color: transparent;
+  transform: scaleX(0);
   transform-origin: right;
-  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out; /* Add transitions for both underline and text color */
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 .nav-link:hover {
-  color: yellow !important; /* Text color change on hover */
+  color: yellow !important;
 }
 
 .nav-link:hover::after {
-  transform: scaleX(1); /* Expand the underline to flinkl width on hover */
-  background-color: yellow; /* Underline color change on hover */
+  transform: scaleX(1);
+  background-color: yellow;
 }
 
 .footer-container {
   margin: 0;
-  background-color: #EC5800;
+  background-color: #ec5800;
   color: #fff;
   width: 100%;
   text-align: center;
-  /* margin-bottom: -15px; */
   overflow: hidden;
-  /* position: absolute;
-  bottom: 0px; */
-
 }
 
 .logo {
@@ -65,13 +58,12 @@
   margin-left: 20px;
 }
 
-
-.lang{
+.lang {
   padding-right: 20px;
 }
 
-.footer{
-  align-items:"center";
-  margin-top:"10px";
+.footer {
+  align-items: "center";
+  margin-top: "10px";
   font-size: 13px;
 }

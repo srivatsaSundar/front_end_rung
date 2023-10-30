@@ -1,9 +1,9 @@
 // import css
 import "../static/header.css";
 import React from 'react';
-import { useLanguage } from './LanguageProvider'; // Import the useLanguage hook
-import translations_en from '../translations/translation_en.json'; // Import English translations
-import translations_de from '../translations/translation_de.json'; // Import German translations
+import { useLanguage } from './LanguageProvider';
+import translations_en from '../translations/translation_en.json'; 
+import translations_de from '../translations/translation_de.json'; 
 
 //display footer
 export function Footer() {
