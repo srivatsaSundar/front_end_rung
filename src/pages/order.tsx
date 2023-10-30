@@ -41,9 +41,8 @@ export function Order(props: IOrder) {
 
   const [confirmation, setConfirmation] = useState(false);
   // Define translations based on the selected language
-  // const translations =
-  //   selectedLanguage === "en" ? translations_en : translations_de;
-  // let data = {};
+  // const translations =selectedLanguage === "en" ? translations_en : translations_de;
+  let data = {};
 
   const handleOrderAndPay = () => {
     const currentDate = new Date();
@@ -140,26 +139,7 @@ export function Order(props: IOrder) {
             <hr />
             <form id="order-form">
               <div className="address">
-                <div className="add">
-                  <label>{translations.address}</label>
-                  <br />
-                  <input name="address" id="address" type="text" required />
-                </div>
-                <div>
-                  <label>{translations.postcode}</label>
-                  <br />
-                  <input name="postcode" id="postcode" type="text" required />
-                </div>
-                <div>
-                  <label>{translations.city}</label>
-                  <br />
-                  <input name="city" id="city" type="text" required />
-                </div>
-              </div>
-              <h4>{translations.contactInformation}</h4>
-              <hr />
-              <div className="address">
-                <div className="name">
+              <div className="name">
                   <label>{translations.name}</label>
                   <br />
                   <input name="name" id="name" type="text" required />
@@ -196,6 +176,26 @@ export function Order(props: IOrder) {
                   />
                 </div>
               </div>
+              <h4>{translations.contactInformation}</h4>
+              <hr />
+              <div className="address">
+              <div className="add">
+                  <label>{translations.address}</label>
+                  <br />
+                  <input name="address" id="address" type="text" required />
+                </div>
+                <div>
+                  <label>{translations.postcode}</label>
+                  <br />
+                  <input name="postcode" id="postcode" type="text" required />
+                </div>
+                <div>
+                  <label>{translations.city}</label>
+                  <br />
+                  <input name="city" id="city" type="text" required />
+                </div>
+              </div>
+
               <h4>{translations.foodDeliveryTime}</h4>
               <hr />
               <div className="address-1">

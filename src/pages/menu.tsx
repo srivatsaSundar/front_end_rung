@@ -115,6 +115,7 @@ export function Menu(props: IMenu) {
 
   function scrollToTitle(index) {
     const element = uniqueTitlesRef.current[index];
+    console.log(uniqueTitles)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
