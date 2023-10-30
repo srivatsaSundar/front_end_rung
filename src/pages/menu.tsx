@@ -54,9 +54,9 @@ export function Menu(props: IMenu) {
     translations,
     setCart,
   } = props;
-  const column3Ref = useRef(null || undefined);
+  const column3Ref = useRef(null);
   const [selectValue, setSelectValue] = useState("DEFAULT");
-
+  const [isAddOnSelected, setIsAddOnSelected] = useState(false);
   const [selectedAddons, setSelectedAddons] = useState({});
   const [menu, setMenu] = useState([]);
   const uniqueTitlesRef = useRef<HTMLElement[]>([]);
@@ -87,6 +87,13 @@ export function Menu(props: IMenu) {
   uniqueTitlesRef.current = uniqueTitles.map(
     (_, index) => uniqueTitlesRef.current[index] as HTMLDivElement,
   );
+  function itemHasAddOns(itemName) {
+    return (
+      add_on_drink.some((drink) => drink.menu.name === itemName) ||
+      add_on_food.some((food) => food.menu.name === itemName)
+    );
+  }
+
 
   console.log(uniqueTitles); //console
   console.log("menu", menu);
@@ -150,7 +157,15 @@ export function Menu(props: IMenu) {
   }, [setMenu]);
 
   function handleAddOnClick(itemName) {
-    setSelectedItemName(itemName);
+    if (selectedItemName === itemName) {
+      // If the add-on options are already open, close them
+      setSelectedItemName(null);
+    } else {
+      // If the add-on options are closed, open them
+      setSelectedItemName(itemName);
+    }
+
+    // You can also add your existing code here to initialize selectedAddons if it doesn't exist
     if (!selectedAddons[itemName]) {
       setSelectedAddons({
         ...selectedAddons,
@@ -162,6 +177,7 @@ export function Menu(props: IMenu) {
     }
   }
 
+
   function handleDrinkChange(event) {
     const selectedValue = event.target.value;
     const updatedAddons = {
@@ -172,8 +188,15 @@ export function Menu(props: IMenu) {
       },
     };
     setSelectedAddons(updatedAddons);
+  
+    // Update the state when add-ons are selected
+    if (selectedValue) {
+      setIsAddOnSelected(true);
+    } else {
+      setIsAddOnSelected(false);
+    }
   }
-
+  
   function handleFoodChange(event) {
     const selectedValue = event.target.value;
     const updatedAddons = {
@@ -184,7 +207,15 @@ export function Menu(props: IMenu) {
       },
     };
     setSelectedAddons(updatedAddons);
+  
+    // Update the state when add-ons are selected
+    if (selectedValue) {
+      setIsAddOnSelected(true);
+    } else {
+      setIsAddOnSelected(false);
+    }
   }
+  
 
   const addToCart = (item) => {
     const selectedDrink = selectedAddons[item.name]?.selectedDrink || null;
@@ -231,10 +262,12 @@ export function Menu(props: IMenu) {
   }, [selectedItemIndex]);
 
   const scrollToColumn3 = () => {
-    if (ref.current) {
-      ref.current.scrollIntoView({ behavior: "smooth" });
+    if (column3Ref.current) {
+      console.log('Scrolling to column3');
+      column3Ref.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
 
   return (
     <div>
@@ -245,9 +278,8 @@ export function Menu(props: IMenu) {
         <div className="column1">
           {uniqueTitles.map((title, index) => (
             <div
-              className={`menu-item ${
-                index === selectedItemIndex ? "first" : ""
-              }`}
+              className={`menu-item ${index === selectedItemIndex ? "first" : ""
+                }`}
               key={index}
               onClick={() => {
                 setSelectedItemIndex(index);
@@ -304,12 +336,14 @@ export function Menu(props: IMenu) {
                         </p>
                       </div>
                       <p className="card-textMenu">{item.description_1}</p>
+                      
+
                       {add_on_drink.some(
                         (drink) => drink.menu.name === item.name,
                       ) ||
-                      add_on_food.some(
-                        (food) => food.menu.name === item.name,
-                      ) ? (
+                        add_on_food.some(
+                          (food) => food.menu.name === item.name,
+                        ) ? (
                         <button
                           onClick={() => handleAddOnClick(item.name)}
                           className="add-on-button"
@@ -317,6 +351,8 @@ export function Menu(props: IMenu) {
                           + {translations.addon}
                         </button>
                       ) : null}
+
+
                       {selectedItemName === item.name && (
                         <div className="drink-food">
                           <br></br>
@@ -382,50 +418,59 @@ export function Menu(props: IMenu) {
                                 ))}
                             </select>
                           </div>
-                          {selectedAddons[item.name].selectedDrink ||
-                          selectedAddons[item.name].selectedFood ? (
-                            <div className="add-on-cost">
-                              <p>
-                                {calculateUpdateItemPrice(
-                                  item,
-                                  selectedAddons[item.name].selectedDrink ||
+                          {selectedAddons[item.name].selectedDrink &&
+                            selectedAddons[item.name].selectedFood && (
+                              <div className="add-on-cost">
+                                <p>
+                                  {calculateUpdateItemPrice(
+                                    item,
+                                    selectedAddons[item.name].selectedDrink ||
                                     null,
-                                  selectedAddons[item.name].selectedFood ||
+                                    selectedAddons[item.name].selectedFood ||
                                     null,
-                                )}
-                                /- CHF
-                              </p>
-                            </div>
-                          ) : null}
+                                  )}
+                                  /- CHF
+                                </p>
+                              </div>
+                            )}
                         </div>
+
                       )}
-                      <button
-                        className="add-button"
-                        onClick={() => addToCart(item)}
-                      >
-                        <Icofont icon="icofont-bag" /> {translations.add}
-                      </button>
+{(selectedItemName === item.name && isAddOnSelected) || !itemHasAddOns(item.name) ? (
+  <button
+    className="add-button"
+    onClick={() => addToCart(item)}
+  >
+    <Icofont icon="icofont-bag" /> {translations.add}
+  </button>
+) : null}
+
+
                     </div>
                   </div>
                 ))}
             </div>
           ))}
         </div>
-        <Cart
-          ref={column3Ref}
-          cart={cart}
-          removeFromCart={removeFromCart}
-          increaseQuantity={increaseQuantity}
-          deleteFromCart={deleteFromCart}
-          calculateItemPrice={calculateItemPrice}
-          calculateTotalPrice={calculateTotalPrice}
-          translations={translations}
-          isMenu={false}
-        />
+        <div className="column3" ref={column3Ref}>
+
+          <Cart
+            ref={column3Ref}
+            cart={cart}
+            removeFromCart={removeFromCart}
+            increaseQuantity={increaseQuantity}
+            deleteFromCart={deleteFromCart}
+            calculateItemPrice={calculateItemPrice}
+            calculateTotalPrice={calculateTotalPrice}
+            translations={translations}
+            isMenu={false}
+          />
+        </div>
         <div className="column4">
-          <button className="cart-button" onClick={scrollToColumn3}>
+          <button className="cart-button" onClick={() => { scrollToColumn3(); console.log('Button clicked'); }}>
             {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF
           </button>
+
         </div>
       </div>
       <SocialLogin />

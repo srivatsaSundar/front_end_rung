@@ -11,7 +11,6 @@ import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cart from "./cart";
-
 interface IOrder {
   ref;
   removeFromCart;

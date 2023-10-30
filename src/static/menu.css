@@ -561,7 +561,7 @@ h4 {
     padding: 5px; /* Add some spacing */
     border: 1px solid #ccc; /* Add a border for clarity */
     overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
-    height: 32vh;
+    height: 43vh;
     display: block;
     width: 340px;
   }
