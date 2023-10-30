@@ -324,7 +324,7 @@ input:focus {
 }
 
 .order-cart {
-  width: 25%; 
+  width: 25%;
 }
 
 .address {
@@ -570,18 +570,18 @@ h4 {
   .menu-select option {
     background-color: white;
     color: black;
-    max-width: 200px; 
+    max-width: 200px;
     white-space: nowrap;
-    overflow: hidden; 
+    overflow: hidden;
     text-overflow: ellipsis;
     width: inherit;
   }
   .column2 {
-    flex: 0 0 50%; 
+    flex: 0 0 50%;
     padding: 10px;
     border: 1px solid #ccc;
     overflow-y: auto;
-    max-height: 100vh; 
+    max-height: 100vh;
     text-align: left;
     margin-bottom: 10px;
     font-size: 15px;

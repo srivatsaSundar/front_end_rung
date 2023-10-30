@@ -1,6 +1,10 @@
-import React from 'react';
+import React from "react";
 
-const LanguageSwitcher = ({ availableLanguages, selectedLanguage, onLanguageChange }) => {
+const LanguageSwitcher = ({
+  availableLanguages,
+  selectedLanguage,
+  onLanguageChange,
+}) => {
   return (
     <div>
       <select value={selectedLanguage} onChange={onLanguageChange}>

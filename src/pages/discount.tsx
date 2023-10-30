@@ -1,26 +1,40 @@
 // imports
 import { Footer } from "../components/footer";
 import { SocialLogin } from "../components/socialmedia";
-import React from 'react';
+import React from "react";
 import "../static/menu.css";
-import { useLanguage } from '../components/LanguageProvider';
-import translations_en from '../translations/translation_en.json';
-import translations_de from '../translations/translation_de.json';
+import { useLanguage } from "../components/LanguageProvider";
+import translations_en from "../translations/translation_en.json";
+import translations_de from "../translations/translation_de.json";
 import AppNavbar from "../components/navbar";
 
 export function Discount() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
 
   // Define translations based on the selected language
-  const translations = selectedLanguage === 'en' ? translations_en : translations_de;
+  const translations =
+    selectedLanguage === "en" ? translations_en : translations_de;
 
   return (
-    <div >
+    <div>
       <div className="yes">
         <AppNavbar />
-        <div style={{ paddingTop: 10, paddingBottom: 10, marginTop: 20 }} className="up">
-          <h3 style={{ fontFamily: "Great Vibes", fontStyle: "italic", color: "white" }}>{translations.discount}</h3>
-          <p style={{ fontFamily: "Great Vibes", color: "white" }}>{translations.home}&rsaquo; {translations.discount}</p>
+        <div
+          style={{ paddingTop: 10, paddingBottom: 10, marginTop: 20 }}
+          className="up"
+        >
+          <h3
+            style={{
+              fontFamily: "Great Vibes",
+              fontStyle: "italic",
+              color: "white",
+            }}
+          >
+            {translations.discount}
+          </h3>
+          <p style={{ fontFamily: "Great Vibes", color: "white" }}>
+            {translations.home}&rsaquo; {translations.discount}
+          </p>
         </div>
       </div>
       <div className="title-Discount">

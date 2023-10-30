@@ -9,7 +9,7 @@ import { useLanguage } from "../components/LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 
 export function Order() {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -25,38 +25,49 @@ export function Order() {
   const handleOrderAndPay = () => {
     const currentDate = new Date();
     const selectedDateTime = selectedDate ? new Date(selectedDate) : null;
-    const selectedTimeElement = document.getElementById('selectedTime');
+    const selectedTimeElement = document.getElementById("selectedTime");
 
     if (selectedDateTime && selectedTimeElement) {
-      const selectedTime = (selectedTimeElement as HTMLSelectElement).value.split(':');
+      const selectedTime = (
+        selectedTimeElement as HTMLSelectElement
+      ).value.split(":");
       selectedDateTime.setHours(parseInt(selectedTime[0], 10));
       selectedDateTime.setMinutes(parseInt(selectedTime[1], 10));
     }
 
     if (selectedDateTime && selectedDateTime > currentDate) {
       const importantFields = [
-        { name: 'name', label: translations.name },
-        { name: 'email', label: translations.email },
-        { name: 'address', label: translations.address },
-        { name: 'postcode', label: translations.postcode },
-        { name: 'city', label: translations.city },
+        { name: "name", label: translations.name },
+        { name: "email", label: translations.email },
+        { name: "address", label: translations.address },
+        { name: "postcode", label: translations.postcode },
+        { name: "city", label: translations.city },
       ];
 
       const missingFields = importantFields.filter((field) => {
-        const inputElement = document.querySelector(`[name=${field.name}]`) as HTMLInputElement;
-        const value = inputElement ? inputElement.value : '';
-        return value.trim() === '';
+        const inputElement = document.querySelector(
+          `[name=${field.name}]`,
+        ) as HTMLInputElement;
+        const value = inputElement ? inputElement.value : "";
+        return value.trim() === "";
       });
 
       if (missingFields.length === 0) {
         data = {
-          person_name: (document.getElementById('name') as HTMLInputElement)?.value,
-          email: (document.getElementById('email') as HTMLInputElement)?.value,
-          address: (document.getElementById('address') as HTMLInputElement)?.value,
-          postal_code: (document.getElementById('postcode') as HTMLInputElement)?.value,
-          city: (document.getElementById('city') as HTMLInputElement)?.value,
-          phone_number: (document.getElementById('phoneNumber') as HTMLInputElement)?.value,
-          company_name: (document.getElementById('companyName') as HTMLInputElement)?.value,
+          person_name: (document.getElementById("name") as HTMLInputElement)
+            ?.value,
+          email: (document.getElementById("email") as HTMLInputElement)?.value,
+          address: (document.getElementById("address") as HTMLInputElement)
+            ?.value,
+          postal_code: (document.getElementById("postcode") as HTMLInputElement)
+            ?.value,
+          city: (document.getElementById("city") as HTMLInputElement)?.value,
+          phone_number: (
+            document.getElementById("phoneNumber") as HTMLInputElement
+          )?.value,
+          company_name: (
+            document.getElementById("companyName") as HTMLInputElement
+          )?.value,
           delivery_option: orderType,
           // selected_date: selectedDate,
           // selected_time: (document.getElementById('selectedTime') as HTMLInputElement)?.value,
@@ -65,26 +76,29 @@ export function Order() {
         };
         setConfirmation(true);
       } else {
-        const missingFieldLabels = missingFields.map((field) => field.label).join(', ');
+        const missingFieldLabels = missingFields
+          .map((field) => field.label)
+          .join(", ");
         alert(`Please fill out the following fields: ${missingFieldLabels}`);
       }
     } else {
-      alert('Please select a date and time in the future.');
+      alert("Please select a date and time in the future.");
     }
   };
 
   const sendOrderToBackend = (data) => {
-    axios.post('https://backend-rung.onrender.com/order/', data)
+    axios
+      .post("https://backend-rung.onrender.com/order/", data)
       .then((response) => {
         if (response.status === 200) {
-          window.location.href = '/placed';
+          window.location.href = "/placed";
         } else {
-          alert('Failed to place the order. Please try again.');
+          alert("Failed to place the order. Please try again.");
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
-        alert('Failed to place the order. Please try again.');
+        console.error("Error:", error);
+        alert("Failed to place the order. Please try again.");
       });
   };
 
@@ -133,14 +147,28 @@ export function Order() {
               </div>
               <div className="address">
                 <div className="name">
-                  <label htmlFor="phoneNumber">{translations.phoneNumber}</label>
+                  <label htmlFor="phoneNumber">
+                    {translations.phoneNumber}
+                  </label>
                   <br />
-                  <input type="text" id="phoneNumber" name="phoneNumber" required />
+                  <input
+                    type="text"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    required
+                  />
                 </div>
                 <div className="name">
-                  <label htmlFor="companyName">{translations.companyName}</label>
+                  <label htmlFor="companyName">
+                    {translations.companyName}
+                  </label>
                   <br />
-                  <input type="text" id="companyName" name="companyName" required />
+                  <input
+                    type="text"
+                    id="companyName"
+                    name="companyName"
+                    required
+                  />
                 </div>
               </div>
               <h4>{translations.foodDeliveryTime}</h4>
@@ -171,21 +199,27 @@ export function Order() {
               </div>
               <div className="address-2">
                 <div>
-                  <label htmlFor="selectedDate">{translations.selectDate}</label>
+                  <label htmlFor="selectedDate">
+                    {translations.selectDate}
+                  </label>
                   <br />
                   <DatePicker
                     id="selectedDate"
                     name="selectedDate"
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
-                    dateFormat={translations.dateFormat.replace('DD', 'dd').replace('YYYY', 'yyyy')}
+                    dateFormat={translations.dateFormat
+                      .replace("DD", "dd")
+                      .replace("YYYY", "yyyy")}
                     placeholderText={translations.dateFormat}
                     className="input-date"
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="selectedTime">{translations.selectTime}</label>
+                  <label htmlFor="selectedTime">
+                    {translations.selectTime}
+                  </label>
                   <br />
                   {orderType === "deliver" ? (
                     <select
@@ -201,8 +235,8 @@ export function Order() {
                         const time = `${hour
                           .toString()
                           .padStart(2, "0")}:${minute
-                            .toString()
-                            .padStart(2, "0")}`;
+                          .toString()
+                          .padStart(2, "0")}`;
                         const period = hour < 12 ? "AM" : "PM";
                         return (
                           <option key={time} value={time}>
@@ -264,9 +298,10 @@ export function Order() {
                 <Link to="/placed">
                   <button
                     className="search-button"
-                    onClick={() => sendOrderToBackend(data)} 
+                    onClick={() => sendOrderToBackend(data)}
                   >
-                    OK</button>
+                    OK
+                  </button>
                 </Link>
                 <button
                   className="search-button"

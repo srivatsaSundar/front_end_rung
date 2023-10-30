@@ -25,6 +25,7 @@
     "google-map-react": "^2.2.1",
     "http-proxy-middleware": "^2.0.6",
     "icofont": "^1.0.0",
+    "prettier": "^3.0.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-datepicker": "^4.18.0",
@@ -46,7 +47,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "eslintConfig": {
     "extends": [
