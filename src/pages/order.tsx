@@ -109,7 +109,7 @@ export function Order(props: IOrder) {
 
   const sendOrderToBackend = (data) => {
     axios
-      .post("https://backend-rung.onrender.com/order/", data)
+      .post("https://backend-rung.onrender.com/user/", data)
       .then((response) => {
         if (response.status === 200) {
           window.location.href = "/placed";
