@@ -110,8 +110,10 @@ export function Order(props: IOrder) {
   };
 
   console.log(Data, "Data")
-  const sendOrderToBackend = (Data) => {
+  const sendOrderToBackend = (data) => {
     console.log("Data -asxjh", Data);
+console.log(Data);
+  const sendOrderToBackend = (data) => {
     axios
       .post("https://backend-rung.onrender.com/order/", Data)
       .then((response) => {
@@ -126,6 +128,7 @@ export function Order(props: IOrder) {
         alert("Failed to place the order. Please try again.");
       });
   };
+}
 
   console.log(cart.length, "order");
 
