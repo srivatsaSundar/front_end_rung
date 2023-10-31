@@ -37,7 +37,7 @@ export function Order(props: IOrder) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [orderType, setOrderType] = useState("deliver");
   const { selectedLanguage } = useLanguage();
-
+  const [Data, setData] = useState({});
   const [confirmation, setConfirmation] = useState(false);
   // Define translations based on the selected language
   // const translations =selectedLanguage === "en" ? translations_en : translations_de;
@@ -47,7 +47,7 @@ export function Order(props: IOrder) {
     const currentDate = new Date();
     const selectedDateTime = selectedDate ? new Date(selectedDate) : null;
     const selectedTimeElement = document.getElementById("selectedTime");
-
+  
     if (selectedDateTime && selectedTimeElement) {
       const selectedTime = (
         selectedTimeElement as HTMLSelectElement
@@ -95,6 +95,8 @@ export function Order(props: IOrder) {
           // remarks: (document.getElementById('remarks') as HTMLInputElement)?.value,
           // coupon_code: (document.getElementById('couponCode') as HTMLInputElement)?.value,
         };
+        console.log("data",data);
+        setData(data);
         setConfirmation(true);
       } else {
         const missingFieldLabels = missingFields
@@ -107,9 +109,11 @@ export function Order(props: IOrder) {
     }
   };
 
-  const sendOrderToBackend = (data) => {
+  console.log(Data, "Data")
+  const sendOrderToBackend = (Data) => {
+    console.log("Data -asxjh", Data);
     axios
-      .post("https://backend-rung.onrender.com/order/", data)
+      .post("https://backend-rung.onrender.com/order/", Data)
       .then((response) => {
         if (response.status === 200) {
           window.location.href = "/placed";
