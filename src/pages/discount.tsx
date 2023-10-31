@@ -33,7 +33,7 @@ export function Discount() {
             {translations.discount}
           </h3>
           <p style={{ fontFamily: "Great Vibes", color: "white" }}>
-            {translations.home}&rsaquo; {translations.discount}
+            {translations.home} &rsaquo; {translations.discount}
           </p>
         </div>
       </div>

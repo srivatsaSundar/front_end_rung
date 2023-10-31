@@ -7,6 +7,7 @@ import { useLanguage } from "../components/LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
 import AppNavbar from "../components/navbar";
+import ScrollToTop from "react-scroll-to-top";
 
 export function Contact() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
@@ -76,6 +77,7 @@ export function Contact() {
           </form>
         </div>
       </div>
+      <ScrollToTop smooth  color="black" height="10px" className="scroll"/>
       <div className="home-container yes">
         <SocialLogin />
       </div>

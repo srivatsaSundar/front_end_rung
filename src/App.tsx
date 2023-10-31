@@ -15,6 +15,9 @@ import translations_de from "../src/translations/translation_de.json";
 function App() {
   const column3Ref = useRef(null || undefined);
   const [cart, setCart] = useState<MenuItem[]>([]);
+  const [add_on_drink, setAdd_on_drink] = useState([]) as any[];
+  const [add_on_food, setAdd_on_food] = useState([]) as any[];
+
   const { selectedLanguage } = useLanguage();
 
   function increaseQuantity(item) {
@@ -140,6 +143,10 @@ function App() {
                 calculateItemPrice={calculateItemPrice}
                 calculateTotalPrice={calculateTotalPrice}
                 translations={translations}
+                add_on_drink={add_on_drink}
+                setAdd_on_drink={setAdd_on_drink}
+                add_on_food={add_on_food}
+                setAdd_on_food={setAdd_on_food}
               />
             }
           />

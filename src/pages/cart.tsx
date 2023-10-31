@@ -2,15 +2,15 @@ import React from "react";
 import Icofont from "react-icofont";
 import { Link } from "react-router-dom";
 interface ICart {
-  ref;
-  removeFromCart;
-  cart;
-  increaseQuantity;
-  calculateItemPrice;
-  calculateTotalPrice;
-  deleteFromCart;
+  ref?;
+  removeFromCart?;
+  cart?;
+  increaseQuantity?;
+  calculateItemPrice?;
+  calculateTotalPrice?;
+  deleteFromCart?;
   translations;
-  isMenu;
+  isMenu?;
   style?;
 }
 function Cart(props: ICart) {

@@ -11,6 +11,7 @@ import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cart from "./cart";
+import ScrollToTop from "react-scroll-to-top";
 interface IOrder {
   ref;
   removeFromCart;
@@ -47,7 +48,7 @@ export function Order(props: IOrder) {
     const currentDate = new Date();
     const selectedDateTime = selectedDate ? new Date(selectedDate) : null;
     const selectedTimeElement = document.getElementById("selectedTime");
-  
+
     if (selectedDateTime && selectedTimeElement) {
       const selectedTime = (
         selectedTimeElement as HTMLSelectElement
@@ -95,7 +96,7 @@ export function Order(props: IOrder) {
           // remarks: (document.getElementById('remarks') as HTMLInputElement)?.value,
           // coupon_code: (document.getElementById('couponCode') as HTMLInputElement)?.value,
         };
-        console.log("data",data);
+        console.log("data", data);
         setData(data);
         setConfirmation(true);
       } else {
@@ -138,7 +139,7 @@ console.log(Data);
             <hr />
             <form id="order-form">
               <div className="address">
-              <div className="name">
+                <div className="name">
                   <label>{translations.name}</label>
                   <br />
                   <input name="name" id="name" type="text" required />
@@ -178,7 +179,7 @@ console.log(Data);
               <h4>{translations.contactInformation}</h4>
               <hr />
               <div className="address">
-              <div className="add">
+                <div className="add">
                   <label>{translations.address}</label>
                   <br />
                   <input name="address" id="address" type="text" required />
@@ -259,8 +260,8 @@ console.log(Data);
                         const time = `${hour
                           .toString()
                           .padStart(2, "0")}:${minute
-                          .toString()
-                          .padStart(2, "0")}`;
+                            .toString()
+                            .padStart(2, "0")}`;
                         const period = hour < 12 ? "AM" : "PM";
                         return (
                           <option key={time} value={time}>
@@ -353,6 +354,7 @@ console.log(Data);
             />
           </div>
         </div>
+        <ScrollToTop smooth  color="black" height="10px" className="scroll" />
         <div className="home-container yes">
           <SocialLogin />
         </div>

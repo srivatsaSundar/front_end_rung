@@ -12,7 +12,6 @@ import soup from "../images/soup.jpg";
 import thai_wok from "../images/thai_wok.jpg";
 import fry from "../images/fry.jpg";
 import combodia from "../images/combodia.jpg";
-import { useLanguage } from "../components/LanguageProvider";
 import AppNavbar from "../components/navbar";
 import drink from "../images/drink.jpg";
 import soft from "../images/soft.jpg";
@@ -21,6 +20,7 @@ import noodle from "../images/noodle.jpg";
 import rice from "../images/rice.jpg";
 import veg from "../images/veg.jpg";
 import Cart from "./cart";
+import ScrollToTop from "react-scroll-to-top";
 
 export interface MenuItem {
   id: number;
@@ -40,22 +40,24 @@ interface IMenu {
   deleteFromCart;
   translations;
   setCart;
+  add_on_drink;
+  setAdd_on_drink;
+  add_on_food;
+  setAdd_on_food
 }
 
 export function Menu(props: IMenu) {
   const {
-    ref,
+    translations,
+    deleteFromCart,
     removeFromCart,
     cart,
-    increaseQuantity,
-    calculateItemPrice,
-    calculateTotalPrice,
-    deleteFromCart,
-    translations,
-    setCart,
+    setCart
   } = props;
+
   const column3Ref = useRef(null);
   const [selectValue, setSelectValue] = useState("DEFAULT");
+  // const [cart, setCart] = useState<MenuItem[]>([]);
   const [isAddOnSelected, setIsAddOnSelected] = useState(false);
   const [selectedAddons, setSelectedAddons] = useState({});
   const [menu, setMenu] = useState([]);
@@ -87,6 +89,7 @@ export function Menu(props: IMenu) {
   uniqueTitlesRef.current = uniqueTitles.map(
     (_, index) => uniqueTitlesRef.current[index] as HTMLDivElement,
   );
+
   function itemHasAddOns(itemName) {
     return (
       add_on_drink.some((drink) => drink.menu.name === itemName) ||
@@ -177,6 +180,104 @@ export function Menu(props: IMenu) {
     }
   }
 
+  function increaseQuantity(item) {
+    const existingItemIndex = cart.findIndex(
+      (cartItem) =>
+        cartItem.id === item.id &&
+        cartItem.drink === item.drink &&
+        cartItem.food === item.food,
+    );
+
+    if (existingItemIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart[existingItemIndex].quantity += 1;
+      setCart(updatedCart);
+    }
+  }
+  // const removeFromCart = (item) => {
+  //   const existingItemIndex = cart.findIndex(
+  //     (cartItem) =>
+  //       cartItem.id === item.id &&
+  //       cartItem.drink === item.drink &&
+  //       cartItem.food === item.food,
+  //   );
+
+  //   if (existingItemIndex !== -1) {
+  //     const updatedCart = [...cart];
+  //     if (updatedCart[existingItemIndex].quantity > 1) {
+  //       updatedCart[existingItemIndex].quantity -= 1;
+  //     } else {
+  //       updatedCart.splice(existingItemIndex, 1);
+  //     }
+  //     setCart(updatedCart);
+  //   }
+  // };
+
+  // const deleteFromCart = (item) => {
+  //   const existingItemIndex = cart.findIndex(
+  //     (cartItem) =>
+  //       cartItem.id === item.id &&
+  //       cartItem.drink === item.drink &&
+  //       cartItem.food === item.food,
+  //   );
+
+  //   if (existingItemIndex !== -1) {
+  //     const updatedCart = [...cart];
+  //     updatedCart.splice(existingItemIndex, 1);
+  //     setCart(updatedCart);
+  //   }
+  // };
+
+  const calculateTotalPrice = () => {
+    if (cart && cart.length > 0) {
+      return cart.reduce((total, item) => {
+        const basePrice = item.price;
+        let price = basePrice;
+
+        if (item.drink) {
+          const drink = add_on_drink.find(
+            (drink) => drink.drink.name === item.drink,
+          );
+          if (drink) {
+            price += drink.drink.price;
+          }
+        }
+        if (item.food) {
+          const food = add_on_food.find((food) => food.food.name === item.food);
+          if (food) {
+            price += food.food.price;
+          }
+        }
+
+        return total + price * item.quantity;
+      }, 0);
+    } else {
+      return 0;
+    }
+  };
+
+  function calculateItemPrice(item) {
+    let price = item.price;
+
+    if (item.drink) {
+      const selectedDrink = add_on_drink.find(
+        (drink) => drink.drink.name === item.drink,
+      );
+      if (selectedDrink) {
+        price += selectedDrink.drink.price;
+      }
+    }
+    if (item.food) {
+      const selectedFood = add_on_food.find(
+        (food) => food.food.name === item.food,
+      );
+      if (selectedFood) {
+        price += selectedFood.food.price;
+      }
+    }
+
+    return price;
+  }
 
   function handleDrinkChange(event) {
     const selectedValue = event.target.value;
@@ -188,7 +289,7 @@ export function Menu(props: IMenu) {
       },
     };
     setSelectedAddons(updatedAddons);
-  
+
     // Update the state when add-ons are selected
     if (selectedValue) {
       setIsAddOnSelected(true);
@@ -196,7 +297,7 @@ export function Menu(props: IMenu) {
       setIsAddOnSelected(false);
     }
   }
-  
+
   function handleFoodChange(event) {
     const selectedValue = event.target.value;
     const updatedAddons = {
@@ -207,7 +308,7 @@ export function Menu(props: IMenu) {
       },
     };
     setSelectedAddons(updatedAddons);
-  
+
     // Update the state when add-ons are selected
     if (selectedValue) {
       setIsAddOnSelected(true);
@@ -215,7 +316,7 @@ export function Menu(props: IMenu) {
       setIsAddOnSelected(false);
     }
   }
-  
+
 
   const addToCart = (item) => {
     const selectedDrink = selectedAddons[item.name]?.selectedDrink || null;
@@ -268,6 +369,11 @@ export function Menu(props: IMenu) {
     }
   };
 
+  const scrollToDiv = () => {
+    const scrollableDiv = document.getElementById('scrollableDiv');
+    scrollableDiv?.scrollIntoView({ behavior: 'smooth' });
+  };
+
 
   return (
     <div>
@@ -312,7 +418,7 @@ export function Menu(props: IMenu) {
             ))}
           </select>
         </div>
-        <div className="column2">
+        <div className="column2" >
           {uniqueTitles.map((title, index) => (
             <div
               key={index}
@@ -321,7 +427,7 @@ export function Menu(props: IMenu) {
                 (uniqueTitlesRef.current[index] = el as HTMLDivElement)
               }
             >
-              <h2>{title}</h2>
+              <h2 id="scrollableDiv">{title}</h2>
               <img src={titleImageUrls[title]} alt={`Image for ${title}`} />
               <hr />
               {menu
@@ -336,7 +442,7 @@ export function Menu(props: IMenu) {
                         </p>
                       </div>
                       <p className="card-textMenu">{item.description_1}</p>
-                      
+
 
                       {add_on_drink.some(
                         (drink) => drink.menu.name === item.name,
@@ -436,14 +542,14 @@ export function Menu(props: IMenu) {
                         </div>
 
                       )}
-{(selectedItemName === item.name && isAddOnSelected) || !itemHasAddOns(item.name) ? (
-  <button
-    className="add-button"
-    onClick={() => addToCart(item)}
-  >
-    <Icofont icon="icofont-bag" /> {translations.add}
-  </button>
-) : null}
+                      {(selectedItemName === item.name && isAddOnSelected) || !itemHasAddOns(item.name) ? (
+                        <button
+                          className="add-button"
+                          onClick={() => addToCart(item)}
+                        >
+                          <Icofont icon="icofont-bag" /> {translations.add}
+                        </button>
+                      ) : null}
 
 
                     </div>
@@ -473,6 +579,7 @@ export function Menu(props: IMenu) {
 
         </div>
       </div>
+      <ScrollToTop smooth color="black" height="10px" className="scroll" onClick={scrollToDiv} top={2} />
       <SocialLogin />
       <Footer />
     </div>
