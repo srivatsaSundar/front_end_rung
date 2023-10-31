@@ -11,6 +11,7 @@ import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cart from "./cart";
+import ScrollToTop from "react-scroll-to-top";
 interface IOrder {
   ref;
   removeFromCart;
@@ -357,6 +358,7 @@ export function Order(props: IOrder) {
             />
           </div>
         </div>
+        <ScrollToTop smooth  color="black" height="10px" className="scroll" />
         <div className="home-container yes">
           <SocialLogin />
         </div>
