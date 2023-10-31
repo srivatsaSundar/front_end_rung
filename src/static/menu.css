@@ -210,7 +210,6 @@ input:focus {
   padding: 5px 10px;
   margin-right: 5px;
   cursor: pointer;
-  float: left;
 }
 
 /* Style for the "Add" button */
@@ -263,10 +262,12 @@ input:focus {
 .drink-food {
   display: flex;
   gap: 5px;
+  flex-direction: row;
 }
 .drink-dropdown,
 .food-dropdown {
   width: 100%;
+  margin-top: 15px;
 }
 
 .drink-dropdown select,

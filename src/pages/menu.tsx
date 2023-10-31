@@ -79,9 +79,10 @@ export function Menu(props: IMenu) {
         }
         return response.json();
       })
-      .then((data) => setMenu(data))
+      .then((data) =>setMenu(data))
       .catch((err) => console.log("error in fetching the menu", err));
   }, [targetURL]);
+
 
   const uniqueTitles: string[] = Array.from(
     new Set(menu.map((item) => item.title_name)),
@@ -194,39 +195,7 @@ export function Menu(props: IMenu) {
       setCart(updatedCart);
     }
   }
-  // const removeFromCart = (item) => {
-  //   const existingItemIndex = cart.findIndex(
-  //     (cartItem) =>
-  //       cartItem.id === item.id &&
-  //       cartItem.drink === item.drink &&
-  //       cartItem.food === item.food,
-  //   );
 
-  //   if (existingItemIndex !== -1) {
-  //     const updatedCart = [...cart];
-  //     if (updatedCart[existingItemIndex].quantity > 1) {
-  //       updatedCart[existingItemIndex].quantity -= 1;
-  //     } else {
-  //       updatedCart.splice(existingItemIndex, 1);
-  //     }
-  //     setCart(updatedCart);
-  //   }
-  // };
-
-  // const deleteFromCart = (item) => {
-  //   const existingItemIndex = cart.findIndex(
-  //     (cartItem) =>
-  //       cartItem.id === item.id &&
-  //       cartItem.drink === item.drink &&
-  //       cartItem.food === item.food,
-  //   );
-
-  //   if (existingItemIndex !== -1) {
-  //     const updatedCart = [...cart];
-  //     updatedCart.splice(existingItemIndex, 1);
-  //     setCart(updatedCart);
-  //   }
-  // };
 
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
