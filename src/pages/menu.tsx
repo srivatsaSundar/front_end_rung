@@ -410,8 +410,8 @@ export function Menu(props: IMenu) {
                           {item.price}/- CHF
                         </p>
                       </div>
-                      <p className="card-textMenu">{item.description_1}</p>
-
+                      <p className="card-textMenu"><b>{item.description_1}</b></p>
+                      <p className="card-textMenu">{item.description_2}</p>
 
                       {add_on_drink.some(
                         (drink) => drink.menu.name === item.name,
@@ -428,8 +428,9 @@ export function Menu(props: IMenu) {
                       ) : null}
 
 
+<div>
                       {selectedItemName === item.name && (
-                        <div className="drink-food">
+                        <div className="drink-food"  style={{backgroundColor:"#efefef" }}>
                           <br></br>
                           <div className="drink-dropdown">
                             <select
@@ -463,7 +464,7 @@ export function Menu(props: IMenu) {
                                 ))}
                             </select>
                           </div>
-                          <div className="food-dropdown">
+                          <div className="food-dropdown" style={{backgroundColor:"#efefef"}}>
                             <select
                               onChange={handleFoodChange}
                               value={
@@ -519,14 +520,15 @@ export function Menu(props: IMenu) {
                           <Icofont icon="icofont-bag" /> {translations.add}
                         </button>
                       ) : null}
-
-
                     </div>
                   </div>
+                </div>
                 ))}
             </div>
           ))}
+          
         </div>
+        
         <div className="column3" ref={column3Ref}>
 
           <Cart

@@ -233,9 +233,7 @@ console.log(Data);
                     name="selectedDate"
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
-                    dateFormat={translations.dateFormat
-                      .replace("DD", "dd")
-                      .replace("YYYY", "yyyy")}
+                    dateFormat="dd.MM.yyyy"
                     placeholderText={translations.dateFormat}
                     className="input-date"
                     required
