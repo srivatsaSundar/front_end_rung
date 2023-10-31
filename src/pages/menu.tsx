@@ -12,7 +12,6 @@ import soup from "../images/soup.jpg";
 import thai_wok from "../images/thai_wok.jpg";
 import fry from "../images/fry.jpg";
 import combodia from "../images/combodia.jpg";
-import { useLanguage } from "../components/LanguageProvider";
 import AppNavbar from "../components/navbar";
 import drink from "../images/drink.jpg";
 import soft from "../images/soft.jpg";
@@ -21,6 +20,7 @@ import noodle from "../images/noodle.jpg";
 import rice from "../images/rice.jpg";
 import veg from "../images/veg.jpg";
 import Cart from "./cart";
+import ScrollToTop from "react-scroll-to-top";
 
 export interface MenuItem {
   id: number;
@@ -40,6 +40,10 @@ interface IMenu {
   deleteFromCart;
   translations;
   setCart;
+  add_on_drink;
+  setAdd_on_drink;
+  add_on_food;
+  setAdd_on_food
 }
 
 export function Menu(props: IMenu) {
@@ -54,6 +58,7 @@ export function Menu(props: IMenu) {
     translations,
     setCart,
   } = props;
+
   const column3Ref = useRef(null);
   const [selectValue, setSelectValue] = useState("DEFAULT");
   const [isAddOnSelected, setIsAddOnSelected] = useState(false);
@@ -87,6 +92,7 @@ export function Menu(props: IMenu) {
   uniqueTitlesRef.current = uniqueTitles.map(
     (_, index) => uniqueTitlesRef.current[index] as HTMLDivElement,
   );
+
   function itemHasAddOns(itemName) {
     return (
       add_on_drink.some((drink) => drink.menu.name === itemName) ||
@@ -188,7 +194,7 @@ export function Menu(props: IMenu) {
       },
     };
     setSelectedAddons(updatedAddons);
-  
+
     // Update the state when add-ons are selected
     if (selectedValue) {
       setIsAddOnSelected(true);
@@ -196,7 +202,7 @@ export function Menu(props: IMenu) {
       setIsAddOnSelected(false);
     }
   }
-  
+
   function handleFoodChange(event) {
     const selectedValue = event.target.value;
     const updatedAddons = {
@@ -207,7 +213,7 @@ export function Menu(props: IMenu) {
       },
     };
     setSelectedAddons(updatedAddons);
-  
+
     // Update the state when add-ons are selected
     if (selectedValue) {
       setIsAddOnSelected(true);
@@ -215,7 +221,7 @@ export function Menu(props: IMenu) {
       setIsAddOnSelected(false);
     }
   }
-  
+
 
   const addToCart = (item) => {
     const selectedDrink = selectedAddons[item.name]?.selectedDrink || null;
@@ -336,7 +342,7 @@ export function Menu(props: IMenu) {
                         </p>
                       </div>
                       <p className="card-textMenu">{item.description_1}</p>
-                      
+
 
                       {add_on_drink.some(
                         (drink) => drink.menu.name === item.name,
@@ -436,14 +442,14 @@ export function Menu(props: IMenu) {
                         </div>
 
                       )}
-{(selectedItemName === item.name && isAddOnSelected) || !itemHasAddOns(item.name) ? (
-  <button
-    className="add-button"
-    onClick={() => addToCart(item)}
-  >
-    <Icofont icon="icofont-bag" /> {translations.add}
-  </button>
-) : null}
+                      {(selectedItemName === item.name && isAddOnSelected) || !itemHasAddOns(item.name) ? (
+                        <button
+                          className="add-button"
+                          onClick={() => addToCart(item)}
+                        >
+                          <Icofont icon="icofont-bag" /> {translations.add}
+                        </button>
+                      ) : null}
 
 
                     </div>
@@ -473,6 +479,7 @@ export function Menu(props: IMenu) {
 
         </div>
       </div>
+      <ScrollToTop smooth  color="orange" height="10px"/>
       <SocialLogin />
       <Footer />
     </div>

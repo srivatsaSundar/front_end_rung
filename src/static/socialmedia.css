@@ -3,7 +3,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   text-align: left;
-  padding-top: 20px;
+  padding: 25px 0px;
   height: fit-content;
   color: #fff;
   background: linear-gradient(to right, #c22527, #b47727);
