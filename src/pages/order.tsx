@@ -106,7 +106,7 @@ export function Order(props: IOrder) {
       alert("Please select a date and time in the future.");
     }
   };
-
+  console.log(data);
   const sendOrderToBackend = (data) => {
     axios
       .post("https://backend-rung.onrender.com/user/", data)
