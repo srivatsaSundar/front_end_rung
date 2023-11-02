@@ -41,12 +41,11 @@ export function Order(props: IOrder) {
   // Define translations based on the selected language
   // const translations =selectedLanguage === "en" ? translations_en : translations_de;
   let data = {};
-
   const handleOrderAndPay = () => {
     const currentDate = new Date();
     const selectedDateTime = selectedDate ? new Date(selectedDate) : null;
     const selectedTimeElement = document.getElementById("selectedTime");
-
+  
     if (selectedDateTime && selectedTimeElement) {
       const selectedTime = (
         selectedTimeElement as HTMLSelectElement
@@ -54,7 +53,7 @@ export function Order(props: IOrder) {
       selectedDateTime.setHours(parseInt(selectedTime[0], 10));
       selectedDateTime.setMinutes(parseInt(selectedTime[1], 10));
     }
-
+  
     if (selectedDateTime && selectedDateTime > currentDate) {
       const importantFields = [
         { name: "name", label: translations.name },
@@ -63,7 +62,7 @@ export function Order(props: IOrder) {
         { name: "postcode", label: translations.postcode },
         { name: "city", label: translations.city },
       ];
-
+  
       const missingFields = importantFields.filter((field) => {
         const inputElement = document.querySelector(
           `[name=${field.name}]`,
@@ -71,8 +70,18 @@ export function Order(props: IOrder) {
         const value = inputElement ? inputElement.value : "";
         return value.trim() === "";
       });
+  
+      if (missingFields.length === 0 && cart.length > 0) {
+        const formattedDate = `${selectedDateTime.getFullYear()}-${(selectedDateTime.getMonth() + 1).toString().padStart(2, '0')}-${selectedDateTime.getDate().toString().padStart(2, '0')}`;
+        
+        // Map cart items to the format you want
+        const cartItems = cart.map((cartItem) => ({
 
-      if (missingFields.length === 0) {
+item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ''}${cartItem.food ? ` + ${cartItem.food}` : ''}`,
+          quantity: cartItem.quantity,
+          cost: cartItem.price, // You need to update this based on your cart structure
+        }));
+  
         data = {
           person_name: (document.getElementById("name") as HTMLInputElement)
             ?.value,
@@ -89,24 +98,30 @@ export function Order(props: IOrder) {
             document.getElementById("companyName") as HTMLInputElement
           )?.value,
           delivery_option: orderType,
-          // selected_date: selectedDate,
-          // selected_time: (document.getElementById('selectedTime') as HTMLInputElement)?.value,
-          // remarks: (document.getElementById('remarks') as HTMLInputElement)?.value,
-          // coupon_code: (document.getElementById('couponCode') as HTMLInputElement)?.value,
+          delivery_date: formattedDate,
+          delivery_time: (document.getElementById('selectedTime') as HTMLInputElement)?.value,
+          remarks: (document.getElementById('remarks') as HTMLInputElement)?.value,
+          coupon_code: (document.getElementById('couponCode') as HTMLInputElement)?.value,
+          cart: JSON.stringify(cartItems), // Include cart items in the order
+          total_price: calculateTotalPrice(cart),
         };
         console.log("data", data);
+        console.log("scart", cart);
         setData(data);
         setConfirmation(true);
       } else {
         const missingFieldLabels = missingFields
           .map((field) => field.label)
           .join(", ");
-        alert(`Please fill out the following fields: ${missingFieldLabels}`);
+        const cartValidationMessage = cart.length === 0 ? "Your cart is empty." : "";
+        const errorMessage = `${missingFieldLabels} ${cartValidationMessage}`;
+        alert(`Please fill out the following fields: ${errorMessage}`);
       }
     } else {
       alert("Please select a date and time in the future.");
     }
   };
+  
 
   console.log(Data, "Data");
   const sendOrderToBackend = (data) => {
@@ -229,7 +244,7 @@ export function Order(props: IOrder) {
                     name="selectedDate"
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
-                    dateFormat="dd.MM.yyyy"
+                    dateFormat="yyyy-MM-dd"
                     placeholderText={translations.dateFormat}
                     className="input-date"
                     required
