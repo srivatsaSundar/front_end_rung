@@ -77,7 +77,7 @@ export function Contact() {
           </form>
         </div>
       </div>
-      <ScrollToTop smooth  color="black" height="10px" className="scroll"/>
+      <ScrollToTop smooth color="black" height="10px" className="scroll" />
       <div className="home-container yes">
         <SocialLogin />
       </div>

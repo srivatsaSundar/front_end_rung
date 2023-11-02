@@ -43,17 +43,11 @@ interface IMenu {
   add_on_drink;
   setAdd_on_drink;
   add_on_food;
-  setAdd_on_food
+  setAdd_on_food;
 }
 
 export function Menu(props: IMenu) {
-  const {
-    translations,
-    deleteFromCart,
-    removeFromCart,
-    cart,
-    setCart
-  } = props;
+  const { translations, deleteFromCart, removeFromCart, cart, setCart } = props;
 
   const column3Ref = useRef(null);
   const [selectValue, setSelectValue] = useState("DEFAULT");
@@ -79,10 +73,9 @@ export function Menu(props: IMenu) {
         }
         return response.json();
       })
-      .then((data) =>setMenu(data))
+      .then((data) => setMenu(data))
       .catch((err) => console.log("error in fetching the menu", err));
   }, [targetURL]);
-
 
   const uniqueTitles: string[] = Array.from(
     new Set(menu.map((item) => item.title_name)),
@@ -97,7 +90,6 @@ export function Menu(props: IMenu) {
       add_on_food.some((food) => food.menu.name === itemName)
     );
   }
-
 
   console.log(uniqueTitles); //console
   console.log("menu", menu);
@@ -126,7 +118,7 @@ export function Menu(props: IMenu) {
 
   function scrollToTitle(index) {
     const element = uniqueTitlesRef.current[index];
-    console.log(uniqueTitles)
+    console.log(uniqueTitles);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -196,11 +188,10 @@ export function Menu(props: IMenu) {
     }
   }
 
-
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
       return cart.reduce((total, item) => {
-        const basePrice = item.price;
+        const basePrice = item.price.toFixed(2);
         let price = basePrice;
 
         if (item.drink) {
@@ -226,7 +217,7 @@ export function Menu(props: IMenu) {
   };
 
   function calculateItemPrice(item) {
-    let price = item.price;
+    let price = item.price.toFixed(2);
 
     if (item.drink) {
       const selectedDrink = add_on_drink.find(
@@ -286,7 +277,6 @@ export function Menu(props: IMenu) {
     }
   }
 
-
   const addToCart = (item) => {
     const selectedDrink = selectedAddons[item.name]?.selectedDrink || null;
     const selectedFood = selectedAddons[item.name]?.selectedFood || null;
@@ -321,7 +311,7 @@ export function Menu(props: IMenu) {
     );
     const food = add_on_food.find((food) => food.food.name === selectedFood);
     return (
-      item.price +
+      item.price.toFixed(2) +
       (drink ? drink.drink.price : 0) +
       (food ? food.food.price : 0)
     );
@@ -333,16 +323,15 @@ export function Menu(props: IMenu) {
 
   const scrollToColumn3 = () => {
     if (column3Ref.current) {
-      console.log('Scrolling to column3');
-      column3Ref.current.scrollIntoView({ behavior: 'smooth' });
+      console.log("Scrolling to column3");
+      column3Ref.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const scrollToDiv = () => {
-    const scrollableDiv = document.getElementById('scrollableDiv');
-    scrollableDiv?.scrollIntoView({ behavior: 'smooth' });
+    const scrollableDiv = document.getElementById("scrollableDiv");
+    scrollableDiv?.scrollIntoView({ behavior: "smooth" });
   };
-
 
   return (
     <div>
@@ -353,8 +342,9 @@ export function Menu(props: IMenu) {
         <div className="column1">
           {uniqueTitles.map((title, index) => (
             <div
-              className={`menu-item ${index === selectedItemIndex ? "first" : ""
-                }`}
+              className={`menu-item ${
+                index === selectedItemIndex ? "first" : ""
+              }`}
               key={index}
               onClick={() => {
                 setSelectedItemIndex(index);
@@ -387,7 +377,7 @@ export function Menu(props: IMenu) {
             ))}
           </select>
         </div>
-        <div className="column2" >
+        <div className="column2">
           {uniqueTitles.map((title, index) => (
             <div
               key={index}
@@ -407,130 +397,145 @@ export function Menu(props: IMenu) {
                       <div className="card-nameMenu">
                         <h5 className="card-titleMenu">{item.name}</h5>
                         <p className="card-titleMenu price">
-                          {item.price}/- CHF
+                          {item.price.toFixed(2)}/- CHF
                         </p>
                       </div>
-                      <p className="card-textMenu"><b>{item.description_1}</b></p>
+                      <p className="card-textMenu">
+                        <b>{item.description_1}</b>
+                      </p>
                       <p className="card-textMenu">{item.description_2}</p>
 
                       {add_on_drink.some(
                         (drink) => drink.menu.name === item.name,
                       ) ||
-                        add_on_food.some(
-                          (food) => food.menu.name === item.name,
-                        ) ? (
+                      add_on_food.some(
+                        (food) => food.menu.name === item.name,
+                      ) ? (
                         <button
                           onClick={() => handleAddOnClick(item.name)}
                           className="add-on-button"
+                          style={{ marginBottom: "-30px" }}
                         >
                           + {translations.addon}
                         </button>
                       ) : null}
 
-
-<div>
-                      {selectedItemName === item.name && (
-                        <div className="drink-food"  style={{backgroundColor:"#efefef" }}>
-                          <br></br>
-                          <div className="drink-dropdown">
-                            <select
-                              onChange={handleDrinkChange}
-                              value={
-                                selectedAddons[item.name].selectedDrink || ""
-                              }
-                            >
-                              <option value="">
-                                {translations.selectaddon}
-                              </option>
-                              {add_on_drink
-                                .filter(
-                                  (drink) => drink.menu.name === item.name,
-                                )
-                                .map((drink, drinkIndex) => (
-                                  <option
-                                    key={drinkIndex}
-                                    value={drink.drink.name}
-                                  >
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                      }}
+                      <div>
+                        {selectedItemName === item.name && (
+                          <div
+                            className="drink-food"
+                            style={{
+                              backgroundColor: "#efefef",
+                              paddingTop: "15px",
+                              paddingRight: "10px",
+                              paddingLeft: "10px",
+                              paddingBottom: "50px",
+                              marginBottom: "-35px",
+                            }}
+                          >
+                            <br></br>
+                            <div className="drink-dropdown">
+                              <select
+                                onChange={handleDrinkChange}
+                                value={
+                                  selectedAddons[item.name].selectedDrink || ""
+                                }
+                              >
+                                <option value="">
+                                  {translations.selectaddon}
+                                </option>
+                                {add_on_drink
+                                  .filter(
+                                    (drink) => drink.menu.name === item.name,
+                                  )
+                                  .map((drink, drinkIndex) => (
+                                    <option
+                                      key={drinkIndex}
+                                      value={drink.drink.name}
                                     >
-                                      <span>{drink.drink.name}</span>
-                                      <span>({drink.drink.price}/- CHF)</span>
-                                    </div>
-                                  </option>
-                                ))}
-                            </select>
-                          </div>
-                          <div className="food-dropdown" style={{backgroundColor:"#efefef"}}>
-                            <select
-                              onChange={handleFoodChange}
-                              value={
-                                selectedAddons[item.name].selectedFood || ""
-                              }
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                        }}
+                                      >
+                                        <span>{drink.drink.name}</span>
+                                        <span>({drink.drink.price}/- CHF)</span>
+                                      </div>
+                                    </option>
+                                  ))}
+                              </select>
+                            </div>
+                            <div
+                              className="food-dropdown"
+                              style={{ backgroundColor: "#efefef" }}
                             >
-                              <option value="">
-                                {translations.selectaddon}
-                              </option>
-                              {add_on_food
-                                .filter((food) => food.menu.name === item.name)
-                                .map((food, foodIndex) => (
-                                  <option
-                                    key={foodIndex}
-                                    value={food.food.name}
-                                  >
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                      }}
+                              <select
+                                onChange={handleFoodChange}
+                                value={
+                                  selectedAddons[item.name].selectedFood || ""
+                                }
+                              >
+                                <option value="">
+                                  {translations.selectaddon}
+                                </option>
+                                {add_on_food
+                                  .filter(
+                                    (food) => food.menu.name === item.name,
+                                  )
+                                  .map((food, foodIndex) => (
+                                    <option
+                                      key={foodIndex}
+                                      value={food.food.name}
                                     >
-                                      <span>{food.food.name}</span>
-                                      <span>({food.food.price}/- CHF)</span>
-                                    </div>
-                                  </option>
-                                ))}
-                            </select>
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                        }}
+                                      >
+                                        <span>{food.food.name}</span>
+                                        <span>({food.food.price}/- CHF)</span>
+                                      </div>
+                                    </option>
+                                  ))}
+                              </select>
+                            </div>
+                            {selectedAddons[item.name].selectedDrink &&
+                              selectedAddons[item.name].selectedFood && (
+                                <div className="add-on-cost">
+                                  <p>
+                                    {calculateUpdateItemPrice(
+                                      item,
+                                      selectedAddons[item.name].selectedDrink ||
+                                        null,
+                                      selectedAddons[item.name].selectedFood ||
+                                        null,
+                                    )}
+                                    /- CHF
+                                  </p>
+                                </div>
+                              )}
                           </div>
-                          {selectedAddons[item.name].selectedDrink &&
-                            selectedAddons[item.name].selectedFood && (
-                              <div className="add-on-cost">
-                                <p>
-                                  {calculateUpdateItemPrice(
-                                    item,
-                                    selectedAddons[item.name].selectedDrink ||
-                                    null,
-                                    selectedAddons[item.name].selectedFood ||
-                                    null,
-                                  )}
-                                  /- CHF
-                                </p>
-                              </div>
-                            )}
-                        </div>
-
-                      )}
-                      {(selectedItemName === item.name && isAddOnSelected) || !itemHasAddOns(item.name) ? (
-                        <button
-                          className="add-button"
-                          onClick={() => addToCart(item)}
-                        >
-                          <Icofont icon="icofont-bag" /> {translations.add}
-                        </button>
-                      ) : null}
+                        )}
+                        {(selectedItemName === item.name && isAddOnSelected) ||
+                        !itemHasAddOns(item.name) ? (
+                          <button
+                            className="add-button"
+                            onClick={() => addToCart(item)}
+                          >
+                            <Icofont icon="icofont-bag" /> {translations.add}
+                          </button>
+                        ) : null}
+                      </div>
                     </div>
                   </div>
-                </div>
                 ))}
             </div>
           ))}
-          
         </div>
-        
-        <div className="column3" ref={column3Ref}>
 
+        <div className="column3" ref={column3Ref}>
           <Cart
             ref={column3Ref}
             cart={cart}
@@ -544,13 +549,25 @@ export function Menu(props: IMenu) {
           />
         </div>
         <div className="column4">
-          <button className="cart-button" onClick={() => { scrollToColumn3(); console.log('Button clicked'); }}>
+          <button
+            className="cart-button"
+            onClick={() => {
+              scrollToColumn3();
+              console.log("Button clicked");
+            }}
+          >
             {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF
           </button>
-
         </div>
       </div>
-      <ScrollToTop smooth color="black" height="10px" className="scroll" onClick={scrollToDiv} top={2} />
+      <ScrollToTop
+        smooth
+        color="black"
+        height="10px"
+        className="scroll"
+        onClick={scrollToDiv}
+        top={2}
+      />
       <SocialLogin />
       <Footer />
     </div>

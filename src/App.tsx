@@ -71,7 +71,7 @@ function App() {
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
       return cart.reduce((total, item) => {
-        const basePrice = item.price;
+        const basePrice = item.price.toFixed(2);
         let price = basePrice;
 
         if (item.drink) {
@@ -97,7 +97,7 @@ function App() {
   };
 
   function calculateItemPrice(item) {
-    let price = item.price;
+    let price = item.price.toFixed(2);
 
     if (item.drink) {
       const selectedDrink = add_on_drink.find(

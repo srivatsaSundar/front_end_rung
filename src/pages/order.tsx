@@ -6,8 +6,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import AppNavbar from "../components/navbar";
 import { useLanguage } from "../components/LanguageProvider";
-import translations_en from "../translations/translation_en.json";
-import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cart from "./cart";
@@ -110,19 +108,17 @@ export function Order(props: IOrder) {
     }
   };
 
-  console.log(Data, "Data")
+  console.log(Data, "Data");
   const sendOrderToBackend = (data) => {
     console.log("Data -asxjh", Data);
-console.log(Data);
+    console.log(Data);
     axios
       .post("https://backend-rung.onrender.com/order/", Data)
       .then((response) => {
-          window.location.href = "/placed";
-          console.log("Success:", response);
-        
-      })
-  
-}
+        window.location.href = "/placed";
+        console.log("Success:", response);
+      });
+  };
 
   console.log(cart.length, "order");
 
@@ -258,8 +254,8 @@ console.log(Data);
                         const time = `${hour
                           .toString()
                           .padStart(2, "0")}:${minute
-                            .toString()
-                            .padStart(2, "0")}`;
+                          .toString()
+                          .padStart(2, "0")}`;
                         const period = hour < 12 ? "AM" : "PM";
                         return (
                           <option key={time} value={time}>
@@ -352,7 +348,7 @@ console.log(Data);
             />
           </div>
         </div>
-        <ScrollToTop smooth  color="black" height="10px" className="scroll" />
+        <ScrollToTop smooth color="black" height="10px" className="scroll" />
         <div className="home-container yes">
           <SocialLogin />
         </div>

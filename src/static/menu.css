@@ -174,8 +174,8 @@ input:focus {
   align-items: center;
 }
 
-.menu-item p{
-  margin:5px;
+.menu-item p {
+  margin: 5px;
 }
 
 /* Style for the first menu item */
@@ -189,7 +189,7 @@ input:focus {
     7
   ); /* Set the background color for the first item */
   color: white; /* Set the text color for the first item */
- /* text-align: justify; */
+  /* text-align: justify; */
 }
 
 /* Hover effect for menu items */
@@ -263,11 +263,11 @@ input:focus {
   display: flex;
   gap: 5px;
   flex-direction: row;
+  padding: "15px";
 }
 .drink-dropdown,
 .food-dropdown {
   width: 100%;
-  margin-top: 15px;
 }
 
 .drink-dropdown select,
@@ -284,12 +284,14 @@ input:focus {
 }
 
 .price-cart {
-  margin-left: 2px;
+  margin-left: 15px;
   margin-right: 2px;
 }
 
 .icon-del {
   border: none;
+  background-color: white;
+  margin-left: 10px;
 }
 
 .order-button {
@@ -425,12 +427,12 @@ h4 {
   display: none;
 }
 
-.scroll{
+.scroll {
   background-color: orange !important;
 }
 
-.btn{
-  bottom:0;
+.btn {
+  bottom: 0;
   position: fixed;
   right: 0;
 }
@@ -471,9 +473,9 @@ h4 {
     flex-direction: column;
     justify-content: space-between;
   }
-  .scroll{
+  .scroll {
     margin-bottom: 25px;
-    right:5px !important;
+    right: 5px !important;
     background-color: orange !important;
   }
 

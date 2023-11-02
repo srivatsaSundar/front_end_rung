@@ -60,10 +60,10 @@ function Cart(props: ICart) {
                 +
               </button>
               <span className="price-cart">
-                {calculateItemPrice(item) * item.quantity}/- CHF
+                {(calculateItemPrice(item) * item.quantity).toFixed(2)}/- CHF
               </span>
               <button className="icon-del" onClick={() => deleteFromCart(item)}>
-                <Icofont icon="icofont-bin" size="1" />
+                <Icofont icon="icofont-bin" size="" />
               </button>
             </div>
           </li>
@@ -71,15 +71,27 @@ function Cart(props: ICart) {
       </ul>
       {calculateTotalPrice() > 0 && (
         <div>
-          <p>
-            {translations.totalLabel} {calculateTotalPrice()}/- CHF
-          </p>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              margin: "0px 18px",
+            }}
+          >
+            <p>{translations.totalLabel}</p>
+            <p style={{ float: "right" }}>
+              {calculateTotalPrice().toFixed(2)}/- CHF
+            </p>
+          </div>
           {calculateTotalPrice() < 40 && (
-            <p>{translations.minimumOrderMessage} </p>
+            <p style={{ marginLeft: "15px", color: "rgb( 196, 61, 7 )" }}>
+              {translations.minimumOrderMessage}{" "}
+            </p>
           )}
         </div>
       )}
-      {calculateTotalPrice() >= 40 && !isMenu &&(
+      {calculateTotalPrice() >= 40 && !isMenu && (
         <Link style={{ textDecoration: "none" }} to="/order">
           <button className="order-button">{translations.orderButton}</button>
         </Link>
