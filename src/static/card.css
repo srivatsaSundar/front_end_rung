@@ -56,42 +56,61 @@
 }
 
 .yes-1 {
-  background: linear-gradient(to right, #1a0606, #b59161);
+  background-image: url(../images/rung.jpg);
+  background: linear-gradient(
+      to right,
+      rgba(182, 21, 26, 0.918),
+      rgba(230, 152, 50, 0.856)
+    ),
+    url(../images/rung.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
 }
 
 @media only screen and (max-width: 600px) {
   /*mobile*/
   .yes-1 {
-    background: linear-gradient(to right, #c91618, #b59161);
+    background-image: url(../images/rung.jpg);
+    background: linear-gradient(
+        to right,
+        rgba(182, 21, 26, 0.918),
+        rgba(230, 152, 50, 0.863)
+      ),
+      url(../images/rung.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     width: inherit;
     height: auto;
     overflow-x: hidden;
   }
 }
 
-@media only screen and (min-width: 600px) {
-  /*tab*/
+/*tab*/
+/* @media only screen and (min-width: 600px) {
   .yes-1 {
     background: linear-gradient(to right, #c91618, #b59161);
-    width: inherit;
+    width: auto;
     height: auto;
   }
-}
+} */
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
+/* @media only screen and (min-width: 992px) {
   .yes-1 {
     background: linear-gradient(to right, #c91618, #b59161);
     width: auto;
     height: auto;
   }
-}
+} */
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+/* @media only screen and (min-width: 1200px) {
   .yes-1 {
     background: linear-gradient(to right, #c91618, #b59161);
     width: auto;
     height: auto;
   }
-}
+} */
