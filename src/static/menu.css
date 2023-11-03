@@ -1,5 +1,15 @@
 .yes {
-  background: linear-gradient(to left, #c91618, #b59161);
+  background-image: url(../images/rung.jpg);
+  background: linear-gradient(
+      to right,
+      rgba(182, 21, 26, 0.918),
+      rgba(230, 152, 50, 0.856)
+    ),
+    url(../images/rung.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100%;
 }
 
 .up {
