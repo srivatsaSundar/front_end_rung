@@ -239,43 +239,49 @@ export function Menu(props: IMenu) {
     return price.toFixed(2);
   }
 
+  // Inside your Menu component
+  useEffect(() => {
+    // Initialize selected options when selectedItemName changes
+    if (selectedItemName && menu.length > 0) {
+      const currentItem = menu.find((item) => item.name === selectedItemName);
+      if (currentItem) {
+        setSelectedAddons((prevSelectedAddons) => ({
+          ...prevSelectedAddons,
+          [selectedItemName]: {
+            selectedDrink: currentItem.selectedDrink || "",
+            selectedFood: currentItem.selectedFood || "",
+          },
+        }));
+      }
+    }
+  }, [selectedItemName, menu]);
+
   function handleDrinkChange(event) {
     const selectedValue = event.target.value;
-    const updatedAddons = {
-      ...selectedAddons,
+    setSelectedAddons((prevSelectedAddons) => ({
+      ...prevSelectedAddons,
       [selectedItemName]: {
-        ...selectedAddons[selectedItemName],
+        ...prevSelectedAddons[selectedItemName],
         selectedDrink: selectedValue,
       },
-    };
-    setSelectedAddons(updatedAddons);
-
-    // Update the state when add-ons are selected
-    if (selectedValue) {
-      setIsAddOnSelected(true);
-    } else {
-      setIsAddOnSelected(false);
-    }
+    }));
+    setIsAddOnSelected(selectedValue || selectedAddons[selectedItemName].selectedFood);
   }
 
   function handleFoodChange(event) {
     const selectedValue = event.target.value;
-    const updatedAddons = {
-      ...selectedAddons,
+    setSelectedAddons((prevSelectedAddons) => ({
+      ...prevSelectedAddons,
       [selectedItemName]: {
-        ...selectedAddons[selectedItemName],
+        ...prevSelectedAddons[selectedItemName],
         selectedFood: selectedValue,
       },
-    };
-    setSelectedAddons(updatedAddons);
-
-    // Update the state when add-ons are selected
-    if (selectedValue) {
-      setIsAddOnSelected(true);
-    } else {
-      setIsAddOnSelected(false);
-    }
+    }));
+    setIsAddOnSelected(selectedAddons[selectedItemName].selectedDrink || selectedValue);
   }
+
+
+
 
   const addToCart = (item) => {
     const selectedDrink = selectedAddons[item.name]?.selectedDrink || null;
@@ -342,9 +348,8 @@ export function Menu(props: IMenu) {
         <div className="column1">
           {uniqueTitles.map((title, index) => (
             <div
-              className={`menu-item ${
-                index === selectedItemIndex ? "first" : ""
-              }`}
+              className={`menu-item ${index === selectedItemIndex ? "first" : ""
+                }`}
               key={index}
               onClick={() => {
                 setSelectedItemIndex(index);
@@ -408,9 +413,9 @@ export function Menu(props: IMenu) {
                       {add_on_drink.some(
                         (drink) => drink.menu.name === item.name,
                       ) ||
-                      add_on_food.some(
-                        (food) => food.menu.name === item.name,
-                      ) ? (
+                        add_on_food.some(
+                          (food) => food.menu.name === item.name,
+                        ) ? (
                         <button
                           onClick={() => handleAddOnClick(item.name)}
                           className="add-on-button"
@@ -503,41 +508,42 @@ export function Menu(props: IMenu) {
                             </div>
                             {(selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood) && (
-                              <div className="add-on-cost">
-                                <p>
-                                  {selectedAddons[item.name].selectedDrink &&
-                                  selectedAddons[item.name].selectedFood
-                                    ? calculateUpdateItemPrice(
+                                <div className="add-on-cost">
+                                  <p>
+                                    {selectedAddons[item.name].selectedDrink &&
+                                      selectedAddons[item.name].selectedFood
+                                      ? calculateUpdateItemPrice(
                                         item,
                                         selectedAddons[item.name].selectedDrink,
                                         selectedAddons[item.name].selectedFood,
                                       )
-                                    : selectedAddons[item.name].selectedDrink
-                                    ? calculateUpdateItemPrice(
-                                        item,
-                                        selectedAddons[item.name].selectedDrink,
-                                        null,
-                                      )
-                                    : calculateUpdateItemPrice(
-                                        item,
-                                        null,
-                                        selectedAddons[item.name].selectedFood,
-                                      )}
-                                  /- CHF
-                                </p>
-                              </div>
-                            )}
+                                      : selectedAddons[item.name].selectedDrink
+                                        ? calculateUpdateItemPrice(
+                                          item,
+                                          selectedAddons[item.name].selectedDrink,
+                                          null,
+                                        )
+                                        : calculateUpdateItemPrice(
+                                          item,
+                                          null,
+                                          selectedAddons[item.name].selectedFood,
+                                        )}
+                                    /- CHF
+                                  </p>
+                                </div>
+                              )}
                           </div>
                         )}
-                        {(selectedItemName === item.name && isAddOnSelected) ||
-                        !itemHasAddOns(item.name) ? (
+                        {isAddOnSelected && (
                           <button
                             className="add-button"
                             onClick={() => addToCart(item)}
                           >
                             <Icofont icon="icofont-bag" /> {translations.add}
                           </button>
-                        ) : null}
+                        )}
+
+
                       </div>
                     </div>
                   </div>
