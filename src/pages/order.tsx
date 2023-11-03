@@ -45,7 +45,7 @@ export function Order(props: IOrder) {
     const currentDate = new Date();
     const selectedDateTime = selectedDate ? new Date(selectedDate) : null;
     const selectedTimeElement = document.getElementById("selectedTime");
-  
+
     if (selectedDateTime && selectedTimeElement) {
       const selectedTime = (
         selectedTimeElement as HTMLSelectElement
@@ -53,7 +53,7 @@ export function Order(props: IOrder) {
       selectedDateTime.setHours(parseInt(selectedTime[0], 10));
       selectedDateTime.setMinutes(parseInt(selectedTime[1], 10));
     }
-  
+
     if (selectedDateTime && selectedDateTime > currentDate) {
       const importantFields = [
         { name: "name", label: translations.name },
@@ -62,7 +62,7 @@ export function Order(props: IOrder) {
         { name: "postcode", label: translations.postcode },
         { name: "city", label: translations.city },
       ];
-  
+
       const missingFields = importantFields.filter((field) => {
         const inputElement = document.querySelector(
           `[name=${field.name}]`,
@@ -70,18 +70,26 @@ export function Order(props: IOrder) {
         const value = inputElement ? inputElement.value : "";
         return value.trim() === "";
       });
-  
+
       if (missingFields.length === 0 && cart.length > 0) {
-        const formattedDate = `${selectedDateTime.getFullYear()}-${(selectedDateTime.getMonth() + 1).toString().padStart(2, '0')}-${selectedDateTime.getDate().toString().padStart(2, '0')}`;
-        
+        const formattedDate = `${selectedDateTime.getFullYear()}-${(
+          selectedDateTime.getMonth() + 1
+        )
+          .toString()
+          .padStart(2, "0")}-${selectedDateTime
+          .getDate()
+          .toString()
+          .padStart(2, "0")}`;
+
         // Map cart items to the format you want
         const cartItems = cart.map((cartItem) => ({
-
-item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ''}${cartItem.food ? ` + ${cartItem.food}` : ''}`,
+          item_name: `${cartItem.name}${
+            cartItem.drink ? ` + ${cartItem.drink}` : ""
+          }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
           quantity: cartItem.quantity,
           cost: cartItem.price, // You need to update this based on your cart structure
         }));
-  
+
         data = {
           person_name: (document.getElementById("name") as HTMLInputElement)
             ?.value,
@@ -99,9 +107,14 @@ item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ''}${car
           )?.value,
           delivery_option: orderType,
           delivery_date: formattedDate,
-          delivery_time: (document.getElementById('selectedTime') as HTMLInputElement)?.value,
-          remarks: (document.getElementById('remarks') as HTMLInputElement)?.value,
-          coupon_code: (document.getElementById('couponCode') as HTMLInputElement)?.value,
+          delivery_time: (
+            document.getElementById("selectedTime") as HTMLInputElement
+          )?.value,
+          remarks: (document.getElementById("remarks") as HTMLInputElement)
+            ?.value,
+          coupon_code: (
+            document.getElementById("couponCode") as HTMLInputElement
+          )?.value,
           cart: JSON.stringify(cartItems), // Include cart items in the order
           total_price: calculateTotalPrice(cart),
         };
@@ -113,7 +126,8 @@ item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ''}${car
         const missingFieldLabels = missingFields
           .map((field) => field.label)
           .join(", ");
-        const cartValidationMessage = cart.length === 0 ? "Your cart is empty." : "";
+        const cartValidationMessage =
+          cart.length === 0 ? "Your cart is empty." : "";
         const errorMessage = `${missingFieldLabels} ${cartValidationMessage}`;
         alert(`Please fill out the following fields: ${errorMessage}`);
       }
@@ -121,7 +135,6 @@ item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ''}${car
       alert("Please select a date and time in the future.");
     }
   };
-  
 
   console.log(Data, "Data");
   const sendOrderToBackend = (data) => {

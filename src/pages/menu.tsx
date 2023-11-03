@@ -191,7 +191,7 @@ export function Menu(props: IMenu) {
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
       return cart.reduce((total, item) => {
-        const basePrice = item.price.toFixed(2);
+        const basePrice = item.price;
         let price = basePrice;
 
         if (item.drink) {
@@ -209,7 +209,7 @@ export function Menu(props: IMenu) {
           }
         }
 
-        return total + price * item.quantity;
+        return (total + price).toFixed(2) * item.quantity;
       }, 0);
     } else {
       return 0;
@@ -217,7 +217,7 @@ export function Menu(props: IMenu) {
   };
 
   function calculateItemPrice(item) {
-    let price = item.price.toFixed(2);
+    let price = item.price;
 
     if (item.drink) {
       const selectedDrink = add_on_drink.find(
@@ -236,7 +236,7 @@ export function Menu(props: IMenu) {
       }
     }
 
-    return price;
+    return price.toFixed(2);
   }
 
   function handleDrinkChange(event) {
@@ -311,10 +311,10 @@ export function Menu(props: IMenu) {
     );
     const food = add_on_food.find((food) => food.food.name === selectedFood);
     return (
-      item.price.toFixed(2) +
+      item.price +
       (drink ? drink.drink.price : 0) +
       (food ? food.food.price : 0)
-    );
+    ).toFixed(2);
   }
 
   useEffect(() => {
@@ -501,21 +501,32 @@ export function Menu(props: IMenu) {
                                   ))}
                               </select>
                             </div>
-                            {selectedAddons[item.name].selectedDrink &&
-                              selectedAddons[item.name].selectedFood && (
-                                <div className="add-on-cost">
-                                  <p>
-                                    {calculateUpdateItemPrice(
-                                      item,
-                                      selectedAddons[item.name].selectedDrink ||
+                            {(selectedAddons[item.name].selectedDrink ||
+                              selectedAddons[item.name].selectedFood) && (
+                              <div className="add-on-cost">
+                                <p>
+                                  {selectedAddons[item.name].selectedDrink &&
+                                  selectedAddons[item.name].selectedFood
+                                    ? calculateUpdateItemPrice(
+                                        item,
+                                        selectedAddons[item.name].selectedDrink,
+                                        selectedAddons[item.name].selectedFood,
+                                      )
+                                    : selectedAddons[item.name].selectedDrink
+                                    ? calculateUpdateItemPrice(
+                                        item,
+                                        selectedAddons[item.name].selectedDrink,
                                         null,
-                                      selectedAddons[item.name].selectedFood ||
+                                      )
+                                    : calculateUpdateItemPrice(
+                                        item,
                                         null,
-                                    )}
-                                    /- CHF
-                                  </p>
-                                </div>
-                              )}
+                                        selectedAddons[item.name].selectedFood,
+                                      )}
+                                  /- CHF
+                                </p>
+                              </div>
+                            )}
                           </div>
                         )}
                         {(selectedItemName === item.name && isAddOnSelected) ||
