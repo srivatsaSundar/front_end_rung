@@ -342,7 +342,7 @@ export function Menu(props: IMenu) {
   return (
     <div>
       <div className="yes">
-        <AppNavbar />
+        <AppNavbar count={cart.length} />
       </div>
       <div className="menu-container">
         <div className="column1">
@@ -551,7 +551,7 @@ export function Menu(props: IMenu) {
           ))}
         </div>
 
-        <div className="column3" ref={column3Ref}>
+        <div ref={column3Ref} style={{ marginLeft: "5px", overflowY: "scroll", maxHeight: "100vh" }}>
           <Cart
             ref={column3Ref}
             cart={cart}
@@ -586,6 +586,6 @@ export function Menu(props: IMenu) {
       />
       <SocialLogin />
       <Footer />
-    </div>
+    </div >
   );
 }

@@ -20,7 +20,7 @@ export function Discount() {
       <div className="yes">
         <AppNavbar />
         <div
-          style={{ paddingTop: 10, paddingBottom: 10, marginTop: 20 }}
+          style={{ paddingTop: 20, paddingBottom: 10, marginTop: 20 }}
           className="up"
         >
           <h3

@@ -8,7 +8,7 @@ import translations_de from "../translations/translation_de.json";
 import Icofont from "react-icofont";
 import "../static/navbar.css";
 
-const AppNavbar = () => {
+const AppNavbar = ({ count }) => {
   const { selectedLanguage, changeLanguage } = useLanguage();
 
   const navLinkStyle = {
@@ -100,7 +100,27 @@ const AppNavbar = () => {
             Deutsch
           </option>
         </select>
-        <Icofont icon="icofont-bag" style={{ color: "white" }} size="1" />
+        <a href="menu#cart">
+          <div style={{ position: "relative", display: "inline-block" }}>
+            <Icofont icon="icofont-bag" style={{ color: "white", paddingLeft: "5px" }} size="1" />
+            {count > 0 && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "-12px",
+                  right: "-12px",
+                  background: "red",
+                  borderRadius: "50%",
+                  padding: "2px 7px",
+                  color: "white",
+                  fontSize: "12px",
+                }}
+              >
+                {count}
+              </div>
+            )}
+          </div>
+        </a>
       </div>
     </Navbar>
   );

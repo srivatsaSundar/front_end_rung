@@ -79,7 +79,7 @@
 .search-pin select {
   width: 380px;
   display: inline-block;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   padding: 10px;
   border-radius: 5px;
   border: none;
@@ -172,7 +172,7 @@ select {
   .icons-catch {
     display: flex;
     flex-direction: row;
-    margin-top: 70px;
+    margin-top: 90px;
   }
   .icons-catch li {
     margin-bottom: 10px;
@@ -212,7 +212,7 @@ select {
     height: 40px;
   }
   .search-td {
-    margin-left: 30px;
+    margin-left: 0px;
     padding-bottom: 10px;
     display: flex;
     flex-direction: column;

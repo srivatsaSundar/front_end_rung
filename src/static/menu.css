@@ -88,7 +88,7 @@
   padding: 5px; /* Add some spacing */
   border: 1px solid #ccc; /* Add a border for clarity */
   overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
-  height: 50vh;
+  height: auto;
   display: block;
 }
 
@@ -652,7 +652,8 @@ h4 {
     text-align: left;
     margin-bottom: 10px;
     font-size: 15px;
-    width: 330px;
+    width: 340px;
+    margin-left: 8px;
   }
   .column2 img {
     width: 320px;
@@ -660,7 +661,7 @@ h4 {
   }
   .contact-mess input {
     height: 150px;
-    width: 200px;
+    width: 330px;
   }
   .order-columns {
     display: flex;
