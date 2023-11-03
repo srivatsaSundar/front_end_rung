@@ -425,6 +425,7 @@ export function Menu(props: IMenu) {
                         </button>
                       ) : null}
 
+
                       <div>
                         {selectedItemName === item.name && (
                           <div
@@ -534,16 +535,14 @@ export function Menu(props: IMenu) {
                               )}
                           </div>
                         )}
-                        {isAddOnSelected && (
-                          <button
-                            className="add-button"
-                            onClick={() => addToCart(item)}
-                          >
-                            <Icofont icon="icofont-bag" /> {translations.add}
-                          </button>
-                        )}
-
-
+                        {(!itemHasAddOns(item.name) || (
+                          selectedItemName === item.name &&
+                          (selectedAddons[item.name].selectedDrink || selectedAddons[item.name].selectedFood)
+                        )) && (
+                            <button className="add-button" onClick={() => addToCart(item)}>
+                              <Icofont icon="icofont-bag" /> {translations.add}
+                            </button>
+                          )}
                       </div>
                     </div>
                   </div>
