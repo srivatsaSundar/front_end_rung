@@ -303,7 +303,6 @@ export function Menu(props: IMenu) {
   return (
     <div>
       <div className="yes">
-        <AppNavbar />
         <AppNavbar count={cart.length} />
       </div>
       <div className="menu-container">
