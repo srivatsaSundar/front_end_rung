@@ -1,10 +1,14 @@
 {
   "files": {
+<<<<<<< HEAD
     "main.css": "/static/css/main.e1f04a28.css",
     "main.js": "/static/js/main.6d3bf6df.js",
+=======
+    "main.css": "/static/css/main.99c80c5c.css",
+    "main.js": "/static/js/main.eb76ed5f.js",
+>>>>>>> parent of 816733d (Cors error)
     "static/js/787.94c44e5c.chunk.js": "/static/js/787.94c44e5c.chunk.js",
     "static/media/reservation_bg.jpg": "/static/media/reservation_bg.a4bbc08e2b361160c7fb.jpg",
-    "static/media/rung.jpg": "/static/media/rung.39b35cbbc3c26613576c.jpg",
     "static/media/soft.jpg": "/static/media/soft.fe01003ce6d67139e8bf.jpg",
     "static/media/fry.jpg": "/static/media/fry.1f962b3867c43834e45d.jpg",
     "static/media/rice.jpg": "/static/media/rice.8d59414c155837f94ee2.jpg",
@@ -22,6 +26,7 @@
     "static/media/soup.jpg": "/static/media/soup.24420bfc44596b42bd3f.jpg",
     "static/media/finger_food.jpg": "/static/media/finger_food.23ceff40211838e14ff4.jpg",
     "index.html": "/index.html",
+<<<<<<< HEAD
     "main.e1f04a28.css.map": "/static/css/main.e1f04a28.css.map",
     "main.6d3bf6df.js.map": "/static/js/main.6d3bf6df.js.map",
     "787.94c44e5c.chunk.js.map": "/static/js/787.94c44e5c.chunk.js.map"
@@ -29,5 +34,14 @@
   "entrypoints": [
     "static/css/main.e1f04a28.css",
     "static/js/main.6d3bf6df.js"
+=======
+    "main.99c80c5c.css.map": "/static/css/main.99c80c5c.css.map",
+    "main.eb76ed5f.js.map": "/static/js/main.eb76ed5f.js.map",
+    "787.94c44e5c.chunk.js.map": "/static/js/787.94c44e5c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.99c80c5c.css",
+    "static/js/main.eb76ed5f.js"
+>>>>>>> parent of 816733d (Cors error)
   ]
 }
