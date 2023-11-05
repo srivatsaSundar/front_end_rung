@@ -21,7 +21,6 @@ import rice from "../images/rice.jpg";
 import veg from "../images/veg.jpg";
 import Cart from "./cart";
 import ScrollToTop from "react-scroll-to-top";
-
 export interface MenuItem {
   id: number;
   name: string;
@@ -29,7 +28,6 @@ export interface MenuItem {
   quantity: number;
   amount: number;
 }
-
 interface IMenu {
   ref;
   removeFromCart;
@@ -45,10 +43,8 @@ interface IMenu {
   add_on_food;
   setAdd_on_food;
 }
-
 export function Menu(props: IMenu) {
   const { translations, deleteFromCart, removeFromCart, cart, setCart } = props;
-
   const column3Ref = useRef(null);
   const [selectValue, setSelectValue] = useState("DEFAULT");
   // const [cart, setCart] = useState<MenuItem[]>([]);
@@ -61,15 +57,8 @@ export function Menu(props: IMenu) {
   const [selectedItemName, setSelectedItemName] = useState<string | null>(null);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL = translations.url;
-
- // Replace the URL for fetching add_on_drink data
-const targetURL2 = " https://backend-rung.onrender.com/add_on_food";
-
-// Replace the URL for fetching add_on_food data
-const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
-
+  const targetURL2 = "https://backend-rung.onrender.com/add_on_drink";
   console.log(targetURL, { mode: "cors" }); //console
-
   useEffect(() => {
     fetch(targetURL)
       .then((response) => {
@@ -81,25 +70,20 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       .then((data) => setMenu(data))
       .catch((err) => console.log("error in fetching the menu", err));
   }, [targetURL]);
-
-
   const uniqueTitles: string[] = Array.from(
     new Set(menu.map((item) => item.title_name)),
   );
   uniqueTitlesRef.current = uniqueTitles.map(
     (_, index) => uniqueTitlesRef.current[index] as HTMLDivElement,
   );
-
   function itemHasAddOns(itemName) {
     return (
       add_on_drink.some((drink) => drink.menu.name === itemName) ||
       add_on_food.some((food) => food.menu.name === itemName)
     );
   }
-
   console.log(uniqueTitles); //console
   console.log("menu", menu);
-
   const titleImageUrls = {
     "Popular Dishes": Popular,
     "Delicious Asia Wok": asiawok,
@@ -121,7 +105,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
     "Alkoholische Getränke": drink,
     "Alkoholfreie Getränke": soft,
   };
-
   function scrollToTitle(index) {
     const element = uniqueTitlesRef.current[index];
     console.log(uniqueTitles);
@@ -129,7 +112,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       element.scrollIntoView({ behavior: "smooth" });
     }
   }
-
   useEffect(() => {
     fetch(targetURL2, { mode: "cors" })
       .then((response) => {
@@ -141,10 +123,8 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       .then((data) => setAdd_on_drink(data))
       .catch((err) => console.log("error in fetching add_on_drink", err));
   }, [setMenu]);
-
   console.log(add_on_drink); //console
-
-
+  const targetURL3 = "https://backend-rung.onrender.com/add_on_food";
   useEffect(() => {
     fetch(targetURL3, { mode: "cors" })
       .then((response) => {
@@ -156,7 +136,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       .then((data) => setAdd_on_food(data))
       .catch((err) => console.log("error in fetching add_on_food", err));
   }, [setMenu]);
-
   function handleAddOnClick(itemName) {
     if (selectedItemName === itemName) {
       // If the add-on options are already open, close them
@@ -165,7 +144,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       // If the add-on options are closed, open them
       setSelectedItemName(itemName);
     }
-
     // You can also add your existing code here to initialize selectedAddons if it doesn't exist
     if (!selectedAddons[itemName]) {
       setSelectedAddons({
@@ -177,7 +155,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       });
     }
   }
-
   function increaseQuantity(item) {
     const existingItemIndex = cart.findIndex(
       (cartItem) =>
@@ -185,20 +162,17 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
         cartItem.drink === item.drink &&
         cartItem.food === item.food,
     );
-
     if (existingItemIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart[existingItemIndex].quantity += 1;
       setCart(updatedCart);
     }
   }
-
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
       return cart.reduce((total, item) => {
         const basePrice = item.price;
         let price = basePrice;
-
         if (item.drink) {
           const drink = add_on_drink.find(
             (drink) => drink.drink.name === item.drink,
@@ -213,17 +187,14 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
             price += food.food.price;
           }
         }
-
         return (total + price).toFixed(2) * item.quantity;
       }, 0);
     } else {
       return 0;
     }
   };
-
   function calculateItemPrice(item) {
     let price = item.price;
-
     if (item.drink) {
       const selectedDrink = add_on_drink.find(
         (drink) => drink.drink.name === item.drink,
@@ -240,10 +211,8 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
         price += selectedFood.food.price;
       }
     }
-
     return price.toFixed(2);
   }
-
   // Inside your Menu component
   useEffect(() => {
     // Initialize selected options when selectedItemName changes
@@ -260,7 +229,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       }
     }
   }, [selectedItemName, menu]);
-
   function handleDrinkChange(event) {
     const selectedValue = event.target.value;
     setSelectedAddons((prevSelectedAddons) => ({
@@ -272,7 +240,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
     }));
     setIsAddOnSelected(selectedValue || selectedAddons[selectedItemName].selectedFood);
   }
-
   function handleFoodChange(event) {
     const selectedValue = event.target.value;
     setSelectedAddons((prevSelectedAddons) => ({
@@ -284,21 +251,15 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
     }));
     setIsAddOnSelected(selectedAddons[selectedItemName].selectedDrink || selectedValue);
   }
-
-
-
-
   const addToCart = (item) => {
     const selectedDrink = selectedAddons[item.name]?.selectedDrink || null;
     const selectedFood = selectedAddons[item.name]?.selectedFood || null;
-
     const existingItemIndex = cart.findIndex(
       (cartItem) =>
         cartItem.id === item.id &&
         cartItem.drink === selectedDrink &&
         cartItem.food === selectedFood,
     );
-
     if (existingItemIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart[existingItemIndex].quantity += 1;
@@ -315,7 +276,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       ]);
     }
   };
-
   function calculateUpdateItemPrice(item, selectedDrink, selectedFood) {
     const drink = add_on_drink.find(
       (drink) => drink.drink.name === selectedDrink,
@@ -327,26 +287,23 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       (food ? food.food.price : 0)
     ).toFixed(2);
   }
-
   useEffect(() => {
     setSelectValue("DEFAULT");
   }, [selectedItemIndex]);
-
   const scrollToColumn3 = () => {
     if (column3Ref.current) {
       console.log("Scrolling to column3");
       column3Ref.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-
   const scrollToDiv = () => {
     const scrollableDiv = document.getElementById("scrollableDiv");
     scrollableDiv?.scrollIntoView({ behavior: "smooth" });
   };
-
   return (
     <div>
       <div className="yes">
+        <AppNavbar />
         <AppNavbar count={cart.length} />
       </div>
       <div className="menu-container">
@@ -414,7 +371,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
                         <b>{item.description_1}</b>
                       </p>
                       <p className="card-textMenu">{item.description_2}</p>
-
                       {add_on_drink.some(
                         (drink) => drink.menu.name === item.name,
                       ) ||
@@ -429,8 +385,6 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
                           + {translations.addon}
                         </button>
                       ) : null}
-
-
                       <div>
                         {selectedItemName === item.name && (
                           <div
@@ -556,6 +510,7 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
           ))}
         </div>
 
+        <div className="column3" ref={column3Ref}>
         <div ref={column3Ref} style={{ marginLeft: "5px", overflowY: "scroll", maxHeight: "100vh" }}>
           <Cart
             ref={column3Ref}
@@ -591,6 +546,7 @@ const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
       />
       <SocialLogin />
       <Footer />
+    </div>
     </div >
   );
 }
