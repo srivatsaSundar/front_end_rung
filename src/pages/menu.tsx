@@ -62,7 +62,12 @@ export function Menu(props: IMenu) {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL = translations.url;
 
-  const targetURL2 = "https://backend-rung.onrender.com/add_on_drink";
+ // Replace the URL for fetching add_on_drink data
+const targetURL2 = "/api/getAddOnDrinkData";
+
+// Replace the URL for fetching add_on_food data
+const targetURL3 = "/api/getAddOnFoodData";
+
   console.log(targetURL, { mode: "cors" }); //console
 
   useEffect(() => {
@@ -148,7 +153,6 @@ export function Menu(props: IMenu) {
 
   console.log(add_on_drink); //console
 
-  const targetURL3 = "https://backend-rung.onrender.com/add_on_food";
 
   useEffect(() => {
     async function fetchAddOnFoodData() {
