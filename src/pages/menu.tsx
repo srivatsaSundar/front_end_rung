@@ -66,15 +66,20 @@ export function Menu(props: IMenu) {
   console.log(targetURL, { mode: "cors" }); //console
 
   useEffect(() => {
-    fetch(targetURL)
-      .then((response) => {
+    async function fetchMenuData() {
+      try {
+        const response = await fetch(targetURL);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.json();
-      })
-      .then((data) => setMenu(data))
-      .catch((err) => console.log("error in fetching the menu", err));
+        const data = await response.json();
+        setMenu(data);
+      } catch (error) {
+        console.log("Error in fetching the menu", error);
+      }
+    }
+
+    fetchMenuData();
   }, [targetURL]);
 
   const uniqueTitles: string[] = Array.from(
@@ -125,15 +130,20 @@ export function Menu(props: IMenu) {
   }
 
   useEffect(() => {
-    fetch(targetURL2, { mode: "cors" })
-      .then((response) => {
+    async function fetchAddOnDrinkData() {
+      try {
+        const response = await fetch(targetURL2, { mode: "cors" });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.json();
-      })
-      .then((data) => setAdd_on_drink(data))
-      .catch((err) => console.log("error in fetching add_on_drink", err));
+        const data = await response.json();
+        setAdd_on_drink(data);
+      } catch (error) {
+        console.log("Error in fetching add_on_drink", error);
+      }
+    }
+
+    fetchAddOnDrinkData();
   }, [setMenu]);
 
   console.log(add_on_drink); //console
@@ -141,15 +151,20 @@ export function Menu(props: IMenu) {
   const targetURL3 = "https://backend-rung.onrender.com/add_on_food";
 
   useEffect(() => {
-    fetch(targetURL3, { mode: "cors" })
-      .then((response) => {
+    async function fetchAddOnFoodData() {
+      try {
+        const response = await fetch(targetURL3, { mode: "cors" });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        return response.json();
-      })
-      .then((data) => setAdd_on_food(data))
-      .catch((err) => console.log("error in fetching add_on_food", err));
+        const data = await response.json();
+        setAdd_on_food(data);
+      } catch (error) {
+        console.log("Error in fetching add_on_food", error);
+      }
+    }
+
+    fetchAddOnFoodData();
   }, [setMenu]);
 
   function handleAddOnClick(itemName) {
