@@ -63,10 +63,10 @@ export function Menu(props: IMenu) {
   const targetURL = translations.url;
 
  // Replace the URL for fetching add_on_drink data
-const targetURL2 = "/api/getAddOnDrinkData";
+const targetURL2 = " https://backend-rung.onrender.com/add_on_food";
 
 // Replace the URL for fetching add_on_food data
-const targetURL3 = "/api/getAddOnFoodData";
+const targetURL3 = " https://backend-rung.onrender.com/add_on_drink";
 
   console.log(targetURL, { mode: "cors" }); //console
 
@@ -86,6 +86,7 @@ const targetURL3 = "/api/getAddOnFoodData";
 
     fetchMenuData();
   }, [targetURL]);
+
 
   const uniqueTitles: string[] = Array.from(
     new Set(menu.map((item) => item.title_name)),
