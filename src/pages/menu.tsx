@@ -440,7 +440,7 @@ export function Menu(props: IMenu) {
                             }}
                           >
                             <br></br>
-                            <div className="drink-dropdown">
+                            {/* <div className="drink-dropdown">
                               <select
                                 onChange={handleDrinkChange}
                                 value={
@@ -471,7 +471,7 @@ export function Menu(props: IMenu) {
                                     </option>
                                   ))}
                               </select>
-                            </div>
+                            </div> */}
                             <div
                               className="food-dropdown"
                               style={{ backgroundColor: "#efefef" }}
@@ -509,7 +509,7 @@ export function Menu(props: IMenu) {
                             </div>
                             {(selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood) && (
-                                <div className="add-on-cost">
+                                <div className="add-on-cost"  >
                                   <p>
                                     {selectedAddons[item.name].selectedDrink &&
                                       selectedAddons[item.name].selectedFood

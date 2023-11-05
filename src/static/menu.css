@@ -280,10 +280,16 @@ input:focus {
   gap: 5px;
   flex-direction: row;
   padding: "15px";
+  justify-content: space-evenly;
 }
 .drink-dropdown,
 .food-dropdown {
-  width: 100%;
+  width: 80%;
+  float: left;
+}
+
+.add-on-cost {
+  text-align: right;
 }
 
 .drink-dropdown select,
@@ -460,6 +466,11 @@ h4 {
     overflow-x: hidden;
     justify-content: space-between;
   }
+
+  .add-on-cost {
+    line-height: 2;
+  }
+
   .yes-order {
     background: linear-gradient(to left, #c91618, #b59161);
     margin: 20px;
@@ -488,6 +499,11 @@ h4 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .drink-dropdown,
+  .food-dropdown {
+    width: 60%;
   }
   .scroll {
     margin-bottom: 25px;
@@ -603,7 +619,7 @@ h4 {
   }
   .column3 {
     flex: 0 0 25%; /* Set the width of Column 3 to 25% */
-    margin-left: 6px; /* Add a 5px margin to the left of Column 3 */
+    margin-left: 0px; /* Add a 5px margin to the left of Column 3 */
     padding: 5px; /* Add some spacing */
     border: 1px solid #ccc; /* Add a border for clarity */
     overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
@@ -660,7 +676,7 @@ h4 {
     margin-bottom: 10px;
     font-size: 15px;
     /* width: 340px; */
-    margin-left: 8px;
+    /* margin-left: 8px; */
   }
   .column2 img {
     width: 320px;
