@@ -24,6 +24,8 @@
 
 .title-Discount {
   text-align: center;
+  padding-top: 20px;
+  margin-left: 12px;
 }
 
 .reservation {
@@ -564,7 +566,7 @@ h4 {
     text-align: center;
     background: rgba(0, 0, 0, 0.35);
     width: 350px;
-    margin-left: 12px;
+    margin-left: 24px;
     font-family: italic;
   }
   .title-Discount {

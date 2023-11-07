@@ -38,7 +38,7 @@ export function Discount() {
         </div>
       </div>
       <div className="title-Discount">
-        <h1 style={{ padding: 20, marginLeft: 10 }}>{translations.discount}</h1>
+        <h1 style={{ padding: 20 }}>{translations.discount}</h1>
         <hr></hr>
       </div>
       <div className="home-container yes">
