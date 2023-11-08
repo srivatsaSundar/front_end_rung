@@ -100,7 +100,7 @@ function Cart(props: ICart) {
         <Link style={{ textDecoration: "none" }} to="/menu">
           <button
             className="order-button"
-            style={{ marginTop: "10px", width: "280px" }}
+            style={{ marginTop: "10px" }}
           >
             {translations.backToMenuButton}
           </button>
