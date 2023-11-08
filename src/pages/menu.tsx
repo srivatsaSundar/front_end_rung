@@ -401,7 +401,7 @@ export function Menu(props: IMenu) {
                     <div className="card-bodyMenu">
                       <div className="card-nameMenu">
                         <h5 className="card-titleMenu">{item.name}</h5>
-                        <p className="card-titleMenu price">
+                        <p className="card-titleMenuprice">
                           {item.price.toFixed(2)}/- CHF
                         </p>
                       </div>
