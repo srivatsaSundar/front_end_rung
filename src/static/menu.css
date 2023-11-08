@@ -39,8 +39,10 @@
 }
 
 .contact-form {
-  width: 650px;
-  margin-left: 330px;
+  /* width: 650px; */
+  /* margin-left: 330px; */
+  display: flex;
+  justify-content: center;
 }
 
 .menu-container {
@@ -147,10 +149,13 @@ input:focus {
 .cardMenu {
   margin-bottom: 10px;
   border: 1px solid #ccc;
-
   border-radius: 5px;
   padding: 10px;
   padding-bottom: 45px;
+}
+
+.cardMenu:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
 .card-titleMenu {
@@ -222,6 +227,9 @@ input:focus {
   padding: 5px 10px;
   margin-right: 5px;
   cursor: pointer;
+}
+.add-button:hover {
+  color: darkorange;
 }
 
 /* Style for the "Add" button */
@@ -395,6 +403,11 @@ input:focus {
   border: 1px solid #ccc;
   padding: 5px;
   width: 400px;
+}
+
+.column2 img {
+  width: 650px;
+  height: 150px;
 }
 
 .rem input {
@@ -580,6 +593,8 @@ h4 {
     margin-left: 0px;
     align-items: center;
     font-family: italic;
+    display: flex;
+    align-items: center;
   }
   .title-Discount {
     text-align: center;
@@ -598,7 +613,7 @@ h4 {
     border: #fff 1px solid;
     border-radius: 3px;
     padding: 10px;
-    margin-left: 15px;
+    margin-left: 0px;
     margin-top: 10px;
   }
   .contact-form {
@@ -693,7 +708,8 @@ h4 {
     /* margin-left: 8px; */
   }
   .column2 img {
-    width: 320px;
+    width: 100%;
+    overflow-x: hidden;
     height: 130px;
   }
   .contact-mess input {
