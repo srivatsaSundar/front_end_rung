@@ -143,7 +143,7 @@
 }
 
 input:focus {
-  color: rgb(196, 80, 7);
+  color: #fff;
 }
 /* Menu.css */
 .cardMenu {
@@ -628,6 +628,7 @@ h4 {
     padding: 10px;
     margin-left: 0px;
     margin-top: 10px;
+    color: #fff;
   }
   .contact-form {
     width: inherit;
