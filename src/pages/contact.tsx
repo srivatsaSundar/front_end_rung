@@ -18,10 +18,10 @@ export function Contact() {
 
   return (
     <div>
-      <div style={{ fontSize: 16, marginBottom: 10 }} className="yes">
+      <div style={{ fontSize: 16 }} className="yes">
         <AppNavbar />
         <div
-          style={{ paddingTop: 20, paddingBottom: 20, marginTop: 30 }}
+          style={{ paddingTop: 20, paddingBottom: 20, marginTop: 30}}
           className="up"
         >
           <h3
@@ -41,7 +41,7 @@ export function Contact() {
       <div className="reservation">
         <h1>{translations.contact}</h1>
         <div className="contact-form">
-          <form>
+          <form >
             <div className="name-email">
               <input
                 type="text"
@@ -64,11 +64,7 @@ export function Contact() {
                   placeholder={translations.formMessagePlaceholder}
                 />
               </div>
-              <input
-                type="text"
-                placeholder={translations.formCaptchaPlaceholder}
-              />
-              <br></br>
+             
             </div>
             <button className="search-b">
               {" "}
