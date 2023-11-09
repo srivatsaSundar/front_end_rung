@@ -276,15 +276,15 @@ export function Order(props: IOrder) {
                       name="selectedTime"
                       required
                     >
-                      {Array.from({ length: 33 }, (_, i) => {
-                        const hour = 11 + Math.floor(i / 4);
+                      {Array.from({ length: 18}, (_, i) => {
+                        const hour = 6 + Math.floor(i / 4);
                         const minute = (i % 4) * 15;
                         const time = `${hour
                           .toString()
                           .padStart(2, "0")}:${minute
                           .toString()
                           .padStart(2, "0")}`;
-                        const period = hour < 12 ? "AM" : "PM";
+                        const period = "PM";
                         return (
                           <option key={time} value={time}>
                             {time} {period}
@@ -300,9 +300,14 @@ export function Order(props: IOrder) {
                       name="selectedTime"
                       required
                     >
-                      {Array.from({ length: 12 }, (_, i) => {
-                        const hour = 18 + i;
-                        const time = `${hour.toString().padStart(2, "0")}:00`;
+                      {Array.from({ length: 18 }, (_, i) => {
+                        const hour = 6 + Math.floor(i / 4);
+                        const minute = (i % 4) * 15;
+                        const time = `${hour
+                          .toString()
+                          .padStart(2, "0")}:${minute
+                          .toString()
+                          .padStart(2, "0")}`;
                         const period = "PM";
                         return (
                           <option key={time} value={time}>
