@@ -93,14 +93,14 @@ function Cart(props: ICart) {
       )}
       {calculateTotalPrice() >= 40 && !isMenu && (
         <Link style={{ textDecoration: "none" }} to="/order">
-          <button className="order-button">{translations.orderButton}</button>
+          <button className="order-button" style={{ width: "320px" }}>{translations.orderButton}</button>
         </Link>
       )}
       {isMenu && (
         <Link style={{ textDecoration: "none" }} to="/menu">
           <button
             className="order-button"
-            style={{ marginTop: "10px", width: "280px" }}
+            style={{ marginTop: "10px" }}
           >
             {translations.backToMenuButton}
           </button>

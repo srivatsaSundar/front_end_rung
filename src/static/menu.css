@@ -335,7 +335,7 @@ input:focus {
   float: left;
   height: 50px;
   align-items: center;
-  width: 280px;
+  width: 260px;
 }
 
 .yes-order {
@@ -344,6 +344,7 @@ input:focus {
   padding: 20px;
   color: #fff;
   border-radius: 5px;
+  align-items: center;
 }
 
 .search-button-pay {
@@ -365,11 +366,11 @@ input:focus {
   justify-content: space-between;
 }
 
-.yes-order {
+/* .yes-order {
   width: 75%;
   padding-left: 40px;
   padding-right: 40px;
-}
+} */
 
 .order-cart {
   width: 25%;
@@ -390,6 +391,7 @@ input:focus {
   border-radius: 5px;
   border: 1px solid #ccc;
   padding: 5px;
+  margin-right: 5px;
 }
 
 .code button {
@@ -482,6 +484,10 @@ h4 {
     justify-content: space-between;
   }
 
+  .search-button-pay {
+    width: 280px;
+  }
+
   .card-titleMenu {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
@@ -498,12 +504,20 @@ h4 {
 
   .yes-order {
     background: linear-gradient(to left, #c91618, #b59161);
-    margin: 20px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 20px;
     color: #fff;
     border-radius: 5px;
-    width: 340px;
+    width: 320px;
   }
+  .order-cart {
+    width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+  }
+
   .order-button {
     background: rgb(196, 80, 7);
     color: white;
@@ -513,8 +527,7 @@ h4 {
     float: left;
     height: 50px;
     align-items: center;
-    width: 280px;
-    margin-left: 30px;
+    width: 309px;
   }
   .search-time-yes {
     padding-right: 140px;
@@ -545,20 +558,20 @@ h4 {
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 5px;
-    width: 300px;
+    width: 280px;
   }
 
   .address input {
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 5px;
-    width: 300px;
+    width: 280px;
   }
   .rem input {
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 5px;
-    width: 300px;
+    width: 280px;
     height: 150px;
   }
 
@@ -579,11 +592,11 @@ h4 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-right: 200px;
+    margin-right: 0px;
   }
   .address-2 input,
   .address-2 select {
-    width: 300px;
+    width: 280px;
   }
   .up {
     text-align: center;
