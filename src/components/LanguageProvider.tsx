@@ -4,7 +4,7 @@ import React, { createContext, useContext, useState } from "react";
 const LanguageContext = createContext(null);
 
 export function LanguageProvider({ children }) {
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [selectedLanguage, setSelectedLanguage] = useState("de");
 
   const changeLanguage = (newLanguage) => {
     setSelectedLanguage(newLanguage);

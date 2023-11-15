@@ -39,7 +39,7 @@ const AppNavbar = ({ count }) => {
   };
 
   const translations =
-    selectedLanguage === "en" ? translations_en : translations_de;
+  selectedLanguage === "de" ? translations_de : translations_en;
 
   return (
     <Navbar expand="lg">

@@ -11,7 +11,7 @@ export function Footer() {
 
   // Define translations based on the selected language
   const translations =
-    selectedLanguage === "en" ? translations_en : translations_de;
+  selectedLanguage === "de" ? translations_de : translations_en;
 
   return (
     <div className="footer-container">
