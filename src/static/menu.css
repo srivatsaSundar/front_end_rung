@@ -91,9 +91,10 @@
   margin-left: 1px; /* Add a 5px margin to the left of Column 3 */
   padding: 5px; /* Add some spacing */
   border: 1px solid #ccc; /* Add a border for clarity */
-  overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
+  overflow-y: scroll; /* Allow Column 3 to scroll if content exceeds its height */
   height: auto;
   display: block;
+  max-height: 100vh;
 }
 
 .title-cart {
@@ -665,11 +666,12 @@ h4 {
     margin-left: 0px; /* Add a 5px margin to the left of Column 3 */
     padding: 5px; /* Add some spacing */
     border: 1px solid #ccc; /* Add a border for clarity */
-    overflow-y: hidden; /* Allow Column 3 to scroll if content exceeds its height */
+    overflow-y: scroll; /* Allow Column 3 to scroll if content exceeds its height */
     height: 43vh;
     display: block;
     /* width: 340px; */
     margin-bottom: 10px;
+    overflow-x: hidden;
   }
 
   .mobile-dropdown,
