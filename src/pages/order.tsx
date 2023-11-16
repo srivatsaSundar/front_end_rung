@@ -276,7 +276,7 @@ export function Order(props: IOrder) {
                       name="selectedTime"
                       required
                     >
-                      {Array.from({ length: 13}, (_, i) => {
+                      {Array.from({ length: 13 }, (_, i) => {
                         const hour = 6 + Math.floor(i / 4);
                         const minute = (i % 4) * 15;
                         const time = `${hour

@@ -39,7 +39,7 @@ const AppNavbar = ({ count }) => {
   };
 
   const translations =
-  selectedLanguage === "de" ? translations_de : translations_en;
+    selectedLanguage === "de" ? translations_de : translations_en;
 
   return (
     <Navbar expand="lg">
@@ -102,7 +102,11 @@ const AppNavbar = ({ count }) => {
         </select>
         <a href="menu#cart">
           <div style={{ position: "relative", display: "inline-block" }}>
-            <Icofont icon="icofont-bag" style={{ color: "white", paddingLeft: "5px" }} size="1" />
+            <Icofont
+              icon="icofont-bag"
+              style={{ color: "white", paddingLeft: "5px" }}
+              size="1"
+            />
             {count > 0 && (
               <div
                 style={{

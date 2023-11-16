@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icofont from "react-icofont";
 import "../static/citysearch.css";
 import DatePicker from "react-datepicker";
@@ -8,6 +8,7 @@ import { useLanguage } from "./LanguageProvider"; // Import the useLanguage hook
 import translations_en from "../translations/translation_en.json"; // Import English translations
 import translations_de from "../translations/translation_de.json"; // Import German translations
 import lines from "../images/lines.png";
+import { DateTime } from "luxon";
 
 function CitySearch() {
   const navigate = useNavigate();
@@ -16,6 +17,20 @@ function CitySearch() {
   const [pincode, setPincode] = useState("");
   const [error, setError] = useState(null);
   const { selectedLanguage } = useLanguage(); // Access the selected language
+  const [currentTime, setCurrentTime] = useState(DateTime.local());
+
+  console.log(currentTime.hour)
+
+  useEffect(() => {
+    // Update the current time every minute
+    const interval = setInterval(() => {
+      setCurrentTime(DateTime.local());
+      console.log(currentTime.hour)
+    }, 60000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, [currentTime]);
 
   // Define translations based on the selected language
   const translations =
@@ -144,6 +159,24 @@ function CitySearch() {
           ) : null}
         </div>
       </div>
+      <div>
+        {(currentTime.hour >= 18 && currentTime.hour < 21) ? (
+          ""
+        ) : (
+          <div
+            className="closed"
+            style={{
+              textAlign: "center",
+              fontSize: "30px",
+              marginBottom: "20px",
+              fontWeight: "600",
+            }}
+          >
+            Closed
+          </div>
+        )}
+      </div>
+
       <div>
         <ul className="icons-catch">
           <div className="list-item">
