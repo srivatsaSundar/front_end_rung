@@ -421,7 +421,7 @@ export function Menu(props: IMenu) {
                       <p className="card-textMenu">{item.description_2}</p>
 
                       {add_on_food.some((food) => {
-                        const menuName = selectedLanguage === "english" ? food.menu.name : food.menu_germen.name;
+                        const menuName = selectedLanguage === "en" ? food.menu.name : food.menu_germen.name;
                         return menuName === item.name;
                       }) ? (
                         <button
