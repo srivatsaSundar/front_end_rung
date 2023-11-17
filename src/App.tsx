@@ -147,6 +147,7 @@ function App() {
                 setAdd_on_drink={setAdd_on_drink}
                 add_on_food={add_on_food}
                 setAdd_on_food={setAdd_on_food}
+                selectedLanguage={selectedLanguage}
               />
             }
           />

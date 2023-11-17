@@ -19,13 +19,13 @@ function CitySearch() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
   const [currentTime, setCurrentTime] = useState(DateTime.local());
 
-  console.log(currentTime.hour)
+  console.log(currentTime.hour);
 
   useEffect(() => {
     // Update the current time every minute
     const interval = setInterval(() => {
       setCurrentTime(DateTime.local());
-      console.log(currentTime.hour)
+      console.log(currentTime.hour);
     }, 60000);
 
     // Cleanup interval on component unmount
@@ -160,7 +160,7 @@ function CitySearch() {
         </div>
       </div>
       <div>
-        {(currentTime.hour >= 18 && currentTime.hour < 21) ? (
+        {currentTime.hour >= 18 && currentTime.hour < 21 ? (
           ""
         ) : (
           <div
