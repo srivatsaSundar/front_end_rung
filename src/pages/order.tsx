@@ -77,15 +77,14 @@ export function Order(props: IOrder) {
         )
           .toString()
           .padStart(2, "0")}-${selectedDateTime
-          .getDate()
-          .toString()
-          .padStart(2, "0")}`;
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`;
 
         // Map cart items to the format you want
         const cartItems = cart.map((cartItem) => ({
-          item_name: `${cartItem.name}${
-            cartItem.drink ? ` + ${cartItem.drink}` : ""
-          }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+          item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
+            }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
           quantity: cartItem.quantity,
           cost: cartItem.price, // You need to update this based on your cart structure
         }));
@@ -159,7 +158,7 @@ export function Order(props: IOrder) {
         <div className="order-columns">
           <div className="yes-order">
             <h1>{translations.readyToEat}</h1>
-            <h4>{translations.deliveryLocation}</h4>
+            <h4>{translations.contactInformation}</h4>
             <hr />
             <form id="order-form">
               <div className="address">
@@ -200,7 +199,7 @@ export function Order(props: IOrder) {
                   />
                 </div>
               </div>
-              <h4>{translations.contactInformation}</h4>
+              <h4>{translations.deliveryLocation}</h4>
               <hr />
               <div className="address">
                 <div className="add">
@@ -277,17 +276,17 @@ export function Order(props: IOrder) {
                       required
                     >
                       {Array.from({ length: 13 }, (_, i) => {
-                        const hour = 6 + Math.floor(i / 4);
+                        const hour = 18 + Math.floor(i / 4);
                         const minute = (i % 4) * 15;
                         const time = `${hour
                           .toString()
                           .padStart(2, "0")}:${minute
-                          .toString()
-                          .padStart(2, "0")}`;
-                        const period = "PM";
+                            .toString()
+                            .padStart(2, "0")}`;
+
                         return (
                           <option key={time} value={time}>
-                            {time} {period}
+                            {time}
                           </option>
                         );
                       })}
@@ -301,17 +300,17 @@ export function Order(props: IOrder) {
                       required
                     >
                       {Array.from({ length: 13 }, (_, i) => {
-                        const hour = 6 + Math.floor(i / 4);
+                        const hour = 18 + Math.floor(i / 4);
                         const minute = (i % 4) * 15;
                         const time = `${hour
                           .toString()
                           .padStart(2, "0")}:${minute
-                          .toString()
-                          .padStart(2, "0")}`;
-                        const period = "PM";
+                            .toString()
+                            .padStart(2, "0")}`;
+
                         return (
                           <option key={time} value={time}>
-                            {time} {period}
+                            {time}
                           </option>
                         );
                       })}

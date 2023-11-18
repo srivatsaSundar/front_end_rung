@@ -44,11 +44,18 @@ interface IMenu {
   setAdd_on_drink;
   add_on_food;
   setAdd_on_food;
-  selectedLanguage
+  selectedLanguage;
 }
 
 export function Menu(props: IMenu) {
-  const { translations, deleteFromCart, removeFromCart, cart, setCart, selectedLanguage } = props;
+  const {
+    translations,
+    deleteFromCart,
+    removeFromCart,
+    cart,
+    setCart,
+    selectedLanguage,
+  } = props;
 
   const column3Ref = useRef(null);
   const [selectValue, setSelectValue] = useState("DEFAULT");
@@ -95,7 +102,7 @@ export function Menu(props: IMenu) {
       add_on_food.some((food) =>
         language === "en"
           ? food.menu.name === itemName
-          : food.menu_germen.name === itemName
+          : food.menu_germen.name === itemName,
       )
     );
   }
@@ -358,8 +365,9 @@ export function Menu(props: IMenu) {
         <div className="column1">
           {uniqueTitles.map((title, index) => (
             <div
-              className={`menu-item ${index === selectedItemIndex ? "first" : ""
-                }`}
+              className={`menu-item ${
+                index === selectedItemIndex ? "first" : ""
+              }`}
               key={index}
               onClick={() => {
                 setSelectedItemIndex(index);
@@ -421,7 +429,10 @@ export function Menu(props: IMenu) {
                       <p className="card-textMenu">{item.description_2}</p>
 
                       {add_on_food.some((food) => {
-                        const menuName = selectedLanguage === "en" ? food.menu.name : food.menu_germen.name;
+                        const menuName =
+                          selectedLanguage === "en"
+                            ? food.menu.name
+                            : food.menu_germen.name;
                         return menuName === item.name;
                       }) ? (
                         <button
@@ -500,7 +511,10 @@ export function Menu(props: IMenu) {
                                       : food.menu_germen.name === item.name;
                                   })
                                   .map((food, foodIndex) => (
-                                    <option key={foodIndex} value={food.food.name}>
+                                    <option
+                                      key={foodIndex}
+                                      value={food.food.name}
+                                    >
                                       <div
                                         style={{
                                           display: "flex",
@@ -516,43 +530,43 @@ export function Menu(props: IMenu) {
                             </div>
                             {(selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood) && (
-                                <div className="add-on-cost">
-                                  <p>
-                                    {selectedAddons[item.name].selectedDrink &&
-                                      selectedAddons[item.name].selectedFood
-                                      ? calculateUpdateItemPrice(
+                              <div className="add-on-cost">
+                                <p>
+                                  {selectedAddons[item.name].selectedDrink &&
+                                  selectedAddons[item.name].selectedFood
+                                    ? calculateUpdateItemPrice(
                                         item,
                                         selectedAddons[item.name].selectedDrink,
                                         selectedAddons[item.name].selectedFood,
                                       )
-                                      : selectedAddons[item.name].selectedDrink
-                                        ? calculateUpdateItemPrice(
-                                          item,
-                                          selectedAddons[item.name].selectedDrink,
-                                          null,
-                                        )
-                                        : calculateUpdateItemPrice(
-                                          item,
-                                          null,
-                                          selectedAddons[item.name].selectedFood,
-                                        )}
-                                    /- CHF
-                                  </p>
-                                </div>
-                              )}
+                                    : selectedAddons[item.name].selectedDrink
+                                    ? calculateUpdateItemPrice(
+                                        item,
+                                        selectedAddons[item.name].selectedDrink,
+                                        null,
+                                      )
+                                    : calculateUpdateItemPrice(
+                                        item,
+                                        null,
+                                        selectedAddons[item.name].selectedFood,
+                                      )}
+                                  /- CHF
+                                </p>
+                              </div>
+                            )}
                           </div>
                         )}
                         {(!itemHasAddOns(item.name) ||
                           (selectedItemName === item.name &&
                             (selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood))) && (
-                            <button
-                              className="add-button"
-                              onClick={() => addToCart(item)}
-                            >
-                              <Icofont icon="icofont-bag" /> {translations.add}
-                            </button>
-                          )}
+                          <button
+                            className="add-button"
+                            onClick={() => addToCart(item)}
+                          >
+                            <Icofont icon="icofont-bag" /> {translations.add}
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
