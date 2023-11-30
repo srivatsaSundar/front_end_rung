@@ -70,10 +70,8 @@ export function Menu(props: IMenu) {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL = translations.url;
 
-  console.log(selectedLanguage);
 
   const targetURL2 = "https://backend-rung.onrender.com/add_on_drink";
-  console.log(targetURL, { mode: "cors" }); //console
 
   useEffect(() => {
     fetch(targetURL)
@@ -107,8 +105,7 @@ export function Menu(props: IMenu) {
     );
   }
 
-  console.log(uniqueTitles); //console
-  console.log("menu", menu);
+
 
   const titleImageUrls = {
     "Popular Dishes": Popular,
@@ -134,7 +131,6 @@ export function Menu(props: IMenu) {
 
   function scrollToTitle(index) {
     const element = uniqueTitlesRef.current[index];
-    console.log(uniqueTitles);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
@@ -166,7 +162,6 @@ export function Menu(props: IMenu) {
       .catch((err) => console.log("error in fetching add_on_food", err));
   }, [setMenu]);
 
-  console.log(add_on_food);
 
   function handleAddOnClick(itemName) {
     if (selectedItemName === itemName) {
@@ -346,7 +341,7 @@ export function Menu(props: IMenu) {
 
   const scrollToColumn3 = () => {
     if (column3Ref.current) {
-      console.log("Scrolling to column3");
+    
       column3Ref.current.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -594,7 +589,7 @@ export function Menu(props: IMenu) {
               className="cart-button"
               onClick={() => {
                 scrollToColumn3();
-                console.log("Button clicked");
+               
               }}
             >
               {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF

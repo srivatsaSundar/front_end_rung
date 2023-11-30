@@ -117,8 +117,6 @@ export function Order(props: IOrder) {
           cart: JSON.stringify(cartItems), // Include cart items in the order
           total_price: calculateTotalPrice(cart),
         };
-        console.log("data", data);
-        console.log("scart", cart);
         setData(data);
         setConfirmation(true);
       } else {
@@ -135,19 +133,13 @@ export function Order(props: IOrder) {
     }
   };
 
-  console.log(Data, "Data");
   const sendOrderToBackend = (data) => {
-    console.log("Data -asxjh", Data);
-    console.log(Data);
     axios
       .post("https://backend-rung.onrender.com/order/", Data)
       .then((response) => {
         window.location.href = "/placed";
-        console.log("Success:", response);
       });
   };
-
-  console.log(cart.length, "order");
 
   return (
     <div>

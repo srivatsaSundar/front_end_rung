@@ -2,7 +2,7 @@ import "./App.css";
 import { Home } from "./pages/home";
 import { Contact } from "./pages/contact";
 import { Discount } from "./pages/discount";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NoPage } from "./pages/nopage";
 import { Menu, MenuItem } from "./pages/menu";
 import React, { useRef, useState } from "react";
@@ -11,6 +11,11 @@ import { useLanguage } from "./components/LanguageProvider";
 import { Final } from "./pages/final";
 import translations_en from "../src/translations/translation_en.json";
 import translations_de from "../src/translations/translation_de.json";
+import { Manage } from "./pages/manage";
+import { Dashboard } from "./pages/dashboard";
+import { EditMenu } from "./components/menu_edit";
+import { Postcodes } from "./components/postcodes";
+import { Holiday } from "./components/holiday";
 
 function App() {
   const column3Ref = useRef(null || undefined);
@@ -122,6 +127,44 @@ function App() {
   const translations =
     selectedLanguage === "en" ? translations_en : translations_de;
 
+    function PrivateRoute({ element }) {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    
+      return isLoggedIn ? (
+        element
+      ) : (
+        <Navigate to="/manage" state={{ from: "/dashboard" }} />
+      );
+    }
+    function PrivateRouteholi({ element }) {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    
+      return isLoggedIn ? (
+        element
+      ) : (
+        <Navigate to="/manage" state={{ from: "/holiday" }} />
+      );
+    }
+
+    function PrivateRoutemenu({ element }) {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    
+      return isLoggedIn ? (
+        element
+      ) : (
+        <Navigate to="/manage" state={{ from: "/editmenu" }} />
+      );
+    }
+
+    function PrivateRoutepost({ element }) {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    
+      return isLoggedIn ? (
+        element
+      ) : (
+        <Navigate to="/manage" state={{ from: "/postcodes" }} />
+      );
+    }
   return (
     <div>
       <BrowserRouter>
@@ -130,6 +173,20 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/discount" element={<Discount />} />
+          <Route path="/manage" element={<Manage />} />
+          <Route
+          path="/dashboard"
+          element={<PrivateRoute element={<Dashboard />} />}
+        />
+         <Route
+          path="/holiday"
+          element={<PrivateRoute element={<Holiday />} />}
+        />
+        <Route
+          path="/editmenu"
+          element={<PrivateRoute element={<EditMenu />} />}
+        />
+        <Route path="/postcodes" element={<PrivateRoute element={<Postcodes />} />} />
           <Route
             path="/menu"
             element={
@@ -171,6 +228,7 @@ function App() {
           <Route path="/placed" element={<Final />} />
         </Routes>
       </BrowserRouter>
+     
     </div>
   );
 }
