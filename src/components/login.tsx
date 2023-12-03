@@ -1,5 +1,3 @@
-// import css
-import "../static/header.css";
 import React, { useState } from "react";
 import { useLanguage } from "./LanguageProvider";
 import translations_en from "../translations/translation_en.json";
@@ -13,47 +11,49 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+  const translations =
+    selectedLanguage === "de" ? translations_de : translations_en;
 
   const handleLogin = async () => {
     if (username === "yes" && password === "no") {
       setIsLoggedIn(true);
       localStorage.setItem("isLoggedIn", "true");
       navigate("/dashboard");
+      setTimeout(() => {
+        setIsLoggedIn(false);
+        localStorage.setItem("isLoggedIn", "false");
+      }, 600000);
     } else {
-      alert("Invalid credentials");
+      alert(translations.invalidCredentials);
       setIsLoggedIn(false);
       localStorage.setItem("isLoggedIn", "false");
 
     }
   };
 
-  // Define translations based on the selected language
-  const translations =
-    selectedLanguage === "de" ? translations_de : translations_en;
-
   return (
-    <div className="login">
+    <div>
       <div>
         <h2>Mr.Rung</h2>
-        <h3>Login</h3>
+        <h3>{translations.login}</h3>
       </div>
       {isLoggedIn ? (
         // Redirect to next page if logged in
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/dashboard">{translations.dashboard}</Link>
       ) : (
         // Display login form if not logged in
         <div>
-          <input
+          <input 
             type="text"
-            placeholder="Username"
+            placeholder={translations.usernamePlaceholder}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
             type="password"
-            placeholder="Password"
+            placeholder={translations.passwordPlaceholder}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={handleLogin}>Login</button>
+          <button onClick={handleLogin}>{translations.login}</button>
         </div>
       )}
     </div>

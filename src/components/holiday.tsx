@@ -2,6 +2,9 @@ import React from "react";
 import { useLanguage } from "./LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
+import { Footer } from "./footer";
+import AppNavbar from "./navbar";
+import { Link } from "react-router-dom";
 
 //display footer
 export function Holiday() {
@@ -12,7 +15,7 @@ export function Holiday() {
     selectedLanguage === "de" ? translations_de : translations_en;
     const handleLogout = () => {
         localStorage.clear();
-        window.location.href = "/";
+        window.location.href = "/manage";
       };
 
       const data = [
@@ -31,7 +34,10 @@ export function Holiday() {
         ]
   return (
     <div>
-        <h1>Closing Edit</h1>
+        <div className="yes">
+        <AppNavbar />
+        </div>
+        <h1>{translations.holidayEdit}</h1>
         <form>
             <input type="date" id="start" name="startdate"></input>
             <input type="date" id="end" name="enddate"></input>
@@ -63,7 +69,9 @@ export function Holiday() {
         </tbody>
         </table>
         </div>
-        <button onClick={handleLogout}> Logout </button>
+        <Link to="/dashboard"><button>{translations.gotodash}</button></Link>
+        <button onClick={handleLogout}> {translations.logoutButton}</button>
+        <Footer />
     </div>
   );
 }

@@ -3,6 +3,8 @@ import { useLanguage } from "../components/LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
+import AppNavbar from "../components/navbar";
+import { Footer } from "../components/footer";
 
 //display footer
 export function Dashboard() {
@@ -14,22 +16,26 @@ export function Dashboard() {
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = "/";
+    window.location.href = "/manage";
   };
 
   return (
     <div>
-      <h1>Dashboard</h1>
+       <div className="yes">
+        <AppNavbar />
+        </div>
+      <h1>{translations.dashboard}</h1>
       <Link to="/editmenu">
-      <h3>Menu edit</h3>
+      <h3>{translations.menuname}</h3>
       </Link>
       <Link to="/postcodes">
-      <h3>Postcodes edit</h3>
+      <h3>{translations.postcodes}</h3>
       </Link>
       <Link to="/holiday">
-      <h3>Closing edit</h3>
+      <h3>{translations.holiday}</h3>
       </Link>
-      <button onClick={handleLogout}> Logout </button>
+      <button onClick={handleLogout}>{translations.logoutButton}</button>
+      <Footer />
     </div>
   );
 }

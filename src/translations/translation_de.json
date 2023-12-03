@@ -63,5 +63,21 @@
   "orderAndPay": "zahlungspflichtig Bestellen ",
   "orderConfirmation": "“ Nachdem Du eine Bestellung aufgegeben hast, empfängst Du eine Bestellbestätigung, per E-Mail, oder auf anderem Wege (z.B. Push-Nachrichten)”  ",
   "pay": "Ihre Bestellung wurde aufgegeben und wird bestätigt, wenn Sie eine E-Mail erhalten, und Sie können die Lieferung per Nachnahme vornehmen",
-  "placed": "Sind Sie sicher, dass Sie die Bestellung aufgeben und per Nachnahme bezahlen möchten?"
+  "placed": "Sind Sie sicher, dass Sie die Bestellung aufgeben und per Nachnahme bezahlen möchten?",
+  "login": "Anmelden",
+  "dashboard": "Dashboard",
+  "usernamePlaceholder": "Benutzername",
+  "passwordPlaceholder": "Passwort",
+  "loginButton": "Anmelden",
+  "logoutButton": "Abmelden",
+  "invalidCredentials": "Ungültige Anmeldeinformationen",
+  "postcodes":"Postleitzahlen",
+  "holiday":"Feiertage und Schließung",
+  "Loading":"Postleitzahlen werden geladen...",
+  "menuEdit": "Menü bearbeiten",
+  "menuname":"Menü",
+  "gotodash":"Gehen Sie zum Dashboard",
+  "postcodesEdit": "Postleitzahlen bearbeiten",
+  "holidayEdit": "Feiertage und Schließung bearbeiten"
+
 }

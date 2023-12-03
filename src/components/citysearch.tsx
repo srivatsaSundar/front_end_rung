@@ -18,7 +18,7 @@ function CitySearch() {
   const [error, setError] = useState(null);
   const { selectedLanguage } = useLanguage(); // Access the selected language
   const [currentTime, setCurrentTime] = useState(DateTime.local());
-
+  const [pin, setPin] = useState("");
   useEffect(() => {
     // Update the current time every minute
     const interval = setInterval(() => {
@@ -34,33 +34,34 @@ function CitySearch() {
     selectedLanguage === "de" ? translations_de : translations_en;
 
   const handlePincodeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPincode(e.target.value);
+    setPin(e.target.value);
     setError(null);
   };
-
-  const handleSearch = () => {
-    const validPincodes = [
-      "6003",
-      "6004",
-      "6005",
-      "6014",
-      "6020",
-      "6032",
-      "6010",
-      "6012",
-      "6013",
-      "6047",
-      "6048",
-      "6052",
-    ];
-
-    if (validPincodes.includes(pincode)) {
-      setError(null);
-      navigate("/menu");
-    } else {
-      setError("Sorry, this Pin Code is not eligible for delivery.");
-    }
-  };
+  const api= "https://backend-rung.onrender.com/all_values/"
+  useEffect(() => {
+    fetch(api)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setPincode(data))
+      .catch((err) => console.log("error in fetching the pin", err));
+  }, [api]);
+  console.log(api)
+  console.log(pincode);
+const handlepin = pincode.postal_codes;
+console.log(handlepin);
+const handleSearch = (e) => {
+if (pin){
+  e.preventDefault();
+  navigate(`/menu`);
+}
+else{
+  alert("Please select the pincode");
+}
+};
 
   return (
     <div className="citysearch">
@@ -93,20 +94,22 @@ function CitySearch() {
                   <label>{translations.timeToOrderFood}</label>
                 </div>
                 <div className="search-pin">
-                  <select value={pincode} onChange={handlePincodeChange}>
+                  <select value={pin} onChange={handlePincodeChange}>
                     <option value="">{translations.selectPincode}</option>
-                    <option value="6003">6003</option>
-                    <option value="6004">6004</option>
-                    <option value="6005">6005</option>
-                    <option value="6014">6014</option>
-                    <option value="6020">6020</option>
-                    <option value="6032">6032</option>
-                    <option value="6010">6010</option>
-                    <option value="6012">6012</option>
-                    <option value="6013">6013</option>
-                    <option value="6047">6047</option>
-                    <option value="6048">6048</option>
-                    <option value="6052">6052</option>
+                  
+                    {handlepin ? (
+    // Iterate over options only if handlepin is available
+    handlepin.map((item, index) => (
+      <option key={index} value={item.postal_code}>
+        {item.postal_code}
+      </option>
+    ))
+  ) : (
+    // Optionally, you can include a loading or placeholder option
+    <option value="" disabled>
+      {translations.Loading}
+    </option>
+  )}
                   </select>
                   <button onClick={handleSearch}>
                     <Icofont className="icon-pin" icon="icofont-search" />

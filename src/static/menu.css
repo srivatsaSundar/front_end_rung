@@ -115,10 +115,13 @@
   padding: 10px;
   margin-left: 15px;
   margin-top: 10px;
+  
+  visibility: visible;
 }
 
 .contact-mobile input {
   width: 521px;
+
 }
 
 .contact-mess input {
@@ -143,9 +146,7 @@
   width: 252px;
 }
 
-input:focus {
-  color: #fff;
-}
+
 /* Menu.css */
 .cardMenu {
   margin-bottom: 10px;
