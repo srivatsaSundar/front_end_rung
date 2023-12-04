@@ -1,0 +1,168 @@
+.postcodes h1 {
+  color: black;
+  text-align: center;
+  margin-top: 30px;
+}
+.center-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.styled-table {
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  border-radius: 20px;
+}
+
+.styled-table thead tr {
+  background-color: #ec5800;
+  color: #ffffff;
+  text-align: left;
+}
+.styled-table th,
+.styled-table td {
+  padding: 15px 20px;
+  text-align: center;
+}
+
+.styled-table td button {
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  color: #ec5800;
+  background-color: transparent;
+}
+.styled-table td button:hover {
+  color: darkred;
+}
+.buttons button {
+  color: #fff;
+  background-color: red;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 15px;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+
+/* fdrgfthyjukilo;pdgfthyjukofghjkl;fdghjkl;fdghjkl;fdghjkl;dfghjkl; */
+
+/* holidayy cssss */
+.holiday h3 {
+  text-align: center;
+  margin-top: 30px;
+  color: black;
+}
+.holiday form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+.holiday form div {
+  margin-left: auto;
+  margin-right: auto;
+}
+.holiday form input {
+  border-radius: 10px;
+  border: 1px solid rgb(196, 186, 186);
+  padding: 10px;
+  margin: 10px;
+  width: 38%;
+  margin-top: 30px;
+}
+.holiday .buttons button {
+  padding: 10px 25px;
+}
+/* -------end holiday css */
+
+/* menu-edit */
+.menu-edit {
+  width: inherit;
+  overflow-x: hidden;
+}
+
+/* -------end menu edits */
+
+/* Media Query for Mobile Devices (up to 768px) */
+@media only screen and (max-width: 668px) {
+  .styled-table {
+    margin: 15px 0;
+    font-size: 0.7em;
+    min-width: 300px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    border-radius: 20px;
+  }
+
+  .styled-table thead tr {
+    background-color: #ec5800;
+    color: #ffffff;
+    text-align: left;
+  }
+  .styled-table th,
+  .styled-table td {
+    padding: 10px 15px;
+  }
+
+  .styled-table td button {
+    border: none;
+    border-radius: 10px;
+    padding: 8px;
+    color: #ec5800;
+    background-color: transparent;
+  }
+  .styled-table td button:hover {
+    color: darkred;
+  }
+  .buttons button {
+    color: #fff;
+    background-color: red;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    display: block;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 12px;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 8px;
+    margin-bottom: 10px;
+  }
+
+  /* holidayyyyy */
+  .holiday form input {
+    border-radius: 10px;
+    border: 1px solid rgb(196, 186, 186);
+    padding: 10px;
+    margin: 10px;
+    width: 65%;
+    box-sizing: border-box;
+  }
+  .holiday form {
+    margin: 20px;
+  }
+
+  /* menu-edit */
+  .menu-edit .styled-table th,
+  .menu-edit .styled-table td {
+    padding: 8px 8px;
+  }
+}

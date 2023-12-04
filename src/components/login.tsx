@@ -27,13 +27,12 @@ export function Login() {
       alert(translations.invalidCredentials);
       setIsLoggedIn(false);
       localStorage.setItem("isLoggedIn", "false");
-
     }
   };
 
   return (
-    <div>
-      <div>
+    <div className="login">
+      <div className="login-header">
         <h2>Mr.Rung</h2>
         <h3>{translations.login}</h3>
       </div>
@@ -42,8 +41,8 @@ export function Login() {
         <Link to="/dashboard">{translations.dashboard}</Link>
       ) : (
         // Display login form if not logged in
-        <div>
-          <input 
+        <div className="login-input">
+          <input
             type="text"
             placeholder={translations.usernamePlaceholder}
             onChange={(e) => setUsername(e.target.value)}

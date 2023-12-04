@@ -66,6 +66,80 @@
 
 .footer {
   align-items: "center";
-  margin-top: "10px";
+  margin-top: 10px;
   font-size: 13px;
+}
+
+.login {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  margin-top: 80px;
+  border-radius: 30px;
+  background-color: rgb(241, 238, 238);
+  padding: 30px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.login-header {
+  text-align: center;
+  color: #ec5800;
+  padding-bottom: 10px;
+}
+
+.login-input input {
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 8px;
+}
+
+.login-input button {
+  color: white;
+  border-radius: 5px;
+  background-color: #ec5800;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 5px 15px;
+}
+
+.login-input button:hover {
+  color: #ec5800;
+  background-color: gainsboro;
+  align-content: center;
+}
+
+/* dashboardddd */
+
+.dashboard h2 {
+  text-align: center;
+  margin-top: 30px;
+}
+.dashboard h3 {
+  display: flex;
+  justify-content: center;
+}
+.dashboard .buttonss button {
+  color: #fff;
+  background-color: red;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 15px;
+}
+.buttonss {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+  margin-bottom: 20px;
+  margin-top: 40px;
 }

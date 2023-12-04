@@ -5,6 +5,7 @@ import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
 import AppNavbar from "../components/navbar";
 import { Footer } from "../components/footer";
+import "../static/header.css"
 
 //display footer
 export function Dashboard() {
@@ -21,22 +22,28 @@ export function Dashboard() {
 
   return (
     <div>
-       <div className="yes">
+      <div className="yes">
         <AppNavbar />
+      </div>
+      <div className="dashboard">
+        <h2>{translations.dashboard}</h2>
+        <Link to="/editmenu">
+          <h3>{translations.menuname}</h3>
+        </Link>
+        <Link to="/postcodes">
+          <h3>{translations.postcodes}</h3>
+        </Link>
+        <Link to="/holiday">
+          <h3>{translations.holiday}</h3>
+        </Link>
+        <div className="buttonss">
+          <button onClick={handleLogout}>{translations.logoutButton}</button>
         </div>
-      <h1>{translations.dashboard}</h1>
-      <Link to="/editmenu">
-      <h3>{translations.menuname}</h3>
-      </Link>
-      <Link to="/postcodes">
-      <h3>{translations.postcodes}</h3>
-      </Link>
-      <Link to="/holiday">
-      <h3>{translations.holiday}</h3>
-      </Link>
-      <button onClick={handleLogout}>{translations.logoutButton}</button>
-      <Footer />
+      </div>
+      <div style={{ position: "fixed", bottom: "0px", width: "100%" }}>
+        <Footer />
+      </div>
     </div>
   );
 }
-  
+

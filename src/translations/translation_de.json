@@ -67,7 +67,7 @@
   "login": "Anmelden",
   "dashboard": "Dashboard",
   "usernamePlaceholder": "Benutzername",
-  "passwordPlaceholder": "Passwort",
+  "passwordPlaceholder": "Password",
   "loginButton": "Anmelden",
   "logoutButton": "Abmelden",
   "invalidCredentials": "Ungültige Anmeldeinformationen",

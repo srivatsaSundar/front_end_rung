@@ -5,11 +5,13 @@ import { Footer } from "../components/footer";
 export function Manage() {
   return (
     <div>
-       <div className="yes">
+      <div className="yes">
         <AppNavbar />
-        </div>
-        <Login />
+      </div>
+      <Login />
+      <div style={{ position: "fixed", bottom: "0px", width: "100%" }}>
         <Footer />
+      </div>
     </div>
   );
 }
