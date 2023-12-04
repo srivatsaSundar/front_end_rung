@@ -44,7 +44,7 @@ console.log(handlepin);
         <thead>
           <tr>
             <th>Postcode</th>
-            {/* <th>Availability</th> */}
+            <th>Availability</th>
             <th>Change Availability</th>
             <th>Delete</th>
           </tr>
@@ -54,7 +54,7 @@ console.log(handlepin);
    handlepin.map((item, index) => (
             <tr>
               <td>{item.postal_code}</td>
-              {/* <td>{item.available}</td> */}
+              <td>{String(item.available)}</td>
               <td><button >Change Availability</button></td>
               <td><button >Delete</button></td>
             </tr>
