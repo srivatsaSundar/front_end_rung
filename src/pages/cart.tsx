@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Icofont from "react-icofont";
 import { Link } from "react-router-dom";
 interface ICart {
@@ -26,6 +26,7 @@ function Cart(props: ICart) {
     deleteFromCart,
     translations,
   } = props;
+  
   return (
     <div className="column3" ref={ref} style={style} id="cart">
       <div className="title-cart">

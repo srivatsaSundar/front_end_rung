@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { useLanguage } from "./LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
@@ -7,11 +7,20 @@ import AppNavbar from "./navbar";
 import { Navigate, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import "../static/postcodes.css"
+import { Modal } from "react-bootstrap";
 
 //display footer
 export function EditMenu() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
   const navigate = useNavigate;
+  const [showModal, setShowModal] = useState(false);
+  const [inputData, setInputData] = useState({
+    name: '',
+    title: '',
+    price: '',
+    description: '',
+  });
+
   // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
@@ -32,10 +41,71 @@ export function EditMenu() {
       available: 'True'
     },
   ]
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  
+  const handleInputChange = (field, value) => {
+    setInputData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    // Do something with the input data, e.g., send it to the server
+    console.log('Input Data:', inputData);
+
+    // Close the modal
+    handleCloseModal();
+  };
+
   return (
     <div>
       <div className="yes">
         <AppNavbar />
+      </div>
+      <div >
+          <button onClick={handleOpenModal}>+</button>
+          </div>
+          <div>
+          <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add data</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+  <div className="mb-3">
+    <label>Name:</label>
+    <input type="text" className="form-control" value={inputData.name} onChange={(e) => handleInputChange('name', e.target.value)} />
+  </div>
+  <div className="mb-3">
+    <label>Title:</label>
+    <input type="text" className="form-control" value={inputData.title} onChange={(e) => handleInputChange('title', e.target.value)} />
+  </div>
+  <div className="mb-3">
+    <label>Price:</label>
+    <input type="text" className="form-control" value={inputData.price} onChange={(e) => handleInputChange('price', e.target.value)} />
+  </div>
+  <div className="mb-3">
+    <label>Description:</label>
+    <textarea className="form-control" value={inputData.description} onChange={(e) => handleInputChange('description', e.target.value)} />
+  </div>
+</Modal.Body>
+
+        <Modal.Footer>
+          <button  onClick={handleCloseModal}>
+            Close
+          </button>
+          <button onClick={handleSubmit}>
+            Submit
+          </button>
+        </Modal.Footer>
+      </Modal>
       </div>
       <div className="menu-edit">
         <h2 style={{ textAlign: "center", marginTop: "30px" }}>{translations.menuEdit}</h2>

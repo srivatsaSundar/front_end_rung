@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
@@ -6,11 +6,16 @@ import { Link } from "react-router-dom";
 import AppNavbar from "./navbar";
 import { Footer } from "./footer";
 import "../static/postcodes.css"
+import { Modal } from "react-bootstrap";
+
 
 //display footer
 export function Postcodes() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
-  const [data, setData] = React.useState([]);
+  const [data, setData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [inputData, setInputData] = useState('');
+
   // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
@@ -35,6 +40,25 @@ export function Postcodes() {
   console.log(data);
   const handlepin = data.postal_codes;
   console.log(handlepin);
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleInputChange = (e) => {
+    setInputData(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    // Do something with the input data, e.g., send it to the server
+    console.log('Input Data:', inputData);
+
+    // Close the modal
+    handleCloseModal();
+  };
 
   return (
     <div>
@@ -43,6 +67,30 @@ export function Postcodes() {
       </div>
       <div className="postcodes">
         <h1>{translations.postcodesEdit}</h1>
+        
+      </div>
+        <div >
+          <button onClick={handleOpenModal}>+</button>
+          </div>
+          <div>
+          <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add data</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <label>Input Data:</label>
+          <input type="text" value={inputData} onChange={handleInputChange} />
+        </Modal.Body>
+        <Modal.Footer>
+          <button  onClick={handleCloseModal}>
+            Close
+          </button>
+          <button onClick={handleSubmit}>
+            Submit
+          </button>
+        </Modal.Footer>
+      </Modal>
+        </div>
         <div className="table-container center-table">
           <table className="styled-table">
             <thead>
@@ -71,7 +119,7 @@ export function Postcodes() {
             </tbody>
           </table>
         </div>
-      </div>
+      
       <div className="buttons">
         <Link to="/dashboard"><button>{translations.gotodash}</button></Link>
         <button onClick={handleLogout}> {translations.logoutButton}</button>
