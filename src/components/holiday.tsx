@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
@@ -6,6 +6,7 @@ import { Footer } from "./footer";
 import AppNavbar from "./navbar";
 import { Link } from "react-router-dom";
 import "../static/postcodes.css"
+import axios from "axios";
 
 //display footer
 export function Holiday() {
@@ -19,20 +20,63 @@ export function Holiday() {
     window.location.href = "/manage";
   };
 
-  const data = [
-    {
-      startdate: '2021-08-01',
-      enddate: '2021-08-02',
-      starttime: '12:00',
-      endtime: '13:00'
-    },
-    {
-      startdate: '2021-08-02',
-      enddate: '2021-08-03',
-      starttime: '12:00',
-      endtime: '13:00'
-    },
-  ]
+  const [data, setData] = useState([]);
+  const api = "https://backend-rung.onrender.com/holiday/"
+  const fetchData = () => {
+    axios.get(api)
+      .then(response => {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors if needed
+      });
+  };
+  useEffect(() => {
+    fetchData();
+    console.log(api)
+    console.log(data);
+  }, []);
+  const [formData, setFormData] = useState({
+    start_data: '',
+    end_data: '',
+    start_time: '',
+    end_time: '',
+    holiday_note: '',
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+    // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
+    axios.post('https://backend-rung.onrender.com/add_holiday/', formData)
+      .then(response => {
+        console.log('Server Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors if needed
+      });
+  };
+
+  const handleDelete = (startData) => {
+    axios.delete(`https://backend-rung.onrender.com/delete_holiday/${startData}/`)
+      .then(response => {
+        console.log('Delete Response:', response.data);
+        // Update the list of holidays after successful deletion
+      })
+      .catch(error => {
+        console.error('Delete Error:', error);
+        // Handle errors if needed
+      });
+  };
   return (
     <div>
       <div className="yes">
@@ -40,13 +84,14 @@ export function Holiday() {
       </div>
       <div className="holiday">
         <h3>{translations.holidayEdit}</h3>
-        <form>
-          <div>
-            Start Date :<input type="date" id="start" name="startdate" />
-            End Date : <input type="date" id="end" name="enddate" />
-            Start Time :<input type="time" id="start" name="starttime" />
-            End Time : <input type="time" id="end" name="endtime" />
-          </div>
+        <form onSubmit={handleSubmit}>
+        <div>
+        Start Date: <input type="date" name="start_data" value={formData.start_data} onChange={handleInputChange} />
+        End Date: <input type="date" name="end_data" value={formData.end_data} onChange={handleInputChange} />
+        Start Time: <input type="time" name="start_time" value={formData.start_time} onChange={handleInputChange} />
+        End Time: <input type="time" name="end_time" value={formData.end_time} onChange={handleInputChange} />
+        Holiday Note: <input type="text" name="holiday_note" value={formData.holiday_note} onChange={handleInputChange} />
+      </div>
           <div className="buttons">
             <button type="submit">Submit</button>
           </div>
@@ -59,17 +104,19 @@ export function Holiday() {
                 <th>End Date</th>
                 <th>Start Time</th>
                 <th>End Time</th>
+                <th>Holiday Note</th>
                 <th>Delete</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item) => (
                 <tr>
-                  <td>{item.startdate}</td>
-                  <td>{item.enddate}</td>
-                  <td>{item.starttime}</td>
-                  <td>{item.endtime}</td>
-                  <td><button >Delete</button></td>
+                  <td>{item.start_data}</td>
+                  <td>{item.end_data}</td>
+                  <td>{item.start_time}</td>
+                  <td>{item.end_time}</td>
+                  <td>{item.holiday_note}</td>
+                  <td><button onClick={() => handleDelete(item.start_data)}>Delete</button></td>
                 </tr>
               ))}
             </tbody>
