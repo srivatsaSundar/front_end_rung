@@ -14,7 +14,7 @@ export function EditMenu() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
   const navigate = useNavigate;
   const [showModal, setShowModal] = useState(false);
-  const [inputData, setInputData] = useState({
+  const [value, setvalue] = useState({
     name: '',
     title: '',
     price: '',
@@ -51,7 +51,7 @@ export function EditMenu() {
 
   
   const handleInputChange = (field, value) => {
-    setInputData((prevData) => ({
+    setvalue((prevData) => ({
       ...prevData,
       [field]: value,
     }));
@@ -59,7 +59,7 @@ export function EditMenu() {
 
   const handleSubmit = () => {
     // Do something with the input data, e.g., send it to the server
-    console.log('Input Data:', inputData);
+    console.log('Input Data:', value);
 
     // Close the modal
     handleCloseModal();
@@ -81,19 +81,19 @@ export function EditMenu() {
         <Modal.Body>
   <div className="mb-3">
     <label>Name:</label>
-    <input type="text" className="form-control" value={inputData.name} onChange={(e) => handleInputChange('name', e.target.value)} />
+    <input type="text" className="form-control" value={value.name} onChange={(e) => handleInputChange('name', e.target.value)} />
   </div>
   <div className="mb-3">
     <label>Title:</label>
-    <input type="text" className="form-control" value={inputData.title} onChange={(e) => handleInputChange('title', e.target.value)} />
+    <input type="text" className="form-control" value={value.title} onChange={(e) => handleInputChange('title', e.target.value)} />
   </div>
   <div className="mb-3">
     <label>Price:</label>
-    <input type="text" className="form-control" value={inputData.price} onChange={(e) => handleInputChange('price', e.target.value)} />
+    <input type="text" className="form-control" value={value.price} onChange={(e) => handleInputChange('price', e.target.value)} />
   </div>
   <div className="mb-3">
     <label>Description:</label>
-    <textarea className="form-control" value={inputData.description} onChange={(e) => handleInputChange('description', e.target.value)} />
+    <textarea className="form-control" value={value.description} onChange={(e) => handleInputChange('description', e.target.value)} />
   </div>
 </Modal.Body>
 

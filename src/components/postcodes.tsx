@@ -7,14 +7,14 @@ import AppNavbar from "./navbar";
 import { Footer } from "./footer";
 import "../static/postcodes.css"
 import { Modal } from "react-bootstrap";
-
+import axios from "axios";
 
 //display footer
 export function Postcodes() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
-  const [data, setData] = useState([]);
+  const [datapin, setDatapin] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [inputData, setInputData] = useState('');
+  const [value, setvalue] = useState('');
 
   // Define translations based on the selected language
   const translations =
@@ -33,12 +33,12 @@ export function Postcodes() {
         }
         return response.json();
       })
-      .then((data) => setData(data))
+      .then((data) => setDatapin(data))
       .catch((err) => console.log("error in fetching the pin", err));
   }, [api]);
   console.log(api)
-  console.log(data);
-  const handlepin = data.postal_codes;
+  console.log(datapin);
+  const handlepin = datapin.postal_codes;
   console.log(handlepin);
   const handleOpenModal = () => {
     setShowModal(true);
@@ -49,15 +49,57 @@ export function Postcodes() {
   };
 
   const handleInputChange = (e) => {
-    setInputData(e.target.value);
+    setvalue(e.target.value);
   };
 
   const handleSubmit = () => {
-    // Do something with the input data, e.g., send it to the server
-    console.log('Input Data:', inputData);
+    // Assuming value contains the data you want to send
+    console.log('Input Data:', (value));
+    
+    const data = { postal_code: value, available: true };
 
-    // Close the modal
-    handleCloseModal();
+    
+
+    axios.post('https://backend-rung.onrender.com/add_postal_code/', data, )
+    .then(response => {
+        // Handle the response from the server if needed
+        console.log('Server Response:', response.data);
+
+        // Close the modal
+        handleCloseModal();
+    })
+    .catch(error => {
+        // Handle any errors that occurred during the Axios request
+        console.log('Full Error Object:', error);
+    });
+};
+
+
+  const handleAvailabilityChange = (postalCode, currentAvailability) => {
+    const newData = {
+      postal_code: postalCode,
+      available: !currentAvailability, // Toggle availability
+    };
+  
+    axios.post(`https://backend-rung.onrender.com/change_availability/${postalCode}/`, newData)
+      .then(response => {
+        // Handle the response from the server if needed
+        console.log('Server Response:', response.data);
+      })
+      .catch(error => {
+        // Handle any errors that occurred during the Axios request
+        console.error('Error:', error);
+      });
+  };
+
+  const handleDelete = (postalCode) => {
+    axios.delete(`https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`)
+      .then(response => {
+        console.log('Delete Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error deleting postal code:', error);
+      });
   };
 
   return (
@@ -78,8 +120,8 @@ export function Postcodes() {
           <Modal.Title>Add data</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <label>Input Data:</label>
-          <input type="text" value={inputData} onChange={handleInputChange} />
+          <label>Postcode:</label>
+          <input type="text" value={value} onChange={handleInputChange} />
         </Modal.Body>
         <Modal.Footer>
           <button  onClick={handleCloseModal}>
@@ -107,8 +149,8 @@ export function Postcodes() {
                   <tr>
                     <td>{item.postal_code}</td>
                     <td>{String(item.available)}</td>
-                    <td><button >Change Availability</button></td>
-                    <td><button >Delete</button></td>
+                    <td><button onClick={() => handleAvailabilityChange(item.postal_code, item.available)}>Change Availability</button></td>
+                    <td><button onClick={() => handleDelete(item.postal_code)}>Delete</button></td>
                   </tr>
                 ))
               ) : (

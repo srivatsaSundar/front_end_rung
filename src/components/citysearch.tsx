@@ -37,7 +37,7 @@ function CitySearch() {
     setPin(e.target.value);
     setError(null);
   };
-  const api= "https://backend-rung.onrender.com/all_values/"
+  const api= "https://backend-rung.onrender.com/code/"
   useEffect(() => {
     fetch(api)
       .then((response) => {
@@ -51,7 +51,7 @@ function CitySearch() {
   }, [api]);
   console.log(api)
   console.log(pincode);
-const handlepin = pincode.postal_codes;
+const handlepin = pincode;
 console.log(handlepin);
 const handleSearch = (e) => {
 if (pin){
