@@ -78,6 +78,8 @@
   "menuname":"Menü",
   "gotodash":"Gehen Sie zum Dashboard",
   "postcodesEdit": "Postleitzahlen bearbeiten",
-  "holidayEdit": "Feiertage und Schließung bearbeiten"
+  "holidayEdit": "Feiertage und Schließung bearbeiten",
+  "holidayload":"Feiertage und Schließung werden geladen...",
+  "menuLoad":"Menü wird geladen..."
 
 }

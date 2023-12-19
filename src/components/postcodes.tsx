@@ -81,7 +81,7 @@ export function Postcodes() {
       available: !currentAvailability, // Toggle availability
     };
   
-    axios.post(`https://backend-rung.onrender.com/change_availability/${postalCode}/`, newData)
+    axios.post(`https://backend-rung.onrender.com/postal_change_availability/${postalCode}/`, newData)
       .then(response => {
         // Handle the response from the server if needed
         console.log('Server Response:', response.data);

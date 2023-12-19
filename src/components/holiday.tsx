@@ -109,7 +109,8 @@ export function Holiday() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item) => (
+              { data? (
+              data.map((item) => (
                 <tr>
                   <td>{item.start_data}</td>
                   <td>{item.end_data}</td>
@@ -118,7 +119,12 @@ export function Holiday() {
                   <td>{item.holiday_note}</td>
                   <td><button onClick={() => handleDelete(item.start_data)}>Delete</button></td>
                 </tr>
-              ))}
+              ))
+              ) : (
+                <tr>
+                  <td>{translations.holidayload}</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
