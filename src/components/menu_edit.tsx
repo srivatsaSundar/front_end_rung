@@ -115,33 +115,28 @@ export function EditMenu() {
       targetSection.scrollIntoView({ behavior: "smooth" });
     }
   }
-  const handleAvailabilityChange = useCallback((name, currentAvailability, language) => {
+  const handleAvailabilityChange = useCallback((name,available, language) => {
     const newData = {
       name: name,
-      available: !currentAvailability, // Toggle availability
+      available: !available, // Toggle availability
     };
-    if (language === "english") {
-      axios.post(`https://backend-rung.onrender.com/menu_availability/<str:menu_name>/`, newData)
-        .then(response => {
-          console.log('Server Response:', response.data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    } else {
-      axios.post(`https://backend-rung.onrender.com/menu_availability_german/<str:menu_name>/`, newData)
-        .then(response => {
-          console.log('Server Response:', response.data);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
+  
+    const apiUrl = language === "english"
+      ? `https://backend-rung.onrender.com/menu_availability/${name}/`
+      : `https://backend-rung.onrender.com/menu_availability_germen/${name}/`;
+  
+    axios.post(apiUrl, newData)
+      .then(response => {
+        console.log('Server Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }, []);
-
-  const handleDelete = (item,language) => {
+  
+  const handleDelete = (name,language) => {
     if(language==="english"){
-    axios.delete(`https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`)
+    axios.delete(`https://backend-rung.onrender.com/delete_menu/${name}/`)
       .then(response => {
         console.log('Delete Response:', response.data);
       })
@@ -150,7 +145,7 @@ export function EditMenu() {
       });
   }
     else{
-      axios.delete(`https://backend-rung.onrender.com/delete_postal_code_german/${postalCode}/`)
+      axios.delete(`https://backend-rung.onrender.com/delete_menu_germen/${name}/`)
       .then(response => {
         console.log('Delete Response:', response.data);
       })
@@ -159,6 +154,60 @@ export function EditMenu() {
       });
     }
   }
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedEditItem, setSelectedEditItem] = useState(null);
+  const [editModalLanguage, setEditModalLanguage] = useState(""); // Added state for language
+
+
+  const handleOpenEditModal = (item,language) => {
+    setSelectedEditItem(item);
+    setEditModalOpen(true);
+    setEditModalLanguage(language); // Set the language of the edit modal
+  };
+
+  const handleCloseEditModal = () => {
+    setSelectedEditItem(null);
+    setEditModalLanguage(""); // Clear the language when closing the edit modal
+    setEditModalOpen(false);
+  };
+
+  const handleEditFormChange = (field, value) => {
+    setSelectedEditItem((prevItem) => ({
+      ...prevItem,
+      [field]: value,
+    }));
+  };
+
+  const handleEditFormSubmit = (e) => {
+    e.preventDefault();
+    console.log(selectedEditItem);
+    if(editModalLanguage==="english"){
+      delete selectedEditItem.id;
+      delete selectedEditItem.title_image;
+    // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
+    axios.post('https://backend-rung.onrender.com/add_menu/', selectedEditItem)
+      .then(response => {
+        console.log('Server Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors if needed
+      });
+    }
+    else{
+      delete selectedEditItem.id;
+      delete selectedEditItem.title_image;
+      axios.post('https://backend-rung.onrender.com/add_menu_germen/', selectedEditItem)
+      .then(response => {
+        console.log('Server Response:', response.data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Handle errors if needed
+      });
+    }
+  };
+
   return (
     <div>
       <div className="yes">
@@ -243,9 +292,9 @@ export function EditMenu() {
                   <td>{String(item.available)}</td>
                   <td>{item.description_1}</td>
                   <td>{item.description_2}</td>
-                  <td><button onClick={(e) => handleAvailabilityChange(item.name, item.availability, 'english')}>Change Availability</button></td>
-                  <td><button >Edit</button></td>
-                  <td><button >Delete</button></td>
+                  <td><button  onClick={() => handleAvailabilityChange(item.name,item.available, 'english')}>Change Availability</button></td>
+                  <td><button onClick={() => handleOpenEditModal(item,'english')}>Edit</button></td>
+                  <td><button onClick={() => handleDelete(item.name,'english')}>Delete</button></td>
                 </tr>
               ))
               ):(
@@ -256,6 +305,56 @@ export function EditMenu() {
             </tbody>
           </table>
         </div>
+        {selectedEditItem && (
+        <Modal show={editModalOpen} onHide={handleCloseEditModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Edit Item</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Edit form goes here */}
+            <div className="mb-3">
+              <label>Name:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={selectedEditItem.name}
+                onChange={(e) => handleEditFormChange("name", e.target.value)}
+              />
+              <label>Title:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={selectedEditItem.title_name}
+                onChange={(e) => handleEditFormChange("title_name", e.target.value)}
+              />
+              <label>Price:</label>
+              <input
+                type="text"
+                className="form-control"
+                value={selectedEditItem.price}
+                onChange={(e) => handleEditFormChange("price", e.target.value)}
+              />
+              <label>Description 1:</label>
+              <textarea
+                className="form-control"
+                value={selectedEditItem.description_1}
+                onChange={(e) => handleEditFormChange("description_1", e.target.value)}
+              />
+              <label>Description 2:</label>
+              <textarea
+                className="form-control"
+                value={selectedEditItem.description_2}
+                onChange={(e) => handleEditFormChange("description_2", e.target.value)}
+              />
+            </div>
+            {/* Add other fields as needed */}
+          </Modal.Body>
+          <Modal.Footer>
+            <button onClick={handleCloseEditModal}>Close</button>
+            <button onClick={handleEditFormSubmit}>Submit</button>
+          </Modal.Footer>
+        </Modal>
+      )}
         </div>
         <div className="table-container center-table">
           <div className="German" id="target-selection-german">
@@ -282,9 +381,9 @@ export function EditMenu() {
                   <td>{String(item.available)}</td>
                   <td>{item.description_1}</td>
                   <td>{item.description_2}</td>
-                  <td><button onClick={handleAvailabilityChange(item.name,item.availability,'german')}>Change Availability</button></td>
-                  <td><button >Edit</button></td>
-                  <td><button >Delete</button></td>
+                  <td><button onClick={() => handleAvailabilityChange(item.name,item.available, 'german')}>Change Availability</button></td>
+                  <td><button onClick={() => handleOpenEditModal(item,'german')}>Edit</button></td>
+                  <td><button onClick={() => handleDelete(item.name,'german')}>Delete</button></td>
                 </tr>
               ))
               ):(
