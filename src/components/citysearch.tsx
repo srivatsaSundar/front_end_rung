@@ -19,6 +19,7 @@ function CitySearch() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
   const [currentTime, setCurrentTime] = useState(DateTime.local());
   const [pin, setPin] = useState("");
+  const [holiday, setholiday] = useState("");
   useEffect(() => {
     // Update the current time every minute
     const interval = setInterval(() => {
@@ -28,7 +29,39 @@ function CitySearch() {
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, [currentTime]);
+  const apis = "https://backend-rung.onrender.com/holiday/"
+  useEffect(() => {
+    fetch(apis)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setholiday(data);
+        // Check if it's a holiday once the data is loaded
+   
+      })
+      .catch((err) => console.log("error in fetching the pin", err));
+  }, [apis,currentTime]);
+  console.log (holiday);
 
+  
+  const ClosedMessage = ({ holidayNote }) => (
+    
+    <div
+      className="closed"
+      style={{
+        textAlign: "center",
+        fontSize: "30px",
+        marginBottom: "20px",
+        fontWeight: "600",
+      }}
+    >
+      Closed {holidayNote  && `for ${holidayNote}`}
+    </div>
+  );
   // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
@@ -37,6 +70,7 @@ function CitySearch() {
     setPin(e.target.value);
     setError(null);
   };
+
   const api= "https://backend-rung.onrender.com/code/"
   useEffect(() => {
     fetch(api)
@@ -160,21 +194,16 @@ else{
         </div>
       </div>
       <div>
-        {currentTime.hour >= 18 && currentTime.hour < 21 ? (
-          ""
-        ) : (
-          <div
-            className="closed"
-            style={{
-              textAlign: "center",
-              fontSize: "30px",
-              marginBottom: "20px",
-              fontWeight: "600",
-            }}
-          >
-            Closed
-          </div>
-        )}
+      <div>
+      {currentTime.hour >= 17 && currentTime.hour < 21  ? (
+        ""
+      ) : (
+        
+    <ClosedMessage holidayNote="Today" />
+
+
+      )}
+    </div>
       </div>
 
       <div>
