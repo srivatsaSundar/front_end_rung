@@ -19,7 +19,7 @@ function CitySearch() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
   const [currentTime, setCurrentTime] = useState(DateTime.local());
   const [pin, setPin] = useState("");
-  const [holiday, setholiday] = useState("");
+  const [holiday, setHoliday] = useState([]);
   useEffect(() => {
     // Update the current time every minute
     const interval = setInterval(() => {
@@ -39,15 +39,31 @@ function CitySearch() {
         return response.json();
       })
       .then((data) => {
-        setholiday(data);
-        // Check if it's a holiday once the data is loaded
-   
+        setHoliday(data);
+
       })
       .catch((err) => console.log("error in fetching the pin", err));
-  }, [apis,currentTime]);
+  }, [apis]);
   console.log (holiday);
 
-  
+  const isClosed = () => {
+    const currentDate = currentTime.toJSDate();
+    const isWithinSpecifiedHours =
+      currentTime.hour < 17 || currentTime.hour >= 21;
+
+    return (
+      isWithinSpecifiedHours ||
+      holiday.some((holidayData) => {
+        const holidayStartTime = DateTime.fromJSDate(holidayData.startDate);
+        const holidayEndTime = DateTime.fromJSDate(holidayData.endDate);
+
+        return (
+          currentDate >= holidayStartTime.toJSDate() &&
+          currentDate <= holidayEndTime.toJSDate()
+        );
+      })
+    );
+  };
   const ClosedMessage = ({ holidayNote }) => (
     
     <div
@@ -97,6 +113,29 @@ else{
 }
 };
 
+
+  const getHolidayNoteForCurrentTime = () => {
+    const currentDateTime = DateTime.local(); // Get current date and time
+  
+    const matchingHoliday = holiday.find((holidayData) => {
+      const holidayStartDateTime = DateTime.fromISO(
+        `${holidayData.startDate}T${holidayData.startTime}`
+      );
+      const holidayEndDateTime = DateTime.fromISO(
+        `${holidayData.endDate}T${holidayData.endTime}`
+      );
+  console.log(holidayStartDateTime);
+  console.log(holidayEndDateTime);
+      return (
+        currentDateTime >= holidayStartDateTime &&
+        currentDateTime <= holidayEndDateTime
+      );
+    });
+  
+    return matchingHoliday?.holidayNote ?? 'Today';
+  };
+
+ 
   return (
     <div className="citysearch">
       <div className="logo-main">
@@ -195,17 +234,13 @@ else{
       </div>
       <div>
       <div>
-      {currentTime.hour >= 17 && currentTime.hour < 21  ? (
-        ""
-      ) : (
-        
-    <ClosedMessage holidayNote="Today" />
-
-
-      )}
+      {isClosed() ? (
+      <ClosedMessage holidayNote={getHolidayNoteForCurrentTime()} />
+    ) : (
+      ''
+    )}
     </div>
       </div>
-
       <div>
         <ul className="icons-catch">
           <div className="list-item">

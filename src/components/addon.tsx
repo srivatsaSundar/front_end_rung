@@ -138,9 +138,9 @@ export function Addon() {
 
     const [showAddOnFoodModal, setShowAddOnFoodModal] = useState(false);
     const [addOnFoodData, setAddOnFoodData] = useState({
-        menuName: "",
-        menuGermanName: "",
-        foodName: "",
+        menu: "",
+        menu_germen: "",
+        addon: "",
     });
 
     const handleOpenAddOnFoodModal = () => {
@@ -163,7 +163,7 @@ export function Addon() {
         console.log(addOnFoodData);
         // Assuming your backend endpoint is 'https://backend-rung.onrender.com/add_on_food/'
         axios
-            .post("https://backend-rung.onrender.com/add_on_food/", addOnFoodData)
+            .post("https://backend-rung.onrender.com/add_addon_food/", addOnFoodData)
             .then((response) => {
                 console.log("Server Response:", response.data);
                 // Optionally, you can fetch the updated data after submitting
@@ -177,9 +177,9 @@ export function Addon() {
             });
     };
 
-    const handleDeleteAddOnFood = (add_on,menu_name) => {
+    const handleDeleteAddOnFood = (id) => {
         axios
-            .delete(`https://backend-rung.onrender.com/delete_add_on_food/${add_on}/`)
+            .delete(`https://backend-rung.onrender.com/delete_addon_food/${id}/`)
             .then((response) => {
                 console.log("Delete Response:", response.data);
                 // Optionally, you can fetch the updated data after deleting
@@ -317,8 +317,8 @@ export function Addon() {
                                 type="text"
                                 id="menuName"
                                 className="form-control"
-                                value={addOnFoodData.menuName}
-                                onChange={(e) => handleAddOnFoodInputChange("menuName", e.target.value)}
+                                value={addOnFoodData.menu}
+                                onChange={(e) => handleAddOnFoodInputChange("menu", e.target.value)}
                             />
                         </div>
                         <div className="mb-3">
@@ -327,8 +327,8 @@ export function Addon() {
                                 type="text"
                                 id="menuGermanName"
                                 className="form-control"
-                                value={addOnFoodData.menuGermanName}
-                                onChange={(e) => handleAddOnFoodInputChange("menuGermanName", e.target.value)}
+                                value={addOnFoodData.menu_german}
+                                onChange={(e) => handleAddOnFoodInputChange("menu_germen", e.target.value)}
                             />
                         </div>
                         <div className="mb-3">
@@ -337,8 +337,8 @@ export function Addon() {
                                 type="text"
                                 id="foodName"
                                 className="form-control"
-                                value={addOnFoodData.foodName}
-                                onChange={(e) => handleAddOnFoodInputChange("foodName", e.target.value)}
+                                value={addOnFoodData.addon}
+                                onChange={(e) => handleAddOnFoodInputChange("addon", e.target.value)}
                             />
                         </div>
                     </Modal.Body>
@@ -365,7 +365,7 @@ export function Addon() {
                                         <td>{item.menu_germen.name}</td>
                                         <td>{item.food.name}</td>
                                         <td>
-                                            <button onClick={() => handleDeleteAddOnFood(add_on,menu)}>
+                                            <button onClick={() => handleDeleteAddOnFood(item.id)}>
                                                 Delete
                                             </button>
                                         </td>
