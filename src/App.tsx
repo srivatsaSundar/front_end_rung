@@ -16,6 +16,7 @@ import { Dashboard } from "./pages/dashboard";
 import { EditMenu } from "./components/menu_edit";
 import { Postcodes } from "./components/postcodes";
 import { Holiday } from "./components/holiday";
+import { Addon } from "./components/addon";
 
 function App() {
   const column3Ref = useRef(null || undefined);
@@ -185,6 +186,10 @@ function App() {
         <Route
           path="/editmenu"
           element={<PrivateRoute element={<EditMenu />} />}
+        />
+         <Route
+          path="/addon"
+          element={<PrivateRoute element={<Addon/>} />}
         />
         <Route path="/postcodes" element={<PrivateRoute element={<Postcodes />} />} />
           <Route
