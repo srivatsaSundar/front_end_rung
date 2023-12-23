@@ -7,10 +7,18 @@ import { useLanguage } from "../components/LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
 import AppNavbar from "../components/navbar";
+import { useState, useEffect } from "react";
 
 export function Discount() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
+  const [cartCount, setCartCount] = useState(0);
 
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCartCount(JSON.parse(storedCart).length); // Assuming cart is an array
+    }
+  }, []);
   // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
@@ -18,7 +26,7 @@ export function Discount() {
   return (
     <div>
       <div className="yes">
-        <AppNavbar />
+        <AppNavbar count={cartCount} />
         <div
           style={{ paddingTop: 20, paddingBottom: 10, marginTop: 20 }}
           className="up"

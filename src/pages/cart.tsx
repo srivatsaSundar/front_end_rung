@@ -27,6 +27,7 @@ function Cart(props: ICart) {
     translations,
   } = props;
   
+  
   return (
     <div className="column3" ref={ref} style={style} id="cart">
       <div className="title-cart">

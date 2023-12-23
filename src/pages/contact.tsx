@@ -8,9 +8,18 @@ import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
 import AppNavbar from "../components/navbar";
 import ScrollToTop from "react-scroll-to-top";
+import { useState, useEffect } from "react";
 
 export function Contact() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCartCount(JSON.parse(storedCart).length); // Assuming cart is an array
+    }
+  }, []);
 
   // Define translations based on the selected language
   const translations =
@@ -19,7 +28,7 @@ export function Contact() {
   return (
     <div>
       <div style={{ fontSize: 16 }} className="yes">
-        <AppNavbar />
+        <AppNavbar count={cartCount}/>
         <div
           style={{ paddingTop: 20, paddingBottom: 20, marginTop: 30 }}
           className="up"

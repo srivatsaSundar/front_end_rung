@@ -5,7 +5,7 @@ import { Discount } from "./pages/discount";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NoPage } from "./pages/nopage";
 import { Menu, MenuItem } from "./pages/menu";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Order } from "./pages/order";
 import { useLanguage } from "./components/LanguageProvider";
 import { Final } from "./pages/final";
@@ -20,11 +20,38 @@ import { Addon } from "./components/addon";
 
 function App() {
   const column3Ref = useRef(null || undefined);
-  const [cart, setCart] = useState<MenuItem[]>([]);
+  const [cart, setCart] = useState([]);
   const [add_on_drink, setAdd_on_drink] = useState([]) as any[];
   const [add_on_food, setAdd_on_food] = useState([]) as any[];
 
   const { selectedLanguage } = useLanguage();
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    if(cart.length) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
+
+  useEffect(() => {
+    const cart = localStorage.getItem("cart");
+    if (cart) {
+      setCart(JSON.parse(cart));
+    }
+  }, []);
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      localStorage.removeItem("cart");
+      window.location.reload();
+    },  1 * 60 * 60 * 1000); 
+
+    return () => clearTimeout(timeoutId);
+  }, []);
 
   function increaseQuantity(item) {
     const existingItemIndex = cart.findIndex(
@@ -60,19 +87,22 @@ function App() {
   };
 
   const deleteFromCart = (item) => {
-    const existingItemIndex = cart.findIndex(
-      (cartItem) =>
-        cartItem.id === item.id &&
-        cartItem.drink === item.drink &&
-        cartItem.food === item.food,
-    );
+  const existingItemIndex = cart.findIndex(
+    (cartItem) =>
+      cartItem.id === item.id &&
+      cartItem.drink === item.drink &&
+      cartItem.food === item.food
+  );
 
-    if (existingItemIndex !== -1) {
-      const updatedCart = [...cart];
-      updatedCart.splice(existingItemIndex, 1);
-      setCart(updatedCart);
-    }
-  };
+  if (existingItemIndex !== -1) {
+    const updatedCart = [...cart];
+    updatedCart.splice(existingItemIndex, 1);
+    setCart(updatedCart);
+
+    // Update localStorage after updating the cart state
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  }
+};
 
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
