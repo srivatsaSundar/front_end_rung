@@ -195,8 +195,29 @@ export function Addon() {
         <AppNavbar count={0} />
       </div>
       <div id="target-selection-add-on">
-        <h3>Add on</h3>
-        <button onClick={handleOpenAddModal}>+</button>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            marginTop: "30px",
+          }}
+        >
+          <h3>Add on</h3>
+          <div className="but">
+            <button
+              onClick={handleOpenAddModal}
+              style={{
+                width: "40px",
+                marginTop: "-6px",
+                marginBottom: "0px",
+                padding: "3px",
+              }}
+            >
+              +
+            </button>
+          </div>
+        </div>
         <Modal show={showAddModal} onHide={handleCloseAddModal}>
           <Modal.Header closeButton>
             <Modal.Title>Add data</Modal.Title>
@@ -300,8 +321,28 @@ export function Addon() {
         )}
       </div>
       <div id="target-selection-add-on-food">
-        <h3>Add on Food</h3>
-        <button onClick={handleOpenAddOnFoodModal}>Add New Add-on Food</button>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+        >
+          <h3>Add on Food</h3>
+          <div className="but">
+            <button
+              onClick={handleOpenAddModal}
+              style={{
+                width: "40px",
+                marginTop: "-6px",
+                marginBottom: "0px",
+                padding: "3px",
+              }}
+            >
+              +
+            </button>
+          </div>
+        </div>
         <Modal show={showAddOnFoodModal} onHide={handleCloseAddOnFoodModal}>
           <Modal.Header closeButton>
             <Modal.Title>Add New Add-on Food</Modal.Title>

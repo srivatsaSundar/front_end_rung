@@ -69,15 +69,15 @@
 .but button {
   color: #0c0c0c;
   background-color: rgb(250, 248, 248);
-  padding: 4px;
+  padding: 5px;
   border: 2px solid black;
   border-radius: 5px;
   display: block;
   text-decoration: none;
   margin-right: 20px;
   font-size: 15px;
-  width: 30px !important;
-  height: 30px !important;
+  width: 35px !important;
+  height: 35px !important;
 }
 .but {
   display: flex;

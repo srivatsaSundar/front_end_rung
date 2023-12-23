@@ -112,11 +112,21 @@ export function Postcodes() {
       <div className="yes">
         <AppNavbar />
       </div>
-      <div className="postcodes">
-        <h1>{translations.postcodesEdit}</h1>
-      </div>
-      <div>
-        <button onClick={handleOpenModal}>+</button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          marginTop: "30px",
+        }}
+      >
+        <div className="postcodes">
+          <h3>{translations.postcodesEdit}</h3>
+        </div>
+        <div className="but" style={{ marginLeft: "40px" }}>
+          <button onClick={handleOpenModal}>+</button>
+        </div>
       </div>
       <div>
         <Modal show={showModal} onHide={handleCloseModal}>
