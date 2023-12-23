@@ -77,14 +77,15 @@ export function Order(props: IOrder) {
         )
           .toString()
           .padStart(2, "0")}-${selectedDateTime
-            .getDate()
-            .toString()
-            .padStart(2, "0")}`;
+          .getDate()
+          .toString()
+          .padStart(2, "0")}`;
 
         // Map cart items to the format you want
         const cartItems = cart.map((cartItem) => ({
-          item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
-            }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+          item_name: `${cartItem.name}${
+            cartItem.drink ? ` + ${cartItem.drink}` : ""
+          }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
           quantity: cartItem.quantity,
           cost: cartItem.price, // You need to update this based on your cart structure
         }));
@@ -273,8 +274,8 @@ export function Order(props: IOrder) {
                         const time = `${hour
                           .toString()
                           .padStart(2, "0")}:${minute
-                            .toString()
-                            .padStart(2, "0")}`;
+                          .toString()
+                          .padStart(2, "0")}`;
 
                         return (
                           <option key={time} value={time}>
@@ -297,8 +298,8 @@ export function Order(props: IOrder) {
                         const time = `${hour
                           .toString()
                           .padStart(2, "0")}:${minute
-                            .toString()
-                            .padStart(2, "0")}`;
+                          .toString()
+                          .padStart(2, "0")}`;
 
                         return (
                           <option key={time} value={time}>

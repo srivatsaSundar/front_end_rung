@@ -71,15 +71,14 @@
   "loginButton": "Anmelden",
   "logoutButton": "Abmelden",
   "invalidCredentials": "Ungültige Anmeldeinformationen",
-  "postcodes":"Postleitzahlen",
-  "holiday":"Feiertage und Schließung",
-  "Loading":"Postleitzahlen werden geladen...",
+  "postcodes": "Postleitzahlen",
+  "holiday": "Feiertage und Schließung",
+  "Loading": "Postleitzahlen werden geladen...",
   "menuEdit": "Menü bearbeiten",
-  "menuname":"Menü",
-  "gotodash":"Gehen Sie zum Dashboard",
+  "menuname": "Menü",
+  "gotodash": "Gehen Sie zum Dashboard",
   "postcodesEdit": "Postleitzahlen bearbeiten",
   "holidayEdit": "Feiertage und Schließung bearbeiten",
-  "holidayload":"Feiertage und Schließung werden geladen...",
-  "menuLoad":"Menü wird geladen..."
-
+  "holidayload": "Feiertage und Schließung werden geladen...",
+  "menuLoad": "Menü wird geladen..."
 }

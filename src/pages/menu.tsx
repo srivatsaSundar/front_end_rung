@@ -70,7 +70,6 @@ export function Menu(props: IMenu) {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL = translations.url;
 
-
   const targetURL2 = "https://backend-rung.onrender.com/add_on_drink";
 
   useEffect(() => {
@@ -104,8 +103,6 @@ export function Menu(props: IMenu) {
       )
     );
   }
-
-
 
   const titleImageUrls = {
     "Popular Dishes": Popular,
@@ -161,7 +158,6 @@ export function Menu(props: IMenu) {
       .then((data) => setAdd_on_food(data))
       .catch((err) => console.log("error in fetching add_on_food", err));
   }, [setMenu]);
-
 
   function handleAddOnClick(itemName) {
     if (selectedItemName === itemName) {
@@ -341,7 +337,6 @@ export function Menu(props: IMenu) {
 
   const scrollToColumn3 = () => {
     if (column3Ref.current) {
-    
       column3Ref.current.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -589,7 +584,6 @@ export function Menu(props: IMenu) {
               className="cart-button"
               onClick={() => {
                 scrollToColumn3();
-               
               }}
             >
               {translations.shoppingCartTitle} - {calculateTotalPrice()}/- CHF

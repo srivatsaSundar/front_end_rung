@@ -28,7 +28,7 @@ export function Contact() {
   return (
     <div>
       <div style={{ fontSize: 16 }} className="yes">
-        <AppNavbar count={cartCount}/>
+        <AppNavbar count={cartCount} />
         <div
           style={{ paddingTop: 20, paddingBottom: 20, marginTop: 30 }}
           className="up"

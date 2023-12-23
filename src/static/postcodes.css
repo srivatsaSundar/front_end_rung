@@ -14,16 +14,23 @@
 
 .styled-table {
   margin: 25px 0;
+  display: block;
   font-size: 0.9em;
-  min-width: 400px;
+  min-width: 300px;
+  max-width: 1200px;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  border-radius: 20px;
+  border-radius: 10px;
+  max-height: 800px;
+  overflow-y: auto;
 }
 
 .styled-table thead tr {
   background-color: #ec5800;
   color: #ffffff;
   text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 .styled-table th,
 .styled-table td {
@@ -59,6 +66,26 @@
   margin: 10px;
   margin-bottom: 20px;
 }
+.but button {
+  color: #0c0c0c;
+  background-color: rgb(250, 248, 248);
+  padding: 4px;
+  border: 2px solid black;
+  border-radius: 5px;
+  display: block;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 15px;
+  width: 30px !important;
+  height: 30px !important;
+}
+.but {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 8px;
+  margin-bottom: 10px;
+}
 
 /* fdrgfthyjukilo;pdgfthyjukofghjkl;fdghjkl;fdghjkl;fdghjkl;dfghjkl; */
 
@@ -76,13 +103,14 @@
 .holiday form div {
   margin-left: auto;
   margin-right: auto;
+  width: 70%;
 }
-.holiday form input {
+.holiday input {
   border-radius: 10px;
   border: 1px solid rgb(196, 186, 186);
   padding: 10px;
   margin: 10px;
-  width: 38%;
+  width: 60%;
   margin-top: 30px;
 }
 .holiday .buttons button {
@@ -103,15 +131,20 @@
   .styled-table {
     margin: 15px 0;
     font-size: 0.7em;
-    min-width: 300px;
+    max-width: 340px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius: 20px;
+    display: block;
+    max-height: 500px;
   }
 
   .styled-table thead tr {
     background-color: #ec5800;
     color: #ffffff;
     text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
   .styled-table th,
   .styled-table td {
@@ -146,6 +179,26 @@
     margin: 8px;
     margin-bottom: 10px;
   }
+  .but button {
+    color: #0c0c0c;
+    background-color: rgb(250, 248, 248);
+    padding: 4px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: block;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 15px;
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .but {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 8px;
+    margin-bottom: 10px;
+  }
 
   /* holidayyyyy */
   .holiday form input {
@@ -153,11 +206,17 @@
     border: 1px solid rgb(196, 186, 186);
     padding: 10px;
     margin: 10px;
-    width: 65%;
+    width: 100%;
     box-sizing: border-box;
   }
+  .holiday form div {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    justify-content: space-evenly;
+  }
   .holiday form {
-    margin: 20px;
+    margin: 10px;
   }
 
   /* menu-edit */
@@ -166,4 +225,3 @@
     padding: 8px 8px;
   }
 }
-

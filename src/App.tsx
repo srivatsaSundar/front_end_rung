@@ -33,7 +33,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(cart.length) {
+    if (cart.length) {
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   }, [cart]);
@@ -45,10 +45,13 @@ function App() {
     }
   }, []);
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      localStorage.removeItem("cart");
-      window.location.reload();
-    },  1 * 60 * 60 * 1000); 
+    const timeoutId = setTimeout(
+      () => {
+        localStorage.removeItem("cart");
+        window.location.reload();
+      },
+      1 * 60 * 60 * 1000,
+    );
 
     return () => clearTimeout(timeoutId);
   }, []);
@@ -87,22 +90,22 @@ function App() {
   };
 
   const deleteFromCart = (item) => {
-  const existingItemIndex = cart.findIndex(
-    (cartItem) =>
-      cartItem.id === item.id &&
-      cartItem.drink === item.drink &&
-      cartItem.food === item.food
-  );
+    const existingItemIndex = cart.findIndex(
+      (cartItem) =>
+        cartItem.id === item.id &&
+        cartItem.drink === item.drink &&
+        cartItem.food === item.food,
+    );
 
-  if (existingItemIndex !== -1) {
-    const updatedCart = [...cart];
-    updatedCart.splice(existingItemIndex, 1);
-    setCart(updatedCart);
+    if (existingItemIndex !== -1) {
+      const updatedCart = [...cart];
+      updatedCart.splice(existingItemIndex, 1);
+      setCart(updatedCart);
 
-    // Update localStorage after updating the cart state
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  }
-};
+      // Update localStorage after updating the cart state
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+    }
+  };
 
   const calculateTotalPrice = () => {
     if (cart && cart.length > 0) {
@@ -158,44 +161,44 @@ function App() {
   const translations =
     selectedLanguage === "en" ? translations_en : translations_de;
 
-    function PrivateRoute({ element }) {
-      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    
-      return isLoggedIn ? (
-        element
-      ) : (
-        <Navigate to="/manage" state={{ from: "/dashboard" }} />
-      );
-    }
-    function PrivateRouteholi({ element }) {
-      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    
-      return isLoggedIn ? (
-        element
-      ) : (
-        <Navigate to="/manage" state={{ from: "/holiday" }} />
-      );
-    }
+  function PrivateRoute({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-    function PrivateRoutemenu({ element }) {
-      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    
-      return isLoggedIn ? (
-        element
-      ) : (
-        <Navigate to="/manage" state={{ from: "/editmenu" }} />
-      );
-    }
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/dashboard" }} />
+    );
+  }
+  function PrivateRouteholi({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-    function PrivateRoutepost({ element }) {
-      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    
-      return isLoggedIn ? (
-        element
-      ) : (
-        <Navigate to="/manage" state={{ from: "/postcodes" }} />
-      );
-    }
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/holiday" }} />
+    );
+  }
+
+  function PrivateRoutemenu({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/editmenu" }} />
+    );
+  }
+
+  function PrivateRoutepost({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/postcodes" }} />
+    );
+  }
   return (
     <div>
       <BrowserRouter>
@@ -206,22 +209,22 @@ function App() {
           <Route path="/discount" element={<Discount />} />
           <Route path="/manage" element={<Manage />} />
           <Route
-          path="/dashboard"
-          element={<PrivateRoute element={<Dashboard />} />}
-        />
-         <Route
-          path="/holiday"
-          element={<PrivateRoute element={<Holiday />} />}
-        />
-        <Route
-          path="/editmenu"
-          element={<PrivateRoute element={<EditMenu />} />}
-        />
-         <Route
-          path="/addon"
-          element={<PrivateRoute element={<Addon/>} />}
-        />
-        <Route path="/postcodes" element={<PrivateRoute element={<Postcodes />} />} />
+            path="/dashboard"
+            element={<PrivateRoute element={<Dashboard />} />}
+          />
+          <Route
+            path="/holiday"
+            element={<PrivateRoute element={<Holiday />} />}
+          />
+          <Route
+            path="/editmenu"
+            element={<PrivateRoute element={<EditMenu />} />}
+          />
+          <Route path="/addon" element={<PrivateRoute element={<Addon />} />} />
+          <Route
+            path="/postcodes"
+            element={<PrivateRoute element={<Postcodes />} />}
+          />
           <Route
             path="/menu"
             element={
@@ -263,7 +266,6 @@ function App() {
           <Route path="/placed" element={<Final />} />
         </Routes>
       </BrowserRouter>
-     
     </div>
   );
 }

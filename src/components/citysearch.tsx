@@ -29,7 +29,7 @@ function CitySearch() {
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, [currentTime]);
-  const apis = "https://backend-rung.onrender.com/holiday/"
+  const apis = "https://backend-rung.onrender.com/holiday/";
   useEffect(() => {
     fetch(apis)
       .then((response) => {
@@ -40,11 +40,10 @@ function CitySearch() {
       })
       .then((data) => {
         setHoliday(data);
-
       })
       .catch((err) => console.log("error in fetching the pin", err));
   }, [apis]);
-  console.log (holiday);
+  console.log(holiday);
 
   const isClosed = () => {
     const currentDate = currentTime.toJSDate();
@@ -65,7 +64,6 @@ function CitySearch() {
     );
   };
   const ClosedMessage = ({ holidayNote }) => (
-    
     <div
       className="closed"
       style={{
@@ -75,7 +73,7 @@ function CitySearch() {
         fontWeight: "600",
       }}
     >
-      Closed {holidayNote  && `for ${holidayNote}`}
+      Closed {holidayNote && `for ${holidayNote}`}
     </div>
   );
   // Define translations based on the selected language
@@ -87,7 +85,7 @@ function CitySearch() {
     setError(null);
   };
 
-  const api= "https://backend-rung.onrender.com/code/"
+  const api = "https://backend-rung.onrender.com/code/";
   useEffect(() => {
     fetch(api)
       .then((response) => {
@@ -99,43 +97,40 @@ function CitySearch() {
       .then((data) => setPincode(data))
       .catch((err) => console.log("error in fetching the pin", err));
   }, [api]);
-  console.log(api)
+  console.log(api);
   console.log(pincode);
-const handlepin = pincode;
-console.log(handlepin);
-const handleSearch = (e) => {
-if (pin){
-  e.preventDefault();
-  navigate(`/menu`);
-}
-else{
-  alert("Please select the pincode");
-}
-};
-
+  const handlepin = pincode;
+  console.log(handlepin);
+  const handleSearch = (e) => {
+    if (pin) {
+      e.preventDefault();
+      navigate(`/menu`);
+    } else {
+      alert("Please select the pincode");
+    }
+  };
 
   const getHolidayNoteForCurrentTime = () => {
     const currentDateTime = DateTime.local(); // Get current date and time
-  
+
     const matchingHoliday = holiday.find((holidayData) => {
       const holidayStartDateTime = DateTime.fromISO(
-        `${holidayData.startDate}T${holidayData.startTime}`
+        `${holidayData.startDate}T${holidayData.startTime}`,
       );
       const holidayEndDateTime = DateTime.fromISO(
-        `${holidayData.endDate}T${holidayData.endTime}`
+        `${holidayData.endDate}T${holidayData.endTime}`,
       );
-  console.log(holidayStartDateTime);
-  console.log(holidayEndDateTime);
+      console.log(holidayStartDateTime);
+      console.log(holidayEndDateTime);
       return (
         currentDateTime >= holidayStartDateTime &&
         currentDateTime <= holidayEndDateTime
       );
     });
-  
-    return matchingHoliday?.holidayNote ?? 'Today';
+
+    return matchingHoliday?.holidayNote ?? "Today";
   };
 
- 
   return (
     <div className="citysearch">
       <div className="logo-main">
@@ -169,20 +164,20 @@ else{
                 <div className="search-pin">
                   <select value={pin} onChange={handlePincodeChange}>
                     <option value="">{translations.selectPincode}</option>
-                  
+
                     {handlepin ? (
-    // Iterate over options only if handlepin is available
-    handlepin.map((item, index) => (
-      <option key={index} value={item.postal_code}>
-        {item.postal_code}
-      </option>
-    ))
-  ) : (
-    // Optionally, you can include a loading or placeholder option
-    <option value="" disabled>
-      {translations.Loading}
-    </option>
-  )}
+                      // Iterate over options only if handlepin is available
+                      handlepin.map((item, index) => (
+                        <option key={index} value={item.postal_code}>
+                          {item.postal_code}
+                        </option>
+                      ))
+                    ) : (
+                      // Optionally, you can include a loading or placeholder option
+                      <option value="" disabled>
+                        {translations.Loading}
+                      </option>
+                    )}
                   </select>
                   <button onClick={handleSearch}>
                     <Icofont className="icon-pin" icon="icofont-search" />
@@ -233,13 +228,13 @@ else{
         </div>
       </div>
       <div>
-      <div>
-      {isClosed() ? (
-      <ClosedMessage holidayNote={getHolidayNoteForCurrentTime()} />
-    ) : (
-      ''
-    )}
-    </div>
+        <div>
+          {isClosed() ? (
+            <ClosedMessage holidayNote={getHolidayNoteForCurrentTime()} />
+          ) : (
+            ""
+          )}
+        </div>
       </div>
       <div>
         <ul className="icons-catch">

@@ -84,7 +84,6 @@
   border-radius: 5px;
   border: none;
   padding-top: 10px;
-  
 }
 
 .search-pin button {
@@ -236,8 +235,8 @@ select {
     border: none;
     width: 270px;
     height: 40px;
-    
-  visibility: visible;
+
+    visibility: visible;
   }
   .search-button {
     width: 100px;

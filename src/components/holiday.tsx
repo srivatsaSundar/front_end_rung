@@ -5,7 +5,7 @@ import translations_de from "../translations/translation_de.json";
 import { Footer } from "./footer";
 import AppNavbar from "./navbar";
 import { Link } from "react-router-dom";
-import "../static/postcodes.css"
+import "../static/postcodes.css";
 import axios from "axios";
 
 //display footer
@@ -21,29 +21,30 @@ export function Holiday() {
   };
 
   const [data, setData] = useState([]);
-  const api = "https://backend-rung.onrender.com/holiday/"
+  const api = "https://backend-rung.onrender.com/holiday/";
   const fetchData = () => {
-    axios.get(api)
-      .then(response => {
+    axios
+      .get(api)
+      .then((response) => {
         console.log(response.data);
         setData(response.data);
       })
-      .catch(error => {
-        console.error('Error:', error);
+      .catch((error) => {
+        console.error("Error:", error);
         // Handle errors if needed
       });
   };
   useEffect(() => {
     fetchData();
-    console.log(api)
+    console.log(api);
     console.log(data);
   }, []);
   const [formData, setFormData] = useState({
-    start_data: '',
-    end_data: '',
-    start_time: '',
-    end_time: '',
-    holiday_note: '',
+    start_data: "",
+    end_data: "",
+    start_time: "",
+    end_time: "",
+    holiday_note: "",
   });
 
   const handleInputChange = (e) => {
@@ -56,24 +57,26 @@ export function Holiday() {
     e.preventDefault();
     console.log(formData);
     // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
-    axios.post('https://backend-rung.onrender.com/add_holiday/', formData)
-      .then(response => {
-        console.log('Server Response:', response.data);
+    axios
+      .post("https://backend-rung.onrender.com/add_holiday/", formData)
+      .then((response) => {
+        console.log("Server Response:", response.data);
       })
-      .catch(error => {
-        console.error('Error:', error);
+      .catch((error) => {
+        console.error("Error:", error);
         // Handle errors if needed
       });
   };
 
   const handleDelete = (startData) => {
-    axios.delete(`https://backend-rung.onrender.com/delete_holiday/${startData}/`)
-      .then(response => {
-        console.log('Delete Response:', response.data);
+    axios
+      .delete(`https://backend-rung.onrender.com/delete_holiday/${startData}/`)
+      .then((response) => {
+        console.log("Delete Response:", response.data);
         // Update the list of holidays after successful deletion
       })
-      .catch(error => {
-        console.error('Delete Error:', error);
+      .catch((error) => {
+        console.error("Delete Error:", error);
         // Handle errors if needed
       });
   };
@@ -85,13 +88,86 @@ export function Holiday() {
       <div className="holiday">
         <h3>{translations.holidayEdit}</h3>
         <form onSubmit={handleSubmit}>
-        <div>
-        Start Date: <input type="date" name="start_data" value={formData.start_data} onChange={handleInputChange} />
-        End Date: <input type="date" name="end_data" value={formData.end_data} onChange={handleInputChange} />
-        Start Time: <input type="time" name="start_time" value={formData.start_time} onChange={handleInputChange} />
-        End Time: <input type="time" name="end_time" value={formData.end_time} onChange={handleInputChange} />
-        Holiday Note: <input type="text" name="holiday_note" value={formData.holiday_note} onChange={handleInputChange} />
-      </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              Start Date:{" "}
+              <input
+                type="date"
+                name="start_data"
+                value={formData.start_data}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              End Date:{" "}
+              <input
+                type="date"
+                name="end_data"
+                value={formData.end_data}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              Start Time:{" "}
+              <input
+                type="time"
+                name="start_time"
+                value={formData.start_time}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              End Time:{" "}
+              <input
+                type="time"
+                name="end_time"
+                value={formData.end_time}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            Holiday Note:{" "}
+            <input
+              type="text"
+              name="holiday_note"
+              value={formData.holiday_note}
+              onChange={handleInputChange}
+              style={{ width: "77%" }}
+            />
+          </div>
           <div className="buttons">
             <button type="submit">Submit</button>
           </div>
@@ -109,17 +185,21 @@ export function Holiday() {
               </tr>
             </thead>
             <tbody>
-              { data? (
-              data.map((item) => (
-                <tr>
-                  <td>{item.start_data}</td>
-                  <td>{item.end_data}</td>
-                  <td>{item.start_time}</td>
-                  <td>{item.end_time}</td>
-                  <td>{item.holiday_note}</td>
-                  <td><button onClick={() => handleDelete(item.start_data)}>Delete</button></td>
-                </tr>
-              ))
+              {data ? (
+                data.map((item) => (
+                  <tr>
+                    <td>{item.start_data}</td>
+                    <td>{item.end_data}</td>
+                    <td>{item.start_time}</td>
+                    <td>{item.end_time}</td>
+                    <td>{item.holiday_note}</td>
+                    <td>
+                      <button onClick={() => handleDelete(item.start_data)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
               ) : (
                 <tr>
                   <td>{translations.holidayload}</td>
@@ -129,11 +209,13 @@ export function Holiday() {
           </table>
         </div>
         <div className="buttons" style={{ marginBottom: "30px" }}>
-          <Link to="/dashboard"><button>{translations.gotodash}</button></Link>
+          <Link to="/dashboard">
+            <button>{translations.gotodash}</button>
+          </Link>
           <button onClick={handleLogout}> {translations.logoutButton}</button>
         </div>
         <Footer />
       </div>
-    </div >
+    </div>
   );
 }

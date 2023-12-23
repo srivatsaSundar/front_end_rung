@@ -5,7 +5,7 @@ import translations_de from "../translations/translation_de.json";
 import { Link } from "react-router-dom";
 import AppNavbar from "../components/navbar";
 import { Footer } from "../components/footer";
-import "../static/header.css"
+import "../static/header.css";
 
 //display footer
 export function Dashboard() {
@@ -49,4 +49,3 @@ export function Dashboard() {
     </div>
   );
 }
-
