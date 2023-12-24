@@ -49,22 +49,23 @@ function CitySearch() {
 
   const isClosed = () => {
     const currentDate = currentTime.toJSDate();
-    const isWithinSpecifiedHours =
-      currentTime.hour < 17 || currentTime.hour >= 21;
-    return (
-      isWithinSpecifiedHours ||
-      holiday.some((holidayData) => {
-        const holidayStartTime = DateTime.fromJSDate(holidayData.startDate);
-        const holidayEndTime = DateTime.fromJSDate(holidayData.endDate);
-
-        return (
-          currentDate >= holidayStartTime.toJSDate() &&
-          currentDate <= holidayEndTime.toJSDate()
-        );
-      })
-    );
+    const isWithinSpecifiedHours = currentTime.hour < 17 || currentTime.hour >= 21;
+  
+    console.log("isWithinSpecifiedHours:", isWithinSpecifiedHours);
+  
+    const holidayCheck = holiday.some((holidayItem) => {
+      const holidayStartTime = DateTime.fromISO(holidayItem.start_data).toJSDate();
+      const holidayEndTime = DateTime.fromISO(holidayItem.end_data).toJSDate();
+      return currentDate >= holidayStartTime && currentDate <= holidayEndTime;
+    });
+  
+    console.log("holidayCheck:", holidayCheck);
+  
+    return isWithinSpecifiedHours || holidayCheck;
   };
   
+  console.log(isClosed());
+
   const ClosedMessage = ({ holidayNote }) => (
     <div
       className="closed"
@@ -119,6 +120,10 @@ function CitySearch() {
       const holidayStartDateTime = DateTime.fromISO(holidayData.start_data);
       const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
 
+      console.log("Holiday Start Date Time:", holidayStartDateTime);
+      console.log("Holiday End Date Time:", holidayEndDateTime);
+      console.log("Current Date Time:", currentDateTime.toISO());
+      console.log("Holiday Data:", holidayData.holiday_note);
 
       if (currentDateTime >= holidayStartDateTime && currentDateTime <= holidayEndDateTime) {
         // Log and return the holiday note if there's a match

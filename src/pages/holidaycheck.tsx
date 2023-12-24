@@ -32,16 +32,24 @@ const useHolidayCheck = () => {
     const currentDate = currentTime.toJSDate();
     const isWithinSpecifiedHours = currentTime.hour < 17 || currentTime.hour >= 21;
 
-    return (
-      isWithinSpecifiedHours ||
-      holiday.some((holidayData) => {
-        const holidayStartTime = DateTime.fromJSDate(holidayData.startDate);
-        const holidayEndTime = DateTime.fromJSDate(holidayData.endDate);
+    console.log("isWithinSpecifiedHours:", isWithinSpecifiedHours);
 
-        return currentDate >= holidayStartTime.toJSDate() && currentDate <= holidayEndTime.toJSDate();
-      })
-    );
+    const holidayCheck = holiday.some((holidayItem) => {
+      const holidayStartTime = DateTime.fromISO(holidayItem.start_data).toJSDate();
+      const holidayEndTime = DateTime.fromISO(holidayItem.end_data).toJSDate();
+
+      console.log("currentDate:", currentDate);
+      console.log("holidayStartTime:", holidayStartTime);
+      console.log("holidayEndTime:", holidayEndTime);
+
+      return currentDate >= holidayStartTime && currentDate <= holidayEndTime;
+    });
+
+    console.log("holidayCheck:", holidayCheck);
+
+    return isWithinSpecifiedHours || holidayCheck;
   };
+
 
   const getHolidayNoteForCurrentTime = () => {
     const currentDateTime = DateTime.local();
