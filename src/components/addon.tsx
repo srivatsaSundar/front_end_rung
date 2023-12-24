@@ -357,7 +357,7 @@ export function Addon() {
           <h3>Add on Food</h3>
           <div className="but">
             <button
-              onClick={handleOpenAddModal}
+              onClick={handleOpenAddOnFoodModal}
               style={{
                 width: "40px",
                 marginTop: "-6px",
