@@ -116,10 +116,6 @@ function CitySearch() {
       const holidayStartDateTime = DateTime.fromISO(holidayData.start_data);
 const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
 
-      console.log("Holiday Start Date Time:", holidayStartDateTime);
-      console.log("Holiday End Date Time:", holidayEndDateTime);
-      console.log("Current Date Time:", currentDateTime.toISO());
-      console.log("Holiday Data:", holidayData.holiday_note);
       
       if (currentDateTime >= holidayStartDateTime && currentDateTime <= holidayEndDateTime) {
         // Log and return the holiday note if there's a match
@@ -170,7 +166,8 @@ const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
 
                     {handlepin ? (
                       // Iterate over options only if handlepin is available
-                      handlepin.map((item, index) => (
+                      handlepin.filter(item=>item.available)
+                      .map((item, index) => (
                         <option key={index} value={item.postal_code}>
                           {item.postal_code}
                         </option>

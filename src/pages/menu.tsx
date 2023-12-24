@@ -403,7 +403,7 @@ export function Menu(props: IMenu) {
               <img src={titleImageUrls[title]} alt={`Image for ${title}`} />
               <hr />
               {menu
-                .filter((item) => item.title_name === title)
+                .filter((item) => item.title_name === title && item.available)
                 .map((item, itemIndex) => (
                   <div className="cardMenu" key={itemIndex}>
                     <div className="card-bodyMenu">
@@ -550,14 +550,16 @@ export function Menu(props: IMenu) {
                           (selectedItemName === item.name &&
                             (selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood))) && (
-                          <button
-                            className="add-button"
-                            onClick={() => addToCart(item)}
-                          >
-                            <Icofont icon="icofont-bag" /> {translations.add}
-                          </button>
-                        )}
+                                <button
+                                className="add-button"
+                                onClick={() => addToCart(item)}
+                              >
+                                <Icofont icon="icofont-bag" /> {translations.add}
+                              </button>
+                            )}
+                                
                       </div>
+                              
                     </div>
                   </div>
                 ))}
