@@ -81,8 +81,11 @@ export function EditMenu() {
         .then((response) => {
           console.log("Server Response:", response.data);
           handleCloseModal();
-          const add = () => toast.success("Data added successfully!");
+          const add = () => toast.success("Menu added successfully!");
           add();
+          setTimeout(() => {
+            window.location.reload();
+          }, 6000);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -94,6 +97,11 @@ export function EditMenu() {
         .post("https://backend-rung.onrender.com/add_menu_germen/", formData)
         .then((response) => {
           console.log("Server Response:", response.data);
+          const add = () => toast.success("Menu added successfully!");
+          add();
+          setTimeout(() => {
+            window.location.reload();
+          }, 6000);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -144,6 +152,9 @@ export function EditMenu() {
         console.log("Server Response:", response.data);
         const availability = () => toast.success("Availability changed successfully!");
         availability();
+        setTimeout(() => {
+          window.location.reload();
+        }, 6000);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -158,7 +169,9 @@ export function EditMenu() {
           console.log("Delete Response:", response.data);
           const deleted = () => toast.success("Deleted menu successfully!");
           deleted();
-          setData([...data]);
+          setTimeout(() => {
+            window.location.reload();
+          }, 6000);
         })
         .catch((error) => {
           console.error("Error deleting postal code:", error);
@@ -170,6 +183,9 @@ export function EditMenu() {
           console.log("Delete Response:", response.data);
           const deleted = () => toast.success("Deleted menu successfully!");
           deleted();
+          setTimeout(() => {
+            window.location.reload();
+          }, 6000);
         })
         .catch((error) => {
           console.error("Error deleting postal code:", error);
@@ -213,6 +229,9 @@ export function EditMenu() {
           const edit = () => toast.success("Edited menu successfully!");
           edit();
           setData([...data]);
+          setTimeout(() => {
+            window.location.reload();
+          }, 6000);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -231,6 +250,9 @@ export function EditMenu() {
           const edit = () => toast.success("Edited menu successfully!");
           edit();
           setData([...data]);
+          setTimeout(() => {
+            window.location.reload();
+          }, 6000);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -239,19 +261,6 @@ export function EditMenu() {
     }
   };
 
-  const handleDeleteAddOn = (name) => {
-    axios
-      .delete(`https://backend-rung.onrender.com/delete_add_on/${name}/`)
-      .then((response) => {
-        console.log("Delete Response:", response.data);
-        const deleted = () => toast.success("Deleted Addon successfully!");
-        deleted();
-        setData([]);
-      })
-      .catch((error) => {
-        console.error("Error deleting postal code:", error);
-      });
-  };
   const [showAddModal, setShowAddModal] = useState(false);
   const [addData, setAddData] = useState([
     {
@@ -270,23 +279,6 @@ export function EditMenu() {
       ...prevData,
       [field]: value,
     }));
-  };
-
-  const handleAddSubmit = (e) => {
-    e.preventDefault();
-    console.log(addData);
-    axios
-      .post("https://backend-rung.onrender.com/add_on/", addData)
-      .then((response) => {
-        console.log("Server Response:", response.data);
-        handleCloseAddModal();
-        const add = () => toast.success("Addon added successfully!");
-        add();
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        // Handle errors if needed
-      });
   };
 
   const scrollToDiv = () => {
@@ -387,7 +379,6 @@ export function EditMenu() {
       <div className="buttons">
         <button onClick={handleMenu}>Menu English</button>
         <button onClick={handleMenuGerman}>Menu German</button>
-        <button onClick={handleAddOn}>Add on</button>
       </div>
       <div className="menu-edit">
         <h2 style={{ textAlign: "center", marginTop: "30px" }}>
@@ -565,92 +556,6 @@ export function EditMenu() {
                         <button
                           onClick={() => handleDelete(item.name, "german")}
                         >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td>{translations.menuLoad}</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div id="target-selection-add-on">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <h3>Add on</h3>
-            <div className="but">
-              <button
-                onClick={handleOpenAddModal}
-                style={{
-                  width: "40px",
-                  marginTop: "-6px",
-                  marginBottom: "0px",
-                  padding: "3px",
-                }}
-              >
-                +
-              </button>
-            </div>
-          </div>
-          <Modal show={showAddModal} onHide={handleCloseAddModal}>
-            <Modal.Header closeButton>
-              <Modal.Title>Add data</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="mb-3">
-                <label>Name:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={addData.name}
-                  onChange={(e) => handleAddInputChange("name", e.target.value)}
-                />
-              </div>
-              <div className="mb-3">
-                <label>Price:</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={addData.price}
-                  onChange={(e) =>
-                    handleAddInputChange("price", e.target.value)
-                  }
-                />
-              </div>
-            </Modal.Body>
-            <Modal.Footer className="buttons">
-              <button onClick={handleCloseAddModal}>Close</button>
-              <button onClick={handleAddSubmit}>Submit</button>
-            </Modal.Footer>
-          </Modal>
-          <div className="table-container center-table">
-            <table className="styled-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                {add_on ? (
-                  add_on.map((item, id) => (
-                    <tr key={id}>
-                      <td>{item.name}</td>
-                      <td>{item.price}</td>
-                      <td>
-                        <button onClick={() => handleDeleteAddOn(item.name)}>
                           Delete
                         </button>
                       </td>

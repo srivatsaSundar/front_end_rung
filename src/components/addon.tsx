@@ -18,7 +18,7 @@ export function Addon() {
   const [data, setData] = useState([]);
   const [newData, setNewData] = useState([]);
 
-  const api = "https://backend-rung.onrender.com/all_values/";
+  const api = "https://backend-rung.onrender.com/view_addon/";
   useEffect(() => {
     fetch(api)
       .then((response) => {
@@ -30,8 +30,6 @@ export function Addon() {
       .then((data) => setData(data))
       .catch((err) => console.log("error in fetching the pin", err));
   }, [api]);
-
-  const add_on = data.length > 0 ? data.add_on : [];
 
   // Define translations based on the selected language
   const translations =
@@ -67,14 +65,19 @@ export function Addon() {
 
     // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
     axios
-      .post("https://backend-rung.onrender.com/add_on/", selectedEditItem)
+      .post("https://backend-rung.onrender.com/add_addon/", selectedEditItem)
       .then((response) => {
         console.log("Server Response:", response.data);
+        toast.success("Addon added/edited successfully!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 6000);
       })
       .catch((error) => {
         console.error("Error:", error);
         // Handle errors if needed
       });
+      window.location.reload();
   };
   const handleDeleteAddOn = (name: string) => {
     axios
@@ -83,6 +86,9 @@ export function Addon() {
         console.log("Delete Response:", response.data);
         const deleted = () => toast.success("Addon deleted successfully!");
         deleted();
+        setTimeout(() => {
+          window.location.reload();
+        }, 6000);  
       })
       .catch((error) => {
         console.error("Error deleting postal code:", error);
@@ -114,9 +120,13 @@ export function Addon() {
     e.preventDefault();
     console.log(addData);
     axios
-      .post("https://backend-rung.onrender.com/add_on/", addData)
+      .post("https://backend-rung.onrender.com/add_addon/", addData)
       .then((response) => {
         console.log("Server Response:", response.data);
+        toast.success("Addon added/edited  successfully!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 6000);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -190,8 +200,7 @@ export function Addon() {
         // Optionally, you can fetch the updated data after deleting
         // the add-on food.
         // fetchNewData();
-        const deleted = () => toast.success("AddOn Food deleted successfully!");
-        deleted();
+        toast.success("AddOn Food deleted successfully!");
       })
       .catch((error) => {
         console.error("Error deleting add-on food:", error);
@@ -277,8 +286,8 @@ export function Addon() {
               </tr>
             </thead>
             <tbody>
-              {add_on.length > 0 ? (
-                add_on.map((item: any, id: number) => (
+              {data.length > 0 ? (
+                data.map((item: any, id: number) => (
                   <tr key={id}>
                     <td>{item.name}</td>
                     <td>{item.price}</td>
