@@ -49,7 +49,6 @@ function CitySearch() {
     const currentDate = currentTime.toJSDate();
     const isWithinSpecifiedHours =
       currentTime.hour < 17 || currentTime.hour >= 21;
-
     return (
       isWithinSpecifiedHours ||
       holiday.some((holidayData) => {
@@ -112,24 +111,28 @@ function CitySearch() {
 
   const getHolidayNoteForCurrentTime = () => {
     const currentDateTime = DateTime.local(); // Get current date and time
-
+  
     const matchingHoliday = holiday.find((holidayData) => {
-      const holidayStartDateTime = DateTime.fromISO(
-        `${holidayData.startDate}T${holidayData.startTime}`,
-      );
-      const holidayEndDateTime = DateTime.fromISO(
-        `${holidayData.endDate}T${holidayData.endTime}`,
-      );
-      console.log(holidayStartDateTime);
-      console.log(holidayEndDateTime);
-      return (
-        currentDateTime >= holidayStartDateTime &&
-        currentDateTime <= holidayEndDateTime
-      );
-    });
+      const holidayStartDateTime = DateTime.fromISO(holidayData.start_data);
+const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
 
-    return matchingHoliday?.holidayNote ?? "Today";
+      console.log("Holiday Start Date Time:", holidayStartDateTime);
+      console.log("Holiday End Date Time:", holidayEndDateTime);
+      console.log("Current Date Time:", currentDateTime.toISO());
+      console.log("Holiday Data:", holidayData.holiday_note);
+      
+      if (currentDateTime >= holidayStartDateTime && currentDateTime <= holidayEndDateTime) {
+        // Log and return the holiday note if there's a match
+        console.log("Matched Holiday Note:", holidayData.holiday_note);
+        return true;
+      }
+  
+      return false;
+    });
+  
+    return matchingHoliday?.holiday_note ?? "Today";
   };
+  
 
   return (
     <div className="citysearch">
@@ -229,11 +232,12 @@ function CitySearch() {
       </div>
       <div>
         <div>
-          {isClosed() ? (
-            <ClosedMessage holidayNote={getHolidayNoteForCurrentTime()} />
-          ) : (
-            ""
-          )}
+        {isClosed() ? (
+  <ClosedMessage holidayNote={getHolidayNoteForCurrentTime()} />
+) : (
+  ""
+)}
+
         </div>
       </div>
       <div>
