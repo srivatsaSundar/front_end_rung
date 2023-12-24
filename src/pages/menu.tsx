@@ -21,6 +21,9 @@ import rice from "../images/rice.jpg";
 import veg from "../images/veg.jpg";
 import Cart from "./cart";
 import ScrollToTop from "react-scroll-to-top";
+import useHolidayCheck from "./holidaycheck";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export interface MenuItem {
   id: number;
@@ -69,6 +72,7 @@ export function Menu(props: IMenu) {
   const [selectedItemName, setSelectedItemName] = useState<string | null>(null);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL = translations.url;
+  const { isClosed, getHolidayNoteForCurrentTime } = useHolidayCheck(); // Use the new hook
 
   const targetURL2 = "https://backend-rung.onrender.com/add_on_drink";
 
@@ -292,6 +296,13 @@ export function Menu(props: IMenu) {
   }
 
   const addToCart = (item) => {
+    // Check if it's a holiday before adding to the cart
+    if (isClosed()) {
+      const holidayNote = () => toast.success("Unable to add items to cart on a holiday");
+      holidayNote();
+      return;
+    }
+
     const selectedDrink = selectedAddons[item.name]?.selectedDrink || null;
     const selectedFood = selectedAddons[item.name]?.selectedFood || null;
 
@@ -350,14 +361,14 @@ export function Menu(props: IMenu) {
     <div>
       <div className="yes">
         <AppNavbar count={cart.length} />
+        <ToastContainer />
       </div>
       <div className="menu-container">
         <div className="column1">
           {uniqueTitles.map((title, index) => (
             <div
-              className={`menu-item ${
-                index === selectedItemIndex ? "first" : ""
-              }`}
+              className={`menu-item ${index === selectedItemIndex ? "first" : ""
+                }`}
               key={index}
               onClick={() => {
                 setSelectedItemIndex(index);
@@ -520,46 +531,46 @@ export function Menu(props: IMenu) {
                             </div>
                             {(selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood) && (
-                              <div className="add-on-cost">
-                                <p>
-                                  {selectedAddons[item.name].selectedDrink &&
-                                  selectedAddons[item.name].selectedFood
-                                    ? calculateUpdateItemPrice(
+                                <div className="add-on-cost">
+                                  <p>
+                                    {selectedAddons[item.name].selectedDrink &&
+                                      selectedAddons[item.name].selectedFood
+                                      ? calculateUpdateItemPrice(
                                         item,
                                         selectedAddons[item.name].selectedDrink,
                                         selectedAddons[item.name].selectedFood,
                                       )
-                                    : selectedAddons[item.name].selectedDrink
-                                    ? calculateUpdateItemPrice(
-                                        item,
-                                        selectedAddons[item.name].selectedDrink,
-                                        null,
-                                      )
-                                    : calculateUpdateItemPrice(
-                                        item,
-                                        null,
-                                        selectedAddons[item.name].selectedFood,
-                                      )}
-                                  /- CHF
-                                </p>
-                              </div>
-                            )}
+                                      : selectedAddons[item.name].selectedDrink
+                                        ? calculateUpdateItemPrice(
+                                          item,
+                                          selectedAddons[item.name].selectedDrink,
+                                          null,
+                                        )
+                                        : calculateUpdateItemPrice(
+                                          item,
+                                          null,
+                                          selectedAddons[item.name].selectedFood,
+                                        )}
+                                    /- CHF
+                                  </p>
+                                </div>
+                              )}
                           </div>
                         )}
                         {(!itemHasAddOns(item.name) ||
                           (selectedItemName === item.name &&
                             (selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood))) && (
-                                <button
-                                className="add-button"
-                                onClick={() => addToCart(item)}
-                              >
-                                <Icofont icon="icofont-bag" /> {translations.add}
-                              </button>
-                            )}
-                                
+                            <button
+                              className="add-button"
+                              onClick={() => addToCart(item)}
+                            >
+                              <Icofont icon="icofont-bag" /> {translations.add}
+                            </button>
+                          )}
+
                       </div>
-                              
+
                     </div>
                   </div>
                 ))}

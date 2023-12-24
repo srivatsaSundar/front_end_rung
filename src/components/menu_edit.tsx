@@ -7,6 +7,9 @@ import AppNavbar from "./navbar";
 import { Link } from "react-router-dom";
 import "../static/postcodes.css";
 import { Modal } from "react-bootstrap";
+import ScrollToTop from "react-scroll-to-top";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 
 //display footer
@@ -36,6 +39,7 @@ export function EditMenu() {
       .then((data) => setData(data))
       .catch((err) => console.log("error in fetching the pin", err));
   }, [api]);
+
   console.log(data);
   const menu = data.menu;
   console.log(menu);
@@ -76,6 +80,9 @@ export function EditMenu() {
         .post("https://backend-rung.onrender.com/add_menu/", formData)
         .then((response) => {
           console.log("Server Response:", response.data);
+          handleCloseModal();
+          const add = () => toast.success("Data added successfully!");
+          add();
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -135,6 +142,8 @@ export function EditMenu() {
       .post(apiUrl, newData)
       .then((response) => {
         console.log("Server Response:", response.data);
+        const availability = () => toast.success("Availability changed successfully!");
+        availability();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -147,6 +156,9 @@ export function EditMenu() {
         .delete(`https://backend-rung.onrender.com/delete_menu/${name}/`)
         .then((response) => {
           console.log("Delete Response:", response.data);
+          const deleted = () => toast.success("Deleted menu successfully!");
+          deleted();
+          setData([...data]);
         })
         .catch((error) => {
           console.error("Error deleting postal code:", error);
@@ -156,6 +168,8 @@ export function EditMenu() {
         .delete(`https://backend-rung.onrender.com/delete_menu_germen/${name}/`)
         .then((response) => {
           console.log("Delete Response:", response.data);
+          const deleted = () => toast.success("Deleted menu successfully!");
+          deleted();
         })
         .catch((error) => {
           console.error("Error deleting postal code:", error);
@@ -196,6 +210,9 @@ export function EditMenu() {
         .post("https://backend-rung.onrender.com/add_menu/", selectedEditItem)
         .then((response) => {
           console.log("Server Response:", response.data);
+          const edit = () => toast.success("Edited menu successfully!");
+          edit();
+          setData([...data]);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -211,6 +228,9 @@ export function EditMenu() {
         )
         .then((response) => {
           console.log("Server Response:", response.data);
+          const edit = () => toast.success("Edited menu successfully!");
+          edit();
+          setData([...data]);
         })
         .catch((error) => {
           console.error("Error:", error);
@@ -224,6 +244,9 @@ export function EditMenu() {
       .delete(`https://backend-rung.onrender.com/delete_add_on/${name}/`)
       .then((response) => {
         console.log("Delete Response:", response.data);
+        const deleted = () => toast.success("Deleted Addon successfully!");
+        deleted();
+        setData([]);
       })
       .catch((error) => {
         console.error("Error deleting postal code:", error);
@@ -256,6 +279,9 @@ export function EditMenu() {
       .post("https://backend-rung.onrender.com/add_on/", addData)
       .then((response) => {
         console.log("Server Response:", response.data);
+        handleCloseAddModal();
+        const add = () => toast.success("Addon added successfully!");
+        add();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -263,12 +289,18 @@ export function EditMenu() {
       });
   };
 
+  const scrollToDiv = () => {
+    const scrollableDiv = document.getElementById("scrollableDiv");
+    scrollableDiv?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div>
       <div className="yes">
         <AppNavbar />
+        <ToastContainer />
       </div>
-      <div className="but">
+      <div className="but" id="scrollableDiv">
         <h3 style={{ paddingRight: "10px" }}>Add Item</h3>
         <button
           onClick={handleOpenModal}
@@ -639,13 +671,15 @@ export function EditMenu() {
           </Link>
           <button onClick={handleLogout}>{translations.logoutButton} </button>
         </div>
+        <ScrollToTop
+          smooth
+          color="black"
+          height="10px"
+          className="scroll"
+          onClick={scrollToDiv}
+          top={2}
+        />
         <div
-          style={{
-            position: "fixed",
-            bottom: "0px",
-            width: "100%",
-            marginTop: "20px",
-          }}
         >
           <Footer />
         </div>

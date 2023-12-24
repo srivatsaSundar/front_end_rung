@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import "../static/postcodes.css";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ScrollToTop from "react-scroll-to-top";
 
 //display footer
 export function Addon() {
@@ -78,6 +81,8 @@ export function Addon() {
       .delete(`https://backend-rung.onrender.com/delete_add_on/${name}/`)
       .then((response) => {
         console.log("Delete Response:", response.data);
+        const deleted = () => toast.success("Addon deleted successfully!");
+        deleted();
       })
       .catch((error) => {
         console.error("Error deleting postal code:", error);
@@ -168,6 +173,8 @@ export function Addon() {
         // the new add-on food.
         // fetchNewData();
         handleCloseAddOnFoodModal();
+        const add = () => toast.success("Addon Food added successfully!");
+        add();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -183,16 +190,25 @@ export function Addon() {
         // Optionally, you can fetch the updated data after deleting
         // the add-on food.
         // fetchNewData();
+        const deleted = () => toast.success("AddOn Food deleted successfully!");
+        deleted();
       })
       .catch((error) => {
         console.error("Error deleting add-on food:", error);
       });
   };
 
+  const scrollToDiv = () => {
+    const scrollableDiv = document.getElementById("scrollableDiv");
+    scrollableDiv?.scrollIntoView({ behavior: "smooth" });
+  };
+
+
   return (
     <div>
       <div className="yes">
         <AppNavbar count={0} />
+        <ToastContainer />
       </div>
       <div id="target-selection-add-on">
         <div
@@ -202,6 +218,7 @@ export function Addon() {
             justifyContent: "center",
             marginTop: "30px",
           }}
+          id="scrollableDiv"
         >
           <h3>Add on</h3>
           <div className="but">
@@ -244,7 +261,7 @@ export function Addon() {
               />
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="buttons">
             <button onClick={handleCloseAddModal}>Close</button>
             <button onClick={handleAddSubmit}>Submit</button>
           </Modal.Footer>
@@ -313,7 +330,7 @@ export function Addon() {
                 />
               </div>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className="buttons">
               <button onClick={handleCloseEditModal}>Close</button>
               <button onClick={handleEditFormSubmit}>Submit</button>
             </Modal.Footer>
@@ -385,7 +402,7 @@ export function Addon() {
               />
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="buttons">
             <button onClick={handleCloseAddOnFoodModal}>Close</button>
             <button onClick={handleAddOnFoodSubmit}>Submit</button>
           </Modal.Footer>
@@ -429,13 +446,15 @@ export function Addon() {
           </Link>
           <button onClick={handleLogout}>{translations.logoutButton}</button>
         </div>
+        <ScrollToTop
+          smooth
+          color="black"
+          height="10px"
+          className="scroll"
+          onClick={scrollToDiv}
+          top={2}
+        />
         <div
-          style={{
-            position: "fixed",
-            bottom: "0px",
-            width: "100%",
-            marginTop: "20px",
-          }}
         >
           <Footer />
         </div>

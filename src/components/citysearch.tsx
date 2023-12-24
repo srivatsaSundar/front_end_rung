@@ -20,6 +20,7 @@ function CitySearch() {
   const [currentTime, setCurrentTime] = useState(DateTime.local());
   const [pin, setPin] = useState("");
   const [holiday, setHoliday] = useState([]);
+
   useEffect(() => {
     // Update the current time every minute
     const interval = setInterval(() => {
@@ -29,6 +30,7 @@ function CitySearch() {
     // Cleanup interval on component unmount
     return () => clearInterval(interval);
   }, [currentTime]);
+
   const apis = "https://backend-rung.onrender.com/holiday/";
   useEffect(() => {
     fetch(apis)
@@ -62,6 +64,7 @@ function CitySearch() {
       })
     );
   };
+  
   const ClosedMessage = ({ holidayNote }) => (
     <div
       className="closed"
@@ -111,24 +114,24 @@ function CitySearch() {
 
   const getHolidayNoteForCurrentTime = () => {
     const currentDateTime = DateTime.local(); // Get current date and time
-  
+
     const matchingHoliday = holiday.find((holidayData) => {
       const holidayStartDateTime = DateTime.fromISO(holidayData.start_data);
-const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
+      const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
 
-      
+
       if (currentDateTime >= holidayStartDateTime && currentDateTime <= holidayEndDateTime) {
         // Log and return the holiday note if there's a match
         console.log("Matched Holiday Note:", holidayData.holiday_note);
         return true;
       }
-  
+
       return false;
     });
-  
+
     return matchingHoliday?.holiday_note ?? "Today";
   };
-  
+
 
   return (
     <div className="citysearch">
@@ -166,12 +169,12 @@ const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
 
                     {handlepin ? (
                       // Iterate over options only if handlepin is available
-                      handlepin.filter(item=>item.available)
-                      .map((item, index) => (
-                        <option key={index} value={item.postal_code}>
-                          {item.postal_code}
-                        </option>
-                      ))
+                      handlepin.filter(item => item.available)
+                        .map((item, index) => (
+                          <option key={index} value={item.postal_code}>
+                            {item.postal_code}
+                          </option>
+                        ))
                     ) : (
                       // Optionally, you can include a loading or placeholder option
                       <option value="" disabled>
@@ -229,11 +232,11 @@ const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
       </div>
       <div>
         <div>
-        {isClosed() ? (
-  <ClosedMessage holidayNote={getHolidayNoteForCurrentTime()} />
-) : (
-  ""
-)}
+          {isClosed() ? (
+            <ClosedMessage holidayNote={getHolidayNoteForCurrentTime()} />
+          ) : (
+            ""
+          )}
 
         </div>
       </div>

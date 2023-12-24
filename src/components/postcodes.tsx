@@ -8,6 +8,10 @@ import { Footer } from "./footer";
 import "../static/postcodes.css";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
+import ScrollToTop from "react-scroll-to-top";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { debounce } from 'lodash';
 
 //display footer
 export function Postcodes() {
@@ -25,52 +29,60 @@ export function Postcodes() {
   };
 
   const api = "https://backend-rung.onrender.com/all_values/";
-  useEffect(() => {
-    fetch(api)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setDatapin(data))
-      .catch((err) => console.log("error in fetching the pin", err));
-  }, [api]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(api);
+      console.log(response.data);
+      setDatapin(response.data);
+    } catch (error) {
+      console.error("Error:", error);
+      // Handle errors if needed
+    }
+  };
+  const updateUI = async () => {
+    await fetchData();
+    console.log("UI updated");
+  };
+
+
+
   console.log(api);
   console.log(datapin);
   const handlepin = datapin.postal_codes;
-  console.log(handlepin);
+  console.log(handlepin, "handle");
+
+  const debouncedUpdateUI = debounce(updateUI, 300);
+
   const handleOpenModal = () => {
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
+    updateUI();
   };
 
   const handleInputChange = (e) => {
     setvalue(e.target.value);
   };
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
     // Assuming value contains the data you want to send
     console.log("Input Data:", value);
 
     const data = { postal_code: value, available: true };
 
-    axios
-      .post("https://backend-rung.onrender.com/add_postal_code/", data)
-      .then((response) => {
-        // Handle the response from the server if needed
-        console.log("Server Response:", response.data);
-
-        // Close the modal
-        handleCloseModal();
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the Axios request
-        console.log("Full Error Object:", error);
-      });
+    try {
+      await axios.post("https://backend-rung.onrender.com/add_postal_code/", data);
+      console.log("Server Response: Postcode added successfully!");
+      toast.success("Postcode added successfully!");
+      handleCloseModal();
+      debouncedUpdateUI(); // Update UI manually after submitting
+    } catch (error) {
+      console.error("Full Error Object:", error);
+    }
   };
 
   const handleAvailabilityChange = (postalCode, currentAvailability) => {
@@ -87,6 +99,12 @@ export function Postcodes() {
       .then((response) => {
         // Handle the response from the server if needed
         console.log("Server Response:", response.data);
+        const availability = () => {
+          toast.success("Availability changed successfully!");
+          debouncedUpdateUI();
+        };
+        availability();
+        fetchData()
       })
       .catch((error) => {
         // Handle any errors that occurred during the Axios request
@@ -94,23 +112,31 @@ export function Postcodes() {
       });
   };
 
-  const handleDelete = (postalCode) => {
-    axios
-      .delete(
-        `https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`,
-      )
-      .then((response) => {
-        console.log("Delete Response:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error deleting postal code:", error);
-      });
+  const handleDelete = async (postalCode) => {
+    try {
+      await axios.delete(`https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`);
+      console.log("Delete Response: Postcode deleted successfully!");
+      toast.success("Postcode deleted successfully!");
+      debouncedUpdateUI(); // Update UI manually after deletion
+    } catch (error) {
+      console.error("Error deleting postal code:", error);
+    }
   };
+
+  const scrollToDiv = () => {
+    const scrollableDiv = document.getElementById("scrollableDiv");
+    scrollableDiv?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [datapin]);
 
   return (
     <div>
       <div className="yes">
         <AppNavbar />
+        <ToastContainer />
       </div>
       <div
         style={{
@@ -121,7 +147,7 @@ export function Postcodes() {
           marginTop: "30px",
         }}
       >
-        <div className="postcodes">
+        <div className="postcodes" id="scrollableDiv">
           <h3>{translations.postcodesEdit}</h3>
         </div>
         <div className="but" style={{ marginLeft: "40px" }}>
@@ -137,7 +163,7 @@ export function Postcodes() {
             <label>Postcode:</label>
             <input type="text" value={value} onChange={handleInputChange} />
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="buttons">
             <button onClick={handleCloseModal}>Close</button>
             <button onClick={handleSubmit}>Submit</button>
           </Modal.Footer>
@@ -191,7 +217,22 @@ export function Postcodes() {
         </Link>
         <button onClick={handleLogout}> {translations.logoutButton}</button>
       </div>
-      <Footer />
+      <ScrollToTop
+        smooth
+        color="black"
+        height="10px"
+        className="scroll"
+        onClick={scrollToDiv}
+        top={2}
+      />
+      <div
+        style={{
+          position: "fixed",
+          bottom: "0px",
+          width: "100%",
+          marginTop: "20px",
+        }}> <Footer /></div>
+
     </div>
   );
 }

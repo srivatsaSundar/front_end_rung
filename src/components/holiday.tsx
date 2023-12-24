@@ -7,6 +7,9 @@ import AppNavbar from "./navbar";
 import { Link } from "react-router-dom";
 import "../static/postcodes.css";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import ScrollToTop from "react-scroll-to-top";
+import 'react-toastify/dist/ReactToastify.css';
 
 //display footer
 export function Holiday() {
@@ -39,6 +42,7 @@ export function Holiday() {
     console.log(api);
     console.log(data);
   }, []);
+
   const [formData, setFormData] = useState({
     start_data: "",
     end_data: "",
@@ -53,6 +57,12 @@ export function Holiday() {
       [e.target.name]: e.target.value,
     });
   };
+
+  const updateData = () => {
+    // Fetch data again after form submission or deletion
+    fetchData();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
@@ -61,6 +71,9 @@ export function Holiday() {
       .post("https://backend-rung.onrender.com/add_holiday/", formData)
       .then((response) => {
         console.log("Server Response:", response.data);
+        const add = () => toast.success("Holiday added successfully!");
+        add();
+        updateData();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -74,18 +87,28 @@ export function Holiday() {
       .then((response) => {
         console.log("Delete Response:", response.data);
         // Update the list of holidays after successful deletion
+        const deleted = () => toast.success("Holiday deleted successfully!");
+        deleted();
+        updateData();
       })
       .catch((error) => {
         console.error("Delete Error:", error);
         // Handle errors if needed
       });
   };
+
+  const scrollToDiv = () => {
+    const scrollableDiv = document.getElementById("scrollableDiv");
+    scrollableDiv?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div>
       <div className="yes">
         <AppNavbar />
+        <ToastContainer />
       </div>
-      <div className="holiday">
+      <div className="holiday" id="scrollableDiv">
         <h3>{translations.holidayEdit}</h3>
         <form onSubmit={handleSubmit}>
           <div style={{ display: "flex", flexDirection: "row" }}>
@@ -214,6 +237,14 @@ export function Holiday() {
           </Link>
           <button onClick={handleLogout}> {translations.logoutButton}</button>
         </div>
+        <ScrollToTop
+          smooth
+          color="black"
+          height="10px"
+          className="scroll"
+          onClick={scrollToDiv}
+          top={2}
+        />
         <Footer />
       </div>
     </div>
