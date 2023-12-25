@@ -40,13 +40,13 @@ export function EditMenu() {
       .catch((err) => console.log("error in fetching the pin", err));
   }, [api]);
 
-  console.log(data);
+  // console.log(data);
   const menu = data.menu;
-  console.log(menu);
+  // console.log(menu);
   const menu_german = data.menu_germen;
-  console.log(menu_german);
+  // console.log(menu_german);
   const add_on = data.add_on;
-  console.log(add_on);
+  // console.log(add_on);
   // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
@@ -72,14 +72,14 @@ export function EditMenu() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     if (formData.language === "english") {
       delete formData.language;
       // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
       axios
         .post("https://backend-rung.onrender.com/add_menu/", formData)
         .then((response) => {
-          console.log("Server Response:", response.data);
+          // console.log("Server Response:", response.data);
           handleCloseModal();
           const add = () => toast.success("Menu added successfully!");
           add();
@@ -97,7 +97,7 @@ export function EditMenu() {
       axios
         .post("https://backend-rung.onrender.com/add_menu_germen/", formData)
         .then((response) => {
-          console.log("Server Response:", response.data);
+          // console.log("Server Response:", response.data);
           const add = () => toast.success("Menu added successfully!");
           add();
           setTimeout(() => {
@@ -105,7 +105,7 @@ export function EditMenu() {
           }, 6000);
         })
         .catch((error) => {
-          console.error("Error:", error);
+          // console.error("Error:", error);
           toast.error("Error adding menu!");
           // Handle errors if needed
         });
@@ -123,7 +123,7 @@ export function EditMenu() {
 
   const handleMenuGerman = () => {
     const targetSection = document.getElementById("target-selection-german");
-    console.log(targetSection);
+    // console.log(targetSection);
     // Scroll to the target section
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: "smooth" });
@@ -131,7 +131,7 @@ export function EditMenu() {
   };
   const handleAddOn = () => {
     const targetSection = document.getElementById("target-selection-add-on");
-    console.log(targetSection);
+    // console.log(targetSection);
     // Scroll to the target section
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: "smooth" });
@@ -151,7 +151,7 @@ export function EditMenu() {
     axios
       .post(apiUrl, newData)
       .then((response) => {
-        console.log("Server Response:", response.data);
+        // console.log("Server Response:", response.data);
         const availability = () => toast.success("Availability changed successfully!");
         availability();
         setTimeout(() => {
@@ -169,7 +169,7 @@ export function EditMenu() {
       axios
         .delete(`https://backend-rung.onrender.com/delete_menu/${name}/`)
         .then((response) => {
-          console.log("Delete Response:", response.data);
+          // console.log("Delete Response:", response.data);
           const deleted = () => toast.success("Deleted menu successfully!");
           deleted();
           setTimeout(() => {
@@ -184,7 +184,7 @@ export function EditMenu() {
       axios
         .delete(`https://backend-rung.onrender.com/delete_menu_germen/${name}/`)
         .then((response) => {
-          console.log("Delete Response:", response.data);
+          // console.log("Delete Response:", response.data);
           const deleted = () => toast.success("Deleted menu successfully!");
           deleted();
           setTimeout(() => {
@@ -222,7 +222,7 @@ export function EditMenu() {
 
   const handleEditFormSubmit = (e) => {
     e.preventDefault();
-    console.log(selectedEditItem);
+    // console.log(selectedEditItem);
     if (editModalLanguage === "english") {
       delete selectedEditItem.id;
       delete selectedEditItem.title_image;
@@ -230,7 +230,7 @@ export function EditMenu() {
       axios
         .post("https://backend-rung.onrender.com/add_menu/", selectedEditItem)
         .then((response) => {
-          console.log("Server Response:", response.data);
+          // console.log("Server Response:", response.data);
           const edit = () => toast.success("Edited menu successfully!");
           edit();
           setData([...data]);
@@ -252,7 +252,7 @@ export function EditMenu() {
           selectedEditItem,
         )
         .then((response) => {
-          console.log("Server Response:", response.data);
+          // console.log("Server Response:", response.data);
           const edit = () => toast.success("Edited menu successfully!");
           edit();
           setData([...data]);
@@ -507,7 +507,7 @@ export function EditMenu() {
                 </div>
                 {/* Add other fields as needed */}
               </Modal.Body>
-              <Modal.Footer>
+              <Modal.Footer className="buttons">
                 <button onClick={handleCloseEditModal}>Close</button>
                 <button onClick={handleEditFormSubmit}>Submit</button>
               </Modal.Footer>

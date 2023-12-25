@@ -45,13 +45,13 @@ function CitySearch() {
       })
       .catch((err) => console.log("error in fetching the pin", err));
   }, [apis]);
-  console.log(holiday);
+  // console.log(holiday);
 
   const isClosed = () => {
     const currentDate = currentTime.toJSDate();
     const isWithinSpecifiedHours = currentTime.hour < 17 || currentTime.hour >= 21;
   
-    console.log("isWithinSpecifiedHours:", isWithinSpecifiedHours);
+    // console.log("isWithinSpecifiedHours:", isWithinSpecifiedHours);
   
     const holidayCheck = holiday.some((holidayItem) => {
       const holidayStartTime = DateTime.fromISO(holidayItem.start_data).toJSDate();
@@ -59,12 +59,11 @@ function CitySearch() {
       return currentDate >= holidayStartTime && currentDate <= holidayEndTime;
     });
   
-    console.log("holidayCheck:", holidayCheck);
+    // console.log("holidayCheck:", holidayCheck);
   
     return isWithinSpecifiedHours || holidayCheck;
   };
   
-  console.log(isClosed());
 
   const ClosedMessage = ({ holidayNote }) => (
     <div
@@ -100,10 +99,10 @@ function CitySearch() {
       .then((data) => setPincode(data))
       .catch((err) => console.log("error in fetching the pin", err));
   }, [api]);
-  console.log(api);
-  console.log(pincode);
+  // console.log(api);
+  // console.log(pincode);
   const handlepin = pincode;
-  console.log(handlepin);
+  // console.log(handlepin);
   const handleSearch = (e) => {
     if (pin) {
       e.preventDefault();
@@ -118,16 +117,10 @@ function CitySearch() {
 
     const matchingHoliday = holiday.find((holidayData) => {
       const holidayStartDateTime = DateTime.fromISO(holidayData.start_data);
-      const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
-
-      console.log("Holiday Start Date Time:", holidayStartDateTime);
-      console.log("Holiday End Date Time:", holidayEndDateTime);
-      console.log("Current Date Time:", currentDateTime.toISO());
-      console.log("Holiday Data:", holidayData.holiday_note);
+      const holidayEndDateTime = DateTime.fromISO(holidayData.end_data)
 
       if (currentDateTime >= holidayStartDateTime && currentDateTime <= holidayEndDateTime) {
         // Log and return the holiday note if there's a match
-        console.log("Matched Holiday Note:", holidayData.holiday_note);
         return true;
       }
 

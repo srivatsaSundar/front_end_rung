@@ -33,7 +33,6 @@ export function Postcodes() {
   const fetchData = async () => {
     try {
       const response = await axios.get(api);
-      console.log(response.data);
       setDatapin(response.data);
     } catch (error) {
       console.error("Error:", error);
@@ -42,15 +41,9 @@ export function Postcodes() {
   };
   const updateUI = async () => {
     await fetchData();
-    console.log("UI updated");
   };
 
-
-
-  console.log(api);
-  console.log(datapin);
   const handlepin = datapin.postal_codes;
-  console.log(handlepin, "handle");
 
   const debouncedUpdateUI = debounce(updateUI, 300);
 
@@ -70,18 +63,17 @@ export function Postcodes() {
 
   const handleSubmit = async () => {
     // Assuming value contains the data you want to send
-    console.log("Input Data:", value);
 
     const data = { postal_code: value, available: true };
 
     try {
       await axios.post("https://backend-rung.onrender.com/add_postal_code/", data);
-      console.log("Server Response: Postcode added successfully!");
+      // console.log("Server Response: Postcode added successfully!");
       toast.success("Postcode added successfully!");
       handleCloseModal();
       debouncedUpdateUI(); // Update UI manually after submitting
     } catch (error) {
-      console.error("Full Error Object:", error);
+      // console.error("Full Error Object:", error);
       toast.error("Error adding postcode!");
     }
   };
@@ -99,7 +91,7 @@ export function Postcodes() {
       )
       .then((response) => {
         // Handle the response from the server if needed
-        console.log("Server Response:", response.data);
+        // console.log("Server Response:", response.data);
         const availability = () => {
           toast.success("Availability changed successfully!");
           debouncedUpdateUI();
@@ -117,7 +109,7 @@ export function Postcodes() {
   const handleDelete = async (postalCode) => {
     try {
       await axios.delete(`https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`);
-      console.log("Delete Response: Postcode deleted successfully!");
+      // console.log("Delete Response: Postcode deleted successfully!");
       toast.success("Postcode deleted successfully!");
       debouncedUpdateUI(); // Update UI manually after deletion
     } catch (error) {
@@ -228,13 +220,7 @@ export function Postcodes() {
         onClick={scrollToDiv}
         top={2}
       />
-      <div
-        style={{
-          position: "fixed",
-          bottom: "0px",
-          width: "100%",
-          marginTop: "20px",
-        }}> <Footer /></div>
+      <div> <Footer /></div>
 
     </div>
   );

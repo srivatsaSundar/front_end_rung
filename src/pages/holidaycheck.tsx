@@ -29,27 +29,32 @@ const useHolidayCheck = () => {
   }, []);
 
   const isClosed = () => {
-    const currentDate = currentTime.toJSDate();
+    // Format current date and time to match the holiday data format
+    const currentDateTimeFormatted = currentTime.toISO();
+  
     const isWithinSpecifiedHours = currentTime.hour < 17 || currentTime.hour >= 21;
-
-    console.log("isWithinSpecifiedHours:", isWithinSpecifiedHours);
-
+  
+    // console.log("isWithinSpecifiedHours:", isWithinSpecifiedHours);
+  
     const holidayCheck = holiday.some((holidayItem) => {
-      const holidayStartTime = DateTime.fromISO(holidayItem.start_data).toJSDate();
-      const holidayEndTime = DateTime.fromISO(holidayItem.end_data).toJSDate();
-
-      console.log("currentDate:", currentDate);
-      console.log("holidayStartTime:", holidayStartTime);
-      console.log("holidayEndTime:", holidayEndTime);
-
-      return currentDate >= holidayStartTime && currentDate <= holidayEndTime;
+      // Keep holiday start and end time as is
+      const holidayStartTime = holidayItem.start_data;
+      const holidayEndTime = holidayItem.end_data;
+  
+      // console.log("currentDateTimeFormatted:", currentDateTimeFormatted);
+      // console.log("holidayStartTime:", holidayStartTime);
+      // console.log("holidayEndTime:", holidayEndTime);
+  
+      return (
+        currentDateTimeFormatted >= holidayStartTime &&
+        currentDateTimeFormatted <= holidayEndTime
+      );
     });
-
-    console.log("holidayCheck:", holidayCheck);
-
+  
+    // console.log("holidayCheck:", holidayCheck);
+  
     return isWithinSpecifiedHours || holidayCheck;
   };
-
 
   const getHolidayNoteForCurrentTime = () => {
     const currentDateTime = DateTime.local();
@@ -58,7 +63,7 @@ const useHolidayCheck = () => {
       const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
 
       if (currentDateTime >= holidayStartDateTime && currentDateTime <= holidayEndDateTime) {
-        console.log("Matched Holiday Note:", holidayData.holiday_note);
+        // console.log("Matched Holiday Note:", holidayData.holiday_note);
         return true;
       }
 
@@ -68,7 +73,7 @@ const useHolidayCheck = () => {
     return matchingHoliday?.holiday_note ?? "Today";
   };
 
-  return { isClosed, getHolidayNoteForCurrentTime };
+  return { isClosed, getHolidayNoteForCurrentTime  };
 };
 
 export default useHolidayCheck;

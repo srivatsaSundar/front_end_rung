@@ -146,38 +146,6 @@ export function Holiday() {
               />
             </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              Start Time:{" "}
-              <input
-                type="time"
-                name="start_time"
-                value={formData.start_time}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              End Time:{" "}
-              <input
-                type="time"
-                name="end_time"
-                value={formData.end_time}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
           <div
             style={{
               display: "flex",
@@ -204,8 +172,6 @@ export function Holiday() {
               <tr>
                 <th>Start Date</th>
                 <th>End Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
                 <th>Holiday Note</th>
                 <th>Delete</th>
               </tr>
@@ -216,8 +182,6 @@ export function Holiday() {
                   <tr>
                     <td>{item.start_data}</td>
                     <td>{item.end_data}</td>
-                    <td>{item.start_time}</td>
-                    <td>{item.end_time}</td>
                     <td>{item.holiday_note}</td>
                     <td>
                       <button onClick={() => handleDelete(item.start_data)}>
