@@ -3,6 +3,7 @@ import { useLanguage } from "./LanguageProvider";
 import translations_en from "../translations/translation_en.json";
 import translations_de from "../translations/translation_de.json";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 //display footer
 export function Login() {
@@ -15,10 +16,11 @@ export function Login() {
     selectedLanguage === "de" ? translations_de : translations_en;
 
   const handleLogin = async () => {
-    if (username === "yes" && password === "no") {
+    if (username === "mrrung" && password === "admin@123") {
       setIsLoggedIn(true);
       localStorage.setItem("isLoggedIn", "true");
       navigate("/dashboard");
+      toast.success("Admin Login Successful");
       setTimeout(() => {
         setIsLoggedIn(false);
         localStorage.setItem("isLoggedIn", "false");

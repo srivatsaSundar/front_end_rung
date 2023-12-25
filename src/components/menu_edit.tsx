@@ -89,6 +89,7 @@ export function EditMenu() {
         })
         .catch((error) => {
           console.error("Error:", error);
+          toast.error("Error adding menu!");
           // Handle errors if needed
         });
     } else {
@@ -105,6 +106,7 @@ export function EditMenu() {
         })
         .catch((error) => {
           console.error("Error:", error);
+          toast.error("Error adding menu!");
           // Handle errors if needed
         });
     }
@@ -158,6 +160,7 @@ export function EditMenu() {
       })
       .catch((error) => {
         console.error("Error:", error);
+        toast.error("Error changing availability!");
       });
   }, []);
 
@@ -175,6 +178,7 @@ export function EditMenu() {
         })
         .catch((error) => {
           console.error("Error deleting postal code:", error);
+          toast.error("Error deleting menu!");
         });
     } else {
       axios
@@ -189,6 +193,7 @@ export function EditMenu() {
         })
         .catch((error) => {
           console.error("Error deleting postal code:", error);
+          toast.error("Error deleting menu!");
         });
     }
   };
@@ -235,6 +240,7 @@ export function EditMenu() {
         })
         .catch((error) => {
           console.error("Error:", error);
+          toast.error("Error editing menu!");
           // Handle errors if needed
         });
     } else {
@@ -256,6 +262,7 @@ export function EditMenu() {
         })
         .catch((error) => {
           console.error("Error:", error);
+          toast.error("Error editing menu!");
           // Handle errors if needed
         });
     }

@@ -75,6 +75,7 @@ export function Addon() {
       })
       .catch((error) => {
         console.error("Error:", error);
+        toast.error("Error adding add-on!");
         // Handle errors if needed
       });
       window.location.reload();
@@ -92,6 +93,7 @@ export function Addon() {
       })
       .catch((error) => {
         console.error("Error deleting postal code:", error);
+        toast.error("Error deleting add-on!");
       });
   };
 
@@ -130,6 +132,7 @@ export function Addon() {
       })
       .catch((error) => {
         console.error("Error:", error);
+        toast.error("Error adding add-on!");
         // Handle errors if needed
       });
   };
@@ -185,9 +188,13 @@ export function Addon() {
         handleCloseAddOnFoodModal();
         const add = () => toast.success("Addon Food added successfully!");
         add();
+        setTimeout(() => {
+          window.location.reload();
+        }, 6000);
       })
       .catch((error) => {
         console.error("Error:", error);
+        toast.error("Error adding add-on food!");
         // Handle errors if needed
       });
   };
@@ -201,9 +208,13 @@ export function Addon() {
         // the add-on food.
         // fetchNewData();
         toast.success("AddOn Food deleted successfully!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 6000);
       })
       .catch((error) => {
         console.error("Error deleting add-on food:", error);
+        toast.error("Error deleting add-on food!");
       });
   };
 

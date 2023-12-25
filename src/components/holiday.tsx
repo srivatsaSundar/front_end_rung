@@ -34,6 +34,7 @@ export function Holiday() {
       })
       .catch((error) => {
         console.error("Error:", error);
+        toast.error("Error in fetching data");
         // Handle errors if needed
       });
   };
@@ -77,6 +78,7 @@ export function Holiday() {
       })
       .catch((error) => {
         console.error("Error:", error);
+        toast.error("Error adding holiday!");
         // Handle errors if needed
       });
   };
@@ -93,6 +95,7 @@ export function Holiday() {
       })
       .catch((error) => {
         console.error("Delete Error:", error);
+        toast.error("Error deleting holiday!");
         // Handle errors if needed
       });
   };

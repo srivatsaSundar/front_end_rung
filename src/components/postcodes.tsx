@@ -82,6 +82,7 @@ export function Postcodes() {
       debouncedUpdateUI(); // Update UI manually after submitting
     } catch (error) {
       console.error("Full Error Object:", error);
+      toast.error("Error adding postcode!");
     }
   };
 
@@ -109,6 +110,7 @@ export function Postcodes() {
       .catch((error) => {
         // Handle any errors that occurred during the Axios request
         console.error("Error:", error);
+        toast.error("Error changing availability!");
       });
   };
 
@@ -120,6 +122,7 @@ export function Postcodes() {
       debouncedUpdateUI(); // Update UI manually after deletion
     } catch (error) {
       console.error("Error deleting postal code:", error);
+      toast.error("Error deleting postcode!");
     }
   };
 

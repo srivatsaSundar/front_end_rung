@@ -298,7 +298,7 @@ export function Menu(props: IMenu) {
   const addToCart = (item) => {
     // Check if it's a holiday before adding to the cart
     if (isClosed()) {
-      const holidayNote = () => toast.success("Unable to add items to cart on a holiday");
+      const holidayNote = () => toast.error("Unable to add items to cart on a holiday");
       holidayNote();
       return;
     }
