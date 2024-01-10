@@ -1,6 +1,6 @@
 import { Footer } from "../components/footer";
 import { SocialLogin } from "../components/socialmedia";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../static/menu.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -34,18 +34,29 @@ export function Order(props: IOrder) {
     translations,
   } = props;
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedPostalCode, setSelectedPostalCode] = useState("");
   const [orderType, setOrderType] = useState("deliver");
-  const { selectedLanguage } = useLanguage();
   const [Data, setData] = useState({});
   const [confirmation, setConfirmation] = useState(false);
-  // Define translations based on the selected language
-  // const translations =selectedLanguage === "en" ? translations_en : translations_de;
   let data = {};
+  const [pin,setPin] = useState([]);
+  const api = "https://backend-rung.onrender.com/code/";
+  useEffect(() => {
+    fetch(api)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((res) => setPin(res))
+      .catch((err) => console.log("error in fetching the pin", err));
+  }, [api]);
+  console.log(pin);
   const handleOrderAndPay = () => {
     const currentDate = new Date();
     const selectedDateTime = selectedDate ? new Date(selectedDate) : null;
     const selectedTimeElement = document.getElementById("selectedTime");
-
     if (selectedDateTime && selectedTimeElement) {
       const selectedTime = (
         selectedTimeElement as HTMLSelectElement
@@ -62,7 +73,7 @@ export function Order(props: IOrder) {
         { name: "postcode", label: translations.postcode },
         { name: "city", label: translations.city },
       ];
-
+      
       const missingFields = importantFields.filter((field) => {
         const inputElement = document.querySelector(
           `[name=${field.name}]`,
@@ -80,6 +91,18 @@ export function Order(props: IOrder) {
           .getDate()
           .toString()
           .padStart(2, "0")}`;
+          if (orderType === "deliver") {
+            const deliveryCost = pin.find((code) => code.postal_code === selectedPostalCode)?.price || 0;
+            const totalWithDelivery = calculateTotalPrice(cart) + deliveryCost;
+            
+            // Display a confirmation dialogue with the added delivery cost
+            const confirmation = window.confirm(
+              `Total Price (including delivery cost): ${totalWithDelivery.toFixed(2)}/- CHF. Do you want to proceed?`
+            );
+            const foundCode = pin.find((code) => code.postal_code === selectedPostalCode);
+            console.log("Found Code:", foundCode);
+                      
+            if (confirmation) {
 
         // Map cart items to the format you want
         const cartItems = cart.map((cartItem) => ({
@@ -89,7 +112,7 @@ export function Order(props: IOrder) {
           quantity: cartItem.quantity,
           cost: cartItem.price, // You need to update this based on your cart structure
         }));
-
+      
         data = {
           person_name: (document.getElementById("name") as HTMLInputElement)
             ?.value,
@@ -121,6 +144,10 @@ export function Order(props: IOrder) {
         setData(data);
         setConfirmation(true);
       } else {
+        alert("Order canceled.");
+      }
+    }
+    } else {
         const missingFieldLabels = missingFields
           .map((field) => field.label)
           .join(", ");
@@ -132,6 +159,7 @@ export function Order(props: IOrder) {
     } else {
       alert("Please select a date and time in the future.");
     }
+  
   };
 
   const sendOrderToBackend = (data) => {
@@ -141,6 +169,7 @@ export function Order(props: IOrder) {
         window.location.href = "/placed";
       });
   };
+  
 
   return (
     <div>
@@ -203,7 +232,19 @@ export function Order(props: IOrder) {
                 <div>
                   <label>{translations.postcode}</label>
                   <br />
-                  <input name="postcode" id="postcode" type="text" required />
+                  <select
+            name="postcode"
+            id="postcode"
+            value={selectedPostalCode}
+            onChange={(e) => setSelectedPostalCode(e.target.value)}
+            required
+          >
+            {pin.map((code) => (
+              <option key={code.id} value={code.postal_code}>
+                {code.postal_code}
+              </option>
+            ))}
+          </select>
                 </div>
                 <div>
                   <label>{translations.city}</label>
