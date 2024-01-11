@@ -139,13 +139,55 @@ export function Order(props: IOrder) {
             document.getElementById("couponCode") as HTMLInputElement
           )?.value,
           cart: JSON.stringify(cartItems), // Include cart items in the order
-          total_price: calculateTotalPrice(cart),
+          total_price: calculateTotalPrice(cart)+deliveryCost,
         };
         setData(data);
+        console.log(data);
         setConfirmation(true);
       } else {
         alert("Order canceled.");
       }
+    }
+    else{
+      const cartItems = cart.map((cartItem) => ({
+        item_name: `${cartItem.name}${
+          cartItem.drink ? ` + ${cartItem.drink}` : ""
+        }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+        quantity: cartItem.quantity,
+        cost: cartItem.price, // You need to update this based on your cart structure
+      }));
+    
+      data = {
+        person_name: (document.getElementById("name") as HTMLInputElement)
+          ?.value,
+        email: (document.getElementById("email") as HTMLInputElement)?.value,
+        address: (document.getElementById("address") as HTMLInputElement)
+          ?.value,
+        postal_code: (document.getElementById("postcode") as HTMLInputElement)
+          ?.value,
+        city: (document.getElementById("city") as HTMLInputElement)?.value,
+        phone_number: (
+          document.getElementById("phoneNumber") as HTMLInputElement
+        )?.value,
+        company_name: (
+          document.getElementById("companyName") as HTMLInputElement
+        )?.value,
+        delivery_option: orderType,
+        delivery_date: formattedDate,
+        delivery_time: (
+          document.getElementById("selectedTime") as HTMLInputElement
+        )?.value,
+        remarks: (document.getElementById("remarks") as HTMLInputElement)
+          ?.value,
+        coupon_code: (
+          document.getElementById("couponCode") as HTMLInputElement
+        )?.value,
+        cart: JSON.stringify(cartItems), // Include cart items in the order
+        total_price: calculateTotalPrice(cart),
+      };
+      setData(data);
+      console.log(data);
+      setConfirmation(true);
     }
     } else {
         const missingFieldLabels = missingFields
@@ -239,6 +281,9 @@ export function Order(props: IOrder) {
             onChange={(e) => setSelectedPostalCode(e.target.value)}
             required
           >
+             <option value="" disabled selected>
+      {translations.selectPostalCode}
+    </option>
             {pin.map((code) => (
               <option key={code.id} value={code.postal_code}>
                 {code.postal_code}

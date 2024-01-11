@@ -39,6 +39,9 @@ export function Dashboard() {
         <Link to="/addon">
           <h3>{translations.addon}</h3>
         </Link>
+        <Link to="/timing">
+          <h3>{translations.timings}</h3>
+        </Link>
         <div className="buttonss">
           <button onClick={handleLogout}>{translations.logoutButton}</button>
         </div>

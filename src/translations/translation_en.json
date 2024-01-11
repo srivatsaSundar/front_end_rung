@@ -80,5 +80,9 @@
   "postcodesEdit": "Edit Postcodes",
   "holidayEdit": "Edit Holidays and closing time",
   "holidayload": "Loading holidays...",
-  "menuLoad": "Loading ..."
+  "menuLoad": "Loading ...",
+  "selectPostalCode": "Select Postal Code",
+  "edittimings": "Edit Timings",
+  "timingsLoad": "Loading Timings...",
+  "timings":"Shop Timings"
 }

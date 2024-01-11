@@ -80,5 +80,9 @@
   "postcodesEdit": "Postleitzahlen bearbeiten",
   "holidayEdit": "Feiertage und Schließung bearbeiten",
   "holidayload": "Feiertage und Schließung werden geladen...",
-  "menuLoad": "wird geladen..."
+  "menuLoad": "wird geladen...",
+  "selectPostalCode":"Postleitzahl auswählen",
+  "edittimings":"Zeit bearbeiten",
+  "timingsLoad":"Zeit wird geladen...",
+  "timings":"Ladenzeiten"
 }

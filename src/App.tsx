@@ -17,6 +17,7 @@ import { EditMenu } from "./components/menu_edit";
 import { Postcodes } from "./components/postcodes";
 import { Holiday } from "./components/holiday";
 import { Addon } from "./components/addon";
+import { Timing } from "./components/timing";
 
 function App() {
   const column3Ref = useRef(null || undefined);
@@ -199,6 +200,24 @@ function App() {
       <Navigate to="/manage" state={{ from: "/postcodes" }} />
     );
   }
+  function PrivateRouteadd({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/addon" }} />
+    );
+  }
+  function PrivateRoutetim({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/timing" }} />
+    );
+  }
   return (
     <div>
       <BrowserRouter>
@@ -225,6 +244,7 @@ function App() {
             path="/postcodes"
             element={<PrivateRoute element={<Postcodes />} />}
           />
+          <Route path="/timing" element={<PrivateRoute element={<Timing />} />} />
           <Route
             path="/menu"
             element={
