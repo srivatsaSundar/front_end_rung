@@ -12,7 +12,7 @@ import ScrollToTop from "react-scroll-to-top";
 import 'react-toastify/dist/ReactToastify.css';
 
 //display footer
-export function Holiday() {
+export function Discountvalue() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
 
   // Define translations based on the selected language
@@ -24,7 +24,7 @@ export function Holiday() {
   };
 
   const [data, setData] = useState([]);
-  const api = "https://backend-rung.onrender.com/holiday/";
+  const api = "https://backend-rung.onrender.com/discount_coupon_list/";
   const fetchData = () => {
     axios
       .get(api)
@@ -69,7 +69,7 @@ export function Holiday() {
     console.log(formData);
     // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
     axios
-      .post("https://backend-rung.onrender.com/add_holiday/", formData)
+      .post("https://backend-rung.onrender.com/add_discount_coupon/", formData)
       .then((response) => {
         console.log("Server Response:", response.data);
         const add = () => toast.success("Holiday added successfully!");
@@ -85,7 +85,7 @@ export function Holiday() {
 
   const handleDelete = (startData) => {
     axios
-      .delete(`https://backend-rung.onrender.com/delete_holiday/${startData}/`)
+      .delete(`https://backend-rung.onrender.com/delete_discount_coupon/${coupon_code}/`)
       .then((response) => {
         console.log("Delete Response:", response.data);
         // Update the list of holidays after successful deletion
@@ -97,6 +97,34 @@ export function Holiday() {
         console.error("Delete Error:", error);
         toast.error("Error deleting holiday!");
         // Handle errors if needed
+      });
+  };
+
+  const handleAvailabilityChange = (postalCode, currentAvailability) => {
+    const newData = {
+      postal_code: postalCode,
+      available: !currentAvailability, // Toggle availability
+    };
+
+    axios
+      .post(
+        `https://backend-rung.onrender.com/discount_coupon_availability/${coupon_code}/`,
+        newData,
+      )
+      .then((response) => {
+        // Handle the response from the server if needed
+        // console.log("Server Response:", response.data);
+        const availability = () => {
+          toast.success("Availability changed successfully!");
+          debouncedUpdateUI();
+        };
+        availability();
+        fetchData()
+      })
+      .catch((error) => {
+        // Handle any errors that occurred during the Axios request
+        console.error("Error:", error);
+        toast.error("Error changing availability!");
       });
   };
 
@@ -170,10 +198,11 @@ export function Holiday() {
           <table className="styled-table">
             <thead>
               <tr>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Holiday Note</th>
-                <th>Delete</th>
+                <th>coupon code</th>
+                <th>discount percentage</th>
+                <th>coupon name</th>
+                <th>coupon expiry date </th>
+                <th>coupon description</th>
               </tr>
             </thead>
             <tbody>

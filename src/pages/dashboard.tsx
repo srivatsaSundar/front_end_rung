@@ -42,6 +42,9 @@ export function Dashboard() {
         <Link to="/timing">
           <h3>{translations.timings}</h3>
         </Link>
+        <Link to="/discountvalue">
+          <h3>{translations.discountvalue}</h3>
+        </Link>
         <div className="buttonss">
           <button onClick={handleLogout}>{translations.logoutButton}</button>
         </div>

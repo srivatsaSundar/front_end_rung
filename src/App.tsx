@@ -18,6 +18,7 @@ import { Postcodes } from "./components/postcodes";
 import { Holiday } from "./components/holiday";
 import { Addon } from "./components/addon";
 import { Timing } from "./components/timing";
+import { Discountvalue } from "./components/discountvalue";
 
 function App() {
   const column3Ref = useRef(null || undefined);
@@ -244,6 +245,7 @@ function App() {
             path="/postcodes"
             element={<PrivateRoute element={<Postcodes />} />}
           />
+          <Route path="/discountvalue" element={<PrivateRoute element={<Discountvalue />} />} />
           <Route path="/timing" element={<PrivateRoute element={<Timing />} />} />
           <Route
             path="/menu"
