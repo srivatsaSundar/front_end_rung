@@ -219,6 +219,15 @@ function App() {
       <Navigate to="/manage" state={{ from: "/timing" }} />
     );
   }
+  function PrivateRoutediscount({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/discountvalue" }} />
+    );
+  }
   return (
     <div>
       <BrowserRouter>

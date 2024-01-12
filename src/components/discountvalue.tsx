@@ -11,11 +11,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import ScrollToTop from "react-scroll-to-top";
 import 'react-toastify/dist/ReactToastify.css';
 
-//display footer
 export function Discountvalue() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
 
-  // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
   const handleLogout = () => {
@@ -25,6 +23,7 @@ export function Discountvalue() {
 
   const [data, setData] = useState([]);
   const api = "https://backend-rung.onrender.com/discount_coupon_list/";
+
   const fetchData = () => {
     axios
       .get(api)
@@ -35,21 +34,19 @@ export function Discountvalue() {
       .catch((error) => {
         console.error("Error:", error);
         toast.error("Error in fetching data");
-        // Handle errors if needed
       });
   };
+
   useEffect(() => {
     fetchData();
-    console.log(api);
-    console.log(data);
   }, []);
 
   const [formData, setFormData] = useState({
-    start_data: "",
-    end_data: "",
-    start_time: "",
-    end_time: "",
-    holiday_note: "",
+    coupon_code: "",
+    discount_percentage: "",
+    coupon_name: "",
+    coupon_expiry_date: "",
+    coupon_description: "",
   });
 
   const handleInputChange = (e) => {
@@ -60,73 +57,50 @@ export function Discountvalue() {
   };
 
   const updateData = () => {
-    // Fetch data again after form submission or deletion
     fetchData();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
+
     axios
       .post("https://backend-rung.onrender.com/add_discount_coupon/", formData)
       .then((response) => {
         console.log("Server Response:", response.data);
-        const add = () => toast.success("Holiday added successfully!");
+        const add = () => toast.success("Coupon added successfully!");
         add();
         updateData();
+        setFormData({
+          coupon_code: "",
+          discount_percentage: "",
+          coupon_name: "",
+          coupon_expiry_date: "",
+          coupon_description: "",
+        });
       })
       .catch((error) => {
         console.error("Error:", error);
-        toast.error("Error adding holiday!");
-        // Handle errors if needed
+        toast.error("Error adding coupon!");
       });
   };
 
-  const handleDelete = (startData) => {
+  const handleDelete = (couponCode) => {
     axios
-      .delete(`https://backend-rung.onrender.com/delete_discount_coupon/${coupon_code}/`)
+      .delete(`https://backend-rung.onrender.com/delete_discount_coupon/${couponCode}/`)
       .then((response) => {
         console.log("Delete Response:", response.data);
-        // Update the list of holidays after successful deletion
-        const deleted = () => toast.success("Holiday deleted successfully!");
+        const deleted = () => toast.success("Coupon deleted successfully!");
         deleted();
         updateData();
       })
       .catch((error) => {
         console.error("Delete Error:", error);
-        toast.error("Error deleting holiday!");
-        // Handle errors if needed
+        toast.error("Error deleting coupon!");
       });
   };
 
-  const handleAvailabilityChange = (postalCode, currentAvailability) => {
-    const newData = {
-      postal_code: postalCode,
-      available: !currentAvailability, // Toggle availability
-    };
-
-    axios
-      .post(
-        `https://backend-rung.onrender.com/discount_coupon_availability/${coupon_code}/`,
-        newData,
-      )
-      .then((response) => {
-        // Handle the response from the server if needed
-        // console.log("Server Response:", response.data);
-        const availability = () => {
-          toast.success("Availability changed successfully!");
-          debouncedUpdateUI();
-        };
-        availability();
-        fetchData()
-      })
-      .catch((error) => {
-        // Handle any errors that occurred during the Axios request
-        console.error("Error:", error);
-        toast.error("Error changing availability!");
-      });
-  };
+ 
 
   const scrollToDiv = () => {
     const scrollableDiv = document.getElementById("scrollableDiv");
@@ -140,7 +114,7 @@ export function Discountvalue() {
         <ToastContainer />
       </div>
       <div className="holiday" id="scrollableDiv">
-        <h3>{translations.holidayEdit}</h3>
+        <h3>{translations.discountEdit}</h3>
         <form onSubmit={handleSubmit}>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div
@@ -150,11 +124,11 @@ export function Discountvalue() {
                 alignItems: "center",
               }}
             >
-              Start Date:{" "}
+              Coupon Code:{" "}
               <input
-                type="date"
-                name="start_data"
-                value={formData.start_data}
+                type="text"
+                name="coupon_code"
+                value={formData.coupon_code}
                 onChange={handleInputChange}
               />
             </div>
@@ -165,11 +139,11 @@ export function Discountvalue() {
                 alignItems: "center",
               }}
             >
-              End Date:{" "}
+              Discount Percentage:{" "}
               <input
-                type="date"
-                name="end_data"
-                value={formData.end_data}
+                type="text"
+                name="discount_percentage"
+                value={formData.discount_percentage}
                 onChange={handleInputChange}
               />
             </div>
@@ -181,11 +155,41 @@ export function Discountvalue() {
               alignItems: "center",
             }}
           >
-            Holiday Note:{" "}
+            Coupon Name:{" "}
             <input
               type="text"
-              name="holiday_note"
-              value={formData.holiday_note}
+              name="coupon_name"
+              value={formData.coupon_name}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            Coupon Expiry Date:{" "}
+            <input
+              type="date"
+              name="coupon_expiry_date"
+              value={formData.coupon_expiry_date}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            Coupon Description:{" "}
+            <input
+              type="text"
+              name="coupon_description"
+              value={formData.coupon_description}
               onChange={handleInputChange}
               style={{ width: "77%" }}
             />
@@ -198,22 +202,25 @@ export function Discountvalue() {
           <table className="styled-table">
             <thead>
               <tr>
-                <th>coupon code</th>
-                <th>discount percentage</th>
-                <th>coupon name</th>
-                <th>coupon expiry date </th>
-                <th>coupon description</th>
+                <th>Coupon Code</th>
+                <th>Discount Percentage</th>
+                <th>Coupon Name</th>
+                <th>Coupon Expiry Date</th>
+                <th>Coupon Description</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
               {data ? (
                 data.map((item) => (
-                  <tr>
-                    <td>{item.start_data}</td>
-                    <td>{item.end_data}</td>
-                    <td>{item.holiday_note}</td>
+                  <tr key={item.coupon_code}>
+                    <td>{item.coupon_code}</td>
+                    <td>{item.discount_percentage}</td>
+                    <td>{item.coupon_name}</td>
+                    <td>{item.coupon_expiry_date}</td>
+                    <td>{item.coupon_description}</td>
                     <td>
-                      <button onClick={() => handleDelete(item.start_data)}>
+                      <button onClick={() => handleDelete(item.coupon_code)}>
                         Delete
                       </button>
                     </td>
@@ -221,7 +228,7 @@ export function Discountvalue() {
                 ))
               ) : (
                 <tr>
-                  <td>{translations.holidayload}</td>
+                  <td>{translations.menuLoad}</td>
                 </tr>
               )}
             </tbody>
@@ -231,7 +238,7 @@ export function Discountvalue() {
           <Link to="/dashboard">
             <button>{translations.gotodash}</button>
           </Link>
-          <button onClick={handleLogout}> {translations.logoutButton}</button>
+          <button onClick={handleLogout}>{translations.logoutButton}</button>
         </div>
         <ScrollToTop
           smooth

@@ -86,5 +86,6 @@
   "selectPostalCode":"Postleitzahl auswählen",
   "edittimings":"Zeit bearbeiten",
   "timingsLoad":"Zeit wird geladen...",
-  "timings":"Ladenzeiten"
+  "timings":"Ladenzeiten",
+  "discountEdit": "Gutschein bearbeiten"
 }

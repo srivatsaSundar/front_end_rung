@@ -86,5 +86,6 @@
   "selectPostalCode": "Select Postal Code",
   "edittimings": "Edit Timings",
   "timingsLoad": "Loading Timings...",
-  "timings":"Shop Timings"
+  "timings":"Shop Timings",
+  "discountEdit": "Edit Discount"
 }
