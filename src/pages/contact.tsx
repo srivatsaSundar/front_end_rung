@@ -24,6 +24,7 @@ export function Contact() {
     }
   }, []);
 
+
   // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
@@ -33,7 +34,7 @@ export function Contact() {
       phone_number: "",
       message: "",
     });
-  
+
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       console.log(`Input changed - Name: ${name}, Value: ${value}`);
@@ -72,6 +73,7 @@ export function Contact() {
     <div>
       <div style={{ fontSize: 16 }} className="yes">
         <AppNavbar count={cartCount} />
+        <ToastContainer />
         <div
           style={{ paddingTop: 20, paddingBottom: 20, marginTop: 30 }}
           className="up"

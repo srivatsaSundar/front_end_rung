@@ -228,7 +228,7 @@ export function Discountvalue() {
                 ))
               ) : (
                 <tr>
-                  <td>{translations.menuLoad}</td>
+                  <td>{translations.discountLoad}</td>
                 </tr>
               )}
             </tbody>

@@ -45,6 +45,9 @@ export function Dashboard() {
         <Link to="/discountvalue">
           <h3>{translations.discount}</h3>
         </Link>
+        <Link to="/contactview">
+          <h3>{translations.contact}</h3>
+        </Link>
         <div className="buttonss">
           <button onClick={handleLogout}>{translations.logoutButton}</button>
         </div>

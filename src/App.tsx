@@ -4,7 +4,7 @@ import { Contact } from "./pages/contact";
 import { Discount } from "./pages/discount";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NoPage } from "./pages/nopage";
-import { Menu, MenuItem } from "./pages/menu";
+import { Menu } from "./pages/menu";
 import React, { useEffect, useRef, useState } from "react";
 import { Order } from "./pages/order";
 import { useLanguage } from "./components/LanguageProvider";
@@ -19,6 +19,7 @@ import { Holiday } from "./components/holiday";
 import { Addon } from "./components/addon";
 import { Timing } from "./components/timing";
 import { Discountvalue } from "./components/discountvalue";
+import { ContactView } from "./components/contactView";
 
 function App() {
   const column3Ref = useRef(null || undefined);
@@ -228,6 +229,16 @@ function App() {
       <Navigate to="/manage" state={{ from: "/discountvalue" }} />
     );
   }
+  function PrivateRoutecontact({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/contactview" }} />
+    );
+  }
+
   return (
     <div>
       <BrowserRouter>
@@ -256,6 +267,7 @@ function App() {
           />
           <Route path="/discountvalue" element={<PrivateRoute element={<Discountvalue />} />} />
           <Route path="/timing" element={<PrivateRoute element={<Timing />} />} />
+          <Route path="/contactview" element={<PrivateRoute element={<ContactView />}/>}/>
           <Route
             path="/menu"
             element={

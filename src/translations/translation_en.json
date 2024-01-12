@@ -87,5 +87,7 @@
   "edittimings": "Edit Timings",
   "timingsLoad": "Loading Timings...",
   "timings":"Shop Timings",
-  "discountEdit": "Edit Discount"
+  "discountEdit": "Edit Discount",
+  "discountLoad": "Loading Discount...",
+  "contactLoad": "Loading Contact..."
 }

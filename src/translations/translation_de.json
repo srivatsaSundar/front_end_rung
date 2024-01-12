@@ -87,5 +87,7 @@
   "edittimings":"Zeit bearbeiten",
   "timingsLoad":"Zeit wird geladen...",
   "timings":"Ladenzeiten",
-  "discountEdit": "Gutschein bearbeiten"
+  "discountEdit": "Gutschein bearbeiten",
+  "discountLoad": "Gutschein wird geladen...",
+  "contactLoad": "Kontakt wird geladen..."
 }

@@ -13,14 +13,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { debounce } from 'lodash';
 
-//display footer
 export function Postcodes() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
   const [datapin, setDatapin] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [value, setvalue] = useState("");
+  const [price, setPrice] = useState("");
 
-  // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
   const handleLogout = () => {
@@ -36,9 +35,9 @@ export function Postcodes() {
       setDatapin(response.data);
     } catch (error) {
       console.error("Error:", error);
-      // Handle errors if needed
     }
   };
+
   const updateUI = async () => {
     await fetchData();
   };
@@ -60,28 +59,24 @@ export function Postcodes() {
     setvalue(e.target.value);
   };
 
-
   const handleSubmit = async () => {
-    // Assuming value contains the data you want to send
-
-    const data = { postal_code: value, available: true };
+    const data = { postal_code: value, price: price, available: true };
 
     try {
       await axios.post("https://backend-rung.onrender.com/add_postal_code/", data);
-      // console.log("Server Response: Postcode added successfully!");
       toast.success("Postcode added successfully!");
       handleCloseModal();
-      debouncedUpdateUI(); // Update UI manually after submitting
+      debouncedUpdateUI();
     } catch (error) {
-      // console.error("Full Error Object:", error);
       toast.error("Error adding postcode!");
     }
   };
 
-  const handleAvailabilityChange = (postalCode, currentAvailability) => {
+  const handleAvailabilityChange = (postalCode, price, currentAvailability) => {
     const newData = {
       postal_code: postalCode,
-      available: !currentAvailability, // Toggle availability
+      price: price,
+      available: !currentAvailability,
     };
 
     axios
@@ -90,8 +85,6 @@ export function Postcodes() {
         newData,
       )
       .then((response) => {
-        // Handle the response from the server if needed
-        // console.log("Server Response:", response.data);
         const availability = () => {
           toast.success("Availability changed successfully!");
           debouncedUpdateUI();
@@ -100,7 +93,6 @@ export function Postcodes() {
         fetchData()
       })
       .catch((error) => {
-        // Handle any errors that occurred during the Axios request
         console.error("Error:", error);
         toast.error("Error changing availability!");
       });
@@ -109,9 +101,8 @@ export function Postcodes() {
   const handleDelete = async (postalCode) => {
     try {
       await axios.delete(`https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`);
-      // console.log("Delete Response: Postcode deleted successfully!");
       toast.success("Postcode deleted successfully!");
-      debouncedUpdateUI(); // Update UI manually after deletion
+      debouncedUpdateUI();
     } catch (error) {
       console.error("Error deleting postal code:", error);
       toast.error("Error deleting postcode!");
@@ -157,6 +148,9 @@ export function Postcodes() {
           <Modal.Body>
             <label>Postcode:</label>
             <input type="text" value={value} onChange={handleInputChange} />
+            <br></br>
+            <label>Price:</label>
+            <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
           </Modal.Body>
           <Modal.Footer className="buttons">
             <button onClick={handleCloseModal}>Close</button>
@@ -169,6 +163,7 @@ export function Postcodes() {
           <thead>
             <tr>
               <th>Postcode</th>
+              <th>Price</th>
               <th>Availability</th>
               <th>Change Availability</th>
               <th>Delete</th>
@@ -177,35 +172,32 @@ export function Postcodes() {
           <tbody>
             {handlepin ? (
               handlepin.map((item, index) => (
-                <tr>
+                <tr key={index}>
                   <td>{item.postal_code}</td>
+                  <td>{item.price}</td>
                   <td>{String(item.available)}</td>
                   <td>
                     <button
                       onClick={() =>
-                        handleAvailabilityChange(
-                          item.postal_code,
-                          item.available,
-                        )
+                        handleAvailabilityChange(item.postal_code, item.price, item.available)
                       }
                     >
                       Change Availability
                     </button>
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(item.postal_code)}>
-                      Delete
-                    </button>
+                    <button onClick={() => handleDelete(item.postal_code)}>Delete</button>
                   </td>
                 </tr>
               ))
             ) : (
-              <tr>{translations.Loading}</tr>
+              <tr>
+                <td>{translations.Loading}</td>
+              </tr>
             )}
           </tbody>
         </table>
       </div>
-
       <div className="buttons">
         <Link to="/dashboard">
           <button>{translations.gotodash}</button>
@@ -221,7 +213,6 @@ export function Postcodes() {
         top={2}
       />
       <div> <Footer /></div>
-
     </div>
   );
 }
