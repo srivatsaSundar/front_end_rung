@@ -66,7 +66,7 @@ const useHolidayCheck = () => {
     const isNoService =
       currentDate < startTime || currentDate >= endTime;
 
-    // console.log("isWithinSpecifiedHours:", isWithinSpecifiedHours);
+    // console.log("isNoService:", isNoService);
 
     const holidayCheck = holiday.some((holidayItem) => {
       // Keep holiday start and end time as is

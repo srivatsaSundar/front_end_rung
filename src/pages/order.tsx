@@ -10,6 +10,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Cart from "./cart";
 import ScrollToTop from "react-scroll-to-top";
+import { toast } from "react-toastify";
+import { DateTime } from "luxon";
+
 interface IOrder {
   ref;
   removeFromCart;
@@ -38,9 +41,13 @@ export function Order(props: IOrder) {
   const [orderType, setOrderType] = useState("deliver");
   const [Data, setData] = useState({});
   const [confirmation, setConfirmation] = useState(false);
+  const [Time, setTime] = useState([]);
+
+
   let data = {};
   const [pin, setPin] = useState([]);
   const api = "https://backend-rung.onrender.com/code/";
+
   useEffect(() => {
     fetch(api)
       .then((response) => {
@@ -88,9 +95,9 @@ export function Order(props: IOrder) {
         )
           .toString()
           .padStart(2, "0")}-${selectedDateTime
-          .getDate()
-          .toString()
-          .padStart(2, "0")}`;
+            .getDate()
+            .toString()
+            .padStart(2, "0")}`;
         if (orderType === "deliver") {
           const deliveryCost =
             pin.find((code) => code.postal_code === selectedPostalCode)
@@ -111,9 +118,8 @@ export function Order(props: IOrder) {
           if (confirmation) {
             // Map cart items to the format you want
             const cartItems = cart.map((cartItem) => ({
-              item_name: `${cartItem.name}${
-                cartItem.drink ? ` + ${cartItem.drink}` : ""
-              }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+              item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
+                }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
               quantity: cartItem.quantity,
               cost: cartItem.price, // You need to update this based on your cart structure
             }));
@@ -157,9 +163,8 @@ export function Order(props: IOrder) {
           }
         } else {
           const cartItems = cart.map((cartItem) => ({
-            item_name: `${cartItem.name}${
-              cartItem.drink ? ` + ${cartItem.drink}` : ""
-            }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+            item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
+              }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
             quantity: cartItem.quantity,
             cost: cartItem.price, // You need to update this based on your cart structure
           }));
@@ -218,6 +223,40 @@ export function Order(props: IOrder) {
       .then((response) => {
         window.location.href = "/placed";
       });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    axios
+      .get("https://backend-rung.onrender.com/shop_time_list/")
+      .then((response) => {
+        // console.log(response.data);
+        setTime(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error("Error in fetching data");
+      });
+  };
+
+  const generateTimeOptions = () => {
+    const currentShopTimings = Time[0];
+
+    const startTime = DateTime.fromISO(currentShopTimings?.shop_delivery_opening_time);
+    const endTime = DateTime.fromISO(currentShopTimings?.shop_delivery_closing_time);
+
+    const timeOptions = [];
+    let currentTime = startTime;
+
+    while (currentTime <= endTime) {
+      timeOptions.push(currentTime.toFormat("HH:mm"));
+      currentTime = currentTime.plus({ minutes: 15 });
+    }
+
+    return timeOptions;
   };
 
   return (
@@ -361,21 +400,11 @@ export function Order(props: IOrder) {
                       name="selectedTime"
                       required
                     >
-                      {Array.from({ length: 13 }, (_, i) => {
-                        const hour = 18 + Math.floor(i / 4);
-                        const minute = (i % 4) * 15;
-                        const time = `${hour
-                          .toString()
-                          .padStart(2, "0")}:${minute
-                          .toString()
-                          .padStart(2, "0")}`;
-
-                        return (
-                          <option key={time} value={time}>
-                            {time}
-                          </option>
-                        );
-                      })}
+                      {generateTimeOptions().map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
                     </select>
                   ) : (
                     <select
@@ -385,21 +414,11 @@ export function Order(props: IOrder) {
                       name="selectedTime"
                       required
                     >
-                      {Array.from({ length: 13 }, (_, i) => {
-                        const hour = 18 + Math.floor(i / 4);
-                        const minute = (i % 4) * 15;
-                        const time = `${hour
-                          .toString()
-                          .padStart(2, "0")}:${minute
-                          .toString()
-                          .padStart(2, "0")}`;
-
-                        return (
-                          <option key={time} value={time}>
-                            {time}
-                          </option>
-                        );
-                      })}
+                      {generateTimeOptions().map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
                     </select>
                   )}
                 </div>

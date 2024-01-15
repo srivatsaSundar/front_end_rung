@@ -195,7 +195,14 @@ export function Menu(props: IMenu) {
     if (existingItemIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart[existingItemIndex].quantity += 1;
-      setCart(updatedCart);
+      if (isClosed() === true) {
+        const closedMessage = "Restaurant is currently closed.";
+        toast.error(closedMessage);
+        return;
+      }
+      else {
+        setCart(updatedCart)
+      }
     }
   }
 
@@ -374,9 +381,8 @@ export function Menu(props: IMenu) {
         <div className="column1">
           {uniqueTitles.map((title, index) => (
             <div
-              className={`menu-item ${
-                index === selectedItemIndex ? "first" : ""
-              }`}
+              className={`menu-item ${index === selectedItemIndex ? "first" : ""
+                }`}
               key={index}
               onClick={() => {
                 setSelectedItemIndex(index);
@@ -539,43 +545,43 @@ export function Menu(props: IMenu) {
                             </div>
                             {(selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood) && (
-                              <div className="add-on-cost">
-                                <p>
-                                  {selectedAddons[item.name].selectedDrink &&
-                                  selectedAddons[item.name].selectedFood
-                                    ? calculateUpdateItemPrice(
+                                <div className="add-on-cost">
+                                  <p>
+                                    {selectedAddons[item.name].selectedDrink &&
+                                      selectedAddons[item.name].selectedFood
+                                      ? calculateUpdateItemPrice(
                                         item,
                                         selectedAddons[item.name].selectedDrink,
                                         selectedAddons[item.name].selectedFood,
                                       )
-                                    : selectedAddons[item.name].selectedDrink
-                                    ? calculateUpdateItemPrice(
-                                        item,
-                                        selectedAddons[item.name].selectedDrink,
-                                        null,
-                                      )
-                                    : calculateUpdateItemPrice(
-                                        item,
-                                        null,
-                                        selectedAddons[item.name].selectedFood,
-                                      )}
-                                  /- CHF
-                                </p>
-                              </div>
-                            )}
+                                      : selectedAddons[item.name].selectedDrink
+                                        ? calculateUpdateItemPrice(
+                                          item,
+                                          selectedAddons[item.name].selectedDrink,
+                                          null,
+                                        )
+                                        : calculateUpdateItemPrice(
+                                          item,
+                                          null,
+                                          selectedAddons[item.name].selectedFood,
+                                        )}
+                                    /- CHF
+                                  </p>
+                                </div>
+                              )}
                           </div>
                         )}
                         {(!itemHasAddOns(item.name) ||
                           (selectedItemName === item.name &&
                             (selectedAddons[item.name].selectedDrink ||
                               selectedAddons[item.name].selectedFood))) && (
-                          <button
-                            className="add-button"
-                            onClick={() => addToCart(item)}
-                          >
-                            <Icofont icon="icofont-bag" /> {translations.add}
-                          </button>
-                        )}
+                            <button
+                              className="add-button"
+                              onClick={() => addToCart(item)}
+                            >
+                              <Icofont icon="icofont-bag" /> {translations.add}
+                            </button>
+                          )}
                       </div>
                     </div>
                   </div>

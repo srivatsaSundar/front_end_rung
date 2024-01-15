@@ -20,12 +20,15 @@ import { Addon } from "./components/addon";
 import { Timing } from "./components/timing";
 import { Discountvalue } from "./components/discountvalue";
 import { ContactView } from "./components/contactView";
+import useHolidayCheck from "./pages/holidaycheck";
+import { toast } from "react-toastify";
 
 function App() {
   const column3Ref = useRef(null || undefined);
   const [cart, setCart] = useState([]);
   const [add_on_drink, setAdd_on_drink] = useState([]) as any[];
   const [add_on_food, setAdd_on_food] = useState([]) as any[];
+  const { isClosed } = useHolidayCheck();
 
   const { selectedLanguage } = useLanguage();
   useEffect(() => {
@@ -88,7 +91,14 @@ function App() {
       } else {
         updatedCart.splice(existingItemIndex, 1);
       }
-      setCart(updatedCart);
+      if (isClosed() === true) {
+        const closedMessage = "Restaurant is currently closed.";
+        toast.error(closedMessage);
+        return;
+      }
+      else {
+        setCart(updatedCart)
+      }
     }
   };
 
@@ -103,7 +113,14 @@ function App() {
     if (existingItemIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart.splice(existingItemIndex, 1);
-      setCart(updatedCart);
+      if (isClosed() === true) {
+        const closedMessage = "Restaurant is currently closed.";
+        toast.error(closedMessage);
+        return;
+      }
+      else {
+        setCart(updatedCart)
+      }
 
       // Update localStorage after updating the cart state
       localStorage.setItem("cart", JSON.stringify(updatedCart));

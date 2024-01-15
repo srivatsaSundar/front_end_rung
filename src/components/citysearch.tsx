@@ -158,6 +158,23 @@ function CitySearch() {
     return matchingHoliday?.holiday_note ?? "Today";
   };
 
+  const generateTimeOptions = () => {
+    const currentShopTimings = data[0];
+
+    const startTime = DateTime.fromISO(currentShopTimings?.shop_delivery_opening_time);
+    const endTime = DateTime.fromISO(currentShopTimings?.shop_delivery_closing_time);
+
+    const timeOptions = [];
+    let currentTime = startTime;
+
+    while (currentTime <= endTime) {
+      timeOptions.push(currentTime.toFormat("HH:mm"));
+      currentTime = currentTime.plus({ minutes: 15 });
+    }
+
+    return timeOptions;
+  };
+
   return (
     <div className="citysearch">
       <div className="logo-main">
@@ -232,19 +249,11 @@ function CitySearch() {
                   />
                   <select className="search-time" defaultValue="18:00">
                     <option value="">{translations.selecttime}</option>
-                    {Array.from({ length: 13 }, (_, i) => {
-                      const hour = 18 + Math.floor(i / 4);
-                      const minute = (i % 4) * 15;
-                      const time = `${hour.toString().padStart(2, "0")}:${minute
-                        .toString()
-                        .padStart(2, "0")}`;
-                      const pm = "PM";
-                      return (
-                        <option key={time} value={time}>
-                          {time} {pm}
-                        </option>
-                      );
-                    })}
+                    {generateTimeOptions().map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
                   </select>
                   <button className="search-button">
                     <Icofont className="icon-pin" icon="icofont-search" />{" "}
