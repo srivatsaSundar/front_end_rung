@@ -21,7 +21,7 @@
   "openingHours": "Restaurant Opening Hours",
   "regularHours": "Monday to Sunday ",
   "deliveryHours": "Delivery time ",
-  "hr":"hrs",
+  "hr": "hrs",
   "to": "to",
   "followUsOn": "Follow Us On",
   "copyrightNotice": "Copyright © Mr Rung 2023. All Rights Reserved.",
@@ -86,7 +86,7 @@
   "selectPostalCode": "Select Postal Code",
   "edittimings": "Edit Timings",
   "timingsLoad": "Loading Timings...",
-  "timings":"Shop Timings",
+  "timings": "Shop Timings",
   "discountEdit": "Edit Discount",
   "discountLoad": "Loading Discount...",
   "contactLoad": "Loading Contact..."

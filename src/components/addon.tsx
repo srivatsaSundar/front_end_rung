@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import "../static/postcodes.css";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "react-scroll-to-top";
 
 //display footer
@@ -78,7 +78,7 @@ export function Addon() {
         toast.error("Error adding add-on!");
         // Handle errors if needed
       });
-      window.location.reload();
+    window.location.reload();
   };
   const handleDeleteAddOn = (name: string) => {
     axios
@@ -89,7 +89,7 @@ export function Addon() {
         deleted();
         setTimeout(() => {
           window.location.reload();
-        }, 6000);  
+        }, 6000);
       })
       .catch((error) => {
         console.error("Error deleting postal code:", error);
@@ -222,7 +222,6 @@ export function Addon() {
     const scrollableDiv = document.getElementById("scrollableDiv");
     scrollableDiv?.scrollIntoView({ behavior: "smooth" });
   };
-
 
   return (
     <div>
@@ -474,8 +473,7 @@ export function Addon() {
           onClick={scrollToDiv}
           top={2}
         />
-        <div
-        >
+        <div>
           <Footer />
         </div>
       </div>

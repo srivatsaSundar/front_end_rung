@@ -54,32 +54,30 @@ export function SocialLogin() {
       <div className="opening">
         <h5>{translations.openingHours}</h5>
         <ul className="contact-us">
-        {data ? (
-  data.map((item) => (
-    <React.Fragment key={item.id}>
-      <li>
-        <p className="margin-hour">
-          {translations.regularHours} (
-          {item.shop_opening_time.substring(0, 5)} {translations.hr} {translations.to}{" "}
-          {item.shop_closing_time.substring(0, 5)} {translations.hr})
-        </p>
-      </li>
-      <li>
-        <p className="margin-hour">
-          {translations.deliveryHours} (
-          {item.shop_delivery_opening_time.substring(0, 5)} {translations.hr} {translations.to}{" "}
-          {item.shop_delivery_closing_time.substring(0, 5)} {translations.hr})
-        </p>
-      </li>
-    </React.Fragment>
-  ))
-) : null}
-
-
-                
+          {data
+            ? data.map((item) => (
+                <React.Fragment key={item.id}>
+                  <li>
+                    <p className="margin-hour">
+                      {translations.regularHours} (
+                      {item.shop_opening_time.substring(0, 5)} {translations.hr}{" "}
+                      {translations.to} {item.shop_closing_time.substring(0, 5)}{" "}
+                      {translations.hr})
+                    </p>
+                  </li>
+                  <li>
+                    <p className="margin-hour">
+                      {translations.deliveryHours} (
+                      {item.shop_delivery_opening_time.substring(0, 5)}{" "}
+                      {translations.hr} {translations.to}{" "}
+                      {item.shop_delivery_closing_time.substring(0, 5)}{" "}
+                      {translations.hr})
+                    </p>
+                  </li>
+                </React.Fragment>
+              ))
+            : null}
         </ul>
-           
-          
       </div>
       <div className="media">
         <h5>{translations.followUsOn}</h5>

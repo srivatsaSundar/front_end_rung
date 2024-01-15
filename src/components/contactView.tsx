@@ -7,9 +7,9 @@ import AppNavbar from "./navbar";
 import { Link } from "react-router-dom";
 import "../static/postcodes.css";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import ScrollToTop from "react-scroll-to-top";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export function ContactView() {
   const { selectedLanguage } = useLanguage(); // Access the selected language

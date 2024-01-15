@@ -12,10 +12,10 @@ import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "react-scroll-to-top";
 
 export function Timing() {
-    const handleLogout = () => {
-        localStorage.clear();
-        window.location.href = "/manage";
-      };
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/manage";
+  };
   const { selectedLanguage } = useLanguage();
   const [data, setData] = useState([]);
   const [formData, setFormData] = useState({
@@ -23,7 +23,7 @@ export function Timing() {
     shop_closing_time: "",
     shop_delivery_opening_time: "",
     shop_delivery_closing_time: "",
-    id:1
+    id: 1,
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingData, setEditingData] = useState(null);
@@ -56,7 +56,7 @@ export function Timing() {
       shop_closing_time: item.shop_closing_time,
       shop_delivery_opening_time: item.shop_delivery_opening_time,
       shop_delivery_closing_time: item.shop_delivery_closing_time,
-      id:1
+      id: 1,
     });
     setIsModalOpen(true);
   };
@@ -85,8 +85,9 @@ export function Timing() {
         console.log("Server Response:", response.data);
         const add = () => toast.success("Timings added successfully!");
         add();
+        closeModal();
         updateData();
-        console.log(formData)
+        console.log(formData);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -198,7 +199,6 @@ export function Timing() {
             <button onClick={handleSubmit}>Submit</button>
           </Modal.Footer>
         </Modal>
-
         <ScrollToTop
           smooth
           color="black"

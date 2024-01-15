@@ -39,7 +39,7 @@ export function Order(props: IOrder) {
   const [Data, setData] = useState({});
   const [confirmation, setConfirmation] = useState(false);
   let data = {};
-  const [pin,setPin] = useState([]);
+  const [pin, setPin] = useState([]);
   const api = "https://backend-rung.onrender.com/code/";
   useEffect(() => {
     fetch(api)
@@ -73,7 +73,7 @@ export function Order(props: IOrder) {
         { name: "postcode", label: translations.postcode },
         { name: "city", label: translations.city },
       ];
-      
+
       const missingFields = importantFields.filter((field) => {
         const inputElement = document.querySelector(
           `[name=${field.name}]`,
@@ -91,105 +91,114 @@ export function Order(props: IOrder) {
           .getDate()
           .toString()
           .padStart(2, "0")}`;
-          if (orderType === "deliver") {
-            const deliveryCost = pin.find((code) => code.postal_code === selectedPostalCode)?.price || 0;
-            const totalWithDelivery = calculateTotalPrice(cart) + deliveryCost;
-            
-            // Display a confirmation dialogue with the added delivery cost
-            const confirmation = window.confirm(
-              `Total Price (including delivery cost): ${totalWithDelivery.toFixed(2)}/- CHF. Do you want to proceed?`
-            );
-            const foundCode = pin.find((code) => code.postal_code === selectedPostalCode);
-            console.log("Found Code:", foundCode);
-                      
-            if (confirmation) {
+        if (orderType === "deliver") {
+          const deliveryCost =
+            pin.find((code) => code.postal_code === selectedPostalCode)
+              ?.price || 0;
+          const totalWithDelivery = calculateTotalPrice(cart) + deliveryCost;
 
-        // Map cart items to the format you want
-        const cartItems = cart.map((cartItem) => ({
-          item_name: `${cartItem.name}${
-            cartItem.drink ? ` + ${cartItem.drink}` : ""
-          }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
-          quantity: cartItem.quantity,
-          cost: cartItem.price, // You need to update this based on your cart structure
-        }));
-      
-        data = {
-          person_name: (document.getElementById("name") as HTMLInputElement)
-            ?.value,
-          email: (document.getElementById("email") as HTMLInputElement)?.value,
-          address: (document.getElementById("address") as HTMLInputElement)
-            ?.value,
-          postal_code: (document.getElementById("postcode") as HTMLInputElement)
-            ?.value,
-          city: (document.getElementById("city") as HTMLInputElement)?.value,
-          phone_number: (
-            document.getElementById("phoneNumber") as HTMLInputElement
-          )?.value,
-          company_name: (
-            document.getElementById("companyName") as HTMLInputElement
-          )?.value,
-          delivery_option: orderType,
-          delivery_date: formattedDate,
-          delivery_time: (
-            document.getElementById("selectedTime") as HTMLInputElement
-          )?.value,
-          remarks: (document.getElementById("remarks") as HTMLInputElement)
-            ?.value,
-          coupon_code: (
-            document.getElementById("couponCode") as HTMLInputElement
-          )?.value,
-          cart: JSON.stringify(cartItems), // Include cart items in the order
-          total_price: calculateTotalPrice(cart)+deliveryCost,
-        };
-        setData(data);
-        console.log(data);
-        setConfirmation(true);
+          // Display a confirmation dialogue with the added delivery cost
+          const confirmation = window.confirm(
+            `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
+              2,
+            )}/- CHF. Do you want to proceed?`,
+          );
+          const foundCode = pin.find(
+            (code) => code.postal_code === selectedPostalCode,
+          );
+          console.log("Found Code:", foundCode);
+
+          if (confirmation) {
+            // Map cart items to the format you want
+            const cartItems = cart.map((cartItem) => ({
+              item_name: `${cartItem.name}${
+                cartItem.drink ? ` + ${cartItem.drink}` : ""
+              }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+              quantity: cartItem.quantity,
+              cost: cartItem.price, // You need to update this based on your cart structure
+            }));
+
+            data = {
+              person_name: (document.getElementById("name") as HTMLInputElement)
+                ?.value,
+              email: (document.getElementById("email") as HTMLInputElement)
+                ?.value,
+              address: (document.getElementById("address") as HTMLInputElement)
+                ?.value,
+              postal_code: (
+                document.getElementById("postcode") as HTMLInputElement
+              )?.value,
+              city: (document.getElementById("city") as HTMLInputElement)
+                ?.value,
+              phone_number: (
+                document.getElementById("phoneNumber") as HTMLInputElement
+              )?.value,
+              company_name: (
+                document.getElementById("companyName") as HTMLInputElement
+              )?.value,
+              delivery_option: orderType,
+              delivery_date: formattedDate,
+              delivery_time: (
+                document.getElementById("selectedTime") as HTMLInputElement
+              )?.value,
+              remarks: (document.getElementById("remarks") as HTMLInputElement)
+                ?.value,
+              coupon_code: (
+                document.getElementById("couponCode") as HTMLInputElement
+              )?.value,
+              cart: JSON.stringify(cartItems), // Include cart items in the order
+              total_price: calculateTotalPrice(cart) + deliveryCost,
+            };
+            setData(data);
+            console.log(data);
+            setConfirmation(true);
+          } else {
+            alert("Order canceled.");
+          }
+        } else {
+          const cartItems = cart.map((cartItem) => ({
+            item_name: `${cartItem.name}${
+              cartItem.drink ? ` + ${cartItem.drink}` : ""
+            }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+            quantity: cartItem.quantity,
+            cost: cartItem.price, // You need to update this based on your cart structure
+          }));
+
+          data = {
+            person_name: (document.getElementById("name") as HTMLInputElement)
+              ?.value,
+            email: (document.getElementById("email") as HTMLInputElement)
+              ?.value,
+            address: (document.getElementById("address") as HTMLInputElement)
+              ?.value,
+            postal_code: (
+              document.getElementById("postcode") as HTMLInputElement
+            )?.value,
+            city: (document.getElementById("city") as HTMLInputElement)?.value,
+            phone_number: (
+              document.getElementById("phoneNumber") as HTMLInputElement
+            )?.value,
+            company_name: (
+              document.getElementById("companyName") as HTMLInputElement
+            )?.value,
+            delivery_option: orderType,
+            delivery_date: formattedDate,
+            delivery_time: (
+              document.getElementById("selectedTime") as HTMLInputElement
+            )?.value,
+            remarks: (document.getElementById("remarks") as HTMLInputElement)
+              ?.value,
+            coupon_code: (
+              document.getElementById("couponCode") as HTMLInputElement
+            )?.value,
+            cart: JSON.stringify(cartItems), // Include cart items in the order
+            total_price: calculateTotalPrice(cart),
+          };
+          setData(data);
+          console.log(data);
+          setConfirmation(true);
+        }
       } else {
-        alert("Order canceled.");
-      }
-    }
-    else{
-      const cartItems = cart.map((cartItem) => ({
-        item_name: `${cartItem.name}${
-          cartItem.drink ? ` + ${cartItem.drink}` : ""
-        }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
-        quantity: cartItem.quantity,
-        cost: cartItem.price, // You need to update this based on your cart structure
-      }));
-    
-      data = {
-        person_name: (document.getElementById("name") as HTMLInputElement)
-          ?.value,
-        email: (document.getElementById("email") as HTMLInputElement)?.value,
-        address: (document.getElementById("address") as HTMLInputElement)
-          ?.value,
-        postal_code: (document.getElementById("postcode") as HTMLInputElement)
-          ?.value,
-        city: (document.getElementById("city") as HTMLInputElement)?.value,
-        phone_number: (
-          document.getElementById("phoneNumber") as HTMLInputElement
-        )?.value,
-        company_name: (
-          document.getElementById("companyName") as HTMLInputElement
-        )?.value,
-        delivery_option: orderType,
-        delivery_date: formattedDate,
-        delivery_time: (
-          document.getElementById("selectedTime") as HTMLInputElement
-        )?.value,
-        remarks: (document.getElementById("remarks") as HTMLInputElement)
-          ?.value,
-        coupon_code: (
-          document.getElementById("couponCode") as HTMLInputElement
-        )?.value,
-        cart: JSON.stringify(cartItems), // Include cart items in the order
-        total_price: calculateTotalPrice(cart),
-      };
-      setData(data);
-      console.log(data);
-      setConfirmation(true);
-    }
-    } else {
         const missingFieldLabels = missingFields
           .map((field) => field.label)
           .join(", ");
@@ -201,7 +210,6 @@ export function Order(props: IOrder) {
     } else {
       alert("Please select a date and time in the future.");
     }
-  
   };
 
   const sendOrderToBackend = (data) => {
@@ -211,7 +219,6 @@ export function Order(props: IOrder) {
         window.location.href = "/placed";
       });
   };
-  
 
   return (
     <div>
@@ -275,21 +282,21 @@ export function Order(props: IOrder) {
                   <label>{translations.postcode}</label>
                   <br />
                   <select
-            name="postcode"
-            id="postcode"
-            value={selectedPostalCode}
-            onChange={(e) => setSelectedPostalCode(e.target.value)}
-            required
-          >
-             <option value="" disabled selected>
-      {translations.selectPostalCode}
-    </option>
-            {pin.map((code) => (
-              <option key={code.id} value={code.postal_code}>
-                {code.postal_code}
-              </option>
-            ))}
-          </select>
+                    name="postcode"
+                    id="postcode"
+                    value={selectedPostalCode}
+                    onChange={(e) => setSelectedPostalCode(e.target.value)}
+                    required
+                  >
+                    <option value="" disabled selected>
+                      {translations.selectPostalCode}
+                    </option>
+                    {pin.map((code) => (
+                      <option key={code.id} value={code.postal_code}>
+                        {code.postal_code}
+                      </option>
+                    ))}
+                  </select>
                 </div>
                 <div>
                   <label>{translations.city}</label>

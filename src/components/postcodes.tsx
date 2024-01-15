@@ -9,9 +9,9 @@ import "../static/postcodes.css";
 import { Modal } from "react-bootstrap";
 import axios from "axios";
 import ScrollToTop from "react-scroll-to-top";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { debounce } from 'lodash';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { debounce } from "lodash";
 
 export function Postcodes() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
@@ -63,7 +63,10 @@ export function Postcodes() {
     const data = { postal_code: value, price: price, available: true };
 
     try {
-      await axios.post("https://backend-rung.onrender.com/add_postal_code/", data);
+      await axios.post(
+        "https://backend-rung.onrender.com/add_postal_code/",
+        data,
+      );
       toast.success("Postcode added successfully!");
       handleCloseModal();
       debouncedUpdateUI();
@@ -90,7 +93,7 @@ export function Postcodes() {
           debouncedUpdateUI();
         };
         availability();
-        fetchData()
+        fetchData();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -100,7 +103,9 @@ export function Postcodes() {
 
   const handleDelete = async (postalCode) => {
     try {
-      await axios.delete(`https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`);
+      await axios.delete(
+        `https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`,
+      );
       toast.success("Postcode deleted successfully!");
       debouncedUpdateUI();
     } catch (error) {
@@ -146,11 +151,23 @@ export function Postcodes() {
             <Modal.Title>Add data</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <label>Postcode:</label>
-            <input type="text" value={value} onChange={handleInputChange} />
-            <br></br>
-            <label>Price:</label>
-            <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
+            <div className="mb-3">
+              <label>Postcode:</label>
+              <input
+                type="text"
+                value={value}
+                onChange={handleInputChange}
+                className="form-control"
+              />
+              <br></br>
+              <label>Price:</label>
+              <input
+                type="text"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="form-control"
+              />
+            </div>
           </Modal.Body>
           <Modal.Footer className="buttons">
             <button onClick={handleCloseModal}>Close</button>
@@ -179,14 +196,20 @@ export function Postcodes() {
                   <td>
                     <button
                       onClick={() =>
-                        handleAvailabilityChange(item.postal_code, item.price, item.available)
+                        handleAvailabilityChange(
+                          item.postal_code,
+                          item.price,
+                          item.available,
+                        )
                       }
                     >
                       Change Availability
                     </button>
                   </td>
                   <td>
-                    <button onClick={() => handleDelete(item.postal_code)}>Delete</button>
+                    <button onClick={() => handleDelete(item.postal_code)}>
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))
@@ -212,7 +235,10 @@ export function Postcodes() {
         onClick={scrollToDiv}
         top={2}
       />
-      <div> <Footer /></div>
+      <div>
+        {" "}
+        <Footer />
+      </div>
     </div>
   );
 }

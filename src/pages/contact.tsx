@@ -10,8 +10,8 @@ import AppNavbar from "../components/navbar";
 import ScrollToTop from "react-scroll-to-top";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function Contact() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
@@ -24,51 +24,49 @@ export function Contact() {
     }
   }, []);
 
-
   // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
-    const [formData, setFormData] = useState({
-      name: "",
-      email: "",
-      phone_number: "",
-      message: "",
-    });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone_number: "",
+    message: "",
+  });
 
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      console.log(`Input changed - Name: ${name}, Value: ${value}`);
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    };
-    
-    
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-      // Assuming your backend endpoint is 'https://backend-rung.onrender.com/create_contact_us/'
-      axios
-        .post("https://backend-rung.onrender.com/contact_us/", formData)
-        .then((response) => {
-          console.log("Success", response.data);
-          // Handle success, e.g., show a success message
-          setFormData({
-            name: "",
-            email: "",
-            phone_number: "",
-            message: "",
-          });
-          toast.success("Message sent successfully");
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          // Handle errors if needed
-          toast.error("Error in sending message");
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(`Input changed - Name: ${name}, Value: ${value}`);
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Assuming your backend endpoint is 'https://backend-rung.onrender.com/create_contact_us/'
+    axios
+      .post("https://backend-rung.onrender.com/contact_us/", formData)
+      .then((response) => {
+        console.log("Success", response.data);
+        // Handle success, e.g., show a success message
+        setFormData({
+          name: "",
+          email: "",
+          phone_number: "",
+          message: "",
         });
-    };
-    
+        toast.success("Message sent successfully");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Handle errors if needed
+        toast.error("Error in sending message");
+      });
+  };
+
   return (
     <div>
       <div style={{ fontSize: 16 }} className="yes">
@@ -95,15 +93,15 @@ export function Contact() {
       <div className="reservation">
         <h1>{translations.contact}</h1>
         <div className="contact-form">
-        <form onSubmit={handleSubmit} >
-            <div className="name-email" >
+          <form onSubmit={handleSubmit}>
+            <div className="name-email">
               <input
                 type="text"
                 name="name"
                 placeholder={translations.formNamePlaceholder}
                 value={formData.name}
                 onChange={handleInputChange}
-                style={{color:"white"}}
+                style={{ color: "white" }}
               />
               <input
                 type="text"
@@ -111,7 +109,7 @@ export function Contact() {
                 placeholder={translations.formEmailPlaceholder}
                 value={formData.email}
                 onChange={handleInputChange}
-                style={{color:"white"}}
+                style={{ color: "white" }}
               />
             </div>
             <div className="contact-mobile">
@@ -121,7 +119,7 @@ export function Contact() {
                 placeholder={translations.formMobilePlaceholder}
                 value={formData.phone_number}
                 onChange={handleInputChange}
-                style={{color:"white"}}
+                style={{ color: "white" }}
               />
               <br></br>
               <div className="contact-mess">
@@ -131,7 +129,7 @@ export function Contact() {
                   placeholder={translations.formMessagePlaceholder}
                   value={formData.message}
                   onChange={handleInputChange}
-                  style={{color:"white"}}
+                  style={{ color: "white" }}
                 />
               </div>
             </div>

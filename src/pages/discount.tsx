@@ -24,7 +24,7 @@ export function Discount() {
   // Define translations based on the selected language
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
-const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   const api = "https://backend-rung.onrender.com/discount_coupon_list/";
 
   const fetchData = () => {

@@ -265,9 +265,18 @@ function App() {
             path="/postcodes"
             element={<PrivateRoute element={<Postcodes />} />}
           />
-          <Route path="/discountvalue" element={<PrivateRoute element={<Discountvalue />} />} />
-          <Route path="/timing" element={<PrivateRoute element={<Timing />} />} />
-          <Route path="/contactview" element={<PrivateRoute element={<ContactView />}/>}/>
+          <Route
+            path="/discountvalue"
+            element={<PrivateRoute element={<Discountvalue />} />}
+          />
+          <Route
+            path="/timing"
+            element={<PrivateRoute element={<Timing />} />}
+          />
+          <Route
+            path="/contactview"
+            element={<PrivateRoute element={<ContactView />} />}
+          />
           <Route
             path="/menu"
             element={

@@ -9,6 +9,8 @@ import translations_en from "../translations/translation_en.json"; // Import Eng
 import translations_de from "../translations/translation_de.json"; // Import German translations
 import lines from "../images/lines.png";
 import { DateTime } from "luxon";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function CitySearch() {
   const navigate = useNavigate();
@@ -20,6 +22,7 @@ function CitySearch() {
   const [currentTime, setCurrentTime] = useState(DateTime.local());
   const [pin, setPin] = useState("");
   const [holiday, setHoliday] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     // Update the current time every minute
@@ -46,24 +49,46 @@ function CitySearch() {
       .catch((err) => console.log("error in fetching the pin", err));
   }, [apis]);
   // console.log(holiday);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    axios
+      .get("https://backend-rung.onrender.com/shop_time_list/")
+      .then((response) => {
+        // console.log(response.data);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error("Error in fetching data");
+      });
+  };
 
   const isClosed = () => {
     const currentDate = currentTime.toJSDate();
-    const isWithinSpecifiedHours = currentTime.hour < 17 || currentTime.hour >= 21;
-  
-    // console.log("isWithinSpecifiedHours:", isWithinSpecifiedHours);
-  
+    const currentShopTimings = data[0];
+
+    const startTime = DateTime.fromISO(
+      currentShopTimings?.shop_opening_time,
+    ).toJSDate();
+    const endTime = DateTime.fromISO(
+      currentShopTimings?.shop_closing_time,
+    ).toJSDate();
+
+    const isNoService = currentDate < startTime || currentDate >= endTime;
+
     const holidayCheck = holiday.some((holidayItem) => {
-      const holidayStartTime = DateTime.fromISO(holidayItem.start_data).toJSDate();
+      const holidayStartTime = DateTime.fromISO(
+        holidayItem.start_data,
+      ).toJSDate();
       const holidayEndTime = DateTime.fromISO(holidayItem.end_data).toJSDate();
       return currentDate >= holidayStartTime && currentDate <= holidayEndTime;
     });
-  
-    // console.log("holidayCheck:", holidayCheck);
-  
-    return isWithinSpecifiedHours || holidayCheck;
+
+    return isNoService || holidayCheck;
   };
-  
 
   const ClosedMessage = ({ holidayNote }) => (
     <div
@@ -113,13 +138,16 @@ function CitySearch() {
   };
 
   const getHolidayNoteForCurrentTime = () => {
-    const currentDateTime = DateTime.local(); // Get current date and time
+    const currentDateTime = DateTime.local();
 
     const matchingHoliday = holiday.find((holidayData) => {
       const holidayStartDateTime = DateTime.fromISO(holidayData.start_data);
-      const holidayEndDateTime = DateTime.fromISO(holidayData.end_data)
+      const holidayEndDateTime = DateTime.fromISO(holidayData.end_data);
 
-      if (currentDateTime >= holidayStartDateTime && currentDateTime <= holidayEndDateTime) {
+      if (
+        currentDateTime >= holidayStartDateTime &&
+        currentDateTime <= holidayEndDateTime
+      ) {
         // Log and return the holiday note if there's a match
         return true;
       }
@@ -129,7 +157,6 @@ function CitySearch() {
 
     return matchingHoliday?.holiday_note ?? "Today";
   };
-
 
   return (
     <div className="citysearch">
@@ -167,7 +194,8 @@ function CitySearch() {
 
                     {handlepin ? (
                       // Iterate over options only if handlepin is available
-                      handlepin.filter(item => item.available)
+                      handlepin
+                        .filter((item) => item.available)
                         .map((item, index) => (
                           <option key={index} value={item.postal_code}>
                             {item.postal_code}
@@ -235,7 +263,6 @@ function CitySearch() {
           ) : (
             ""
           )}
-
         </div>
       </div>
       <div>

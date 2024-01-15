@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import "../static/postcodes.css";
 import { Modal } from "react-bootstrap";
 import ScrollToTop from "react-scroll-to-top";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 //display footer
@@ -152,7 +152,8 @@ export function EditMenu() {
       .post(apiUrl, newData)
       .then((response) => {
         // console.log("Server Response:", response.data);
-        const availability = () => toast.success("Availability changed successfully!");
+        const availability = () =>
+          toast.success("Availability changed successfully!");
         availability();
         setTimeout(() => {
           window.location.reload();
@@ -591,8 +592,7 @@ export function EditMenu() {
           onClick={scrollToDiv}
           top={2}
         />
-        <div
-        >
+        <div>
           <Footer />
         </div>
       </div>

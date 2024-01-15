@@ -7,9 +7,9 @@ import AppNavbar from "./navbar";
 import { Link } from "react-router-dom";
 import "../static/postcodes.css";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import ScrollToTop from "react-scroll-to-top";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
 export function Discountvalue() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
@@ -87,7 +87,9 @@ export function Discountvalue() {
 
   const handleDelete = (couponCode) => {
     axios
-      .delete(`https://backend-rung.onrender.com/delete_discount_coupon/${couponCode}/`)
+      .delete(
+        `https://backend-rung.onrender.com/delete_discount_coupon/${couponCode}/`,
+      )
       .then((response) => {
         console.log("Delete Response:", response.data);
         const deleted = () => toast.success("Coupon deleted successfully!");
@@ -99,8 +101,6 @@ export function Discountvalue() {
         toast.error("Error deleting coupon!");
       });
   };
-
- 
 
   const scrollToDiv = () => {
     const scrollableDiv = document.getElementById("scrollableDiv");

@@ -52,9 +52,7 @@ export function Dashboard() {
           <button onClick={handleLogout}>{translations.logoutButton}</button>
         </div>
       </div>
-      <div style={{ position: "fixed", bottom: "0px", width: "100%" }}>
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 }
