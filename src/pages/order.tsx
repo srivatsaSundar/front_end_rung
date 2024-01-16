@@ -258,6 +258,22 @@ export function Order(props: IOrder) {
 
     return timeOptions;
   };
+  const generateTakeTimeOptions = () => {
+    const currentShopTimings = Time[0];
+
+    const startTime = DateTime.fromISO(currentShopTimings?.shop_opening_time);
+    const endTime = DateTime.fromISO(currentShopTimings?.shop_closing_time);
+
+    const timeOptions = [];
+    let currentTime = startTime;
+
+    while (currentTime <= endTime) {
+      timeOptions.push(currentTime.toFormat("HH:mm"));
+      currentTime = currentTime.plus({ minutes: 15 });
+    }
+
+    return timeOptions;
+  };
 
   return (
     <div>
@@ -414,7 +430,7 @@ export function Order(props: IOrder) {
                       name="selectedTime"
                       required
                     >
-                      {generateTimeOptions().map((option) => (
+                      {generateTakeTimeOptions().map((option) => (
                         <option key={option} value={option}>
                           {option}
                         </option>

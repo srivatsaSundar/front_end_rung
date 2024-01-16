@@ -6,24 +6,6 @@ import { toast } from "react-toastify";
 const useHolidayCheck = () => {
   const [currentTime, setCurrentTime] = useState(DateTime.local());
   const [holiday, setHoliday] = useState([]);
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = () => {
-    axios
-      .get("https://backend-rung.onrender.com/shop_time_list/")
-      .then((response) => {
-        // console.log(response.data);
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        toast.error("Error in fetching data");
-      });
-  };
 
   useEffect(() => {
     const fetchHolidayData = async () => {
@@ -53,18 +35,19 @@ const useHolidayCheck = () => {
   const isClosed = () => {
     // Format current date and time to match the holiday data format
     const currentDateTimeFormatted = currentTime.toISO();
-    const currentDate = currentTime.toJSDate();
-    const currentShopTimings = data[0];
 
-    const startTime = DateTime.fromISO(
-      currentShopTimings?.shop_opening_time,
-    ).toJSDate();
-    const endTime = DateTime.fromISO(
-      currentShopTimings?.shop_closing_time,
-    ).toJSDate();
+    // const currentDate = currentTime.toJSDate();
+    // const currentShopTimings = data[0];
 
-    const isNoService =
-      currentDate < startTime || currentDate >= endTime;
+    // const startTime = DateTime.fromISO(
+    //   currentShopTimings?.shop_opening_time,
+    // ).toJSDate();
+    // const endTime = DateTime.fromISO(
+    //   currentShopTimings?.shop_closing_time,
+    // ).toJSDate();
+
+    // const isNoService =
+    //   currentDate < startTime || currentDate >= endTime;
 
     // console.log("isNoService:", isNoService);
 
@@ -85,7 +68,7 @@ const useHolidayCheck = () => {
 
     // console.log("holidayCheck:", holidayCheck);
 
-    return isNoService || holidayCheck;
+    return holidayCheck;
   };
 
   const getHolidayNoteForCurrentTime = () => {
