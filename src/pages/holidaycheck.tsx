@@ -6,7 +6,24 @@ import { toast } from "react-toastify";
 const useHolidayCheck = () => {
   const [currentTime, setCurrentTime] = useState(DateTime.local());
   const [holiday, setHoliday] = useState([]);
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = () => {
+    axios
+      .get("https://backend-rung.onrender.com/shop_time_list/")
+      .then((response) => {
+        // console.log(response.data);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error("Error in fetching data");
+      });
+  };
   useEffect(() => {
     const fetchHolidayData = async () => {
       try {
@@ -36,20 +53,20 @@ const useHolidayCheck = () => {
     // Format current date and time to match the holiday data format
     const currentDateTimeFormatted = currentTime.toISO();
 
-    // const currentDate = currentTime.toJSDate();
-    // const currentShopTimings = data[0];
+    const currentDate = currentTime.toJSDate();
+    const currentShopTimings = data[0];
 
-    // const startTime = DateTime.fromISO(
-    //   currentShopTimings?.shop_opening_time,
-    // ).toJSDate();
-    // const endTime = DateTime.fromISO(
-    //   currentShopTimings?.shop_closing_time,
-    // ).toJSDate();
+    const startTime = DateTime.fromISO(
+      currentShopTimings?.shop_opening_time,
+    ).toJSDate();
+    const endTime = DateTime.fromISO(
+      currentShopTimings?.shop_closing_time,
+    ).toJSDate();
 
-    // const isNoService =
-    //   currentDate < startTime || currentDate >= endTime;
+    const isNoService =
+      currentDate < startTime || currentDate >= endTime;
 
-    // console.log("isNoService:", isNoService);
+    console.log("isNoService:", isNoService);
 
     const holidayCheck = holiday.some((holidayItem) => {
       // Keep holiday start and end time as is
@@ -68,7 +85,7 @@ const useHolidayCheck = () => {
 
     // console.log("holidayCheck:", holidayCheck);
 
-    return holidayCheck;
+    return isNoService || holidayCheck;
   };
 
   const getHolidayNoteForCurrentTime = () => {
