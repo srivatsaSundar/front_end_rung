@@ -10,7 +10,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Cart from "./cart";
 import ScrollToTop from "react-scroll-to-top";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { DateTime } from "luxon";
 
 interface IOrder {
@@ -42,7 +43,6 @@ export function Order(props: IOrder) {
   const [Data, setData] = useState({});
   const [confirmation, setConfirmation] = useState(false);
   const [Time, setTime] = useState([]);
-  const [appliedCoupon, setAppliedCoupon] = useState(null);
 
   const [discounts, setDiscounts] = useState([]);
   const discountApi = "https://backend-rung.onrender.com/discount_coupon_list/";
@@ -133,12 +133,23 @@ export function Order(props: IOrder) {
           console.log(discountDetail)
 
           if (discountDetail) {
-            // Apply the discount percentage if a matching coupon code is found
-            const discountPercentage = discountDetail.discount_percentage;
-            const discountAmount = totalWithDelivery * (discountPercentage / 100);
-            totalWithDelivery -= discountAmount;
+            // Check if the coupon is not expired
+            const couponExpiryDate = new Date(discountDetail.coupon_expiry_date);
+            console.log(couponExpiryDate)
+            console.log(currentDate)
+            if (couponExpiryDate > currentDate) {
+              // Apply the discount percentage if the coupon is not expired
+              const discountPercentage = discountDetail.discount_percentage;
+              const discountAmount = totalWithDelivery * (discountPercentage / 100);
+              totalWithDelivery -= discountAmount;
 
-            // console.log(`Coupon "${couponCode}" applied. Discounted Amount: ${discountAmount.toFixed(2)}`);
+              alert("Discount applied successfully");
+            } else {
+              alert("Coupon has expired. Couldn't apply discount.");
+            }
+          }
+          else {
+            alert("Invalid coupon code. Couldn't apply discount.");
           }
 
           // Display a confirmation dialogue with the added delivery cost
@@ -256,12 +267,12 @@ export function Order(props: IOrder) {
   };
 
   const sendOrderToBackend = (data) => {
-    axios
-      .post("https://backend-rung.onrender.com/order/", Data)
-      .then((response) => {
-        window.location.href = "/placed";
-      });
-    // console.log("Form Values:", data);
+    // axios
+    //   .post("https://backend-rung.onrender.com/order/", Data)
+    //   .then((response) => {
+    //     window.location.href = "/placed";
+    //   });
+    console.log("Form Values:", data);
   };
 
   useEffect(() => {
@@ -318,6 +329,7 @@ export function Order(props: IOrder) {
     <div>
       <div className="yes">
         <AppNavbar />
+        <ToastContainer position="top-right" />
       </div>
       <div>
         <div className="order-columns">

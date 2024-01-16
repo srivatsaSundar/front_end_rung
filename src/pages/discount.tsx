@@ -31,7 +31,7 @@ export function Discount() {
     axios
       .get(api)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
       })
       .catch((error) => {
@@ -71,12 +71,13 @@ export function Discount() {
         <div className="discount-list">
           {data.map((coupon) => (
             <div key={coupon.coupon_code} className="coupon-item">
-              <h2>{coupon.coupon_code}</h2>
-              <p>{coupon.coupon_name}</p>
-              <p>{coupon.coupon_description}</p>
-              <hr></hr>
+              <div>
+                <h2 style={{ fontSize: "24px", color: "#333", marginBottom: "10px" }}>{coupon.coupon_code}</h2>
+                <p style={{ fontSize: "16px", color: "#555", marginBottom: "10px" }}>{coupon.coupon_name}</p>
+              </div>
             </div>
           ))}
+
         </div>
       </div>
       <div className="home-container yes">
@@ -85,6 +86,6 @@ export function Discount() {
       <div>
         <Footer />
       </div>
-    </div>
+    </div >
   );
 }
