@@ -24,7 +24,6 @@ const useHolidayCheck = () => {
         toast.error("Error in fetching data");
       });
   };
-
   useEffect(() => {
     const fetchHolidayData = async () => {
       try {
@@ -53,6 +52,7 @@ const useHolidayCheck = () => {
   const isClosed = () => {
     // Format current date and time to match the holiday data format
     const currentDateTimeFormatted = currentTime.toISO();
+
     const currentDate = currentTime.toJSDate();
     const currentShopTimings = data[0];
 
@@ -66,7 +66,7 @@ const useHolidayCheck = () => {
     const isNoService =
       currentDate < startTime || currentDate >= endTime;
 
-    // console.log("isNoService:", isNoService);
+    console.log("isNoService:", isNoService);
 
     const holidayCheck = holiday.some((holidayItem) => {
       // Keep holiday start and end time as is
