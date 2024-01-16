@@ -18,7 +18,7 @@ export function SocialLogin() {
     axios
       .get("https://backend-rung.onrender.com/shop_time_list/")
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
       })
       .catch((error) => {
@@ -56,26 +56,26 @@ export function SocialLogin() {
         <ul className="contact-us">
           {data
             ? data.map((item) => (
-                <React.Fragment key={item.id}>
-                  <li>
-                    <p className="margin-hour">
-                      {translations.regularHours} (
-                      {item.shop_opening_time.substring(0, 5)} {translations.hr}{" "}
-                      {translations.to} {item.shop_closing_time.substring(0, 5)}{" "}
-                      {translations.hr})
-                    </p>
-                  </li>
-                  <li>
-                    <p className="margin-hour">
-                      {translations.deliveryHours} (
-                      {item.shop_delivery_opening_time.substring(0, 5)}{" "}
-                      {translations.hr} {translations.to}{" "}
-                      {item.shop_delivery_closing_time.substring(0, 5)}{" "}
-                      {translations.hr})
-                    </p>
-                  </li>
-                </React.Fragment>
-              ))
+              <React.Fragment key={item.id}>
+                <li>
+                  <p className="margin-hour">
+                    {translations.regularHours} (
+                    {item.shop_opening_time.substring(0, 5)} {translations.hr}{" "}
+                    {translations.to} {item.shop_closing_time.substring(0, 5)}{" "}
+                    {translations.hr})
+                  </p>
+                </li>
+                <li>
+                  <p className="margin-hour">
+                    {translations.deliveryHours} (
+                    {item.shop_delivery_opening_time.substring(0, 5)}{" "}
+                    {translations.hr} {translations.to}{" "}
+                    {item.shop_delivery_closing_time.substring(0, 5)}{" "}
+                    {translations.hr})
+                  </p>
+                </li>
+              </React.Fragment>
+            ))
             : null}
         </ul>
       </div>
