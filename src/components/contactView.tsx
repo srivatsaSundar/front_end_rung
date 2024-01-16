@@ -72,7 +72,7 @@ export function ContactView() {
                     <td>{item.name}</td>
                     <td>{item.email}</td>
                     <td>{item.phone_number}</td>
-                    <td>{item.date}</td>
+                    <td>{item.date.slice(0, 16)}</td>
                     <td>{item.message}</td>
                   </tr>
                 ))
