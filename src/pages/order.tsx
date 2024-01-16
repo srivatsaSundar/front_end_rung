@@ -42,7 +42,27 @@ export function Order(props: IOrder) {
   const [Data, setData] = useState({});
   const [confirmation, setConfirmation] = useState(false);
   const [Time, setTime] = useState([]);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
 
+  const [discounts, setDiscounts] = useState([]);
+  const discountApi = "https://backend-rung.onrender.com/discount_coupon_list/";
+
+  const fetchDiscountData = () => {
+    axios
+      .get(discountApi)
+      .then((response) => {
+        // console.log(response.data);
+        setDiscounts(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        toast.error("Error in fetching data");
+      });
+  };
+
+  useEffect(() => {
+    fetchDiscountData();
+  }, []);
 
   let data = {};
   const [pin, setPin] = useState([]);
@@ -59,7 +79,8 @@ export function Order(props: IOrder) {
       .then((res) => setPin(res))
       .catch((err) => console.log("error in fetching the pin", err));
   }, [api]);
-  console.log(pin);
+  // console.log(pin);
+
   const handleOrderAndPay = () => {
     const currentDate = new Date();
     const selectedDateTime = selectedDate ? new Date(selectedDate) : null;
@@ -102,7 +123,23 @@ export function Order(props: IOrder) {
           const deliveryCost =
             pin.find((code) => code.postal_code === selectedPostalCode)
               ?.price || 0;
-          const totalWithDelivery = calculateTotalPrice(cart) + deliveryCost;
+          let totalWithDelivery = calculateTotalPrice(cart) + deliveryCost;
+
+          const couponCodeElement = document.getElementById("couponCode") as HTMLInputElement;
+          const couponCode = couponCodeElement?.value;
+
+          const discountDetail = discounts.find((discount) => discount.coupon_code === couponCode);
+
+          console.log(discountDetail)
+
+          if (discountDetail) {
+            // Apply the discount percentage if a matching coupon code is found
+            const discountPercentage = discountDetail.discount_percentage;
+            const discountAmount = totalWithDelivery * (discountPercentage / 100);
+            totalWithDelivery -= discountAmount;
+
+            // console.log(`Coupon "${couponCode}" applied. Discounted Amount: ${discountAmount.toFixed(2)}`);
+          }
 
           // Display a confirmation dialogue with the added delivery cost
           const confirmation = window.confirm(
@@ -110,10 +147,11 @@ export function Order(props: IOrder) {
               2,
             )}/- CHF. Do you want to proceed?`,
           );
+
           const foundCode = pin.find(
             (code) => code.postal_code === selectedPostalCode,
           );
-          console.log("Found Code:", foundCode);
+          // console.log("Found Code:", foundCode);
 
           if (confirmation) {
             // Map cart items to the format you want
@@ -223,6 +261,7 @@ export function Order(props: IOrder) {
       .then((response) => {
         window.location.href = "/placed";
       });
+    // console.log("Form Values:", data);
   };
 
   useEffect(() => {
@@ -451,7 +490,7 @@ export function Order(props: IOrder) {
               <br />
               <div className="code">
                 <input type="text" id="couponCode" name="couponCode" />
-                <button className="search-button">
+                <button className="search-button" onClick={handleOrderAndPay}>
                   {translations.applyCode}
                 </button>
               </div>
