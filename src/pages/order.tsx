@@ -267,12 +267,12 @@ export function Order(props: IOrder) {
   };
 
   const sendOrderToBackend = (data) => {
-    // axios
-    //   .post("https://backend-rung.onrender.com/order/", Data)
-    //   .then((response) => {
-    //     window.location.href = "/placed";
-    //   });
-    console.log("Form Values:", data);
+    axios
+      .post("https://backend-rung.onrender.com/order/", Data)
+      .then((response) => {
+        window.location.href = "/placed";
+      });
+    // console.log("Form Values:", data);
   };
 
   useEffect(() => {
