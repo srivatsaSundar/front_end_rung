@@ -39,7 +39,7 @@
   "formMobilePlaceholder": "Mobile Number",
   "formMessagePlaceholder": "Write your message here",
   "formCaptchaPlaceholder": "Enter Captcha",
-  "formSubmitButton": "Send a Message",
+  "formSubmitButton": "Send",
   "select": "Language",
   "url": "https://backend-rung.onrender.com/menu/",
   "readyToEat": "Ready to eat?",

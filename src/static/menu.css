@@ -479,8 +479,11 @@ h4 {
 .coupon-item {
   margin-bottom: 20px;
 }
+.coupon-item div {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 8px;
+}
 .coupon-item div:hover {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 8px;
 }
 
 .coupon-item div {
