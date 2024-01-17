@@ -143,6 +143,39 @@ export function Order(props: IOrder) {
               const discountAmount = totalWithDelivery * (discountPercentage / 100);
               totalWithDelivery -= discountAmount;
 
+              data = {
+                person_name: (document.getElementById("name") as HTMLInputElement)
+                  ?.value,
+                email: (document.getElementById("email") as HTMLInputElement)
+                  ?.value,
+                address: (document.getElementById("address") as HTMLInputElement)
+                  ?.value,
+                postal_code: (
+                  document.getElementById("postcode") as HTMLInputElement
+                )?.value,
+                city: (document.getElementById("city") as HTMLInputElement)
+                  ?.value,
+                phone_number: (
+                  document.getElementById("phoneNumber") as HTMLInputElement
+                )?.value,
+                company_name: (
+                  document.getElementById("companyName") as HTMLInputElement
+                )?.value,
+                delivery_option: orderType,
+                delivery_date: formattedDate,
+                delivery_time: (
+                  document.getElementById("selectedTime") as HTMLInputElement
+                )?.value,
+                remarks: (document.getElementById("remarks") as HTMLInputElement)
+                  ?.value,
+                coupon_code: (
+                  document.getElementById("couponCode") as HTMLInputElement
+                )?.value,
+                discount_amount: discountAmount
+              };
+              setData(data);
+              console.log(data)
+
               alert("Discount applied successfully");
             } else {
               alert("Coupon has expired. Couldn't apply discount.");
@@ -203,6 +236,7 @@ export function Order(props: IOrder) {
               )?.value,
               cart: JSON.stringify(cartItems), // Include cart items in the order
               total_price: calculateTotalPrice(cart) + deliveryCost,
+              delivery_cost: deliveryCost
             };
             setData(data);
             console.log(data);
@@ -308,6 +342,7 @@ export function Order(props: IOrder) {
 
     return timeOptions;
   };
+
   const generateTakeTimeOptions = () => {
     const currentShopTimings = Time[0];
 
