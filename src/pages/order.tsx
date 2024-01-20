@@ -5,7 +5,6 @@ import "../static/menu.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import AppNavbar from "../components/navbar";
-import { useLanguage } from "../components/LanguageProvider";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cart from "./cart";
@@ -81,7 +80,8 @@ export function Order(props: IOrder) {
   }, [api]);
   // console.log(pin);
 
-  const handleOrderAndPay = () => {
+  const handleOrderAndPay = (event) => {
+    event.preventDefault();
     const currentDate = new Date();
     const selectedDateTime = selectedDate ? new Date(selectedDate) : null;
     const selectedTimeElement = document.getElementById("selectedTime");
@@ -131,7 +131,7 @@ export function Order(props: IOrder) {
           const discountDetail = discounts.find((discount) => discount.coupon_code === couponCode);
 
           console.log(discountDetail)
-
+          let discountAmount;
           if (discountDetail) {
             // Check if the coupon is not expired
             const couponExpiryDate = new Date(discountDetail.coupon_expiry_date);
@@ -140,7 +140,7 @@ export function Order(props: IOrder) {
             if (couponExpiryDate > currentDate) {
               // Apply the discount percentage if the coupon is not expired
               const discountPercentage = discountDetail.discount_percentage;
-              const discountAmount = totalWithDelivery * (discountPercentage / 100);
+              discountAmount = totalWithDelivery * (discountPercentage / 100);
               totalWithDelivery -= discountAmount;
 
               data = {
@@ -186,18 +186,17 @@ export function Order(props: IOrder) {
           }
 
           // Display a confirmation dialogue with the added delivery cost
-          const confirmation = window.confirm(
+          const confirmation = 
             `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
               2,
-            )}/- CHF. Do you want to proceed?`,
-          );
+            )}/- CHF. Do you want to proceed?`
 
           const foundCode = pin.find(
             (code) => code.postal_code === selectedPostalCode,
           );
           // console.log("Found Code:", foundCode);
 
-          if (confirmation) {
+          if (window.confirm(confirmation) ){
             // Map cart items to the format you want
             const cartItems = cart.map((cartItem) => ({
               item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
@@ -236,7 +235,8 @@ export function Order(props: IOrder) {
               )?.value,
               cart: JSON.stringify(cartItems), // Include cart items in the order
               total_price: calculateTotalPrice(cart) + deliveryCost,
-              delivery_cost: deliveryCost
+              delivery_charges: deliveryCost,
+              coupon_code_amount: discountAmount
             };
             setData(data);
             console.log(data);
@@ -276,11 +276,8 @@ export function Order(props: IOrder) {
             )?.value,
             remarks: (document.getElementById("remarks") as HTMLInputElement)
               ?.value,
-            coupon_code: (
-              document.getElementById("couponCode") as HTMLInputElement
-            )?.value,
             cart: JSON.stringify(cartItems), // Include cart items in the order
-            total_price: calculateTotalPrice(cart),
+            total_price: calculateTotalPrice(cart)
           };
           setData(data);
           console.log(data);
@@ -306,7 +303,7 @@ export function Order(props: IOrder) {
       .then((response) => {
         window.location.href = "/placed";
       });
-    // console.log("Form Values:", data);
+    console.log("Form Values:", data);
   };
 
   useEffect(() => {
@@ -537,7 +534,8 @@ export function Order(props: IOrder) {
               <br />
               <div className="code">
                 <input type="text" id="couponCode" name="couponCode" />
-                <button className="search-button" onClick={handleOrderAndPay}>
+                <button className="search-button"   onClick={(event) => handleOrderAndPay(event)}
+>
                   {translations.applyCode}
                 </button>
               </div>
@@ -545,7 +543,8 @@ export function Order(props: IOrder) {
               <button
                 className="search-button-pay"
                 type="button"
-                onClick={handleOrderAndPay}
+                  onClick={(event) => handleOrderAndPay(event)}
+
               >
                 {translations.orderAndPay}
               </button>
