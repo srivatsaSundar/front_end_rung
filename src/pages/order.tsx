@@ -175,7 +175,7 @@ export function Order(props: IOrder) {
               };
               setData(data);
               console.log(data)
-
+              console.log(discountAmount)
               alert("Discount applied successfully");
             } else {
               alert("Coupon has expired. Couldn't apply discount.");
@@ -238,6 +238,7 @@ export function Order(props: IOrder) {
               delivery_charges: deliveryCost,
               coupon_code_amount: discountAmount
             };
+            console.log(data.coupon_code_amount)
             setData(data);
             console.log(data);
             setConfirmation(true);

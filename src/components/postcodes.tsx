@@ -13,15 +13,60 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { debounce } from "lodash";
 
+// Edit Modal Component
+const EditModal = ({ item, onClose, onSubmit }) => {
+  const [editedPrice, setEditedPrice] = useState(item?.price || "");
+
+  const handleEditSubmit = () => {
+    // Perform any validation if needed
+    // Submit the edited data
+    onSubmit({ ...item, price: editedPrice });
+  };
+
+  return (
+    <Modal show={true} onHide={onClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Edit data</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="mb-3">
+          <label>Postcode:</label>
+          <input
+            type="text"
+            value={item?.postal_code || ""}
+            disabled
+            className="form-control"
+          />
+          <br />
+          <label>Price:</label>
+          <input
+            type="text"
+            value={editedPrice}
+            onChange={(e) => setEditedPrice(e.target.value)}
+            className="form-control"
+          />
+        </div>
+      </Modal.Body>
+      <Modal.Footer className="buttons">
+        <button onClick={onClose}>Close</button>
+        <button onClick={handleEditSubmit}>Submit</button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
+
 export function Postcodes() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
   const [datapin, setDatapin] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [value, setvalue] = useState("");
   const [price, setPrice] = useState("");
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [editItem, setEditItem] = useState(null);
 
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
+
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/manage";
@@ -52,6 +97,18 @@ export function Postcodes() {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    updateUI();
+  };
+
+  const handleEditModalOpen = (item) => {
+    setEditItem(item);
+
+    setEditModalVisible(true);
+  };
+
+  const handleEditModalClose = () => {
+    setEditItem(null);
+    setEditModalVisible(false);
     updateUI();
   };
 
@@ -118,7 +175,20 @@ export function Postcodes() {
     const scrollableDiv = document.getElementById("scrollableDiv");
     scrollableDiv?.scrollIntoView({ behavior: "smooth" });
   };
-
+  const handleEditSubmit = async (updatedData) => {
+    try {
+      await axios.post(
+        `https://backend-rung.onrender.com/add_postal_code/`,
+        updatedData
+      );
+      toast.success("Postcode updated successfully!");
+      handleEditModalClose();
+      debouncedUpdateUI();
+    } catch (error) {
+      console.error("Error updating postal code:", error);
+      toast.error("Error updating postcode!");
+    }
+  };
   useEffect(() => {
     fetchData();
   }, [datapin]);
@@ -159,7 +229,7 @@ export function Postcodes() {
                 onChange={handleInputChange}
                 className="form-control"
               />
-              <br></br>
+              <br />
               <label>Price:</label>
               <input
                 type="text"
@@ -175,6 +245,15 @@ export function Postcodes() {
           </Modal.Footer>
         </Modal>
       </div>
+      {/* Edit Modal */}
+      {editModalVisible && (
+        <EditModal
+          item={editItem}
+          onClose={handleEditModalClose}
+          onSubmit={handleEditSubmit}
+         
+        />
+      )}
       <div className="table-container center-table">
         <table className="styled-table">
           <thead>
@@ -183,6 +262,7 @@ export function Postcodes() {
               <th>Price</th>
               <th>Availability</th>
               <th>Change Availability</th>
+              <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -207,6 +287,11 @@ export function Postcodes() {
                     </button>
                   </td>
                   <td>
+                    <button onClick={() => handleEditModalOpen(item)}>
+                      Edit
+                    </button>
+                  </td>
+                  <td>
                     <button onClick={() => handleDelete(item.postal_code)}>
                       Delete
                     </button>
@@ -225,7 +310,7 @@ export function Postcodes() {
         <Link to="/dashboard">
           <button>{translations.gotodash}</button>
         </Link>
-        <button onClick={handleLogout}> {translations.logoutButton}</button>
+        <button onClick={handleLogout}>{translations.logoutButton}</button>
       </div>
       <ScrollToTop
         smooth
@@ -236,7 +321,6 @@ export function Postcodes() {
         top={2}
       />
       <div>
-        {" "}
         <Footer />
       </div>
     </div>
