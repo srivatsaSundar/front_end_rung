@@ -14,7 +14,7 @@ const useHolidayCheck = () => {
 
   const fetchData = () => {
     axios
-      .get("http://16.170.172.45:8000/shop_time_list/")
+      .get("https://api.mrrung.com/shop_time_list/")
       .then((response) => {
         // console.log(response.data);
         setData(response.data);
@@ -28,7 +28,7 @@ const useHolidayCheck = () => {
     const fetchHolidayData = async () => {
       try {
         const response = await fetch(
-          "http://16.170.172.45:8000/holiday/",
+          "https://api.mrrung.com/holiday/",
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");

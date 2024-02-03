@@ -35,7 +35,7 @@ export function Timing() {
 
   const fetchData = () => {
     axios
-      .get("http://16.170.172.45:8000/shop_time_list/")
+      .get("https://api.mrrung.com/shop_time_list/")
       .then((response) => {
         console.log(response.data);
         setData(response.data);
@@ -80,7 +80,7 @@ export function Timing() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://16.170.172.45:8000/add_shop_time/", formData)
+      .post("https://api.mrrung.com/add_shop_time/", formData)
       .then((response) => {
         console.log("Server Response:", response.data);
         const add = () => toast.success("Timings added successfully!");

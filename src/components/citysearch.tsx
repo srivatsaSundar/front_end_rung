@@ -34,7 +34,7 @@ function CitySearch() {
     return () => clearInterval(interval);
   }, [currentTime]);
 
-  const apis = "http://16.170.172.45:8000/holiday/";
+  const apis = "https://api.mrrung.com/holiday/";
   useEffect(() => {
     fetch(apis)
       .then((response) => {
@@ -55,7 +55,7 @@ function CitySearch() {
 
   const fetchData = () => {
     axios
-      .get("http://16.170.172.45:8000/shop_time_list/")
+      .get("https://api.mrrung.com/shop_time_list/")
       .then((response) => {
         // console.log(response.data);
         setData(response.data);
@@ -112,7 +112,7 @@ function CitySearch() {
     setError(null);
   };
 
-  const api = "http://16.170.172.45:8000/code/";
+  const api = "https://api.mrrung.com/code/";
   useEffect(() => {
     fetch(api)
       .then((response) => {

@@ -18,7 +18,7 @@ export function Addon() {
   const [data, setData] = useState([]);
   const [newData, setNewData] = useState([]);
 
-  const api = "http://16.170.172.45:8000/view_addon/";
+  const api = "https://api.mrrung.com/view_addon/";
   useEffect(() => {
     fetch(api)
       .then((response) => {
@@ -63,9 +63,9 @@ export function Addon() {
     e.preventDefault();
     console.log(selectedEditItem);
 
-    // Assuming your backend endpoint is 'http://16.170.172.45:8000/submit_data/'
+    // Assuming your backend endpoint is 'https://api.mrrung.com/submit_data/'
     axios
-      .post("http://16.170.172.45:8000/add_addon/", selectedEditItem)
+      .post("https://api.mrrung.com/add_addon/", selectedEditItem)
       .then((response) => {
         console.log("Server Response:", response.data);
         toast.success("Addon added/edited successfully!");
@@ -82,7 +82,7 @@ export function Addon() {
   };
   const handleDeleteAddOn = (name: string) => {
     axios
-      .delete(`http://16.170.172.45:8000/delete_add_on/${name}/`)
+      .delete(`https://api.mrrung.com/delete_add_on/${name}/`)
       .then((response) => {
         console.log("Delete Response:", response.data);
         const deleted = () => toast.success("Addon deleted successfully!");
@@ -122,7 +122,7 @@ export function Addon() {
     e.preventDefault();
     console.log(addData);
     axios
-      .post("http://16.170.172.45:8000/add_addon/", addData)
+      .post("https://api.mrrung.com/add_addon/", addData)
       .then((response) => {
         console.log("Server Response:", response.data);
         toast.success("Addon added/edited  successfully!");
@@ -137,7 +137,7 @@ export function Addon() {
       });
   };
 
-  const apis = "http://16.170.172.45:8000/add_on_food/";
+  const apis = "https://api.mrrung.com/add_on_food/";
   useEffect(() => {
     fetch(apis)
       .then((response) => {
@@ -177,9 +177,9 @@ export function Addon() {
   const handleAddOnFoodSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(addOnFoodData);
-    // Assuming your backend endpoint is 'http://16.170.172.45:8000/add_on_food/'
+    // Assuming your backend endpoint is 'https://api.mrrung.com/add_on_food/'
     axios
-      .post("http://16.170.172.45:8000/add_addon_food/", addOnFoodData)
+      .post("https://api.mrrung.com/add_addon_food/", addOnFoodData)
       .then((response) => {
         console.log("Server Response:", response.data);
         // Optionally, you can fetch the updated data after submitting
@@ -201,7 +201,7 @@ export function Addon() {
 
   const handleDeleteAddOnFood = (id) => {
     axios
-      .delete(`http://16.170.172.45:8000/delete_addon_food/${id}/`)
+      .delete(`https://api.mrrung.com/delete_addon_food/${id}/`)
       .then((response) => {
         console.log("Delete Response:", response.data);
         // Optionally, you can fetch the updated data after deleting
