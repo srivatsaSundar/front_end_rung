@@ -16,7 +16,7 @@ export function SocialLogin() {
 
   const fetchData = () => {
     axios
-      .get("https://backend-rung.onrender.com/shop_time_list/")
+      .get("http://16.170.172.45:8000/shop_time_list/")
       .then((response) => {
         // console.log(response.data);
         setData(response.data);

@@ -25,7 +25,7 @@ export function Discount() {
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
   const [data, setData] = useState([]);
-  const api = "https://backend-rung.onrender.com/discount_coupon_list/";
+  const api = "http://16.170.172.45:8000/discount_coupon_list/";
 
   const fetchData = () => {
     axios

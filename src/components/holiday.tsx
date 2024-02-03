@@ -24,7 +24,7 @@ export function Holiday() {
   };
 
   const [data, setData] = useState([]);
-  const api = "https://backend-rung.onrender.com/holiday/";
+  const api = "http://16.170.172.45:8000/holiday/";
   const fetchData = () => {
     axios
       .get(api)
@@ -67,9 +67,9 @@ export function Holiday() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
+    // Assuming your backend endpoint is 'http://16.170.172.45:8000/submit_data/'
     axios
-      .post("https://backend-rung.onrender.com/add_holiday/", formData)
+      .post("http://16.170.172.45:8000/add_holiday/", formData)
       .then((response) => {
         console.log("Server Response:", response.data);
         const add = () => toast.success("Holiday added successfully!");
@@ -85,7 +85,7 @@ export function Holiday() {
 
   const handleDelete = (startData) => {
     axios
-      .delete(`https://backend-rung.onrender.com/delete_holiday/${startData}/`)
+      .delete(`http://16.170.172.45:8000/delete_holiday/${startData}/`)
       .then((response) => {
         console.log("Delete Response:", response.data);
         // Update the list of holidays after successful deletion

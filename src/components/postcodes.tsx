@@ -72,7 +72,7 @@ export function Postcodes() {
     window.location.href = "/manage";
   };
 
-  const api = "https://backend-rung.onrender.com/all_values/";
+  const api = "http://16.170.172.45:8000/all_values/";
 
   const fetchData = async () => {
     try {
@@ -121,7 +121,7 @@ export function Postcodes() {
 
     try {
       await axios.post(
-        "https://backend-rung.onrender.com/add_postal_code/",
+        "http://16.170.172.45:8000/add_postal_code/",
         data,
       );
       toast.success("Postcode added successfully!");
@@ -141,7 +141,7 @@ export function Postcodes() {
 
     axios
       .post(
-        `https://backend-rung.onrender.com/postal_change_availability/${postalCode}/`,
+        `http://16.170.172.45:8000/postal_change_availability/${postalCode}/`,
         newData,
       )
       .then((response) => {
@@ -161,7 +161,7 @@ export function Postcodes() {
   const handleDelete = async (postalCode) => {
     try {
       await axios.delete(
-        `https://backend-rung.onrender.com/delete_postal_code/${postalCode}/`,
+        `http://16.170.172.45:8000/delete_postal_code/${postalCode}/`,
       );
       toast.success("Postcode deleted successfully!");
       debouncedUpdateUI();

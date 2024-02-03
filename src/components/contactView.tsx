@@ -22,7 +22,7 @@ export function ContactView() {
   };
 
   const [data, setData] = useState([]);
-  const api = "https://backend-rung.onrender.com/get_contact_us/";
+  const api = "http://16.170.172.45:8000/get_contact_us/";
 
   const fetchData = () => {
     axios

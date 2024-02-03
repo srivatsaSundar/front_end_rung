@@ -65,7 +65,7 @@ export function Order(props: IOrder) {
 
   let data = {};
   const [pin, setPin] = useState([]);
-  const api = "https://backend-rung.onrender.com/code/";
+  const api = "http://16.170.172.45:8000/code/";
 
   useEffect(() => {
     fetch(api)
@@ -300,7 +300,7 @@ export function Order(props: IOrder) {
 
   const sendOrderToBackend = (data) => {
     axios
-      .post("https://backend-rung.onrender.com/order/", Data)
+      .post("http://16.170.172.45:8000/order/", Data)
       .then((response) => {
         window.location.href = "/placed";
       });
@@ -313,7 +313,7 @@ export function Order(props: IOrder) {
 
   const fetchData = () => {
     axios
-      .get("https://backend-rung.onrender.com/shop_time_list/")
+      .get("http://16.170.172.45:8000/shop_time_list/")
       .then((response) => {
         // console.log(response.data);
         setTime(response.data);

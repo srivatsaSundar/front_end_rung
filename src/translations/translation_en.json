@@ -41,7 +41,7 @@
   "formCaptchaPlaceholder": "Enter Captcha",
   "formSubmitButton": "Send",
   "select": "Language",
-  "url": "https://backend-rung.onrender.com/menu/",
+  "url": "http://16.170.172.45:8000/menu/",
   "readyToEat": "Ready to eat?",
   "deliveryLocation": "Where do you want your order to be delivered?",
   "address": "Address",

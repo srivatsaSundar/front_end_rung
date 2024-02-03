@@ -22,7 +22,7 @@ export function Discountvalue() {
   };
 
   const [data, setData] = useState([]);
-  const api = "https://backend-rung.onrender.com/discount_coupon_list/";
+  const api = "http://16.170.172.45:8000/discount_coupon_list/";
 
   const fetchData = () => {
     axios
@@ -65,7 +65,7 @@ export function Discountvalue() {
     // console.log(formData);
 
     axios
-      .post("https://backend-rung.onrender.com/add_discount_coupon/", formData)
+      .post("http://16.170.172.45:8000/add_discount_coupon/", formData)
       .then((response) => {
         // console.log("Server Response:", response.data);
         const add = () => toast.success("Coupon added successfully!");
@@ -88,7 +88,7 @@ export function Discountvalue() {
   const handleDelete = (couponCode) => {
     axios
       .delete(
-        `https://backend-rung.onrender.com/delete_discount_coupon/${couponCode}/`,
+        `http://16.170.172.45:8000/delete_discount_coupon/${couponCode}/`,
       )
       .then((response) => {
         // console.log("Delete Response:", response.data);

@@ -27,7 +27,7 @@ export function EditMenu() {
     language: "",
   });
 
-  const api = "https://backend-rung.onrender.com/all_values/";
+  const api = "http://16.170.172.45:8000/all_values/";
   useEffect(() => {
     fetch(api)
       .then((response) => {
@@ -75,9 +75,9 @@ export function EditMenu() {
     // console.log(formData);
     if (formData.language === "english") {
       delete formData.language;
-      // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
+      // Assuming your backend endpoint is 'http://16.170.172.45:8000/submit_data/'
       axios
-        .post("https://backend-rung.onrender.com/add_menu/", formData)
+        .post("http://16.170.172.45:8000/add_menu/", formData)
         .then((response) => {
           // console.log("Server Response:", response.data);
           handleCloseModal();
@@ -95,7 +95,7 @@ export function EditMenu() {
     } else {
       delete formData.language;
       axios
-        .post("https://backend-rung.onrender.com/add_menu_germen/", formData)
+        .post("http://16.170.172.45:8000/add_menu_germen/", formData)
         .then((response) => {
           // console.log("Server Response:", response.data);
           const add = () => toast.success("Menu added successfully!");
@@ -145,8 +145,8 @@ export function EditMenu() {
 
     const apiUrl =
       language === "english"
-        ? `https://backend-rung.onrender.com/menu_availability/${name}/`
-        : `https://backend-rung.onrender.com/menu_availability_germen/${name}/`;
+        ? `http://16.170.172.45:8000/menu_availability/${name}/`
+        : `http://16.170.172.45:8000/menu_availability_germen/${name}/`;
 
     axios
       .post(apiUrl, newData)
@@ -168,7 +168,7 @@ export function EditMenu() {
   const handleDelete = (name, language) => {
     if (language === "english") {
       axios
-        .delete(`https://backend-rung.onrender.com/delete_menu/${name}/`)
+        .delete(`http://16.170.172.45:8000/delete_menu/${name}/`)
         .then((response) => {
           // console.log("Delete Response:", response.data);
           const deleted = () => toast.success("Deleted menu successfully!");
@@ -183,7 +183,7 @@ export function EditMenu() {
         });
     } else {
       axios
-        .delete(`https://backend-rung.onrender.com/delete_menu_germen/${name}/`)
+        .delete(`http://16.170.172.45:8000/delete_menu_germen/${name}/`)
         .then((response) => {
           // console.log("Delete Response:", response.data);
           const deleted = () => toast.success("Deleted menu successfully!");
@@ -227,9 +227,9 @@ export function EditMenu() {
     if (editModalLanguage === "english") {
       delete selectedEditItem.id;
       delete selectedEditItem.title_image;
-      // Assuming your backend endpoint is 'https://backend-rung.onrender.com/submit_data/'
+      // Assuming your backend endpoint is 'http://16.170.172.45:8000/submit_data/'
       axios
-        .post("https://backend-rung.onrender.com/add_menu/", selectedEditItem)
+        .post("http://16.170.172.45:8000/add_menu/", selectedEditItem)
         .then((response) => {
           // console.log("Server Response:", response.data);
           const edit = () => toast.success("Edited menu successfully!");
@@ -249,7 +249,7 @@ export function EditMenu() {
       delete selectedEditItem.title_image;
       axios
         .post(
-          "https://backend-rung.onrender.com/add_menu_germen/",
+          "http://16.170.172.45:8000/add_menu_germen/",
           selectedEditItem,
         )
         .then((response) => {

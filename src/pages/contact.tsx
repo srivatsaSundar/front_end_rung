@@ -46,9 +46,9 @@ export function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Assuming your backend endpoint is 'https://backend-rung.onrender.com/create_contact_us/'
+    // Assuming your backend endpoint is 'http://16.170.172.45:8000/create_contact_us/'
     axios
-      .post("https://backend-rung.onrender.com/contact_us/", formData)
+      .post("http://16.170.172.45:8000/contact_us/", formData)
       .then((response) => {
         console.log("Success", response.data);
         // Handle success, e.g., show a success message

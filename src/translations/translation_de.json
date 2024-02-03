@@ -41,7 +41,7 @@
   "formCaptchaPlaceholder": "Captcha eingeben",
   "formSubmitButton": "schicken",
   "select": "sprache",
-  "url": "https://backend-rung.onrender.com/menu_germen/",
+  "url": "http://16.170.172.45:8000/menu_germen/",
   "readyToEat": "Auf geht's!  ",
   "deliveryLocation": "Wohin soll Deine Bestellung geliefert werden?  ",
   "address": "Adresse",
