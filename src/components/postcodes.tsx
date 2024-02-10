@@ -72,7 +72,7 @@ export function Postcodes() {
     window.location.href = "/manage";
   };
 
-  const api = "https://api.mrrung.com/all_values/";
+  const api = "http://api.mrrung.com/all_values/";
 
   const fetchData = async () => {
     try {
@@ -121,7 +121,7 @@ export function Postcodes() {
 
     try {
       await axios.post(
-        "https://api.mrrung.com/add_postal_code/",
+        "http://api.mrrung.com/add_postal_code/",
         data,
       );
       toast.success("Postcode added successfully!");
@@ -141,7 +141,7 @@ export function Postcodes() {
 
     axios
       .post(
-        `https://api.mrrung.com/postal_change_availability/${postalCode}/`,
+        `http://api.mrrung.com/postal_change_availability/${postalCode}/`,
         newData,
       )
       .then((response) => {
@@ -161,7 +161,7 @@ export function Postcodes() {
   const handleDelete = async (postalCode) => {
     try {
       await axios.delete(
-        `https://api.mrrung.com/delete_postal_code/${postalCode}/`,
+        `http://api.mrrung.com/delete_postal_code/${postalCode}/`,
       );
       toast.success("Postcode deleted successfully!");
       debouncedUpdateUI();

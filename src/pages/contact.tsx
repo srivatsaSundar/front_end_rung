@@ -46,9 +46,9 @@ export function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Assuming your backend endpoint is 'https://api.mrrung.com/create_contact_us/'
+    // Assuming your backend endpoint is 'http://api.mrrung.com/create_contact_us/'
     axios
-      .post("https://api.mrrung.com/contact_us/", formData)
+      .post("http://api.mrrung.com/contact_us/", formData)
       .then((response) => {
         console.log("Success", response.data);
         // Handle success, e.g., show a success message

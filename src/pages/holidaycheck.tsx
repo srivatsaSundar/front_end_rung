@@ -14,7 +14,7 @@ const useHolidayCheck = () => {
 
   const fetchData = () => {
     axios
-      .get("https://api.mrrung.com/shop_time_list/")
+      .get("http://api.mrrung.com/shop_time_list/")
       .then((response) => {
         // console.log(response.data);
         setData(response.data);
@@ -28,7 +28,7 @@ const useHolidayCheck = () => {
     const fetchHolidayData = async () => {
       try {
         const response = await fetch(
-          "https://api.mrrung.com/holiday/",
+          "http://api.mrrung.com/holiday/",
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");
