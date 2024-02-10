@@ -186,7 +186,7 @@ export function Order(props: IOrder) {
           }
 
           // Display a confirmation dialogue with the added delivery cost
-          const confirmation = 
+          const confirmation =
             `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
               2,
             )}/- CHF. Do you want to proceed?`
@@ -196,7 +196,7 @@ export function Order(props: IOrder) {
           );
           // console.log("Found Code:", foundCode);
 
-          if (window.confirm(confirmation) ){
+          if (window.confirm(confirmation)) {
             // Map cart items to the format you want
             const cartItems = cart.map((cartItem) => ({
               item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
@@ -535,8 +535,8 @@ export function Order(props: IOrder) {
               <br />
               <div className="code">
                 <input type="text" id="couponCode" name="couponCode" />
-                <button className="search-button"   onClick={(event) => handleOrderAndPay(event)}
->
+                <button className="search-button" onClick={(event) => handleOrderAndPay(event)}
+                >
                   {translations.applyCode}
                 </button>
               </div>
@@ -544,7 +544,7 @@ export function Order(props: IOrder) {
               <button
                 className="search-button-pay"
                 type="button"
-                  onClick={(event) => handleOrderAndPay(event)}
+                onClick={(event) => handleOrderAndPay(event)}
 
               >
                 {translations.orderAndPay}

@@ -30,6 +30,21 @@ function App() {
   const [add_on_food, setAdd_on_food] = useState([]) as any[];
   const { isClosed } = useHolidayCheck();
 
+  const targetURL3 = "https://api.mrrung.com/add_on_food";
+  useEffect(() => {
+    fetch(targetURL3, { mode: "cors" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setAdd_on_food(data))
+      .catch((err) => console.log("error in fetching add_on_food", err));
+  }, []);
+
+  console.log(add_on_food)
+
   const { selectedLanguage } = useLanguage();
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -156,7 +171,7 @@ function App() {
   };
 
   function calculateItemPrice(item) {
-    let price = item.price.toFixed(2);
+    let price = item.price;
 
     if (item.drink) {
       const selectedDrink = add_on_drink.find(
@@ -170,12 +185,16 @@ function App() {
       const selectedFood = add_on_food.find(
         (food) => food.food.name === item.food,
       );
+
+      console.log(selectedFood, "selected drink")
       if (selectedFood) {
         price += selectedFood.food.price;
+        console.log(price)
       }
     }
+    console.log('Calculated Price:', price.toFixed(2));
 
-    return price;
+    return price.toFixed(2);
   }
 
   const translations =
@@ -190,6 +209,7 @@ function App() {
       <Navigate to="/manage" state={{ from: "/dashboard" }} />
     );
   }
+
   function PrivateRouteholi({ element }) {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
@@ -329,6 +349,8 @@ function App() {
                 calculateItemPrice={calculateItemPrice}
                 calculateTotalPrice={calculateTotalPrice}
                 translations={translations}
+                add_on_drink={add_on_drink}
+                add_on_food={add_on_food}
               />
             }
           />
