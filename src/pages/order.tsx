@@ -44,7 +44,7 @@ export function Order(props: IOrder) {
   const [Time, setTime] = useState([]);
 
   const [discounts, setDiscounts] = useState([]);
-  const discountApi = "http://api.mrrung.com/discount_coupon_list/";
+  const discountApi = "https://api.mrrung.com/discount_coupon_list/";
 
   const fetchDiscountData = () => {
     axios
@@ -65,7 +65,7 @@ export function Order(props: IOrder) {
 
   let data = {};
   const [pin, setPin] = useState([]);
-  const api = "http://api.mrrung.com/code/";
+  const api = "https://api.mrrung.com/code/";
 
   useEffect(() => {
     fetch(api)
@@ -300,7 +300,7 @@ export function Order(props: IOrder) {
 
   const sendOrderToBackend = (data) => {
     axios
-      .post("http://api.mrrung.com/order/", Data)
+      .post("https://api.mrrung.com/order/", Data)
       .then((response) => {
         window.location.href = "/placed";
       });
@@ -313,7 +313,7 @@ export function Order(props: IOrder) {
 
   const fetchData = () => {
     axios
-      .get("http://api.mrrung.com/shop_time_list/")
+      .get("https://api.mrrung.com/shop_time_list/")
       .then((response) => {
         // console.log(response.data);
         setTime(response.data);

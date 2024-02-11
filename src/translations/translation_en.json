@@ -41,7 +41,7 @@
   "formCaptchaPlaceholder": "Enter Captcha",
   "formSubmitButton": "Send",
   "select": "Language",
-  "url": "http://api.mrrung.com/menu/",
+  "url": "https://api.mrrung.com/menu/",
   "readyToEat": "Ready to eat?",
   "deliveryLocation": "Where do you want your order to be delivered?",
   "address": "Address",

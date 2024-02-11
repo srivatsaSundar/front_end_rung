@@ -41,7 +41,7 @@
   "formCaptchaPlaceholder": "Captcha eingeben",
   "formSubmitButton": "schicken",
   "select": "sprache",
-  "url": "http://api.mrrung.com/menu_germen/",
+  "url": "https://api.mrrung.com/menu_germen/",
   "readyToEat": "Auf geht's!  ",
   "deliveryLocation": "Wohin soll Deine Bestellung geliefert werden?  ",
   "address": "Adresse",

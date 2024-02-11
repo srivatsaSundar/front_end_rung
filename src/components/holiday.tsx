@@ -24,7 +24,7 @@ export function Holiday() {
   };
 
   const [data, setData] = useState([]);
-  const api = "http://api.mrrung.com/holiday/";
+  const api = "https://api.mrrung.com/holiday/";
   const fetchData = () => {
     axios
       .get(api)
@@ -67,9 +67,9 @@ export function Holiday() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // Assuming your backend endpoint is 'http://api.mrrung.com/submit_data/'
+    // Assuming your backend endpoint is 'https://api.mrrung.com/submit_data/'
     axios
-      .post("http://api.mrrung.com/add_holiday/", formData)
+      .post("https://api.mrrung.com/add_holiday/", formData)
       .then((response) => {
         console.log("Server Response:", response.data);
         const add = () => toast.success("Holiday added successfully!");
@@ -85,7 +85,7 @@ export function Holiday() {
 
   const handleDelete = (startData) => {
     axios
-      .delete(`http://api.mrrung.com/delete_holiday/${startData}/`)
+      .delete(`https://api.mrrung.com/delete_holiday/${startData}/`)
       .then((response) => {
         console.log("Delete Response:", response.data);
         // Update the list of holidays after successful deletion

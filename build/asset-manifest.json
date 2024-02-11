@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.eb1ebe3f.css",
-    "main.js": "/static/js/main.1f63e455.js",
+    "main.js": "/static/js/main.167d7379.js",
     "static/media/reservation_bg.jpg": "/static/media/reservation_bg.a4bbc08e2b361160c7fb.jpg",
     "static/media/rung.jpg": "/static/media/rung.39b35cbbc3c26613576c.jpg",
     "static/media/soft.jpg": "/static/media/soft.fe01003ce6d67139e8bf.jpg",
@@ -22,10 +22,10 @@
     "static/media/finger_food.jpg": "/static/media/finger_food.23ceff40211838e14ff4.jpg",
     "index.html": "/index.html",
     "main.eb1ebe3f.css.map": "/static/css/main.eb1ebe3f.css.map",
-    "main.1f63e455.js.map": "/static/js/main.1f63e455.js.map"
+    "main.167d7379.js.map": "/static/js/main.167d7379.js.map"
   },
   "entrypoints": [
     "static/css/main.eb1ebe3f.css",
-    "static/js/main.1f63e455.js"
+    "static/js/main.167d7379.js"
   ]
 }

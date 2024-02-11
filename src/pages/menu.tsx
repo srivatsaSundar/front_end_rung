@@ -74,7 +74,7 @@ export function Menu(props: IMenu) {
   const targetURL = translations.url;
   const { isClosed, getHolidayNoteForCurrentTime } = useHolidayCheck(); // Use the new hook
 
-  const targetURL2 = "http://api.mrrung.com/add_on_drink";
+  const targetURL2 = "https://api.mrrung.com/add_on_drink";
 
   useEffect(() => {
     fetch(targetURL)
@@ -149,7 +149,7 @@ export function Menu(props: IMenu) {
       .catch((err) => console.log("error in fetching add_on_drink", err));
   }, [setMenu]);
 
-  const targetURL3 = "http://api.mrrung.com/add_on_food";
+  const targetURL3 = "https://api.mrrung.com/add_on_food";
 
   useEffect(() => {
     fetch(targetURL3, { mode: "cors" })

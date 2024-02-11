@@ -22,7 +22,7 @@ export function ContactView() {
   };
 
   const [data, setData] = useState([]);
-  const api = "http://api.mrrung.com/get_contact_us/";
+  const api = "https://api.mrrung.com/get_contact_us/";
 
   const fetchData = () => {
     axios
