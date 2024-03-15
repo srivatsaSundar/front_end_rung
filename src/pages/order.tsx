@@ -132,6 +132,7 @@ export function Order(props: IOrder) {
 
           console.log(discountDetail)
           let discountAmount;
+          let confirmation;
           if (discountDetail) {
             // Check if the coupon is not expired
             const couponExpiryDate = new Date(discountDetail.coupon_expiry_date);
@@ -176,20 +177,18 @@ export function Order(props: IOrder) {
               setData(data);
               console.log(data)
               console.log(discountAmount)
-              alert("Discount applied successfully");
-            } else {
-              alert("Coupon has expired. Couldn't apply discount.");
+              confirmation =
+                `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
+                  2,
+                )}/- CHF, Discounted value : ${discountAmount.toFixed(2)}/- CHF. Do you want to proceed?`
             }
           }
           else {
-            alert("Invalid coupon code. Couldn't apply discount.");
+            confirmation =
+              `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
+                2,
+              )}/- CHF. Do you want to proceed?`
           }
-
-          // Display a confirmation dialogue with the added delivery cost
-          const confirmation =
-            `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
-              2,
-            )}/- CHF. Do you want to proceed?`
 
           const foundCode = pin.find(
             (code) => code.postal_code === selectedPostalCode,
