@@ -22,6 +22,7 @@ import { Discountvalue } from "./components/discountvalue";
 import { ContactView } from "./components/contactView";
 import useHolidayCheck from "./pages/holidaycheck";
 import { toast } from "react-toastify";
+import { OrderValue } from "./components/ordervalue";
 
 function App() {
   const column3Ref = useRef(null || undefined);
@@ -266,6 +267,15 @@ function App() {
       <Navigate to="/manage" state={{ from: "/discountvalue" }} />
     );
   }
+  function PrivateRouteorder({ element }) {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    return isLoggedIn ? (
+      element
+    ) : (
+      <Navigate to="/manage" state={{ from: "/ordervalue" }} />
+    );
+  }
   function PrivateRoutecontact({ element }) {
     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
@@ -288,6 +298,10 @@ function App() {
           <Route
             path="/dashboard"
             element={<PrivateRoute element={<Dashboard />} />}
+          />
+          <Route
+            path="/ordervalue"
+            element={<PrivateRoute element={<OrderValue />} />}
           />
           <Route
             path="/holiday"

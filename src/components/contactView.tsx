@@ -41,11 +41,32 @@ export function ContactView() {
     fetchData();
   }, []);
 
+  const updateData = () => {
+    fetchData();
+  };
+
   const scrollToDiv = () => {
     const scrollableDiv = document.getElementById("scrollableDiv");
     scrollableDiv?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleDelete = (message) => {
+    axios
+      .delete(
+        `https://api.mrrung.com/delete_contact_us/${message}/`,
+      )
+      .then((response) => {
+        // console.log("Delete Response:", response.data);
+        const deleted = () => toast.success("Contact deleted successfully!");
+        deleted();
+        updateData();
+      })
+      .catch((error) => {
+        // console.error("Delete Error:", error);
+        toast.error("Error deleting contact!");
+      });
+  };
+  
   return (
     <div>
       <div className="yes">
@@ -63,6 +84,7 @@ export function ContactView() {
                 <th>Phone Number</th>
                 <th>Date</th>
                 <th>Message</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
@@ -72,8 +94,11 @@ export function ContactView() {
                     <td>{item.name}</td>
                     <td>{item.email}</td>
                     <td>{item.phone_number}</td>
-                    <td>{item.date.slice(0,6)} {item.date.slice(7,16)}</td>
+                    <td>{item.date.slice(0,10)} {item.date.slice(12,16)}</td>
                     <td>{item.message}</td>
+                    <td><button onClick={() => handleDelete(item.message)}>
+                        Delete
+                      </button></td>
                   </tr>
                 ))
               ) : (

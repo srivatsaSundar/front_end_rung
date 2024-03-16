@@ -89,5 +89,7 @@
   "timings": "Shop Timings",
   "discountEdit": "Edit Discount",
   "discountLoad": "Loading Discount...",
-  "contactLoad": "Loading Contact..."
+  "contactLoad": "Loading Contact...",
+  "urldis":"https://api.mrrung.com/discount_coupon_list/",
+  "order":"Order Edit"
 }

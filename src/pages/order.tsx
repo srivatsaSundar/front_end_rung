@@ -50,7 +50,6 @@ export function Order(props: IOrder) {
     axios
       .get(discountApi)
       .then((response) => {
-        // console.log(response.data);
         setDiscounts(response.data);
       })
       .catch((error) => {
@@ -78,7 +77,6 @@ export function Order(props: IOrder) {
       .then((res) => setPin(res))
       .catch((err) => console.log("error in fetching the pin", err));
   }, [api]);
-  // console.log(pin);
 
   const handleOrderAndPay = (event) => {
     event.preventDefault();
@@ -130,16 +128,11 @@ export function Order(props: IOrder) {
 
           const discountDetail = discounts.find((discount) => discount.coupon_code === couponCode);
 
-          console.log(discountDetail)
           let discountAmount;
           let confirmation;
           if (discountDetail) {
-            // Check if the coupon is not expired
             const couponExpiryDate = new Date(discountDetail.coupon_expiry_date);
-            console.log(couponExpiryDate)
-            console.log(currentDate)
             if (couponExpiryDate > currentDate) {
-              // Apply the discount percentage if the coupon is not expired
               const discountPercentage = discountDetail.discount_percentage;
               discountAmount = totalWithDelivery * (discountPercentage / 100);
               totalWithDelivery -= discountAmount;
@@ -175,8 +168,6 @@ export function Order(props: IOrder) {
                 discount_amount: discountAmount
               };
               setData(data);
-              console.log(data)
-              console.log(discountAmount)
               confirmation =
                 `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
                   2,
@@ -190,18 +181,12 @@ export function Order(props: IOrder) {
               )}/- CHF. Do you want to proceed?`
           }
 
-          const foundCode = pin.find(
-            (code) => code.postal_code === selectedPostalCode,
-          );
-          // console.log("Found Code:", foundCode);
-
           if (window.confirm(confirmation)) {
-            // Map cart items to the format you want
             const cartItems = cart.map((cartItem) => ({
               item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
                 }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
               quantity: cartItem.quantity,
-              cost: cartItem.price, // You need to update this based on your cart structure
+              cost: cartItem.price,
             }));
 
             data = {
@@ -232,15 +217,17 @@ export function Order(props: IOrder) {
               coupon_code: (
                 document.getElementById("couponCode") as HTMLInputElement
               )?.value,
-              cart: JSON.stringify(cartItems), // Include cart items in the order
+              cart: JSON.stringify(cartItems),
               total_price: calculateTotalPrice(cart) + deliveryCost,
               delivery_charges: deliveryCost,
               coupon_code_amount: discountAmount
             };
-            console.log(data.coupon_code_amount)
             setData(data);
-            console.log(data);
-            setConfirmation(true);
+            axios
+      .post("https://api.mrrung.com/order/", data)
+      .then((response) => {
+        window.location.href = "/placed";
+      });
           } else {
             alert("Order canceled.");
           }
@@ -249,7 +236,7 @@ export function Order(props: IOrder) {
             item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
               }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
             quantity: cartItem.quantity,
-            cost: cartItem.price, // You need to update this based on your cart structure
+            cost: cartItem.price,
           }));
 
           data = {
@@ -276,12 +263,15 @@ export function Order(props: IOrder) {
             )?.value,
             remarks: (document.getElementById("remarks") as HTMLInputElement)
               ?.value,
-            cart: JSON.stringify(cartItems), // Include cart items in the order
+            cart: JSON.stringify(cartItems),
             total_price: calculateTotalPrice(cart)
           };
           setData(data);
-          console.log(data);
-          setConfirmation(true);
+          axios
+      .post("https://api.mrrung.com/order/", data)
+      .then((response) => {
+        window.location.href = "/placed";
+      });
         }
       } else {
         const missingFieldLabels = missingFields
@@ -297,15 +287,7 @@ export function Order(props: IOrder) {
     }
   };
 
-  const sendOrderToBackend = (data) => {
-    axios
-      .post("https://api.mrrung.com/order/", Data)
-      .then((response) => {
-        window.location.href = "/placed";
-      });
-    console.log("Form Values:", data);
-  };
-
+ 
   useEffect(() => {
     fetchData();
   }, []);
@@ -314,7 +296,6 @@ export function Order(props: IOrder) {
     axios
       .get("https://api.mrrung.com/shop_time_list/")
       .then((response) => {
-        // console.log(response.data);
         setTime(response.data);
       })
       .catch((error) => {
@@ -534,8 +515,7 @@ export function Order(props: IOrder) {
               <br />
               <div className="code">
                 <input type="text" id="couponCode" name="couponCode" />
-                <button className="search-button" onClick={(event) => handleOrderAndPay(event)}
-                >
+                <button className="search-button" onClick={(event) => handleOrderAndPay(event)}>
                   {translations.applyCode}
                 </button>
               </div>
@@ -544,56 +524,31 @@ export function Order(props: IOrder) {
                 className="search-button-pay"
                 type="button"
                 onClick={(event) => handleOrderAndPay(event)}
-
               >
                 {translations.orderAndPay}
               </button>
             </form>
-            {confirmation && (
-              <div className="confirmation-dialog">
-                <p>{translations.placed}</p>
-                <Link to="/placed">
-                  <button
-                    className="search-button"
-                    onClick={() => sendOrderToBackend(data)}
-                  >
-                    OK
-                  </button>
-                </Link>
-                <button
-                  className="search-button"
-                  type="submit"
-                  onClick={() => setConfirmation(false)}
-                >
-                  Cancel
-                </button>
-              </div>
-            )}
+           
           </div>
-          {/* //// */}
-          <div className="order-cart">
+          <div className="cart-section">
             <Cart
               ref={ref}
-              cart={cart}
               removeFromCart={removeFromCart}
+              cart={cart}
               increaseQuantity={increaseQuantity}
-              deleteFromCart={deleteFromCart}
               calculateItemPrice={calculateItemPrice}
               calculateTotalPrice={calculateTotalPrice}
+              deleteFromCart={deleteFromCart}
               translations={translations}
-              isMenu={true}
-              style={{ margin: "20px" }}
             />
           </div>
         </div>
-        <ScrollToTop smooth color="black" height="10px" className="scroll" />
-        <div className="home-container yes">
-          <SocialLogin />
-        </div>
-        <div>
-          <Footer />
-        </div>
       </div>
+      <Footer />
+      <SocialLogin />
+      <ScrollToTop smooth />
     </div>
   );
 }
+
+export default Order;

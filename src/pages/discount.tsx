@@ -25,7 +25,7 @@ export function Discount() {
   const translations =
     selectedLanguage === "de" ? translations_de : translations_en;
   const [data, setData] = useState([]);
-  const api = "https://api.mrrung.com/discount_coupon_list/";
+  const api = translations.urldis;
 
   const fetchData = () => {
     axios
@@ -35,7 +35,7 @@ export function Discount() {
         setData(response.data);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error("Error in dicount:", error);
       });
   };
 

@@ -89,5 +89,7 @@
   "timings": "Ladenzeiten",
   "discountEdit": "Gutschein bearbeiten",
   "discountLoad": "Gutschein wird geladen...",
-  "contactLoad": "Kontakt wird geladen..."
+  "contactLoad": "Kontakt wird geladen...",
+  "urldis":"https://api.mrrung.com/discount_coupon_germen/",
+  "order":"Bestellung bearbeiten"
 }

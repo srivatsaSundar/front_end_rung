@@ -48,6 +48,9 @@ export function Dashboard() {
         <Link to="/contactview">
           <h3>{translations.contact}</h3>
         </Link>
+        <Link to="/ordervalue">
+          <h3>{translations.order}</h3>
+        </Link>
         <div className="buttonss">
           <button onClick={handleLogout}>{translations.logoutButton}</button>
         </div>
