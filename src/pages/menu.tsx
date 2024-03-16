@@ -72,7 +72,7 @@ export function Menu(props: IMenu) {
   const [selectedItemName, setSelectedItemName] = useState<string | null>(null);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const targetURL = translations.url;
-  const { isClosed, getHolidayNoteForCurrentTime } = useHolidayCheck(); // Use the new hook
+  const { isClosed, getHolidayNoteForCurrentTime, isClosedOrder } = useHolidayCheck(); // Use the new hook
 
   const targetURL2 = "https://api.mrrung.com/add_on_drink";
 
@@ -195,9 +195,9 @@ export function Menu(props: IMenu) {
     if (existingItemIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart[existingItemIndex].quantity += 1;
-      if (isClosed() === true) {
-        const closedMessage = "Restaurant is currently closed.";
-        toast.error(closedMessage);
+      if (isClosedOrder() === true) {
+        const holidayMessage = "Today is a holiday.";
+        toast.error(holidayMessage);
         return;
       }
       else {
@@ -311,9 +311,9 @@ export function Menu(props: IMenu) {
     }
 
     // Check if it's closed
-    if (isClosed() === true) {
-      const closedMessage = "Restaurant is currently closed.";
-      toast.error(closedMessage);
+    if (isClosedOrder() === true) {
+      const holidayMessage = "Today is a holiday.";
+      toast.error(holidayMessage);
       return;
     }
 

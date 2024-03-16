@@ -155,7 +155,7 @@ function CitySearch() {
       return false;
     });
 
-    return matchingHoliday?.holiday_note ?? "Today";
+    return matchingHoliday?.holiday_note ?? "now";
   };
 
   const generateTimeOptions = () => {

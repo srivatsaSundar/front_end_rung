@@ -88,6 +88,34 @@ const useHolidayCheck = () => {
     return isNoService || holidayCheck;
   };
 
+  const isClosedOrder = () => {
+    // Format current date and time to match the holiday data format
+    const currentDateTimeFormatted = currentTime.toISO();
+
+    const currentDate = currentTime.toJSDate();
+    const currentShopTimings = data[0];
+
+   
+    
+    const holidayCheck = holiday.some((holidayItem) => {
+      // Keep holiday start and end time as is
+      const holidayStartTime = holidayItem.start_data;
+      const holidayEndTime = holidayItem.end_data;
+
+      // console.log("currentDateTimeFormatted:", currentDateTimeFormatted);
+      // console.log("holidayStartTime:", holidayStartTime);
+      // console.log("holidayEndTime:", holidayEndTime);
+
+      return (
+        currentDateTimeFormatted >= holidayStartTime &&
+        currentDateTimeFormatted <= holidayEndTime
+      );
+    });
+
+    // console.log("holidayCheck:", holidayCheck);
+
+    return holidayCheck;
+  };
   const getHolidayNoteForCurrentTime = () => {
     const currentDateTime = DateTime.local();
     const matchingHoliday = holiday.find((holidayData) => {
@@ -105,10 +133,10 @@ const useHolidayCheck = () => {
       return false;
     });
 
-    return matchingHoliday?.holiday_note ?? "Today";
+    return matchingHoliday?.holiday_note ?? "Now";
   };
 
-  return { isClosed, getHolidayNoteForCurrentTime };
+  return { isClosed, getHolidayNoteForCurrentTime, isClosedOrder };
 };
 
 export default useHolidayCheck;

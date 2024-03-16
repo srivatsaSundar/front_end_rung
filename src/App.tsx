@@ -28,7 +28,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [add_on_drink, setAdd_on_drink] = useState([]) as any[];
   const [add_on_food, setAdd_on_food] = useState([]) as any[];
-  const { isClosed } = useHolidayCheck();
+  const { isClosedOrder } = useHolidayCheck();
 
   const targetURL3 = "https://api.mrrung.com/add_on_food";
   useEffect(() => {
@@ -106,9 +106,9 @@ function App() {
       } else {
         updatedCart.splice(existingItemIndex, 1);
       }
-      if (isClosed() === true) {
-        const closedMessage = "Restaurant is currently closed.";
-        toast.error(closedMessage);
+      if (isClosedOrder() === true) {
+        const holidayMessage = "Today is a holiday.";
+      toast.error(holidayMessage);
         return;
       }
       else {
@@ -128,9 +128,9 @@ function App() {
     if (existingItemIndex !== -1) {
       const updatedCart = [...cart];
       updatedCart.splice(existingItemIndex, 1);
-      if (isClosed() === true) {
-        const closedMessage = "Restaurant is currently closed.";
-        toast.error(closedMessage);
+      if (isClosedOrder() === true) {
+        const holidayMessage = "Today is a holiday.";
+      toast.error(holidayMessage);
         return;
       }
       else {
