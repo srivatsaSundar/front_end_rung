@@ -91,5 +91,7 @@
   "discountLoad": "Gutschein wird geladen...",
   "contactLoad": "Kontakt wird geladen...",
   "urldis":"https://api.mrrung.com/discount_coupon_germen/",
-  "order":"Bestellung bearbeiten"
+  "order":"Bestellung bearbeiten",
+  "getFlat":"Erhalten Sie pauschal ",
+  "discountPrice":"Rabatt"
 }

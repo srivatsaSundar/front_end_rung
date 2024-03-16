@@ -91,5 +91,7 @@
   "discountLoad": "Loading Discount...",
   "contactLoad": "Loading Contact...",
   "urldis":"https://api.mrrung.com/discount_coupon/",
-  "order":"Order Edit"
+  "order":"Order Edit",
+  "getFlat":"Get flat ",
+  "discountPrice":"discount"
 }
