@@ -109,7 +109,7 @@ function App() {
       }
       if (isClosedOrder() === true) {
         const holidayMessage = "Today is a holiday.";
-      toast.error(holidayMessage);
+        toast.error(holidayMessage);
         return;
       }
       else {
@@ -131,7 +131,7 @@ function App() {
       updatedCart.splice(existingItemIndex, 1);
       if (isClosedOrder() === true) {
         const holidayMessage = "Today is a holiday.";
-      toast.error(holidayMessage);
+        toast.error(holidayMessage);
         return;
       }
       else {
