@@ -385,7 +385,6 @@ export function Order(props: IOrder) {
                     type="text"
                     id="companyName"
                     name="companyName"
-                    required
                   />
                 </div>
               </div>
