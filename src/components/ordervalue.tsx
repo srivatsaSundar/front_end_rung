@@ -10,6 +10,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import ScrollToTop from "react-scroll-to-top";
 import "react-toastify/dist/ReactToastify.css";
+import { HStack } from "@chakra-ui/react";
 
 export function OrderValue() {
   const { selectedLanguage } = useLanguage(); // Access the selected language
@@ -22,14 +23,17 @@ export function OrderValue() {
   };
 
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
   const api = "https://api.mrrung.com/orders_lists/";
 
   const fetchData = () => {
     axios
       .get(api)
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         setData(response.data);
+        setFilteredData(response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -68,6 +72,20 @@ export function OrderValue() {
     scrollableDiv?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleDateChange = (event) => {
+    const selectedDate = event.target.value;
+    setSelectedDate(selectedDate);
+
+    // Filter data based on selected date
+    const filtered = data.filter((item) => {
+      return item.delivery_date === selectedDate;
+    });
+
+    setFilteredData(filtered);
+  };
+
+  console.log(selectedDate)
+
   return (
     <div>
       <div className="yes">
@@ -75,8 +93,17 @@ export function OrderValue() {
         <ToastContainer />
       </div>
       <div className="holiday" id="scrollableDiv">
-        <h3>{translations.discountEdit}</h3>
-        
+        <h3>{translations.order}</h3>
+
+        <HStack width={"400px"} spacing={2} justifyContent={"center"}>
+          <h3>Filter order with date</h3>
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={handleDateChange}
+            placeholder="Select date to filter"
+          />
+        </HStack>
         <div className="table-container center-table">
           <table className="styled-table">
             <thead>
@@ -103,39 +130,66 @@ export function OrderValue() {
               </tr>
             </thead>
             <tbody>
-              {data ? (
-                data.map((item) => (
-                  <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.person_name}</td>
-                    <td>{item.email}</td>
-                    <td>{item.company_name}</td>
-                    <td>{item.phone_number}</td>
-                    <td>{item.cart}</td>
-                    <td>{String(item.mail_sent)}</td>
-                    <td>{item.address}</td>
-                    <td>{item.postal_code}</td>
-                    <td>{item.city}</td>
-                    <td>{item.coupon_code}</td>
-                    <td>{item.total_price}</td>
-                    <td>{item.delivery_option}</td>
-                    <td>{item.delivery_date}</td>
-                    <td>{item.delivery_time}</td>
-                    <td>{item.remarks}</td>
-                    <td>{item.order_date}</td>
-                    <td>{item.delivery_charges}</td>
-                    <td>
-                      <button onClick={() => handleDelete(item.id)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td>{translations.discountLoad}</td>
-                </tr>
-              )}
+              <tbody>
+                {selectedDate && filteredData.length > 0 ? (
+                  filteredData.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.person_name}</td>
+                      <td>{item.email}</td>
+                      <td>{item.company_name}</td>
+                      <td>{item.phone_number}</td>
+                      <td>{item.cart}</td>
+                      <td>{String(item.mail_sent)}</td>
+                      <td>{item.address}</td>
+                      <td>{item.postal_code}</td>
+                      <td>{item.city}</td>
+                      <td>{item.coupon_code}</td>
+                      <td>{item.total_price}</td>
+                      <td>{item.delivery_option}</td>
+                      <td>{item.delivery_date}</td>
+                      <td>{item.delivery_time}</td>
+                      <td>{item.remarks}</td>
+                      <td>{item.order_date}</td>
+                      <td>{item.delivery_charges}</td>
+                      <td>
+                        <button onClick={() => handleDelete(item.id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  data.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.id}</td>
+                      <td>{item.person_name}</td>
+                      <td>{item.email}</td>
+                      <td>{item.company_name}</td>
+                      <td>{item.phone_number}</td>
+                      <td>{item.cart}</td>
+                      <td>{String(item.mail_sent)}</td>
+                      <td>{item.address}</td>
+                      <td>{item.postal_code}</td>
+                      <td>{item.city}</td>
+                      <td>{item.coupon_code}</td>
+                      <td>{item.total_price}</td>
+                      <td>{item.delivery_option}</td>
+                      <td>{item.delivery_date}</td>
+                      <td>{item.delivery_time}</td>
+                      <td>{item.remarks}</td>
+                      <td>{item.order_date}</td>
+                      <td>{item.delivery_charges}</td>
+                      <td>
+                        <button onClick={() => handleDelete(item.id)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+
             </tbody>
           </table>
         </div>
