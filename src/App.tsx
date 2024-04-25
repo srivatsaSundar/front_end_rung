@@ -46,6 +46,10 @@ function App() {
 
   console.log(add_on_food)
 
+  const handleResetOrder = () => {
+    // Reset the order state to empty
+    setCart([]);
+  };
   const { selectedLanguage } = useLanguage();
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -363,6 +367,7 @@ function App() {
                 calculateItemPrice={calculateItemPrice}
                 calculateTotalPrice={calculateTotalPrice}
                 translations={translations}
+                onResetOrder={handleResetOrder} 
               />
             }
           />

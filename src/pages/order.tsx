@@ -227,6 +227,10 @@ export function Order(props: IOrder) {
       .post("https://api.mrrung.com/order/", data)
       .then((response) => {
         window.location.href = "/placed";
+        localStorage.clear();
+        handleResetOrderClick();
+
+
       });
           } else {
             alert("Order canceled.");
@@ -271,6 +275,9 @@ export function Order(props: IOrder) {
       .post("https://api.mrrung.com/order/", data)
       .then((response) => {
         window.location.href = "/placed";
+        localStorage.clear();
+        handleResetOrderClick();
+
       });
         }
       } else {
@@ -288,6 +295,11 @@ export function Order(props: IOrder) {
   };
 
  
+  const handleResetOrderClick = () => {
+    // Call the function to reset the order state
+    onResetOrder();
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -551,3 +563,7 @@ export function Order(props: IOrder) {
 }
 
 export default Order;
+function onResetOrder() {
+  throw new Error("Function not implemented.");
+}
+
