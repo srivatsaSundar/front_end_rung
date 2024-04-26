@@ -127,7 +127,9 @@ export function Order(props: IOrder) {
           const couponCode = couponCodeElement?.value;
 
           const discountDetail = discounts.find((discount) => discount.coupon_code === couponCode);
-
+          const companyInput = document.getElementById("companyName") as HTMLInputElement;
+          const companyValue = companyInput?.value.trim() || "Empty";
+          
           let discountAmount;
           let confirmation;
           if (discountDetail) {
@@ -152,9 +154,7 @@ export function Order(props: IOrder) {
                 phone_number: (
                   document.getElementById("phoneNumber") as HTMLInputElement
                 )?.value,
-                company_name: (
-                  document.getElementById("companyName") as HTMLInputElement
-                )?.value,
+                company_name: companyValue,
                 delivery_option: orderType,
                 delivery_date: formattedDate,
                 delivery_time: (
@@ -204,9 +204,7 @@ export function Order(props: IOrder) {
               phone_number: (
                 document.getElementById("phoneNumber") as HTMLInputElement
               )?.value,
-              company_name: (
-                document.getElementById("companyName") as HTMLInputElement
-              )?.value,
+              company_name: companyValue,
               delivery_option: orderType,
               delivery_date: formattedDate,
               delivery_time: (
@@ -257,9 +255,7 @@ export function Order(props: IOrder) {
             phone_number: (
               document.getElementById("phoneNumber") as HTMLInputElement
             )?.value,
-            company_name: (
-              document.getElementById("companyName") as HTMLInputElement
-            )?.value,
+            company_name: companyValue,
             delivery_option: orderType,
             delivery_date: formattedDate,
             delivery_time: (
