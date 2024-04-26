@@ -148,31 +148,10 @@ function App() {
   };
 
   const calculateTotalPrice = () => {
-    if (cart && cart.length > 0) {
-      return cart.reduce((total, item) => {
-        const basePrice = item.price;
-        let price = basePrice;
-
-        if (item.drink) {
-          const drink = add_on_drink.find(
-            (drink) => drink.drink.name === item.drink,
-          );
-          if (drink) {
-            price += drink.drink.price;
-          }
-        }
-        if (item.food) {
-          const food = add_on_food.find((food) => food.food.name === item.food);
-          if (food) {
-            price += food.food.price;
-          }
-        }
-
-        return (total + price).toFixed(2) * item.quantity;
-      }, 0);
-    } else {
-      return 0;
-    }
+    return cart.reduce((acc, item) => {
+      const price = calculateItemPrice ? calculateItemPrice(item) : item.price; // Use calculateItemPrice if available, otherwise use item.price
+      return acc + (price * item.quantity);
+    }, 0);
   };
 
   function calculateItemPrice(item) {
