@@ -49,12 +49,9 @@ export function OrderValue() {
     fetchData();
   };
 
-
   const handleDelete = (id) => {
     axios
-      .delete(
-        `https://api.mrrung.com/delete_order_list/${id}/`,
-      )
+      .delete(`https://api.mrrung.com/delete_order_list/${id}/`)
       .then((response) => {
         // console.log("Delete Response:", response.data);
         const deleted = () => toast.success("Order deleted successfully!");
@@ -84,7 +81,7 @@ export function OrderValue() {
     setFilteredData(filtered);
   };
 
-  console.log(selectedDate)
+  console.log(selectedDate);
 
   return (
     <div>
@@ -92,10 +89,13 @@ export function OrderValue() {
         <AppNavbar />
         <ToastContainer />
       </div>
-      <div className="holiday" id="scrollableDiv">
+      <div
+        className="holiday"
+        id="scrollableDiv"
+        style={{ display: "flex", flexDirection: "column" }}
+      >
         <h3>{translations.order}</h3>
-
-        <HStack width={"400px"} spacing={2} justifyContent={"center"}>
+        <HStack spacing={2} justifyContent={"center"} alignSelf={"center"}>
           <h3>Filter order with date</h3>
           <input
             type="date"
@@ -130,9 +130,8 @@ export function OrderValue() {
               </tr>
             </thead>
             <tbody>
-              <tbody>
-                {selectedDate && filteredData.length > 0 ? (
-                  filteredData.map((item) => (
+              {selectedDate && filteredData.length > 0
+                ? filteredData.map((item) => (
                     <tr key={item.id}>
                       <td>{item.id}</td>
                       <td>{item.person_name}</td>
@@ -159,8 +158,7 @@ export function OrderValue() {
                       </td>
                     </tr>
                   ))
-                ) : (
-                  data.map((item) => (
+                : data.map((item) => (
                     <tr key={item.id}>
                       <td>{item.id}</td>
                       <td>{item.person_name}</td>
@@ -186,10 +184,7 @@ export function OrderValue() {
                         </button>
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-
+                  ))}
             </tbody>
           </table>
         </div>
