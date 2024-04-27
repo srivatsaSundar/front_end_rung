@@ -43,6 +43,21 @@ export function Order(props: IOrder) {
   const [confirmation, setConfirmation] = useState(false);
   const [Time, setTime] = useState([]);
 
+  const [add_on_food, setAdd_on_food] = useState([]) as any[];
+
+  const targetURL3 = "https://api.mrrung.com/add_on_food";
+  useEffect(() => {
+    fetch(targetURL3, { mode: "cors" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setAdd_on_food(data))
+      .catch((err) => console.log("error in fetching add_on_food", err));
+  }, []);
+
   const [discounts, setDiscounts] = useState([]);
   const discountApi = "https://api.mrrung.com/discount_coupon_list/";
 
@@ -102,7 +117,7 @@ export function Order(props: IOrder) {
 
       const missingFields = importantFields.filter((field) => {
         const inputElement = document.querySelector(
-          `[name=${field.name}]`,
+          `[name=${field.name}]`
         ) as HTMLInputElement;
         const value = inputElement ? inputElement.value : "";
         return value.trim() === "";
@@ -114,38 +129,48 @@ export function Order(props: IOrder) {
         )
           .toString()
           .padStart(2, "0")}-${selectedDateTime
-            .getDate()
-            .toString()
-            .padStart(2, "0")}`;
+          .getDate()
+          .toString()
+          .padStart(2, "0")}`;
         if (orderType === "deliver") {
           const deliveryCost =
             pin.find((code) => code.postal_code === selectedPostalCode)
               ?.price || 0;
           let totalWithDelivery = calculateTotalPrice(cart) + deliveryCost;
 
-          const couponCodeElement = document.getElementById("couponCode") as HTMLInputElement;
+          const couponCodeElement = document.getElementById(
+            "couponCode"
+          ) as HTMLInputElement;
           const couponCode = couponCodeElement?.value;
 
-          const discountDetail = discounts.find((discount) => discount.coupon_code === couponCode);
-          const companyInput = document.getElementById("companyName") as HTMLInputElement;
+          const discountDetail = discounts.find(
+            (discount) => discount.coupon_code === couponCode
+          );
+          const companyInput = document.getElementById(
+            "companyName"
+          ) as HTMLInputElement;
           const companyValue = companyInput?.value.trim() || "Empty";
-          
+
           let discountAmount;
           let confirmation;
           if (discountDetail) {
-            const couponExpiryDate = new Date(discountDetail.coupon_expiry_date);
+            const couponExpiryDate = new Date(
+              discountDetail.coupon_expiry_date
+            );
             if (couponExpiryDate > currentDate) {
               const discountPercentage = discountDetail.discount_percentage;
               discountAmount = totalWithDelivery * (discountPercentage / 100);
               totalWithDelivery -= discountAmount;
 
               data = {
-                person_name: (document.getElementById("name") as HTMLInputElement)
-                  ?.value,
+                person_name: (
+                  document.getElementById("name") as HTMLInputElement
+                )?.value,
                 email: (document.getElementById("email") as HTMLInputElement)
                   ?.value,
-                address: (document.getElementById("address") as HTMLInputElement)
-                  ?.value,
+                address: (
+                  document.getElementById("address") as HTMLInputElement
+                )?.value,
                 postal_code: (
                   document.getElementById("postcode") as HTMLInputElement
                 )?.value,
@@ -160,34 +185,44 @@ export function Order(props: IOrder) {
                 delivery_time: (
                   document.getElementById("selectedTime") as HTMLInputElement
                 )?.value,
-                remarks: (document.getElementById("remarks") as HTMLInputElement)
-                  ?.value,
+                remarks: (
+                  document.getElementById("remarks") as HTMLInputElement
+                )?.value,
                 coupon_code: (
                   document.getElementById("couponCode") as HTMLInputElement
                 )?.value,
-                discount_amount: discountAmount
+                discount_amount: discountAmount,
               };
               setData(data);
-              confirmation =
-                `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
-                  2,
-                )}/- CHF, Discounted value : ${discountAmount.toFixed(2)}/- CHF. Do you want to proceed?`
+              confirmation = `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
+                2
+              )}/- CHF, Discounted value : ${discountAmount.toFixed(2)}/- CHF. Do you want to proceed?`;
             }
-          }
-          else {
-            confirmation =
-              `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
-                2,
-              )}/- CHF. Do you want to proceed?`
+          } else {
+            confirmation = `Total Price (including delivery cost): ${totalWithDelivery.toFixed(
+              2
+            )}/- CHF. Do you want to proceed?`;
           }
 
           if (window.confirm(confirmation)) {
-            const cartItems = cart.map((cartItem) => ({
-              item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
-                }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
-              quantity: cartItem.quantity,
-              cost: cartItem.price,
-            }));
+            const cartItems = cart.map((cartItem) => {
+              // Calculate the cost of the main item
+              let cost = cartItem.price;
+
+              if (cartItem.food) {
+                const food = add_on_food.find(
+                  (addon) => addon.food.name === cartItem.food
+                );
+                // Add food price to the cost
+                cost += food?.food.price;
+              }
+
+              return {
+                item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""}${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+                quantity: cartItem.quantity,
+                cost: cost,
+              };
+            });
 
             data = {
               person_name: (document.getElementById("name") as HTMLInputElement)
@@ -218,25 +253,25 @@ export function Order(props: IOrder) {
               cart: JSON.stringify(cartItems),
               total_price: calculateTotalPrice(cart) + deliveryCost,
               delivery_charges: deliveryCost,
-              coupon_code_amount: discountAmount
+              coupon_code_amount: discountAmount,
             };
             setData(data);
+            console.log(data);
             axios
-      .post("https://api.mrrung.com/order/", data)
-      .then((response) => {
-        window.location.href = "/placed";
-        localStorage.clear();
-        handleResetOrderClick();
-
-
-      });
+              .post("https://api.mrrung.com/order/", data)
+              .then((response) => {
+                window.location.href = "/placed";
+                localStorage.clear();
+                handleResetOrderClick();
+              });
           } else {
             alert("Order canceled.");
           }
         } else {
           const cartItems = cart.map((cartItem) => ({
-            item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""
-              }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+            item_name: `${cartItem.name}${
+              cartItem.drink ? ` + ${cartItem.drink}` : ""
+            }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
             quantity: cartItem.quantity,
             cost: cartItem.price,
           }));
@@ -264,17 +299,14 @@ export function Order(props: IOrder) {
             remarks: (document.getElementById("remarks") as HTMLInputElement)
               ?.value,
             cart: JSON.stringify(cartItems),
-            total_price: calculateTotalPrice(cart)
+            total_price: calculateTotalPrice(cart),
           };
           setData(data);
-          axios
-      .post("https://api.mrrung.com/order/", data)
-      .then((response) => {
-        window.location.href = "/placed";
-        localStorage.clear();
-        handleResetOrderClick();
-
-      });
+          axios.post("https://api.mrrung.com/order/", data).then((response) => {
+            window.location.href = "/placed";
+            localStorage.clear();
+            handleResetOrderClick();
+          });
         }
       } else {
         const missingFieldLabels = missingFields
@@ -290,7 +322,6 @@ export function Order(props: IOrder) {
     }
   };
 
- 
   const handleResetOrderClick = () => {
     // Call the function to reset the order state
     onResetOrder();
@@ -315,8 +346,12 @@ export function Order(props: IOrder) {
   const generateTimeOptions = () => {
     const currentShopTimings = Time[0];
 
-    const startTime = DateTime.fromISO(currentShopTimings?.shop_delivery_opening_time);
-    const endTime = DateTime.fromISO(currentShopTimings?.shop_delivery_closing_time);
+    const startTime = DateTime.fromISO(
+      currentShopTimings?.shop_delivery_opening_time
+    );
+    const endTime = DateTime.fromISO(
+      currentShopTimings?.shop_delivery_closing_time
+    );
 
     const timeOptions = [];
     let currentTime = startTime;
@@ -389,11 +424,7 @@ export function Order(props: IOrder) {
                     {translations.companyName}
                   </label>
                   <br />
-                  <input
-                    type="text"
-                    id="companyName"
-                    name="companyName"
-                  />
+                  <input type="text" id="companyName" name="companyName" />
                 </div>
               </div>
               <h4>{translations.deliveryLocation}</h4>
@@ -522,7 +553,10 @@ export function Order(props: IOrder) {
               <br />
               <div className="code">
                 <input type="text" id="couponCode" name="couponCode" />
-                <button className="search-button" onClick={(event) => handleOrderAndPay(event)}>
+                <button
+                  className="search-button"
+                  onClick={(event) => handleOrderAndPay(event)}
+                >
                   {translations.applyCode}
                 </button>
               </div>
@@ -535,7 +569,6 @@ export function Order(props: IOrder) {
                 {translations.orderAndPay}
               </button>
             </form>
-           
           </div>
           <div className="cart-section">
             <Cart
@@ -562,4 +595,3 @@ export default Order;
 function onResetOrder() {
   throw new Error("Function not implemented.");
 }
-

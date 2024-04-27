@@ -44,7 +44,7 @@ function App() {
       .catch((err) => console.log("error in fetching add_on_food", err));
   }, []);
 
-  console.log(add_on_food)
+  // console.log(add_on_food)
 
   const handleResetOrder = () => {
     // Reset the order state to empty
@@ -76,7 +76,7 @@ function App() {
         localStorage.removeItem("cart");
         window.location.reload();
       },
-      1 * 60 * 60 * 1000,
+      1 * 60 * 60 * 1000
     );
 
     return () => clearTimeout(timeoutId);
@@ -87,7 +87,7 @@ function App() {
       (cartItem) =>
         cartItem.id === item.id &&
         cartItem.drink === item.drink &&
-        cartItem.food === item.food,
+        cartItem.food === item.food
     );
 
     if (existingItemIndex !== -1) {
@@ -101,7 +101,7 @@ function App() {
       (cartItem) =>
         cartItem.id === item.id &&
         cartItem.drink === item.drink &&
-        cartItem.food === item.food,
+        cartItem.food === item.food
     );
 
     if (existingItemIndex !== -1) {
@@ -115,9 +115,8 @@ function App() {
         const holidayMessage = "Today is a holiday.";
         toast.error(holidayMessage);
         return;
-      }
-      else {
-        setCart(updatedCart)
+      } else {
+        setCart(updatedCart);
       }
     }
   };
@@ -127,7 +126,7 @@ function App() {
       (cartItem) =>
         cartItem.id === item.id &&
         cartItem.drink === item.drink &&
-        cartItem.food === item.food,
+        cartItem.food === item.food
     );
 
     if (existingItemIndex !== -1) {
@@ -137,9 +136,8 @@ function App() {
         const holidayMessage = "Today is a holiday.";
         toast.error(holidayMessage);
         return;
-      }
-      else {
-        setCart(updatedCart)
+      } else {
+        setCart(updatedCart);
       }
 
       // Update localStorage after updating the cart state
@@ -150,7 +148,7 @@ function App() {
   const calculateTotalPrice = () => {
     return cart.reduce((acc, item) => {
       const price = calculateItemPrice ? calculateItemPrice(item) : item.price; // Use calculateItemPrice if available, otherwise use item.price
-      return acc + (price * item.quantity);
+      return acc + price * item.quantity;
     }, 0);
   };
 
@@ -159,7 +157,7 @@ function App() {
 
     if (item.drink) {
       const selectedDrink = add_on_drink.find(
-        (drink) => drink.drink.name === item.drink,
+        (drink) => drink.drink.name === item.drink
       );
       if (selectedDrink) {
         price += selectedDrink.drink.price;
@@ -167,16 +165,16 @@ function App() {
     }
     if (item.food) {
       const selectedFood = add_on_food.find(
-        (food) => food.food.name === item.food,
+        (food) => food.food.name === item.food
       );
 
-      console.log(selectedFood, "selected drink")
+      // console.log(selectedFood, "selected drink")
       if (selectedFood) {
         price += selectedFood.food.price;
-        console.log(price)
+        // console.log(price)
       }
     }
-    console.log('Calculated Price:', price.toFixed(2));
+    // console.log('Calculated Price:', price.toFixed(2));
 
     return price.toFixed(2);
   }
@@ -346,7 +344,7 @@ function App() {
                 calculateItemPrice={calculateItemPrice}
                 calculateTotalPrice={calculateTotalPrice}
                 translations={translations}
-                onResetOrder={handleResetOrder} 
+                onResetOrder={handleResetOrder}
               />
             }
           />
