@@ -275,7 +275,10 @@ export function Order(props: IOrder) {
             quantity: cartItem.quantity,
             cost: cartItem.price,
           }));
-
+          const companyInput = document.getElementById(
+            "companyName"
+          ) as HTMLInputElement;
+          const companyValue = companyInput?.value.trim() || "Empty";
           data = {
             person_name: (document.getElementById("name") as HTMLInputElement)
               ?.value,
