@@ -268,13 +268,24 @@ export function Order(props: IOrder) {
             alert("Order canceled.");
           }
         } else {
-          const cartItems = cart.map((cartItem) => ({
-            item_name: `${cartItem.name}${
-              cartItem.drink ? ` + ${cartItem.drink}` : ""
-            }${cartItem.food ? ` + ${cartItem.food}` : ""}`,
-            quantity: cartItem.quantity,
-            cost: cartItem.price,
-          }));
+          const cartItems = cart.map((cartItem) => {
+            // Calculate the cost of the main item
+            let cost = cartItem.price;
+
+            if (cartItem.food) {
+              const food = add_on_food.find(
+                (addon) => addon.food.name === cartItem.food
+              );
+              // Add food price to the cost
+              cost += food?.food.price;
+            }
+
+            return {
+              item_name: `${cartItem.name}${cartItem.drink ? ` + ${cartItem.drink}` : ""}${cartItem.food ? ` + ${cartItem.food}` : ""}`,
+              quantity: cartItem.quantity,
+              cost: cost,
+            };
+          });
           const companyInput = document.getElementById(
             "companyName"
           ) as HTMLInputElement;
